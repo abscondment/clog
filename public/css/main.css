@@ -38,6 +38,17 @@ a:hover {color:#000;}
 
 .header {
   margin:0 0 1.5em 14.5em;
+  padding:0 0 0 0;
+  font-weight:bold;
+  border-bottom:1px solid #999;
+}
+
+.header h1 {
+  margin: 0.5em 0;
+}
+
+.header a {
+  text-decoration:none;
 }
 
 ul.menu {padding:0;margin:0;}
@@ -49,7 +60,7 @@ ul.menu li a {
 
   background-color:#00a000;
   color:#fff;
-  font-family:serif;
+  font-family:georgia,serif;
   font-size:1.2em;
   font-weight:bold;
 

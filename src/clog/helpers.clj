@@ -1,11 +1,7 @@
 (ns clog.helpers
   (:use [hiccup]
+        [clojure.contrib duck-streams]
         [clog db]))
-
-(defn generate-all []
-  (println
-   (map :url
-        (top-n-posts 10))))
 
 (defn link-to-post [post]
   (html
@@ -55,3 +51,20 @@
        [:h1 "Revelation"]
        [:div body]]
       (footer)]]]))
+
+(defn generate-all []
+  (loop [[post & more-posts :as posts] (top-n-posts 10)]
+    (if (empty? posts)
+      (println "DONE")
+      (let [dirname (str "./public/blog/" (post :url))
+            dir (java.io.File. dirname)
+            _ (if (not (.exists dir)) (.mkdir dir))
+            filename (str dirname "/index.html")
+            file (java.io.File. filename)
+            _ (if (.exists file)
+                (.delete file))
+            _ (spit filename
+                    (html-doc
+                     (post :title)
+                     (post :body)))]
+        (recur more-posts)))))

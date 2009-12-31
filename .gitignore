@@ -1,3 +1,4 @@
+*.jar
 classes/*
 db/posts.db
 lib/*
