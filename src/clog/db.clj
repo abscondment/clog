@@ -17,3 +17,7 @@
 (defn top-n-posts [n]
   (sql-query
    ["select * from posts order by id desc limit ?" n]))
+
+(defn all-posts []
+  (sql-query
+   ["select * from posts order by id desc"]))

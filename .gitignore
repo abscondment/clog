@@ -2,4 +2,6 @@
 classes/*
 db/posts.db
 lib/*
+public/index.html
+public/blog/*
 

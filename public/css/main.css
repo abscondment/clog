@@ -17,9 +17,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family:Georgia,serif;
   font-weight:normal;
-  padding:0;
-  margin:0;
 }
+h1 { font-size:1.7em; }
+h2 { font-size:1.4em; }
+h3 { font-size:1.2em; }
 
 a {color:#00d;}
 a:visited {color:#666;}
