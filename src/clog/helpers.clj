@@ -26,13 +26,13 @@
   (html
    [:div {:class "lbar"}
     [:ul {:class "menu"}
-     [:li [:a {:href "/" :class "selected"} "Blog"]]
-     [:li [:a {:href "/software"} "Software"]]]]))
+     [:li [:a {:href "/brendan/" :class "selected"} "Blog"]]
+     [:li [:a {:href "/brendan/software"} "Software"]]]]))
 
 (defn header [& levels]
   (html
    [:div {:class "header"}
-    [:a {:href "/"} "Brendan"]
+    [:a {:href "/brendan/"} "Brendan"]
     (if (empty? levels) " &raquo; Blog")]))
 
 (defn html-doc
@@ -42,7 +42,7 @@
    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
    [:html {:xmlns "http://www.w3.org/1999/xhtml"}
     [:head
-     [:link {:rel "stylesheet" :type "text/css" :href "/css/main.css"}]
+     [:link {:rel "stylesheet" :type "text/css" :href "/brendan/css/main.css"}]
      [:title "Brendan Ribera - " title]]
     [:body
      [:div {:class "envelope"}
@@ -71,14 +71,14 @@
                                         [[:h1 (post :title)]
                                          (post :body)])))]
                     (recur (conj link-to post) more-posts))))
-        body ["Recent Posts"
+        body ["Recent posts:"
               (vec
                (cons
                 :ul
                 (map
                  (fn [post]
                    [:li
-                    [:a {:href (str "/blog/" (post :url))} (post :title)]
+                    [:a {:href (str "/brendan/blog/" (post :url))} (post :title)]
                     " - " (post :created_at)])
                  posts)))]]
     (spit "./public/index.html"

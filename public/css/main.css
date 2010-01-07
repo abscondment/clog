@@ -2,12 +2,11 @@ body {
   font-family:Arial, sans-serif;
   font-size:0.9em;
   line-height:1.2em;
-  margin:0;
+  margin:0.5em;
   padding:0;
   border:0.5em solid #006000;
   background-color:#fff;
   color:#222;
-  position:absolute;
   top:0.5em;
   bottom:0.5em;
   left:0.5em;
@@ -30,11 +29,11 @@ a:hover {color:#000;}
   margin:0;
   padding:1em;
   border:0.5em solid #00a000;
-  position:absolute;
   top:0em;
   bottom:0em;
   left:0em;
   right:0em;
+  min-height:25em;
 }
 
 .header {
@@ -92,7 +91,6 @@ ul.menu li a:hover {
 }
 
 .footer {
-  position:absolute;
   bottom:1em;
   left:0;
   right:0;
