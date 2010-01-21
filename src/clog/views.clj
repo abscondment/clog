@@ -19,8 +19,15 @@
       (header (post :title))
       [:div {:class "content"}
        [:h1 (post :title)]
-       (post :body)]
-      (footer (take 4 (post :created_at)))]]]))
+       (post :body)
+       [:br]
+       [:div {:id "disqus_thread"}]
+       [:script {:type "text/javascript" :src "http://disqus.com/forums/tbdo-brendan/embed.js"}]
+       [:noscript
+        [:p
+         [:a {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"} "View the discussion thread."]]]]
+      (footer (take 4 (post :created_at)))]
+     [:script {:type "text/javascript" :src "/brendan/js/comments.js"}]]]))
 
 (defn blog-index [posts]
   (html

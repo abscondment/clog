@@ -4,7 +4,7 @@
 
 (defn link-to-post [post]
   (html
-   [:a {:href (str "/brendan/blog/" (post :url))}
+   [:a {:href (str "/brendan/blog/" (post :url) "/")}
     (post :title)]))
 
 (defn footer
@@ -28,8 +28,8 @@
    [:div {:class "lbar"}
     [:ul {:class "menu"}
      [:li [:a {:href "/brendan/" :class "selected"} "Blog"]]
-     [:li [:a {:href "/brendan/about"} "About"]]
-     [:li [:a {:href "/brendan/software"} "Software"]]
+     [:li [:a {:href "/brendan/about/"} "About"]]
+     [:li [:a {:href "/brendan/software/"} "Software"]]
      ]]))
 
 (defn header [& levels]
