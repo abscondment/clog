@@ -1,5 +1,5 @@
 (ns clog.helpers
-  (:use [hiccup]
+  (:use [compojure html]
         [clog config]))
 
 (defn link-to-post [post]

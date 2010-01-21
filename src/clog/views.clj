@@ -1,5 +1,5 @@
 (ns clog.views
-  (:use [hiccup]
+  (:use [compojure html]
         [clojure.contrib seq-utils str-utils]
         [clog config helpers]))
 
