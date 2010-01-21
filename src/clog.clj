@@ -19,5 +19,3 @@
     (do
       (spit "./public/index.html" (blog-index posts))
       (spit "./public/blog/atom.xml" (atom-xml posts)))))
-
-(-main)
