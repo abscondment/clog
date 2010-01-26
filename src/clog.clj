@@ -1,4 +1,4 @@
-(set! *warn-on-reflection* true)
+;(set! *warn-on-reflection* true)
 (ns clog
   (:use [clojure.contrib duck-streams]
         [clog config db views])
