@@ -56,9 +56,9 @@
          (fn [year-posts]
            [:div {:style "margin-top:10px;"}
             [:b (first year-posts)]
-            [:ul {:style "margin-top:0;"}
+            [:ul {:class "list"}
              (map #(vector :li (link-to-post %) " - " (% :created_at))
-                  (last year-posts))]])
+                  (reverse (sort-by :created_at (last year-posts))))]])
          (reverse (group-by #(apply str (take 4 (% :created_at))) posts)))]]
       (footer)]]]))
 
