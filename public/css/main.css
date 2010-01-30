@@ -88,7 +88,11 @@ ul.menu li a:hover {
 
 .content {
   margin-left:14.5em;
+  text-align:justify;
 }
+
+ul.list { margin-top:0; }
+ul.list li { margin-bottom:5px; }
 
 .footer {
   bottom:1em;
