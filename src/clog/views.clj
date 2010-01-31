@@ -13,7 +13,7 @@
      [:link {:rel "stylesheet"
              :type "text/css"
              :href "/brendan/css/main.css"}]
-     [:title "Brendan Ribera - " (post :title)]]
+     [:title (post :title) " - Brendan Ribera"]]
     [:body
      [:div {:class "envelope"}
       (lbar)
@@ -28,7 +28,8 @@
         [:p
          [:a {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"} "View the discussion thread."]]]]
       (footer (take 4 (post :created_at)))]
-     [:script {:type "text/javascript" :src "/brendan/js/comments.js"}]]]))
+     [:script {:type "text/javascript" :src "/brendan/js/comments.js"}]
+     google-analytics]]))
 
 (defn blog-index [posts]
   (html
@@ -59,8 +60,11 @@
             [:ul {:class "list"}
              (map #(vector :li (link-to-post %) " - " (% :created_at))
                   (reverse (sort-by :created_at (last year-posts))))]])
-         (reverse (group-by #(apply str (take 4 (% :created_at))) posts)))]]
-      (footer)]]]))
+         (reverse (group-by #(apply str (take 4 (% :created_at))) posts)))]
+       [:a {:href "http://feeds.feedburner.com/threebrothers/brendan"}
+        [:img {:src "/brendan/images/feed.png" :alt "Feed"}]]]
+      (footer)]
+     google-analytics]]))
 
 (defn atom-xml [posts]
   (html
@@ -81,7 +85,7 @@
      (fn [post]
        [:entry
         [:title (post :title)]
-        [:link {:href (str "http://threebrothers.org/brendan/blog/" (post :url))
+        [:link {:href (str "http://threebrothers.org/brendan/blog/" (post :url) "/")
                 :rel "alternate"
                 :type "text/html"}]
         [:id "tag:threebrothers.org,"
