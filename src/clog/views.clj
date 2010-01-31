@@ -45,7 +45,7 @@
              :type "application/atom+xml"
              :title (*config* :blog-title)
              :href "http://feeds.feedburner.com/threebrothers/brendan"}]
-     [:title "Brendan Ribera - " (*config* :blog-title)]]
+     [:title (*config* :blog-title) " - Brendan Ribera"]]
     [:body
      [:div {:class "envelope"}
       (lbar)
