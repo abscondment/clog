@@ -1,0 +1,1 @@
+Summer has ended, and the winds of fall blew my bark to a new workplace: <a href="http://ilike.com/user/brendanribera">iLike</a>. I'm really enjoying myself there.

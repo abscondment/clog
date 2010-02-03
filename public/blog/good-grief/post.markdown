@@ -1,0 +1,5 @@
+Got sick again.  Go figure... was feeling all better, and everything.  The, on Halloween, Jessica and I went to <a href="http://peopleyoumeet.net">our friends'</a> house for dinner, and I started to feel ill.  I think I ate too much, or something dumb like that.  It wasn't fun.
+
+By Saturday afternoon I was in the ER again, asleep on anti-nasuea and pain medicine (and 3000mL of fluids).  I feel fine today... so annoying.  Now I have a whole day less to study for my biopsychology midterm and write my english midterm... not fun!  Not fun at all.
+
+Listening to Miles Davis' rendition of "There's a Boat That's Leaving Soon for New York" (from Porgy and Bess).  It's nice and relaxing, although not as relaxing as getting to go to church would have been.  But of course, I slept.  Slept slept slept.  I guess that's what happens when you try to turn yourself inside-out by puking. 

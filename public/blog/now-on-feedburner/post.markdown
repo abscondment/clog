@@ -1,0 +1,1 @@
+I just set myself up on FeedBurner.  Please <a href="http://feeds.feedburner.com/threebrothers/brendan">subscribe to the new feed</a> and let me know how it's working.

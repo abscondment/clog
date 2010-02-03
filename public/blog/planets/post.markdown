@@ -1,0 +1,3 @@
+Holst's "Jupiter" from "The Planets" just finished playing.  That music is simply amazing.  I have to write a reading response on <a href="http://search.barnesandnoble.com/textbooks/booksearch/isbnInquiry.asp?isbn=1551111802">Jane Eyre</a>... ugh ugh ugh.  I think I'm just going to wake up early tommorow (today) and do it then...  yes, that is what I'll do.
+
+We (the youth group volunteers) got together for dinner at Jessica's today.  It was a lot of fun.  I need to go to sleep.  My apartment manager is blasting music so loud that we can feel bass thumping the floor... and it's 12:25.  Nice.

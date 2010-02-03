@@ -1,0 +1,7 @@
+Last night Dan and Paul Knight crept into Luke and my room as we slept.  I'm a pretty light sleeper; I woke up almost as soon as they said "Hi" to us and was pretty conscious.  Luke, however, didn't have the same reaction: Dan lay on him and started talking to him, but instead of waking up Luke just started spasming and muttering, eventually throwing Dan off in a rather startling way.  Paul laughed his very distinct Paul laughs, as only he can do; Luke got up for a minute, muttered something apologetic and Luke-ish about hitting Dan, and went back to bed.  When we awoke in the morning, a wonderful picture of Paul's mom was on the apartment door.
+
+Church was good today; I had to bus there, and since I [thought I] remembered hearing talk about not having Youth Group when everyone was away, I arrived only in time for the service.  Apparently, we were having youth group; but, only a handful of kids showed up, so Jeremy was OK by himself.  In the evening, it was only Jeremy, myself, my brothers, one of the girls, and another guy.  Yes, it was small... and since there was only one highschooler, we just played cards the entire time.  Actually, Jeremy did his talk towards the end; I should say that we played cards for nearly the whole 2 hours, instead of only part of one 1 hour segment, as would have normally happened.  OK, contacts blurring.  Need bed.
+
+Ugh... I don't want to go to work tommorow.  I want to wake up married and retired with a PhD and a job teaching English and Philosophy to a bunch of great Christian kids.
+
+*whine*

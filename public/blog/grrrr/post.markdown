@@ -1,0 +1,1 @@
+I threw up a few times yesterday.  So, I'm not going to my first class (sitting at home watching the Simpsons).  Ugh... I don't want to be sick!  No sick no sick no sick.  I'm going to call in sick to work.... guess I'll just take it easy and keep myself hydrated.  Yeah.

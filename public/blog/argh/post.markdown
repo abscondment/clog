@@ -1,0 +1,3 @@
+So, I got sick again this weekend.  I was at World Concern, packing clothes with some people from <a href="http://students.washington.edu/ruf/">RUF</a>... I had only eaten some little chocolate doughnuts and some coffee (bad move, stupid!).   Anyway, my weekend went downhill from there, until I was in the ER due to dehydration on Monday night.  Missed class, yada yada yada.  Came back to find out that my food card was going to be cancelled unless I paid my balance <em>today</em>.  Riiiighhht....
+
+So, now that I've sorted that out I need dinner.

@@ -1,0 +1,3 @@
+I've been very pleased with <a href="http://typosphere.org">Typo</a>, my current blogging setup.  I just upgraded to <a href="http://svn.typosphere.org/typo/trunk/">trunk</a> because I was suffering some really weird Rails caching issues in whatever branch I was running previously.
+
+My problems are (fortunately!) fixed in trunk, so I'm going to stick with it.  Now I just need to get lighttpd 1.4.17 running to fix the broken redirects, and everything will be peachy.

@@ -1,0 +1,2 @@
+<p>I'm fasting right now.  It's really hard, but it's really rewarding.  <a href="http://www.greenlakepc.org">Green Lake</a> is fasting for seven consecutive Wednesdays to pray and think about our identity in God.  The hunger is annoying, but it's a good way to keep my mind on God.</p>
+<p>Other news, the eBay business I bought a PCI Wireless networking card from sent me the wrong card, so I have to wait a few more days to get it replaced.</p>

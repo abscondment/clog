@@ -1,0 +1,2 @@
+<p>I'm leaving for Texas in the morning (rather, really late this night--4 AM).  I'm pretty excited; I still haven't packed, and I'm thinking I should do that before I get tired.</p>
+<p>No Complit grade yet; it's tweaking me right off because my CSE application is put in limbo while I wait.  Grr.  Oh well, I'm about to go on vacation and I don't care!</p>

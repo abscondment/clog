@@ -1,0 +1,17 @@
+I sold a copy of <a href="http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?isbn=0743456955">Tommorow's God: Our Greatest Spiritual Challenge</a> to a customer today.  I really didn't want to; just the look of the book felt sinister.</p><p style="text-align: center;"><img src="http://students.washington.edu/bribera/images/tomgod.gif" style="border: 0px;" alt="Tommorow's God" />
+
+I mean, look at it.  Do the words "<a href="http://bible.gospelcom.net/cgi-bin/bible?SearchType=AND&amp;language=english&amp;searchpage=0&amp;search=whitewash+tomb&amp;version=ESV">whitewashed tomb</a>" come to mind?  But wait, wait--I have real objections, too.
+
+I read the information provided with the book after my break (the same information is provided at the <a href="http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?isbn=0743456955">Barnes  &amp; Noble</a> page about this book).  The first sentence sets the whole tone of everything: "Humanity is about to create a new form of spirituality."  What?  What?  What?  Humanity <i>create</i> spirituality?  What sort of God is this?
+
+Reading <a href="http://search.barnesandnoble.com/booksearch/isbninquiry.asp?ean=9780743456951&amp;displayonly=EXC#EXC">the provided excerpt</a> reveals what is at the heart of this issue.  To quote directly from the book:</p><blockquote><p>Why not? What kind of a God are you?
+
+<b>The best kind there is. The only kind there is. The kind who gives you free will, and who will never, ever interfere with that.</b> (Walsch, Ch. 1)</p></blockquote><p>As Damien Jurado sings, "I have seen the brighter side of the roads that lead to hell."  What is free will to this "god"?  Walsch gets caught on an age old issue:  If this God we believe in is really so powerful, then why in his name is there so much suffering in the world?  The answer that he comes with, it is apparent, is that God hasn't <i>really</i> specified anything about worshipping him, or if we're really supposed to worship, or if he's a him, or &lt;insert P.C. disclaimer&gt;.
+
+Don't believe this for a second.  It's total relativism.  Who would believe a physicist who, claiming to redefine physics in the interests of world peace, stated that the objective was no longer to get <b>right</b> answers, but simply any answer would do (and the resulting space shuttle crashes are merely fluke accidents? what?).
+
+Reading that first chapter reveals the spirit of the whole book; I'll summarize the theology behind that chapter and the introduction:  God exists to serve as a peacekeeper for mankind.  God doesn't want anything to come between humans doing whatever they want, peacefully.  He'd never ask anything (wait... did you <b>read</b> the Old Testament?  Entering Canaan...) that could make people conflict with eachother.  God exists, not to make us do what he knows is best for us, but by validating each and every individual experience.  Happy.   Haaaaaappyyyyy.  Bullcrap.
+
+He's like the crazy middle-eastern man who works at the 7-11 by my apartment:  "Are you haapppyy tonight?  Be haaaaappppyyy!"  Well wadata, my damie.
+
+So, I'm reading this on Good Friday.  And it just makes me sad.  Our world has rejected God, so if its going to be logical it has to reject logic.  As Yeats said, "mere anarchy is loosed upon the world."  1 = right.  0 = wrong.  A = not B.  B = not A.  If A = 1 then B <b>can't be 1 too</b>.  Can't can't can't can't can't can't can't can't...ugh it makes me weak.

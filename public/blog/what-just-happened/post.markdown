@@ -1,0 +1,35 @@
+<p>A "memorable" moment documented.</p><p><span style="display:block;padding:3px;color:#000;background-color:#fff;">
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:34:10 PM): i told you about this like....so long ago<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:34:21 PM): uh huh<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:34:22 PM): it was like 5 minutes ago at least. that was so much advance warning<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:34:30 PM): hehe<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:35:02 PM): we'll have to do something another time<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:35:07 PM): :/<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:10 PM): no<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:12 PM): there is no other time<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:16 PM): this was your only chance<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:36:30 PM): well then<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:41 PM): my love for you has now withered, much like a flower growing on the sun<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:36:50 PM): on the sun, eh?<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:54 PM): yes<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:36:55 PM): on the sun<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:37:11 PM): so what you mean is, your love for me has ignited and is burning passionately.<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:37:34 PM): no. flowers don't provide much fuel for gaseous balls burning at many thousands of degrees<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:37:49 PM): i see, so i'm just one of your many loves?<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:38:39 PM): no. it's that my love for you was not cultivated. my flower could have grown into a sturdy vat of hydrogen gas, with the approximate mass of jupiter<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:39:06 PM): thus fueling a tremendous fiery passionate ball, encompassing much of the universe<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:39:22 PM): weeelll<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:39:59 PM): i think flowers are more romantic than vats.<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:40:40 PM): yeah, but all flowers have to grow up sometime. just like children. they're so cute and pretty when they're small, but they're much more useful in the salt mines when they're larger, although romance is lost<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:42:03 PM): but you've destroyed the possibility of the flower growing into something utilitarian, effectively preserving its romantic memory for eternity.<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:42:27 PM): sentimentality doesn't provide much fuel for fiery passionate gas<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:42:42 PM): it being an intangible notion and all...<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:43:26 PM): yeah, the passionate gas was supposed to be a physical overflow of the intangible feeling.<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:43:44 PM): (so i guess farts and burps are romance in motion...)<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:44:08 PM): yes, love is gas. precisely.<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:44:18 PM): love's a gas.<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:44:36 PM): this is being saved<br />
+<span style="color: #f00;font-weight:bold;">sexsipinoy</span> (10:44:40 PM): it's ingenious<br />
+<span style="color: #00f;font-weight:bold;">abscondment</span> (10:44:41 PM): oh yes, it is<br />
+</span>
+</p>

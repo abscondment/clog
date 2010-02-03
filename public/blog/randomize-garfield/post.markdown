@@ -1,0 +1,3 @@
+<p>I saw <a href="http://rapt.us/toys/garfield.pl">this Random Garfield Comic Strip Generator</a> while browsing the web - from <a href="http://www.glish.com/css/">glish.com/css</a> to <a href="http://www.meyerweb.com/eric/css/edge/">css/edge</a> to <a href="http://www.meyerweb.com/">meyerweb.com</a>, and there it was.</p>
+<p>Needless to say, I was doing all of this instead of writing my COMPLIT paper.</p>
+<p>Here's the <a href="http://rapt.us/toys/garfield.pl?1=3298&amp;2=3299&amp;3=3297">best comic I've made so far</a>.</p>

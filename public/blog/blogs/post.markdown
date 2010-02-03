@@ -1,0 +1,10 @@
+I just spent a good 15 minutes looking through <a href="http://www.livejournal.com/random.bml">random Live Journals</a>.  I must have been reeeeally bored: most of them are pretty pathetic.  Whine whine whine.  Look at me, I'm self centered.  Look at me, I have problems.  Look at me complain about my parents.  That's cool.  That will get me places.  Because honestly, the approval all these people online who read your journals (and, incidentally, are screwed up like you and hate there parents too) is really worth something.  Yeah, that's it.  There's such strong community there, it almost makes me want to cry.  It'll support your life.  It'll build bridges.  It's the end-all-be-all.  In fact, I'd go so far as to sacrifice cute little animals to it.  Or myself (like it seems so many people have done).
+
+OK, so I guess not <i>everyone</i> is like this... I mean, there were a few people who actually wrote good poetry and had (seemingly) legitimate complaints or seemed to be looking for something real and true.
+
+It's really weird when you can't understand a person's motivation.  It makes it difficult to relate to them, to tolerate them, to trust them.  I'd like to think my motivations are pretty clear, but who knows?  I mean, I could easily see myself randomly finding this site, reading the first few lines of this post (which are merely "complain complain complain") and writing the whole thing off as a crock.  I <i>hope</i> that I write things that I'd actually find slightly interesting were I not me (ick - that was an indelicate sentence), but that's something that is difficult to know.
+
+I'm not even sure what prompted me to write this right now.  I think I'm just tired.  I think I need to go to bed.  I know I need to go to class.
+Oh, all you people who are pissed at life:
+
+<a href="http://bible.gospelcom.net/cgi-bin/bible?language=english&amp;passage=Isaiah+28%3A16-22&amp;version=NIV">check this out</a>, and don't be surprised when life sucks.

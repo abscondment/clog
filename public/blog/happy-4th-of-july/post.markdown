@@ -1,0 +1,3 @@
+<p>It's the 4<sup>th</sup> of July!  Woohoo!</p>
+<p>We're going to a lake to launch fireworks / firecrackers and have a good time.  Jessica is bragging about her drum skills to me.... she's gotten pretty good now.  She's so cool!</p>
+<p>Luke and Karen were wed yesterday; it's so weird to think of them as married now.  It was a really nice wedding, and I'm really happy for them.  I can't wait to be married, too... it'll come.</p>

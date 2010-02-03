@@ -1,0 +1,1 @@
+<p>The <a href="http://www.ischool.washington.edu/">Information School</a> has a pretty cool tech lab that Informatics majors can use.  I'm in it right now studying--oh wait... I'm not studying, I'm updating my website.  Well... I'm in it right now taking a break from studying.  Yeah.</p>

@@ -1,0 +1,3 @@
+Ugh.  Was feeling fine, fine, fine... then I ate a stupid BigMac and got sick.  Left work yesterday, was throwing up all night--no good.  Been feeling better today, but who knows if that's going to last?  Anyway, I've just been sitting around doing extra credit and other things.  Mostly sleeping.  Gotta go now--I've got to type up a summary of a biopsychology article about how ecstasy use doesn't impair one's memory.
+
+*roll*

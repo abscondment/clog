@@ -1,0 +1,5 @@
+So, I figured out (OK - clarification: I didn't discover this, my girlfriend's roommate's boyfriend did) that someone in my girlfriend's apartment complex has a wireless network goin'.  I, therefore, take my laptop and my fancy-schmancy new wireless card and proceed to leech bandwidth.  Mmmmm... free internet.  The joy.
+
+Other news, <em>most every link on this site won't work for a while</em>, and hasn't worked for a while either - Moveable Type keeps butting heads with the UW servers.  I finally figured out the actual path to my public_html folder (why they would put it somewhere other than with your other files, I don't know...), only to find out that any file which Perl produces is automatically not-executable; i.e., in order to have Moveable Type generate a working PHP file, I must manually go in and "chmod +x *.php" any time MT changes said file.  Otherwise, the webserver generates freakin' end-of-script errors (more like, end-of-your-life-as-a-web-server...).  So, I've decided to succumb and just do straight HTML; PHP will no longer be a part of my site.
+
+Wait... not true.  Only, MT will have no interaction with the PHP.  Yeah.  There we go.

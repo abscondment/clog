@@ -3,5 +3,5 @@ classes/*
 db/posts.db
 lib/*
 public/index.html
-public/blog/*
+public/blog/*/*.html
 

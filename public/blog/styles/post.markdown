@@ -1,0 +1,2 @@
+<p>I'm changing up the way this site is organized.  The <a href="http://abscond.net">main area</a> is all redone, as you have probably noticed.</p>
+<p>I kept the <a href="http://abscond.net/archives/">archives</a> in the same place because an archive's immutable nature is a good part of the reason people make archives.</p>
