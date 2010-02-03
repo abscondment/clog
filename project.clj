@@ -5,6 +5,8 @@
                                                  commons-io
                                                  commons-fileupload
                                                  org.mortbay.jetty/jetty]]
-                 [org.xerial/sqlite-jdbc "3.6.16"]]
+                 [org.xerial/sqlite-jdbc "3.6.16"]
+                 [postgresql "8.4-701.jdbc4"]
+                 ]
   :namespaces [clog]
   :main clog)

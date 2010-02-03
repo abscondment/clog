@@ -1,21 +1,36 @@
 ;(set! *warn-on-reflection* true)
 (ns clog
-  (:use [clojure.contrib duck-streams]
+  (:use [clojure.contrib.duck-streams]
         [clog config db views])
   (:gen-class))
 
 (defn -main [& args]
-  (let [posts (loop [link-to '()
-                     [post & more-posts :as posts] (all-posts)]
-                (if (empty? posts) link-to
-                    (let [dirname (str "./public/blog/" (post :url))
-                          dir (java.io.File. dirname)
-                          _ (if (not (.exists dir)) (.mkdir dir))
-                          filename (str dirname "/index.html")
-                          file (java.io.File. filename)
-                          _ (if (.exists file) (.delete file))
-                          _ (spit filename (blog-post post))]
-                      (recur (conj link-to post) more-posts))))]
+  
+   (comment
+    (spit "./public/blog/posts.yaml"
+          (loop [yaml "---\n"
+                 [post & more-posts :as posts] (all-posts)]
+            (if (empty? posts) yaml
+                (let [_ (spit (str "./public/blog/" (post :url) ".markdown")
+                              (post :body))]
+                  (recur
+                   (str yaml
+                        (post :url) ":\n"
+                        "  title: " (post :title) "\n"
+                        "  created_at: " (post :created_at) "\n")
+                   more-posts))))))
+ 
+  (let [posts
+        (loop [return-posts (list)
+               [post & more-posts :as posts] (all-posts)]
+          (if (empty? posts) (reverse return-posts)
+              (let [dir (java.io.File. (str "./public/blog/" (post :url)))
+                    _ (if (not (.exists dir)) (.mkdir dir))
+                    _ (spit (str "./public/blog/" (post :url) "/index.html")
+                            (blog-post post
+                                       (first more-posts)
+                                       (first return-posts)))]
+                (recur (conj return-posts post) more-posts))))]
     (do
       (spit "./public/index.html" (blog-index posts))
-      (spit "./public/blog/atom.xml" (atom-xml posts)))))
+      (spit "./public/blog/atom.xml" (atom-xml (take 20 posts))))))

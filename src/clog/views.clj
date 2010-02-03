@@ -3,7 +3,10 @@
         [clojure.contrib seq-utils str-utils]
         [clog config helpers]))
 
-(defn blog-post [post]
+(def *markdown-processor*
+     (new com.petebevin.markdown.MarkdownProcessor))
+
+(defn blog-post [post previous-post next-post]
   (html
    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
@@ -20,9 +23,18 @@
       (header (post :title))
       [:div {:class "content"}
        [:h1 (post :title)]
-       (post :body)
+       (.. *markdown-processor* (markdown (post :body)))
+       [:h4 (post :created_at)]
        [:br]
        [:div {:id "disqus_thread"}]
+       [:div {:style "clear:both;margin:2em 0 1em 0;"}
+        (if previous-post
+          [:div {:style "float:left;"}
+           "&laquo; " (link-to-post previous-post)])
+        (if next-post
+          [:div {:style "float:right;"}
+           (link-to-post next-post) " &raquo;"])
+        [:br {:style "clear:both;"}]]
        [:script {:type "text/javascript" :src "http://disqus.com/forums/tbdo-brendan/embed.js"}]
        [:noscript
         [:p
