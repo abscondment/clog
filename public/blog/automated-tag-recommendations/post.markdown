@@ -8,26 +8,25 @@ I began by creating a few really basic text profiles for eight different tags: <
 
 I then created two sample user profiles: one using <a href="http://threebrothers.org/brendan/resume/">my r&eacute;sum&eacute;</a>, the other using text from <a href="http://jobster.com/people/jasongoldberg">Jason Goldberg's Jobster Profile</a>.  My profile should correlate strongly to the software side of things, while Jason's would likely go towards the business side.  Here are the numbers from the rough (and I mean <b>rough</b>) prototype:
 
-<blockquote>Brendan:
-<typo:code>203810  rails
-213947  software-developer
-228487  java
-250153  creative
-256944  seattle
-267096  marketing
-280711  account-management
-282841  hrm</typo:code>
+    Brendan:
+    203810  rails
+    213947  software-developer
+    228487  java
+    250153  creative
+    256944  seattle
+    267096  marketing
+    280711  account-management
+    282841  hrm
 
-Jason:
-<typo:code>292370  seattle
-299983  account-management
-303124  creative
-306446  rails
-308225  marketing
-310352  hrm
-313499  java
-318043  software-developer</typo:code>
-</blockquote>
+    Jason:
+    292370  seattle
+    299983  account-management
+    303124  creative
+    306446  rails
+    308225  marketing
+    310352  hrm
+    313499  java
+    318043  software-developer
 
 The number in front of the tag indicates how different the user's profile is from the tag's text profile; a small number indicates less difference, while a larger number indicates large differences.
 

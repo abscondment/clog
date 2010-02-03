@@ -6,25 +6,22 @@ From my point of view, Gentoo is a hobbyist's distribution: You tinker with it o
 
 The plug kicking incident worried me for a day or two: "That server has a lot of things on it that I really don't want to lose; I should probably back it up; Oh, I hope the hard drive didn't die...", and so on.  So, I went to make backups today and find out that nearly all of the disk space is being used up.  A quick search for the offending directories finds them nice and bloated:
 
-<typo:code>
-brendan@bloom ~ $ for x in /*; do sudo du -ks $x; done | sort -g
-[snip]
-348200  /opt
-603992  /home
-918601  /proc
-3673612 /var
-8647420 /usr
-</typo:code>
+    brendan@bloom ~ $ for x in /*; do sudo du -ks $x; done | sort -g
+    [snip]
+    348200  /opt
+    603992  /home
+    918601  /proc
+    3673612 /var
+    8647420 /usr
+
 Hmm... why is /usr sucking up <b>8.3G</b>?
 
-<typo:code>
-brendan@bloom ~ $ for x in /usr/*; do sudo du -ks $x; done | sort -g
-[snip]
-497928  /usr/share
-560600  /usr/lib
-2638336 /usr/portage
-4798196 /usr/src
-</typo:code>
+    brendan@bloom ~ $ for x in /usr/*; do sudo du -ks $x; done | sort -g
+    [snip]
+    497928  /usr/share
+    560600  /usr/lib
+    2638336 /usr/portage
+    4798196 /usr/src
 
 What!?  It appears that I have <b>4.6G of kernel sources</b> just sitting there.  That observation leads me to believe that /usr/portage is full of unneeded sources, too.  Yuck!  Of course, I immediately found <a href="http://www.gentoo.org/doc/en/kernel-upgrade.xml#doc_chap9">an emerge command to fix my issue</a>.  Come on, though... I wish it would have at least told me that this scenario was going to happen.
 

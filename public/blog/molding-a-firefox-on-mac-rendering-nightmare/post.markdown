@@ -12,11 +12,9 @@ The issue is one of transparency.  For some reason, the rendering engine is over
 
 I finally found something that works, however:
 
-<typo:code>
-.song_title {
-  [snip]
-  opacity:0.99;
-}
-</typo:code>
+    .song_title {
+      [snip]
+      opacity:0.99;
+    }
 
 Forcing the text from completely opaque to partly transparent appears to jump us out of the buggy render path.  As far as the user is concerned, setting the opacity to 99% changes nothing &mdash; it still looks solid black to me!  Yet, we no longer get nasty molding.  Who knew that one line of code could reverse all that ugliness?

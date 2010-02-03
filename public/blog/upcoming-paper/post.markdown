@@ -1,3 +1,0 @@
-The <a href="http://students.washington.edu/bribera/archives/000103.html">promised writing</a> on my history lecture will be posted by this Thursday--my final in that class is a paper, and the issues covered during that lecture are almost certainly going to be a part of my essay.  I have a pretty busy week coming up:  Statistics final on Tuesday, CSE final on Wednesday, English paper due Wednesday, and History paper due Thursday.  Good grief, I say.
-
-:D  Bedtime for me.

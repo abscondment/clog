@@ -32,27 +32,12 @@ firefox-2-to-3-a-cautionary-tale:
 death-by-duck-typing:
   title: Death by Duck-Typing
   created_at: 2008-05-01 10:48:00.0
-indyennessee-trip-everything-else:
-  title: Indyennessee Trip: Everything Else
-  created_at: 2008-04-23 15:38:00.0
 how-many-five-year-olds-can-you-take-in-a-fight:
   title: How Many Five-Year-Olds Can You Take In A Fight?
   created_at: 2008-04-22 19:27:00.0
-indyennessee-trip-wednesday-thursday:
-  title: Indyennessee Trip: Wednesday/Thursday
-  created_at: 2008-04-19 20:07:00.0
 the-bearded-coincidence:
   title: The Bearded Coincidence
   created_at: 2008-04-18 09:58:00.0
-indyennessee-trip-tuesday:
-  title: Indyennessee Trip: Tuesday
-  created_at: 2008-04-08 19:31:00.0
-indyennessee-trip-monday:
-  title: Indyennessee Trip: Monday
-  created_at: 2008-04-08 19:09:00.0
-indyennessee-trip-saturday-sunday:
-  title: Indyennessee Trip: Saturday/Sunday
-  created_at: 2008-04-08 18:45:00.0
 good-reasons-to-work-from-home:
   title: Good reasons to work from home
   created_at: 2008-03-26 13:25:00.0
@@ -104,9 +89,6 @@ holy-burgeoning-disk-usage-batman:
 onion-bowl-xlii:
   title: Onion Bowl XLII
   created_at: 2008-01-30 11:03:00.0
-paper-telephone:
-  title: Paper Telephone
-  created_at: 2008-01-29 06:45:00.0
 resurrected-living-in-a-lighthouse:
   title: Resurrected, Living in a Lighthouse
   created_at: 2008-01-28 13:22:00.0
@@ -128,150 +110,60 @@ the-generational-divide-in-copyright-morality:
 patching-up-the-ghetto:
   title: Patching Up the Ghetto
   created_at: 2008-01-04 06:45:00.0
-iowa-caucus-results:
-  title: Iowa Caucus Results
-  created_at: 2008-01-03 18:59:00.0
 you-dog-you:
   title: You Dog, You
   created_at: 2008-01-10 17:14:00.0
 vector-difference-functions:
   title: Vector Difference Functions
   created_at: 2008-01-15 19:52:00.0
-cell-phone-comments:
-  title: Cell Phone, Comments
-  created_at: 2004-12-17 16:35:00.0
 clear:
   title: "Clear!"
   created_at: 2004-12-15 16:52:00.0
-finals:
-  title: Finals
-  created_at: 2004-12-14 01:31:00.0
 donate-blood:
   title: Donate Blood
   created_at: 2004-12-06 12:58:00.0
-yes-jessica-im-a-dork:
-  title: Yes, Jessica. I'm a dork.
-  created_at: 2004-12-01 16:45:00.0
-busy-day:
-  title: Busy day...
-  created_at: 2004-11-28 00:55:00.0
-spam-where-are-you:
-  title: Spam?  Where are you?
-  created_at: 2004-11-16 22:17:00.0
-warning-posting-slump:
-  title: Warning: Posting Slump
-  created_at: 2004-11-15 13:40:00.0
 freebsd-e-litaliano:
   title: FreeBSD e l'italiano.
   created_at: 2004-11-02 13:46:00.0
 engagement-ring:
   title: Engagement Ring
   created_at: 2004-10-21 13:55:00.0
-fasting:
-  title: Fasting
-  created_at: 2004-10-27 17:50:00.0
 i-proposed-to-jessica-last-night:
   title: I Proposed to Jessica Last Night
   created_at: 2004-10-20 15:23:00.0
-dialog:
-  title: DIALOG
-  created_at: 2004-10-17 23:25:00.0
 return-of-the-king-and-blueberry-pie:
   title: Return of the King and Blueberry Pie
   created_at: 2004-10-15 16:25:00.0
 when-info-meets-philosophy-pt-2:
   title: When INFO meets philosophy, pt. 2
   created_at: 2004-10-13 00:59:00.0
-te-lab:
-  title: TE Lab
-  created_at: 2004-10-07 14:10:00.0
 take-the-money-and-run:
   title: Take the Money and Run...
   created_at: 2004-10-06 14:55:00.0
 classes:
   title: Classes
   created_at: 2004-09-30 12:35:00.0
-burnin-down-the-house:
-  title: Burnin' down the house...
-  created_at: 2004-09-24 11:48:00.0
-long-time-no-see:
-  title: Long time no see...
-  created_at: 2004-09-17 09:18:00.0
-its-been-a-long-time:
-  title: It's been a long time.
-  created_at: 2004-09-01 18:31:00.0
-up_date:
-  title: up_date
-  created_at: 2004-08-24 07:04:00.0
 remember:
   title: Remember...
   created_at: 2004-08-17 15:27:00.0
-cse-meeting-burke-gilman:
-  title: CSE Meeting, Burke-Gilman
-  created_at: 2004-08-10 12:38:00.0
-styles:
-  title: Styles
-  created_at: 2004-08-04 19:16:00.0
 no-cs-for-me:
   title: No CS for me.
   created_at: 2004-07-31 09:50:00.0
-brendan-v-brandon:
-  title: Brendan v. Brandon
-  created_at: 2004-07-27 09:25:00.0
-paper-idea:
-  title: Paper Idea
-  created_at: 2004-07-26 22:28:00.0
-crypto-progress-2:
-  title: Crypto.Progress
-  created_at: 2004-07-23 00:59:00.0
-what-just-happened:
-  title: What just happened?
-  created_at: 2004-07-21 23:10:00.0
-crypto-progress:
-  title: Crypto.Progress
-  created_at: 2004-07-21 21:33:00.0
-jessicas-birthday:
-  title: Jessica's Birthday
-  created_at: 2004-07-19 10:29:00.0
 personal-statement:
   title: Personal Statement
   created_at: 2004-07-01 23:57:00.0
 cryptogram-solver:
   title: Cryptogram Solver
   created_at: 2004-07-18 00:11:00.0
-tic-tac-toe:
-  title: Tic Tac Toe
-  created_at: 2004-07-14 19:04:00.0
-update-2:
-  title: Update
-  created_at: 2004-07-12 12:43:00.0
-happy-4th-of-july:
-  title: Happy 4th of July...
-  created_at: 2004-07-04 14:18:00.0
 what-else:
   title: What else?
   created_at: 2004-07-01 10:08:00.0
-a-treatise-on-arctic:
-  title: A Treatise on Arctic
-  created_at: 2004-06-30 11:25:00.0
 im-back:
   title: I'm Back...
   created_at: 2004-06-28 11:19:00.0
-seven-minutes:
-  title: Seven minutes...
-  created_at: 2004-06-22 05:12:00.0
-t-minus:
-  title: T-Minus
-  created_at: 2004-06-20 22:36:00.0
-metallica-anyone:
-  title: Metallica, anyone?
-  created_at: 2004-06-11 12:15:00.0
 hum-de-dum:
   title: Hum-de-dum
   created_at: 2004-06-15 23:58:00.0
-clean:
-  title: Clean!
-  created_at: 2004-06-14 09:21:00.0
 death-of-absalom:
   title: Death of Absalom
   created_at: 2004-06-11 01:57:00.0
@@ -281,132 +173,42 @@ full-paper:
 update:
   title: Update.
   created_at: 2004-06-19 12:33:00.0
-randomize-garfield:
-  title: Randomize Garfield
-  created_at: 2004-06-09 23:11:00.0
 thats-different:
   title: That's Different...
   created_at: 2004-06-10 23:17:00.0
-and-i-am-not:
-  title: And I am Not...
-  created_at: 2004-06-08 22:43:00.0
 new-strategy:
   title: New Strategy!
   created_at: 2004-06-09 09:55:00.0
-spam-reg-anyone:
-  title: SPAMÂ® Anyone?
-  created_at: 2004-06-07 13:19:00.0
 hrmm-hrmm:
   title: Hrmm hrmm...
   created_at: 2004-06-07 00:29:00.0
-aaaaahhhh-hgggghhhhh:
-  title: AAAAAHHHH Hgggghhhhh
-  created_at: 2004-06-04 13:14:00.0
-untitled-6-3-2004:
-  title: untitled [6/3/2004]
-  created_at: 2004-06-03 20:50:00.0
-whoa:
-  title: Whoa.
-  created_at: 2004-06-03 11:30:00.0
-birthday-show-etc:
-  title: Birthday Show, etc.
-  created_at: 2004-06-01 15:37:00.0
-birth-day:
-  title: birth day
-  created_at: 2004-05-30 00:44:00.0
-webcam-5-28-05:
-  title: webcam 5/28/05
-  created_at: 2004-05-28 11:21:00.0
 lt-continued-gt:
   title: continued
   created_at: 2004-05-27 20:03:00.0
-rain-rain-go-away:
-  title: Rain, rain, go away...
-  created_at: 2004-05-27 16:13:00.0
 mmm-cpan:
   title: Mmm... CPAN
   created_at: 2004-05-26 16:37:00.0
-not-dark-yet:
-  title: Not Dark Yet...
-  created_at: 2004-05-25 11:20:00.0
-korea:
-  title: Korea?
-  created_at: 2004-05-26 07:58:00.0
 transitioning:
   title: Transitioning...
   created_at: 2004-05-24 17:16:00.0
-me:
-  title: me
-  created_at: 2004-05-23 01:33:00.0
-in-other-news:
-  title: In other news...
-  created_at: 2004-05-22 08:47:00.0
-thank-you-virginia:
-  title: Thank you, Virginia
-  created_at: 2004-05-20 06:59:00.0
-yipes:
-  title: Yipes!
-  created_at: 2004-05-18 19:01:00.0
-wouldnt-ya-know:
-  title: Wouldn't ya know...
-  created_at: 2004-05-15 01:39:00.0
-status-brd-etc:
-  title: Status: BRD, etc.
-  created_at: 2004-05-18 09:52:00.0
 hhgttg:
   title: HHGTTG
   created_at: 2004-05-17 00:39:00.0
-snack:
-  title: Snack
-  created_at: 2004-05-14 17:00:00.0
-cd-player-mood-swings:
-  title: CD Player Mood Swings
-  created_at: 2004-05-14 14:07:00.0
-progress:
-  title: Progress
-  created_at: 2004-05-13 12:53:00.0
-untitled-2:
-  title: untitled
-  created_at: 2004-05-10 16:04:00.0
 barbie:
   title: Barbie
   created_at: 2004-05-09 23:39:00.0
-the-end-amp-the-beginning:
-  title: the end & the beginning
-  created_at: 2004-05-07 12:16:00.0
-what-if:
-  title: What if...
-  created_at: 2004-05-06 01:35:00.0
 current-work:
   title: Current work...
   created_at: 2004-05-05 18:14:00.0
-weelll:
-  title: Weelll.
-  created_at: 2004-05-04 16:04:00.0
 now-that-im-thinking:
   title: Now that I'm thinking...
   created_at: 2004-04-30 11:43:00.0
-memories:
-  title: memories..
-  created_at: 2004-04-29 19:55:00.0
-hey-i-cried-for-you-today:
-  title: hey, i cried for you today
-  created_at: 2004-04-29 19:51:00.0
--:
-  title: ...
-  created_at: 2004-04-29 06:39:00.0
 pain:
   title: pain
   created_at: 2004-04-26 03:25:00.0
-untitled:
-  title: untitled
-  created_at: 2004-04-23 01:46:00.0
 weird:
   title: weird...
   created_at: 2004-04-22 23:52:00.0
-things-fall-apart:
-  title: Things fall apart
-  created_at: 2004-04-21 11:03:00.0
 someday:
   title: someday
   created_at: 2004-04-17 10:48:00.0
@@ -416,21 +218,9 @@ perl-wep-netsumbler:
 taxes:
   title: taxes!
   created_at: 2004-04-13 20:34:00.0
-tommorows-god-the-greatest-spiritual-hogwash:
-  title: Tommorow's God: The Greatest "Spiritual" Hogwash
-  created_at: 2004-04-10 00:07:00.0
-medication:
-  title: "Medication"
-  created_at: 2004-04-07 11:44:00.0
 thank-you-o-basic:
   title: Thank you, O-BASIC
   created_at: 2004-04-07 11:26:00.0
-mips-assembler:
-  title: MIPS Assembler
-  created_at: 2004-04-06 22:28:00.0
-h4c-lt-g:
-  title: h4c|< !|\|g
-  created_at: 2004-04-04 00:37:00.0
 100th-entry:
   title: 100th Entry!
   created_at: 2004-03-31 11:17:00.0
@@ -443,111 +233,45 @@ crazy:
 new-project:
   title: new project
   created_at: 2004-03-22 11:41:00.0
-cook-cook-cook:
-  title: cook cook cook
-  created_at: 2004-03-20 10:02:00.0
-wowza:
-  title: Wowza
-  created_at: 2004-03-18 11:17:00.0
-upcoming-paper:
-  title: Upcoming Paper
-  created_at: 2004-03-14 00:08:00.0
-schooling:
-  title: Schooling
-  created_at: 2004-03-09 22:38:00.0
 second-great-awakening:
   title: Second "Great" Awakening
   created_at: 2004-03-03 22:44:00.0
 grade-update:
   title: Grade Update
   created_at: 2004-03-02 14:31:00.0
-mommy-look-what-i-learned-in-school-today:
-  title: Mommy look what I learned in school today!
-  created_at: 2004-03-02 12:14:00.0
-paranoia-strikes-deep:
-  title: Paranoia strikes deep...
-  created_at: 2004-03-01 11:23:00.0
 ah-life:
   title: Ah, Life
   created_at: 2004-02-26 12:10:00.0
 theory:
   title: Theory
   created_at: 2004-02-25 14:28:00.0
-wadata:
-  title: Wadata
-  created_at: 2004-02-25 09:38:00.0
-friends:
-  title: Friends
-  created_at: 2004-02-23 14:16:00.0
 dag-yo:
   title: Dag, yo.
   created_at: 2004-02-21 00:34:00.0
 java-project:
   title: Java Project
   created_at: 2004-02-20 08:41:00.0
-enders-game-google-google:
-  title: Ender's Game, Google != Google
-  created_at: 2004-02-18 13:55:00.0
-planets:
-  title: Planets
-  created_at: 2004-02-18 00:23:00.0
-new-site-etc:
-  title: New Site, etc.
-  created_at: 2004-02-17 08:02:00.0
 chess-and-bicycles:
   title: Chess and Bicycles
   created_at: 2004-02-14 12:12:00.0
 out-of-left-field:
   title: Out of left field...
   created_at: 2004-02-12 17:16:00.0
-allergy-business:
-  title: Allergy Business
-  created_at: 2004-02-29 23:06:00.0
 a-few-computers-debian:
   title: A few computers + Debian = ...
   created_at: 2004-05-11 15:44:00.0
-security-issue:
-  title: Security Issue
-  created_at: 2004-02-10 01:22:00.0
-blogs:
-  title: blogs
-  created_at: 2004-02-09 11:16:00.0
-project:
-  title: Project
-  created_at: 2004-02-07 11:09:00.0
 firebird-2:
   title: Firebird
   created_at: 2004-02-06 13:42:00.0
-cse-amp-company:
-  title: <acronym title="Computer Science & Engineering">CSE</acronym> & Company
-  created_at: 2004-02-06 02:24:00.0
 firebird:
   title: Firebird
   created_at: 2004-02-05 11:04:00.0
-grades-etc:
-  title: Grades, etc.
-  created_at: 2004-02-04 13:59:00.0
 attn-music-fans:
   title: Attn: music fans
   created_at: 2004-02-03 14:26:00.0
 continually-amazed:
   title: Continually Amazed
   created_at: 2004-02-03 12:03:00.0
-mensa:
-  title: Mensa
-  created_at: 2004-02-02 14:48:00.0
-ka-boom:
-  title: ka-boom
-  created_at: 2004-02-02 00:29:00.0
-music-et-cetera:
-  title: Music, et cetera.
-  created_at: 2004-01-31 17:08:00.0
-im-not-angry-it-happens:
-  title: "I'm not angry, it happens."
-  created_at: 2004-01-30 10:04:00.0
-explain:
-  title: Explain?
-  created_at: 2004-01-30 00:17:00.0
 hear-my-train-a-comin:
   title: Hear my train a comin'
   created_at: 2004-01-29 23:18:00.0
@@ -557,18 +281,12 @@ midterm-exam:
 t-minus-1hr-30-minutes:
   title: T-Minus: 1hr 30 minutes
   created_at: 2004-01-28 12:19:00.0
-no-really-trust-in-man-please:
-  title: No really.  Trust in man.  Please.
-  created_at: 2004-01-27 21:56:00.0
 in-sharp-contrast:
   title: In sharp contrast...
   created_at: 2004-01-25 20:52:00.0
 finally-2:
   title: Finally.
   created_at: 2004-01-26 11:19:00.0
-public-class-boring:
-  title: public class boring {}
-  created_at: 2004-01-23 10:29:00.0
 interesting-method:
   title: Interesting method...
   created_at: 2004-01-22 23:49:00.0
@@ -581,63 +299,21 @@ history-of-christianity:
 what:
   title: What?
   created_at: 2004-01-20 15:48:00.0
-not-knowing-is:
-  title: Not knowing is...
-  created_at: 2004-01-14 22:51:00.0
-grrrr:
-  title: Grrrr...
-  created_at: 2004-01-12 11:00:00.0
-take-that-mary-wollstonecraft:
-  title: Take that, Mary Wollstonecraft
-  created_at: 2004-01-10 12:42:00.0
-damien-jurado-et-cetera:
-  title: Damien Jurado, et cetera.
-  created_at: 2004-01-09 16:27:00.0
-did-i-mention-that-i-like-poetry:
-  title: Did I mention that I like poetry?
-  created_at: 2004-01-08 11:25:00.0
 yay-for-school:
   title: Yay for school.
   created_at: 2004-01-07 14:16:00.0
-to-ricky:
-  title: "To Ricky"
-  created_at: 2004-01-06 21:29:00.0
-snow-day:
-  title: Snow Day!
-  created_at: 2004-01-06 10:29:00.0
 i-forgot:
   title: I forgot.
   created_at: 2004-01-05 14:04:00.0
-well-this-is-pretty-cool:
-  title: Well this is pretty cool...
-  created_at: 2004-01-05 10:26:00.0
-hurry-up-clock:
-  title: Hurry up, Clock!
-  created_at: 2004-01-04 13:21:00.0
-new-year-etc:
-  title: New Year, etc.
-  created_at: 2004-01-02 02:02:00.0
-seriously-people-learn-what-your-books-say-mormon-christian:
-  title: Seriously, people.  Learn what your books say.  Mormon != Christian.
-  created_at: 2003-12-29 10:05:00.0
-luke-are-you-ok:
-  title: Luke... are you OK?
-  created_at: 2003-12-28 23:43:00.0
 crewman-6:
   title: Crewman #6
   created_at: 2003-12-27 01:05:00.0
 merry-christmas:
   title: Merry Christmas!
   created_at: 2003-12-25 15:58:00.0
-about-time:
-  title: About Time...
-  created_at: 2003-12-24 09:43:00.0
 interesting:
   title: Interesting...
   created_at: 2003-12-23 12:52:00.0
-moved-moved-moved:
-  title: Moved moved moved.
-  created_at: 2003-12-20 00:46:00.0
 recommendation-to-the-philosophy-deptartment-seppuku:
   title: Recommendation to the Philosophy Deptartment: Seppuku
   created_at: 2003-12-18 14:54:00.0
@@ -650,30 +326,15 @@ and-the-winner-is-biopsychology:
 how-are-they-so-slow:
   title: How are they so slow?
   created_at: 2003-12-15 10:57:00.0
-tests-etc:
-  title: Tests, etc.
-  created_at: 2003-12-13 11:28:00.0
-pies:
-  title: Pies.
-  created_at: 2003-12-12 11:35:00.0
 one-down-one-to-go:
   title: One down, one to go.
   created_at: 2003-12-12 09:27:00.0
-philosophy-quiz:
-  title: Philosophy Quiz
-  created_at: 2003-12-10 15:50:00.0
 the-path-not-trodden:
   title: The path not trodden...
   created_at: 2003-12-10 00:35:00.0
 doh:
   title: Doh.
   created_at: 2003-12-08 13:56:00.0
-oh-wait:
-  title: Oh wait...
-  created_at: 2003-12-08 01:56:00.0
-fah:
-  title: Fah.
-  created_at: 2003-11-29 19:59:00.0
 egmont:
   title: Egmont.
   created_at: 2003-11-25 15:21:00.0
@@ -692,48 +353,15 @@ experience-machine:
 soap:
   title: SOAP
   created_at: 2003-11-14 00:45:00.0
-dodge-this:
-  title: Dodge this...
-  created_at: 2003-11-12 19:23:00.0
 computers-that-think-and-lions-that-sing:
   title: Computers that think and Lions that sing.
   created_at: 2003-11-11 13:17:00.0
-clockwork:
-  title: Clockwork
-  created_at: 2003-11-08 00:51:00.0
 and-of-course:
   title: And of course...
   created_at: 2003-11-06 12:04:00.0
 house-made-of-dawn:
   title: House Made of Dawn
   created_at: 2003-11-05 19:01:00.0
-mac-kills-my-inner-child:
-  title: Mac Kills my inner child.
-  created_at: 2003-11-04 11:28:00.0
-good-grief:
-  title: Good Grief.
-  created_at: 2003-11-02 11:30:00.0
-fixed-well:
-  title: Fixed? Well...
-  created_at: 2003-10-31 14:05:00.0
-leechin-and-other-good-stuff:
-  title: Leechin', and other good stuff.
-  created_at: 2003-10-30 18:13:00.0
-argh:
-  title: ARGH!
-  created_at: 2003-10-29 17:29:00.0
-finally:
-  title: Finally...
-  created_at: 2003-10-25 14:53:00.0
-whoops:
-  title: Whoops...
-  created_at: 2003-10-17 11:03:00.0
-sleeping-in:
-  title: Sleeping in...
-  created_at: 2003-10-16 10:27:00.0
-food-now:
-  title: food. now.
-  created_at: 2003-10-15 18:50:00.0
 ilike-on-the-today-show:
   title: iLike on The Today Show
   created_at: 2008-01-02 06:51:00.0
@@ -749,9 +377,6 @@ peter-sellers-does-a-hard-days-night:
 drm-the-dark-future-of-e-books:
   title: DRM: The Dark Future of E-Books?
   created_at: 2007-12-12 14:32:00.0
-aim-chat-in-gmail:
-  title: AIM Chat in Gmail
-  created_at: 2007-12-06 11:04:00.0
 beacon-is-global-opt-out-enough:
   title: Beacon: Is Global Opt-Out Enough?
   created_at: 2007-12-05 16:37:00.0
@@ -761,9 +386,6 @@ nytimes-com-usability-complaint:
 current-music-favorites:
   title: Current Favorite Albums
   created_at: 2007-11-28 12:58:00.0
-mysterious-sliding-rocks:
-  title: Mysterious Sliding Rocks
-  created_at: 2007-11-27 16:41:00.0
 true-your-own-wheels:
   title: True Your Own Wheels
   created_at: 2007-11-24 18:23:00.0
@@ -812,24 +434,15 @@ cube-updates:
 vitus-979-reborn:
   title: Vitus 979, Reborn
   created_at: 2007-09-08 08:40:00.0
-typos-and-bugs:
-  title: Typos and Bugs
-  created_at: 2007-09-05 19:11:00.0
 heather-pass-lewis-lake-and-wing-lake:
   title: Heather Pass, Lewis Lake and Wing Lake
   created_at: 2007-08-29 16:46:00.0
 the-jobster-robot:
   title: The Jobster Robot
   created_at: 2007-08-22 21:19:00.0
-alive-again:
-  title: Alive, again.
-  created_at: 2007-08-18 20:46:00.0
 facebook-downtime:
   title: Facebook Downtime
   created_at: 2007-07-31 11:15:00.0
-morale-o-meter:
-  title: Morale-O-Meter
-  created_at: 2007-05-19 10:13:48.0
 09-f9-11-02-9d-74-e3-5b-d8-41-56-c5-63-56-88-c0:
   title: 09-F9-11-02-9D-74-E3-5B-D8-41-56-C5-63-56-88-C0
   created_at: 2007-05-04 12:14:00.0
@@ -866,18 +479,12 @@ when-mashups-go-awry-or-turings-revenge:
 atr-redux:
   title: ATR Redux
   created_at: 2007-03-09 18:14:30.0
-spam-evil-2:
-  title: Spam: Evil + 2
-  created_at: 2007-03-07 19:31:00.0
 linux-in-2007:
   title: Linux in 2007
   created_at: 2007-03-01 11:39:00.0
 three-column-css-layout-centered-and-fixed-width:
   title: Three Column CSS Layout: Centered and Fixed-Width
   created_at: 2007-03-01 09:44:44.0
-the-thread-presents-art-night-2007:
-  title: The Thread Presents Art Night 2007
-  created_at: 2007-02-26 14:14:18.0
 useful-firefox-hack:
   title: Useful Firefox Hack
   created_at: 2007-02-24 23:34:00.0
@@ -953,12 +560,6 @@ reminiscing-with-jeopardy:
 programming-n-grams-in-d:
   title: Programming N-Grams in D
   created_at: 2007-01-02 12:02:28.0
-frist-pots:
-  title: Frist Pots
-  created_at: 2007-01-01 22:03:00.0
-texan-holidays:
-  title: Texan Holidays
-  created_at: 2007-01-01 22:55:08.0
 hello-typo:
   title: Hello, Typo
   created_at: 2007-07-30 13:22:39.622552

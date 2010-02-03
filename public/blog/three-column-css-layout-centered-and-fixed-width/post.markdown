@@ -10,47 +10,47 @@ Fortunately, Steve's design looked like it could fit in a classic metaphor: the 
 
 The layout was rather simple: a left column displaying a 230 pixel image, a right column displaying a 50 pixel image, and a center column.  The center column was a bit tricky: Steve's design subdivided it into two 260 pixel columns, with 10 pixels of space between the original left column, the center left, the center right, and the original right column.  This was just for the front page; the page I was to add would use the full 530 pixels and have a 10 pixel margin on the left and the right.  Additionally, the whole design is centered in the page.
 
-Reading through the above articles I found two major techniques: a centered layout having fixed-width rails with a fluid center, or a left-aligned layout with everything of fixed-width.  Not what I had in mind&mdash;the page really looked better centered, and making the center column fluid would disrupt the design.  Giving a <typo:code>text-align:center;</typo:code> property to any of the surrounding block elements did nothing useful.
+Reading through the above articles I found two major techniques: a centered layout having fixed-width rails with a fluid center, or a left-aligned layout with everything of fixed-width.  Not what I had in mind&mdash;the page really looked better centered, and making the center column fluid would disrupt the design.  Giving a `text-align:center;` property to any of the surrounding block elements did nothing useful.
 
 Fortunately, I remembered a <a href="http://www.bluerobot.com/web/css/center1.html">really neat article on <acronym title="Cascading Style Sheets">CSS</acronym> centering</a>, which turned out to provide exactly what I needed:
 
-<blockquote><typo:code>margin:0px auto;</typo:code></blockquote>
+    margin:0px auto;
 
-Applying that to the containing block in the 3 column <a href="http://alistapart.com/d/multicolumnlayouts/3ColFixed.html">fixed-width example</a> centered it perfectly!  Well, I had to remove the <typo:code>float:left;</typo:code> directive and change the coloring around, too.  A full listing of the revised example CSS is below:
+Applying that to the containing block in the 3 column <a href="http://alistapart.com/d/multicolumnlayouts/3ColFixed.html">fixed-width example</a> centered it perfectly!  Well, I had to remove the `float:left;` directive and change the coloring around, too.  A full listing of the revised example CSS is below:
 
 
 
-<blockquote><typo:code>#container{
-&nbsp;&nbsp;&nbsp;&nbsp;margin:0px auto;		
-&nbsp;&nbsp;&nbsp;&nbsp;width:500px;
-&nbsp;&nbsp;&nbsp;&nbsp;/* The width and color of the left rail */
-&nbsp;&nbsp;&nbsp;&nbsp;border-left:150px solid #cf9;
-&nbsp;&nbsp;&nbsp;&nbsp;/* The width and color of the right rail */
-&nbsp;&nbsp;&nbsp;&nbsp;border-right:200px solid #c33;
-}</typo:code>
+    #container{
+      margin:0px auto;		
+      width:500px;
+      /* The width and color of the left rail */
+      border-left:150px solid #cf9;
+      /* The width and color of the right rail */
+      border-right:200px solid #c33;
+    }
 
-<typo:code>#leftRail{
-&nbsp;&nbsp;&nbsp;&nbsp;float:left;
-&nbsp;&nbsp;&nbsp;&nbsp;width:150px;
-&nbsp;&nbsp;&nbsp;&nbsp;margin-left:-150px;
-&nbsp;&nbsp;&nbsp;&nbsp;position:relative;
-&nbsp;&nbsp;&nbsp;&nbsp;background-color:#cf9;
-}</typo:code>
+    #leftRail{
+      float:left;
+      width:150px;
+      margin-left:-150px;
+      position:relative;
+      background-color:#cf9;
+    }
 
-<typo:code>#center{
-&nbsp;&nbsp;&nbsp;&nbsp;background-color:#9cc;
-&nbsp;&nbsp;&nbsp;&nbsp;float:left;
-&nbsp;&nbsp;&nbsp;&nbsp;width:500px;
-&nbsp;&nbsp;&nbsp;&nbsp;margin-right:-500px;
-}</typo:code>
+    #center{
+      background-color:#9cc;
+      float:left;
+      width:500px;
+      margin-right:-500px;
+    }
 
-<typo:code>#rightRail{
-&nbsp;&nbsp;&nbsp;&nbsp;float:right;
-&nbsp;&nbsp;&nbsp;&nbsp;width:200px;
-&nbsp;&nbsp;&nbsp;&nbsp;margin-right:-200px;
-&nbsp;&nbsp;&nbsp;&nbsp;position:relative;
-&nbsp;&nbsp;&nbsp;&nbsp;background-color:#c33;
-}</typo:code>
+    #rightRail{
+      float:right;
+      width:200px;
+      margin-right:-200px;
+      position:relative;
+      background-color:#c33;
+    }
 
 You can also <a href="http://threebrothers.org/brendan/blog/wp-content/uploads/2007/03/3ColFixedCentered.html">view the example</a>.</blockquote>
 

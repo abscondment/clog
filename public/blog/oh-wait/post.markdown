@@ -1,5 +1,0 @@
-That's right--I have a blog!  Nearly forgot, after the last time I got sick.  Ho-hum.  I'm putting off continuing work on my (last) Philosophy paper.  It's going to argue that there are objective moral values.  Objective moral values are values that do not change from culture to culture.  This is not arguing that there are no subjective values (values that do change from culture to culture), but only that there definately are some that are static.  Obvious illustrations arise when two cultures interact: by saying that it is not OK to judge another culture, you have set up an objective moral by which all cultures must abide.  Blah blah blah.
-
-I'm so sick of this; I just want the quarter to be over!  I want to read The Brothers Karamazov, I want to see The Return of the King, I want to move into my apartment, I want to kiss my girlfriend, and I want to apply to my major.
-
-Phew.

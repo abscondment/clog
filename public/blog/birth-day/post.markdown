@@ -1,3 +1,0 @@
-<p>I'm twenty now.  I'm really tired.  I remind myself of Dan, or at least of the way Dan told me he was acting the other night.  He was trying to write in his journal and would write one word but then fall asleep.  Then he'd try to remember what it was he was trying to say, and he'd write another word.  But of course, he'd fall asleep again.  The whole thing sounded a lot like playing that game where each person goes in order and says the next word in newly forming sentence.  Only...</p>
-<p>d'oh</p>
-<p>I got my 128mb USB 2.0 thumb drive.  It's nice.</p>

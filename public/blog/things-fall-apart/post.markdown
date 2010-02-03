@@ -1,7 +1,0 @@
-Everything is moving in slow motion.  Jessica's claim has been closed; they're giving her no money, so now she has to get a lawyer and fight.  She's also been having roommate issues in the past few months; yesterday, her roommate informed her that she (the roommate) is moving out ASAP.
-
-So she's pretty stressed out (and I am implicitly stressed out as well).  I need to read great expectations and write a 6 page paper on it.  Simple; I just need to <i>do</i> it.  I woke up this morning in a terrible panic; I believed (since the past 3 weeks have been like this) that my CSE homework was due at 9:30 today.  So I worked my little butt off.  I mean WORKED.  I finished it all, even the extra credit.  I was in quite a state when I started, though.
-
-God has been teaching me how little most of our worries matter.  I was convinced when I set out to do my homework that I wasn't going to get any of it done; I wasn't going to get a good grade in the class and then... what?  And then what?  Who even cares?  Much, much worse things could happen.  One homework assignment in a 3 credit CSE class is meaningless.
-
-The assignment was due Friday.  I realized this only after emailing the professor in a panic; I feel pretty foolish.

@@ -1,4 +1,4 @@
-<p>The Computer Science department was unable to offer me a place in their department.  I'm pretty bummed abou that.  And of course, as I read the email, Bob Dylan's <a href="http://bobdylan.com/songs/buckets.html">Buckets of Rain</a> is going on in the background with these lines:</p>
+<p>The Computer Science department was unable to offer me a place in their department.  I'm pretty bummed about that.  And of course, as I read the email, Bob Dylan's <a href="http://bobdylan.com/songs/buckets.html">Buckets of Rain</a> is going on in the background with these lines:</p>
 <blockquote><p>
 Life is sad<br />
 Life is a bust<br />

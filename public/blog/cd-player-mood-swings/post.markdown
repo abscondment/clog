@@ -1,5 +1,0 @@
-My CD Player is having mood swings, jumping from Pink Floyd to Sunny Day Real Estate to Miles Davis to Nine Inch Nails to Radiohead and then back again.  It's such an eclectic mix that it's really funny to listen to.  Rage vs. the blues.  Radiohead meets classic rock.  It's a little schizophrenic feeling.
-
-I really like spelling words (although I'll probably misspell something now that I've made that statement).  I think watching <a href="http://imdb.com/title/tt0334405/">Spellbound</a> made me remember that, but other factors have reiterated the feelings that movie awoke.  My informatics class was discussing the effects of technology on society; one thing that was brought up was the loss of learning how to spell.  One guy conjectured that he's a terrible speller now because he has spent way too many years relying on spellcheck to know how to do things right anymore.  I don't know what I think about this... although, maybe the fact that I can spell is part of the reason I can type quickly.
-
-I'm just rambling, aren't I?  Bah.

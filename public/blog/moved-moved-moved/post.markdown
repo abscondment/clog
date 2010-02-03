@@ -1,3 +1,0 @@
-I'm in my new apartment now.  Yay!  Pictures to come.  I'm tired, so I'm going to bed now.  Or soon.  Had to work today.  Glad quarter is over.  Miss Jessica.  Achieving minimal sentence length.
-
-Zzzzz...

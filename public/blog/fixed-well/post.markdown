@@ -1,3 +1,0 @@
-OK, I'm willing to venture that this site is *mostly* fixed.  Now, I know that I'm dead wrong, and I'll find all sorts of errors the next time I look at it--which is why I'm updating it and then running away quickly.  Honestly, I have things to do.  Like homework, and other such rot.  And I really have to go to the bathroom... so if I find another error (and I can't help but fix errors... one of those OCD kinda things) I'm definately going to make a mess (both of my schoolwork and my pants).
-
-Other news, got my mom to cover my shift at work tonight.  That is a luxury most people don't have :P.

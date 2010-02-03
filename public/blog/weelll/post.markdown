@@ -1,1 +1,0 @@
-Well.  I've applied to Informatics.  I've finished my midterms.  I'm done with another round of being sick.  I'm really hungry (that's a good sign!).  I'm leaving to get something to eat.  Toodles.

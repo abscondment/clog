@@ -1,8 +1,0 @@
-<p>I started a character in <a href="http://mud.arctic.org">Arctic MUD</a> today.  Don't worry; I'm not really going to start playing again.  Reading all of the changes that occurred since my peak playing period has, however, has stirred some thoughts about the game.</p>
-<p>As sick as this may sound, playing Arctic is like playing a sport.  To be good, you can't do it alone (so I guess this makes it a <i>team</i> sport).  Playing around with Mark (as I'm doing now) is like stepping onto the field again after a long absence--it's an uncanny feeling.  It's weird to mull over the nights I zoned with Furshai, tackling some pretty elite zones and living (well... except when Chase was supposed to be healing).</p>
-<p>Of course, there are obvious differences, the most notable being that no one gets paid for mudding.  But I get the sense that if I wanted to, I could get good at it again.  I don't really want to; it takes waaay too much time to justify playing.  Counter-Strike is managable; one can play it in short bursts and retain the hand-eye coordintion.  Arctic requires constant play--it's almost like maintaining the ability to speak another language.</p>
-<hr style="width: 50%;" />
-<p>Anyway...</p>
-<p>Mark and I are reading through Galatians in the morning.  I think Jordan will join us, too.  Ya gotta love brothers.</p>
-<p>Oh, I nearly forgot:<br />
-I'm really glad I installed my bayesian comment filter.  It's been blocking messages well.</p>

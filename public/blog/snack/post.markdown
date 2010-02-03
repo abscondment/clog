@@ -1,1 +1,0 @@
-I am snacking while waiting for the time to go to work to come.  Whole greek olives and cheddar cheese and wheat bread go very well together.

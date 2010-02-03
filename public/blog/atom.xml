@@ -1,25 +1,271 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-02-02T17:24:10-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Oh, by the way: Baby!</title><link href="http://threebrothers.org/brendan/blog/baby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-14:/brendan/blog/baby</id><updated>2008-08-14T11:09:00.0-08:00</updated><summary>Since threebrothers.org has been down for a while, I missed some very important things. One month and one day ago, Jessica gave birth to Ezra Wray Ribera. I have a son! There are a bunch of pictures up on Flickr: http://flickr.com/photos/bribera/tags/ezra. That is all....</summary><content type="html"><![CDATA[
-Since threebrothers.org has been down for a while, I missed some very important things.  One month and one day ago, <a href="http://jeskybera.blogspot.com/2008/07/baby-formerly-known-as-spud.html">Jessica gave birth to Ezra Wray Ribera</a>.  I have a son!
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-02-03T15:26:11-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>iPad: Falling Short of the Past</title><link href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id><updated>2010-01-30T09:51:51-08:00</updated><summary><![CDATA[
+ Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will inveigle unsuspecting hackers into a gloomy extinction. For the most part, however, the response has amounted to a banal whine a...]]>
+</summary><content type="html"><![CDATA[
+<p>
+  <img src="/brendan/images/jobs-ipad.png" alt="Steve Jobs and the iPad" style="float:right;margin:0 0 0 1em;" />
+  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will <a href="http://al3x.net/2010/01/28/ipad.html" rel="nofollow">inveigle unsuspecting hackers into a gloomy extinction</a>. For the most part, however, the response has amounted to a <a href="http://www.youtube.com/watch?v=lQnT0zp8Ya4" rel="nofollow">banal whine</a> about Flash, multitasking, and maxi pads. Why anyone would complain about <em>not</em> being continually tortured by Flash is beyond me&mdash;but that's another post entirely.
+</p>
 
-<img src="http://farm4.static.flickr.com/3085/2730011801_0b6c13dd9d.jpg" alt="Ezra Wray Ribera" />
+<p>
+  I'm continually led to appreciate the history of Computer Science. I write software for a living, and I've used a number of different languages. I began in O-BASIC, and I've taken an analogous path to the one described by Paul Graham in <em><a href="http://www.paulgraham.com/icad.html" rel="nofollow">Revenge of the Nerds</a></em>:
+</p>
 
-There are a bunch of pictures up on Flickr: <a href="http://flickr.com/photos/bribera/tags/ezra">http://flickr.com/photos/bribera/tags/ezra</a>.  That is all.]]>
-</content></entry><entry><title>Copyright Progress</title><link href="http://threebrothers.org/brendan/blog/copyright-progress/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-13:/brendan/blog/copyright-progress</id><updated>2008-08-13T10:29:00.0-08:00</updated><summary>I was excited to read this morning that the Court of Appeals has upheld an open-source copyright license. To quote Lawrence Lessig's summary: In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condi...</summary><content type="html"><![CDATA[
-I was excited to read this morning that <a href="http://lessig.org/blog/2008/08/huge_and_important_news_free_l.html">the Court of Appeals has upheld an open-source copyright license</a>.  To quote Lawrence Lessig's summary:
+<blockquote>
+  <p>
+    <em>
+      If you look at these languages in order, Java, Perl, Python, you notice an interesting pattern. At least, you notice this pattern if you are a Lisp hacker. Each one is progressively more like Lisp. Python copies even features that many Lisp hackers consider to be mistakes. You could translate simple Lisp programs into Python line for line. It's 2002, and programming languages have almost caught up with 1958.
+    </em>
+  </p>
+</blockquote>
+
+<p>
+  &quot;Programming languages have almost caught up with 1958.&quot; Something about that really resonates with me, and I don't think it's only because I've been drinking the Lisp-flavored Clojure Kool-Aid. In fact, I'm sure it's not.
+</p>
+
+<p>
+  I remember the day I had the <acronym title="Model-View-Controller">MVC</acronym> epiphany. I'd worked a little bit in <a href="http://static.springsource.org/spring/docs/2.0.x/reference/mvc.html" rel="nofollow">Spring's framework</a> and had recently dove into the relatively soothing balm of Rails. My prior projects hadn't had any really clean separation. &quot;Man,&quot; I thought, &quot;what a great, new invention. I don't know how people developed web applications before MVC existed.&quot; Then I discovered that <a href="http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html">MVC originated in Xerox PARC in the 70s</a>. Of course, I should have known better&mdash;I had to read all sorts of PARC papers in school. Never underestimate your own capacity to forget important and interesting information.
+</p>
+
+<p>
+  Here's the interesting thing: we're constantly leaving what's rooted in history and rigor for the technique <em>du jour</em>. Lisp isn't for everyone, but enough incredibly smart people swear by it that it should give you pause. There may be a good alternative to MVC for your application, but chances are you've exchanged it for a fragile pile of highly-coupled, poorly organized classes. You may think it's OK to treat a Java interface like a C header file (yes, I maintained code that had this charming characteristic), but this simply indicates that you don't know the first thing about object-oriented programming.
+</p>
+
+<p>
+  Now, it would be silly of me to quote <em>Revenge of the Nerds</em> and then make some (de)moralizing point about &quot;industry best practices.&quot; My point thus far is this: for a given problem, it's likely that an efficient and elegant solution exists already (even if only in concept). And very often, it was invented <em>years</em> ago. <b>It is good to be well-versed in the history of your trade.</b> This will help you know how to think about whole classes of problems. And this&mdash;finally&mdash;brings me back to the iPad.
+</p>
+
+<p>
+  <img src="/brendan/images/parcpad.png" alt="The ParcPad" style="float:left;margin:0 1em 0 0;" />
+  Critics are right to be at least a little disappointed, but not due to the likes of Flash or multitasking. The iPhone and iPad are still behind research prototyped at PARC (yes, them again) in the late 80s. Mark Weiser's <a href="http://sandbox.xerox.com/ubicomp/" rel="nofollow">Ubiquitous Computing research</a> conceived of and built a variety of devices for home and office use&mdash;called tabs, pads, and boards&mdash;sized just like iPhones, iPads, and large LCD screens. They even wrote software and built networking devices to stitch the environment together.
+</p>
+
+<p>
+  It's obvious that Xerox has had a profound impact on Steve Jobs, from the Lisa to the iPhone. When I first heard about the iPhone in 2007, I instantly thought of the ParcTab. Hardware has improved tremendously since the ParcTab experiments and <a href="http://www.ubiq.com/weiser/researchreports.htm" rel="nofollow">papers</a>. Apple now reaps the benefits of faster and cheaper processors, ram, and storage. Wireless networking is pervasive and fast. Screens are vastly better, and touch inputs have obviously improved. The device is supremely capable. But the ubiquitous user interface is completely absent.
+</p>
+
+<p>
+  I recently advised a nontechnical friend about purchasing an iPhone. She wanted to know how it interfaced with her computer and TV. &quot;It really doesn't,&quot; was my response. But she expected it to. It doesn't take an engineer to see that devices like the iPhone and iPad <em>ought</em> to operate as an extension to the computer or TV. Instead, we have this media syncing model that's reminiscent of some lousy corporate <acronym title="Personal digital assistant">PDA</acronym>. Technology pundits who are quibbling about little features are missing the point: the iPad should have made the jump to seamless, ubiquitous integration. This would have been a technological revolution equivalent to the introduction of the iPhone. This is the next step.
+</p>
+
+<p>
+  Both the iPhone and the iPad should operate as stand-alone devices. But they could bring so much more power and flexibility if they also acted as extensions to a desktop, laptop, or distributed network. A general-purpose, network-aware, hand-held device that can continue operating without the network. Access this computer and that; give a presentation on this screen; share files with these people; receive and send email; play a game; order lunch&mdash;and use any of your iPhone, iPad, or MacBook at any point in the progression, with the others automatically and wirelessly synced. This is what I expected of Apple.
+</p>
+
+<p>
+  Indeed, Mark Weiser accurately predicted our current systems in 1996. In <a href="http://www.ubiq.com/hypertext/weiser/acmfuture2endnote.htm">The Coming age of Calm Technology</a>, he describes a transition from the internet and distributed computing to &quot;The <acronym title="Ubiquitous Computing">UC</acronym> Era&quot;&mdash;and he said it would take place between 2005 and 2020. He describes the philosophy of UC with four tenets:
+</p>
+
+<ul>
+  <li>The purpose of a computer is to help you do something else.</li>
+  <li>The best computer is a quiet, invisible servant.</li>
+  <li>The more you can do by intuition the smarter you are; the computer should extend your unconscious.</li>
+  <li>Technology should create calm.</li>
+</ul>
+
+<p>
+  This is the standard to which Apple should be held. We're collectively forgetting how good the iPad <em>should</em> be, because we're forgetting how much brilliant computer science research has already been done. Like Java, Perl, and Python, the present incarnation will inch towards superior and older definition. And although I disagree with them philosophically about the openness of their systems to hackers, I believe they will soon reach the ubiquitous computing standard. This will be good for technology all around.
+</p>
+
+<p>
+  Just remember to peer back a few decades occasionally and recall exactly how much we should expect from modern-day engineering.
+</p>
+
+<p>
+  <br/>
+  <em>
+    What has been is what will be,<br/>
+    &nbsp;&nbsp;&nbsp;and what has been done is what will be done,<br/>
+    &nbsp;&nbsp;&nbsp;and there is nothing new under the sun.
+  </em>
+  <br/>
+  <a href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1" rel="nofollow">Ecclesiastes</a>
+</p>
+]]>
+</content></entry><entry><title>Updating gems for Ruby 1.9</title><link href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id><updated>2010-01-27T06:41:33-08:00</updated><summary><![CDATA[
+I recently updated two libraries for Ruby 1.9 compatibility and made them available on Gemcutter. Both of these libraries include hefty C extensions written against the 1.8 headers. After reading Evan Miller's fantastic article on how not to sort by average rating, I really wanted to apply his solution. However, I quickly r...]]>
+</summary><content type="html"><![CDATA[
+<p>I recently updated two libraries for Ruby 1.9 compatibility and made them available on <a href="http://gemcutter.org" rel="nofollow">Gemcutter</a>. Both of these libraries include hefty C extensions written against the 1.8 headers.</p>
+
+<p>After reading Evan Miller's fantastic article on <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">how <em>not</em> to sort by average rating</a>, I really wanted to apply his solution. However, I quickly ran into a problem: the magical <span style="font-family:courier new,mono;">statistics2</span> library he used was nowhere to be found. At least, it wasn't available as a gem, and wasn't included in the standard distribution. Wait, you say people actually <a href="http://raa.ruby-lang.org/project/statistics2/" rel="nofollow">shared libraries before RubyGems</a>?! I guess so. I quickly updated the packaging, added Hoe support and released it as a gem&mdash;with <a href="http://github.com/abscondment/statistics2">source on Github</a> and <a href="http://gemcutter.org/gems/statistics2">gem on Gemcutter</a>.</p>
+
+<p>At some point, I needed to do spatial clustering with more points than can comfortably run in a na&iuml;ve linear search. <a href="http://thebogles.com/blog/">Phil Bogle</a> suggested that perhaps a Voronoi diagram could be useful to me, and from this came RubyVor. RubyVor provides efficient calculation of Voronoi diagrams and Delaunay triangulation by wrapping <a href="http://ect.bell-labs.com/who/sjf/">Steven Fortune's C program</a> in a Ruby extension. It too was released as <a href="http://github.com/abscondment/rubyvor">a Github project</a> and a <a href="http://gemcutter.org/gems/rubyvor">Gemcutter gem</a>.</p>
+
+<p>Both the libraries wouldn't compile against 1.9 headers due to changes in basic type structs. The symptom of this problem is messages like the following that spew during extension compilation.</p>
+
+<pre><code>rb_cComputation.c:39: error: 'struct RArray' has no member named 'ptr'
+rb_cComputation.c:45: error: 'struct RArray' has no member named 'len'
+rb_cComputation.c:284: error: 'struct RFloat' has no member named 'value'
+</code></pre>
+
+<p>So what's going on here? Well, the answer is simple: Ruby 1.8 used different C structs; the member values we once accessed directly are no longer where the code thinks they ought to be. Just to illustrate, take a look at the RArray struct:</p>
+
+<pre><code>/* Ruby 1.8 */
+struct RArray {
+  struct RBasic basic;
+  long len;
+  union {
+    long capa;
+    VALUE shared;
+  } aux;
+  VALUE *ptr;
+};
+
+/* Ruby 1.9 */
+struct RArray {
+  struct RBasic basic;
+  union {
+    struct {
+      long len;
+      union {
+        long capa;
+        VALUE shared;
+      } aux;
+      VALUE *ptr;
+    } heap;
+    VALUE ary[RARRAY_EMBED_LEN_MAX];
+  } as;
+};
+</code></pre>
+
+<p>The 1.9 Array has a <em>much</em> more complicated structure. In a 1.8 extension, a programmer would often write things like <span style="font-family:courier new,mono;">RARRAY(a)->ptr</span> to iterate directly over the array via pointers. In 1.9, however, accessing the pointer is more verbose and convoluted. Since this is less than ideal, the Ruby developers simplify things with new macros in 1.9 (<span style="font-family:courier new,mono;">RARRAY_PTR(a)</span> in this case). These also provide nice a level of indirection that can allow the underlying structs to change, but the client code to function without change.</p>
+
+<p>The solution to making these gems compatible with both versions lies in this layer of abstraction: if we can write and use Ruby 1.8 versions of certain 1.9 macros, the code will be struct-agnostic. Below is my fix for RubyVor; it's important to note that structs other than RArray and RFloat also changed, so this isn't a solution for every issue. This is a general pattern that can be used for fixing C-level struct incompatibility. You'll need to figure out the correct 1.8 version of any macros for other structs.</p>
+
+<pre><code>#ifndef RUBY_19
+#ifndef RFLOAT_VALUE
+#define RFLOAT_VALUE(v) (RFLOAT(v)-&gt;value)
+#endif
+#ifndef RARRAY_LEN
+#define RARRAY_LEN(v) (RARRAY(v)-&gt;len)
+#endif
+#ifndef RARRAY_PTR
+#define RARRAY_PTR(v) (RARRAY(v)-&gt;ptr)
+#endif
+#endif
+</code></pre>
+
+<p>Now that I use these three macros instead of direct member access, these extensions are compatible with both Ruby versions. So have fun triangulating and crunching statistics in Ruby 1.9!</p>
+]]>
+</content></entry><entry><title>Solving cryptograms in Clojure</title><link href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id><updated>2009-12-31T10:33:07-08:00</updated><summary><![CDATA[
+ While working on Project Euler, I discovered Peter Norvig's elegant Sudoku solver implementation. Although the associated TDD discussion brought me much humor, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany:...]]>
+</summary><content type="html"><![CDATA[
+<p>
+  While working on <a href="http://projecteuler.net/index.php?section=problems&amp;id=96" rel="nofollow">Project Euler</a>, I discovered Peter Norvig's elegant <a href="http://norvig.com/sudoku.html">Sudoku solver</a> implementation. Although the associated <a href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html" rel="nofollow"><acronym title="Test-driven development">TDD</acronym> discussion</a> brought me <a href="http://pindancing.blogspot.com/2009/09/sudoku-in-coders-at-work.html" rel="nofollow">much humor</a>, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany: one could also model <a href="http://en.wikipedia.org/wiki/Cryptogram" rel="nofollow">cryptograms</a> as a constraint problem and find a solution in a nearly identical manner. Here is my account of implementing such a solution.
+</p>
+
+<h2>Formulation</h2>
+
+<p>
+  The problem is rather different than Sudoku. In some ways, it's simpler: we don't need to figure out which rows, columns, and boxes are affected by each state change. That eliminates a lot of bookkeeping, which is fortunate; figuring out how to compare a set of partially decrypted words to see whether they match an encrypted word and the current puzzle state is enough of a hassle.
+</p>
+
+<p>
+  I want to list the possible solutions for an encrypted word, and then use search and constraint propagation to eliminate these possibilities. To find the solution list, I'll convert each word into what I term its <em>base form</em>. This is done by replacing each character with a representation of its order of appearance. For example, both "seas" and "that" become "ABCA". Using integers naturally limits this technique to words with 10 or fewer distinct characters, so I have opted to use upper-case characters instead. To make a comprehensive list, I group all words in <span style="font-family:courier new,mono;font-size:0.8em;">/usr/share/dict/words</span> by their base form to create a dictionary keyed on base forms. We can then look up candidate solutions using the base form for any encrypted word. This solution is similar to the one required by the ever popular <a href="http://www.google.com/search?q=anagram+interview+question" rel="nofollow">anagram interview question</a>. It quite naturally introduces a limitation to our solver; namely, in order to decrypt a word it must appear in the computer's word list. I find this list on a standard *NIX distribution to be quite sufficient.
+</p>
+
+<p>
+  In Clojure, a single entry in the base form dictionary looks something like this:
+</p>
+
+<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
+  {"ABBABC" ["beebes" "inning" "peeped" "peeper" "teeter"]}
+</p>
+
+<p>
+  When an encrypted word has only one candidate on its list, we can consider it solved and propagate that choice. If we encounter a state where an encrypted word has an empty candidate list, we know we've propagated impossibly conflicting constraints. Unlike the Sudoku problem, simply maintaining a list of potential valid states isn't enough. We really need to store a list of all applied decryption rules, and use them as follows.
+</p>
+
+<h2>Rules and eliminating candidates</h2>
+
+<p>
+  Say we have the following encrypted word/candidate list with some yet-to-be-applied rules:
+</p>
+
+<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
+  ;;; Candidates<br/>
+  ("vkkvkl" ["beebes" "inning" "peeped" "peeper" "teeter"])<br/><br/>
+  ;;; New rules<br/>
+  {\v \p}
+</p>
+
+<p>
+  The new rules say we should translate every encrypted "v" to a "p". We can integrate this into the base form and generate a partially decrypted base form for the encrypted word. We can then use that to further eliminate candidates.
+</p>
+
+<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
+  ;;; New base form for "vkkvkl", given our rules<br/>
+  "pBBpBC"<br/><br/>
+  ;;; New hybrid base forms for existing candidates<br/>
+  ["ABBABC" "ABBABC" "pBBpBC" "pBBpBC" "ABBABC"])<br/><br/>
+  ;;; New candidates<br/>
+  ("vkkvkl" ["peeped" "peeper"])
+</p>
+
+<h2>Propagation</h2>
+
+<p>
+  Propagating the constraints is straightforward. We follow four simple rules:
+</p>
+
+<ol>
+  <li>If any encrypted word has no candidates, we are in an inconsistent state. Return nil.</li>
+  <li>Otherwise, if <em>all</em> words have only one candidate, return. We've found a solution!</li>
+  <li>Otherwise, if any encrypted word has only one candidate, accept that candidate as a solution. Update the existing rules in light of this solution and apply them to all the other candidates recursively.</li>
+  <li>Otherwise, return what we have so far &mdash; all words still have more than one candidate, so we have deduced all that we can. We'll fall back on search to progress further.</li>
+</ol>
+
+<h2>Search</h2>
+
+<p>
+  Now that we have the basic tools for modeling and enforcing the constraints, we can easily write a function to fully apply given rules to a set of candidates.
+  However, as seen above in point 4, we can encounter a state where we've eliminated some candidates but have not found a solution. Indeed, this is the <em>initial</em> problem state. In order to begin (and later to progress), we need to choose an encrypted word and one of its candidates and run with that pair. If it's an invalid pairing, we will reach an inconsistent state and backtrack to try the next pairing. This is a basic depth-first search. Our search will return the first valid result (where "valid" means all encrypted words are solved). We can optimize the search by always starting with first candidate of whichever <em>unsolved</em> encrypted word has the fewest number of candidates &mdash; this trims the search tree fairly well. We can also ensure that the set of decryption rules is actually changed by a given candidate before attempting to search further.
+</p>
+
+<h2>Concluding thoughts</h2>
+
+<p>
+  Cryptograms often have many, many solutions. The first solution found by search is often <em>not</em> the most correct one &mdash; especially in terms of human language. There are some things that could be done in the search function to improve the chance of correctness: e.g. picking the next candidate by word/letter frequency. A more advanced system could use some <acronym title="Natural Language Processing">NLP</acronym> techniques to determine whether the decrypted solution passed as human language. All of these are moot, considering that the benefit provided wouldn't outweigh complexity they would add to this simple algorithm.
+</p>
+
+<h3>Caveat developer</h3>
+
+<p>
+  I'm providing my implementation as a reference. Given that I'm a novice Clojurer, it's liable to be hideous and non-idiomatic. I found working in Clojure to be extremely satisfying, both for this project and for the Sudoku one. My solution is a mere 132 lines (whitespace/comments included), so this is obviously a very expressive language.
+  I've been very impressed by flexibility of its <a href="http://technomancy.us/132">persistent data structures</a> and its <a href="http://clojure.org/lazy" rel="nofollow">lazy evaluation</a>. These make it a very powerful language, and it's definitely a tool I want to sharpen.
+</p>
+
+<p><a href="/files/cryptogram.clj">cryptogram.clj</a></p>
+]]>
+</content></entry><entry><title>Oh, by the way: Baby!</title><link href="http://threebrothers.org/brendan/blog/baby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-14:/brendan/blog/baby</id><updated>2008-08-14T11:09:00.0-08:00</updated><summary><![CDATA[
+Since threebrothers.org has been down for a while, I missed some very important things. One month and one day ago, Jessica gave birth to Ezra Wray Ribera. I have a son! There are a bunch of pictures up on Flickr: http://flickr.com/photos/bribera/tags/ezra. That is all. ...]]>
+</summary><content type="html"><![CDATA[
+<p>Since threebrothers.org has been down for a while, I missed some very important things.  One month and one day ago, <a href="http://jeskybera.blogspot.com/2008/07/baby-formerly-known-as-spud.html">Jessica gave birth to Ezra Wray Ribera</a>.  I have a son!</p>
+
+<p><img src="http://farm4.static.flickr.com/3085/2730011801_0b6c13dd9d.jpg" alt="Ezra Wray Ribera" /></p>
+
+<p>There are a bunch of pictures up on Flickr: <a href="http://flickr.com/photos/bribera/tags/ezra">http://flickr.com/photos/bribera/tags/ezra</a>.  That is all.</p>
+]]>
+</content></entry><entry><title>Copyright Progress</title><link href="http://threebrothers.org/brendan/blog/copyright-progress/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-13:/brendan/blog/copyright-progress</id><updated>2008-08-13T10:29:00.0-08:00</updated><summary><![CDATA[
+I was excited to read this morning that the Court of Appeals has upheld an open-source copyright license. To quote Lawrence Lessig's summary: In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condi...]]>
+</summary><content type="html"><![CDATA[
+<p>I was excited to read this morning that <a href="http://lessig.org/blog/2008/08/huge_and_important_news_free_l.html">the Court of Appeals has upheld an open-source copyright license</a>.  To quote Lawrence Lessig's summary:</p>
 
 <blockquote><em>In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condition, the license disappears, meaning you're simply a copyright infringer. This is the theory of the GPL and all CC licenses. Put precisely, whether or not they are also contracts, they are copyright licenses which expire if you fail to abide by the terms of the license.</em></blockquote>
 
-It's wonderful when things work the way they're designed.
+<p>It's wonderful when things work the way they're designed.</p>
 
-Update: Groklaw has <a href="http://www.groklaw.net/article.php?story=2008081313212422">some additional information</a>.
+<p>Update: Groklaw has <a href="http://www.groklaw.net/article.php?story=2008081313212422">some additional information</a>.</p>
 
-Another update: In another area of the copyright arena, Stanford's <acronym title="Center for Internet and Society">CIS</acronym> has succeeded in obtaining a ruling from the New York Supreme Court <em>rejecting</em> the idea that is <a href="http://cyberlaw.stanford.edu/node/5833">no de minimis use for recordings</a> (again <a href="http://lessig.org/blog/2008/08/and_another_big_win_today_for.html">via lessig.org</a>).  Woot!]]>
-</content></entry><entry><title>Verizon Filters Ports 80 and 25</title><link href="http://threebrothers.org/brendan/blog/verizon-filters-ports-80-and-25/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-11:/brendan/blog/verizon-filters-ports-80-and-25</id><updated>2008-08-11T15:52:00.0-08:00</updated><summary>The gracious hosts of this server have recently upgraded to Verizon FiOS, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25. This is why, dear reader, I have reconfigured my blog to live on port 8080. Apparently, these ports are only used for &quot;business purposes&quot;, an...</summary><content type="html"><![CDATA[
-The gracious hosts of this server have recently upgraded to Verizon <acronym title="Fiber Optic Service">FiOS</acronym>, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25.  This is why, dear reader, I have reconfigured my blog to live on port 8080.  Apparently, these ports are only used for &quot;business purposes&quot;, and businesses need to pay more.  While I now have more bandwidth, I am also greatly impaired in my ability to use it.
+<p>Another update: In another area of the copyright arena, Stanford's <acronym title="Center for Internet and Society">CIS</acronym> has succeeded in obtaining a ruling from the New York Supreme Court <em>rejecting</em> the idea that is <a href="http://cyberlaw.stanford.edu/node/5833">no de minimis use for recordings</a> (again <a href="http://lessig.org/blog/2008/08/and_another_big_win_today_for.html">via lessig.org</a>).  Woot!</p>
+]]>
+</content></entry><entry><title>Verizon Filters Ports 80 and 25</title><link href="http://threebrothers.org/brendan/blog/verizon-filters-ports-80-and-25/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-11:/brendan/blog/verizon-filters-ports-80-and-25</id><updated>2008-08-11T15:52:00.0-08:00</updated><summary><![CDATA[
+The gracious hosts of this server have recently upgraded to Verizon FiOS, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25. This is why, dear reader, I have reconfigured my blog to live on port 8080. Apparently, these ports are only used for &quot;business purposes&quot;, an...]]>
+</summary><content type="html"><![CDATA[
+<p>The gracious hosts of this server have recently upgraded to Verizon <acronym title="Fiber Optic Service">FiOS</acronym>, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25.  This is why, dear reader, I have reconfigured my blog to live on port 8080.  Apparently, these ports are only used for &quot;business purposes&quot;, and businesses need to pay more.  While I now have more bandwidth, I am also greatly impaired in my ability to use it.</p>
 
-This further polarizes my beliefs about business rules and technology, which can be summarized as, "don't interfere, you incompetent nincompoops!"  I could spend an inordinate amount of time and energy dissecting the various facets of idiocy I have uncovered attempting to obtain an <acronym title="Internet Service Provider">ISP</acronym> at my new apartment.  To peel back the layers of tampering, throttling, and filtering from this proverbial onion would make even the most stalwart vegetable cutter cry.  I read through the fine, disingenuous print of each company's <acronym title="Terms of Service">TOS</acronym>, and each time it is like turning on the shower and receiving a cascade of putrescent sewage.  Each one of these companies is a moldering, pus-filled lesion on the face of the internet.
+<p>This further polarizes my beliefs about business rules and technology, which can be summarized as, "don't interfere, you incompetent nincompoops!"  I could spend an inordinate amount of time and energy dissecting the various facets of idiocy I have uncovered attempting to obtain an <acronym title="Internet Service Provider">ISP</acronym> at my new apartment.  To peel back the layers of tampering, throttling, and filtering from this proverbial onion would make even the most stalwart vegetable cutter cry.  I read through the fine, disingenuous print of each company's <acronym title="Terms of Service">TOS</acronym>, and each time it is like turning on the shower and receiving a cascade of putrescent sewage.  Each one of these companies is a moldering, pus-filled lesion on the face of the internet.</p>
 
-So, please: clean up your acts.  Bandwidth should not be accompanied by throttles, filters, or intermittent magical interference.  If I have a service plan advertised at a speed of 3.0 megabits per second, I expect:
+<p>So, please: clean up your acts.  Bandwidth should not be accompanied by throttles, filters, or intermittent magical interference.  If I have a service plan advertised at a speed of 3.0 megabits per second, I expect:</p>
 
 <ol>
   <li>That this speed is consistent &mdash; it doesn't change unless there is a <em>problem</em> with the service, and problems ought not to be expected.</li>
@@ -27,14 +273,16 @@ So, please: clean up your acts.  Bandwidth should not be accompanied by throttle
   <li>Since there are 2,592,000 seconds in a 30-day period, I expect to be able to download approximately 949.22 gigabytes of data in a 30-day period.  Of course, the same &quot;problems&quot; disclaimer applies here &mdash; of course I don't expect <a href="http://en.wikipedia.org/wiki/Myth_of_the_nines">5 nines</a> of uptime, or even 3.</li>
 </ol>
 
+<p>Postscript:</p>
 
-Postscript:
+<p>I'm aware that Verizon is the only brand with which I am associating this vituperation, and I don't think that's entirely fair.  Verizon's port filtering leans towards the innocuous end of the moldering, pus-filled lesion spectrum &mdash; it's a few orders of magnitude less despicable than some of the despicable things being done by ISPs.  However, it happens to be the particular lesion that I am faced with looking at, and so I will not forgo associating their name with their actions.</p>
+]]>
+</content></entry><entry><title>There and back again: the return to Linux (updated)</title><link href="http://threebrothers.org/brendan/blog/there-and-back-again-the-return-to-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-21:/brendan/blog/there-and-back-again-the-return-to-linux</id><updated>2008-05-21T21:55:00.0-08:00</updated><summary><![CDATA[
+When I started at iLike in October, I chose a MacBook Pro as my development machine. After months of my attempting to adapt to OSX, that Macbook is now running Linux. Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' UI, I consistently found OSX cloyin...]]>
+</summary><content type="html"><![CDATA[
+<p>When I started at <a href="http://ilike.com/user/brendanribera">iLike</a> in October, I chose a MacBook Pro as my development machine.  After months of my attempting to adapt to OSX, that Macbook is now running Linux.  Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' <acronym title="User Interface">UI</acronym>, I consistently found OSX cloying and claustrophobia-inducing when compared to a standard Linux environment.  So I nuked it.</p>
 
-I'm aware that Verizon is the only brand with which I am associating this vituperation, and I don't think that's entirely fair.  Verizon's port filtering leans towards the innocuous end of the moldering, pus-filled lesion spectrum &mdash; it's a few orders of magnitude less despicable than some of the despicable things being done by ISPs.  However, it happens to be the particular lesion that I am faced with looking at, and so I will not forgo associating their name with their actions.]]>
-</content></entry><entry><title>There and back again: the return to Linux (updated)</title><link href="http://threebrothers.org/brendan/blog/there-and-back-again-the-return-to-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-21:/brendan/blog/there-and-back-again-the-return-to-linux</id><updated>2008-05-21T21:55:00.0-08:00</updated><summary>When I started at iLike in October, I chose a MacBook Pro as my development machine. After months of my attempting to adapt to OSX, that Macbook is now running Linux. Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' UI, I consistently found OSX cloyin...</summary><content type="html"><![CDATA[
-When I started at <a href="http://ilike.com/user/brendanribera">iLike</a> in October, I chose a MacBook Pro as my development machine.  After months of my attempting to adapt to OSX, that Macbook is now running Linux.  Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' <acronym title="User Interface">UI</acronym>, I consistently found OSX cloying and claustrophobia-inducing when compared to a standard Linux environment.  So I nuked it.
-
-Here are some interesting things I learned in the process:
+<p>Here are some interesting things I learned in the process:</p>
 
 <ul>
   <li>OSX relies on a ~200MB EFI system partition.  The MacBook's BIOS looks for this partition <em>everywhere</em> before performing a standard boot from the hard drive's <acronym title="Master Boot Record">MBR</acronym>.  There are two "gotchas" as a result of this silly operating system <acronym title="Digital Rights Management">DRM</acronym>:
@@ -46,68 +294,76 @@ Here are some interesting things I learned in the process:
   <li>Since the MacBook has a Core 2 Duo, you can install the poorly-named AMD64 branch of whatever distribution you're using.  If you happen to install Ubuntu like I did, peruse the <a href="http://ubuntuforums.org/forumdisplay.php?s=e33b9a6ef38cfc8fadd59b78fb2e8c18&amp;f=343">x86 64-bit Users Ubuntu forum</a> to get abreast of any odd architecture-related issues.  Since many programs (Firefox and Thunderbird, for example) are 32-bit, it's important to get all of the necessary 32-bit compatibility libraries installed.<br/><br/>In Ubuntu, lacking these libraries means that a fresh download of Firefox or Thunderbird won't be able to access the internet &mdash; lame.  To solve, install <tt>lib32nss-mdns</tt> (ala <a href="http://ubuntuforums.org/showthread.php?t=796225">this thread</a>).</li>
 </ul>
 
-<b>Update:</b> <a href="http://thenullpointer.net">Dustin</a> asks what my particular complaints are.  Well, here goes...</p><div>&lt;joking&gt;<ul style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"><li style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;">The missing right-hand mouse button</li></ul>&lt;/joking&gt;<br/><br/></div><p>Seriously, though; it was a combination of these things:
+<p><b>Update:</b> <a href="http://thenullpointer.net">Dustin</a> asks what my particular complaints are.  Well, here goes...</p><div>&lt;joking&gt;<ul style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"><li style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;">The missing right-hand mouse button</li></ul>&lt;/joking&gt;<br/><br/></div><p>Seriously, though; it was a combination of these things:</p>
+
 <ul>
   <li>The crazy focus model: you can't actually click on a control inside a window unless that window already has focus.<br/><br/>Imagine that Thunderbird has the focus and is sitting in one of two monitors; if I want to view a different tab in the instance of Firefox that sits on the other monitor (Firefox is visible, but doesn't have focus), I have to click twice: once to attain focus, once to actually click the tab I want to view.<br/><br/></li>
   <li>Shortcut keys.  I know, everything can be changed; it's just ridiculous to have to go through and reset all of the defaults<br/><br/></li>
   <li>1-dimensional desktop.<br/><br/>I didn't have <a href="http://www.apple.com/macosx/features/spaces.html">Leopard and its "Spaces"</a>, which would probably have scratched this itch.  But I've really grown to be <em>dependent</em> on Compiz and all of the little ways you can customize it.  Even with Spaces, you just don't have the same degree of granularity that Compiz offers.  Plus, I'll add the totally emotional, worthless argument that Spaces is an obvious knock-off of Compiz since Linux desktops have been doing this for a good long while.<br/><br/></li>
   <li>Performance &mdash; both mine and the machine's.<br/><br/>OSX can't keep up with a well-tuned Linux installation.  Sure, both Linux and OSX can run laps around your year-old, bloated Windows installation.  Nevertheless, I kept getting frustrated with how things would freeze up.  Windows has the <acronym title="Blue Screen Of Death">BSOD</acronym>; OSX has the <acronym title="Beach Ball of Frustration">BBOF</acronym>.<br/><br/>Additionally, my own performance was suboptimal under OSX.  Perhaps if I had made a complete switch (and not retained my Linux <em>skillz</em> by using it at home and work every day) I would have adapted; as it is, I kept on tripping on these and other subtle UI differences.<br/><br/></li>
   <li>In general, Linux is a much more developer-friendly environment.  I find it faster to set up, and faster to alter.  That has to do with personal preference and knowledge more than anything else.</li>
-</ul>]]>
-</content></entry><entry><title>Grep and Subversion</title><link href="http://threebrothers.org/brendan/blog/grep-and-subversion/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-16:/brendan/blog/grep-and-subversion</id><updated>2008-05-16T15:38:00.0-08:00</updated><summary>A while ago, Grant supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents. This was the solution to a thread about counting the number of occurrences of a given word (HACK, in this case) within your project; the final response did this rather nicely. I'...</summary><content type="html"><![CDATA[
-A while ago, <a href="http://twitter.com/grantr">Grant</a> supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents.  This was the solution to a <a href="http://twitter.com/laurelfan/statuses/774697353">thread</a> about <a href="http://twitter.com/abscondment/statuses/774699294">counting</a> the number of occurrences of a given word (HACK, in this case) within your project; <a href="http://twitter.com/grantr/statuses/774701774">the final response</a> did this rather nicely.
+</ul>
+]]>
+</content></entry><entry><title>Grep and Subversion</title><link href="http://threebrothers.org/brendan/blog/grep-and-subversion/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-16:/brendan/blog/grep-and-subversion</id><updated>2008-05-16T15:38:00.0-08:00</updated><summary><![CDATA[
+A while ago, Grant supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents. This was the solution to a thread about counting the number of occurrences of a given word (HACK, in this case) within your project; the final response did this rather nicely. I'...]]>
+</summary><content type="html"><![CDATA[
+<p>A while ago, <a href="http://twitter.com/grantr">Grant</a> supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents.  This was the solution to a <a href="http://twitter.com/laurelfan/statuses/774697353">thread</a> about <a href="http://twitter.com/abscondment/statuses/774699294">counting</a> the number of occurrences of a given word (HACK, in this case) within your project; <a href="http://twitter.com/grantr/statuses/774701774">the final response</a> did this rather nicely.</p>
 
-I've found myself wanting to needing this more and more: searching for all instances in which a certain method is called, for all uses of a particular phrase, for all uses of a <acronym title="Cascading StyleSheets">CSS</acronym> class, <em>et cetera</em>.  And <a href="http://www.hhhh.org/wiml/virtues.html">like a good programmer</a>, I have consistent trouble actually typing out all of those commands and flags.  Whether it's my memory or merely my lazy fingers matters not; I needed this to be encapsulated as a shell script that I could call just like grep.
+<p>I've found myself wanting to needing this more and more: searching for all instances in which a certain method is called, for all uses of a particular phrase, for all uses of a <acronym title="Cascading StyleSheets">CSS</acronym> class, <em>et cetera</em>.  And <a href="http://www.hhhh.org/wiml/virtues.html">like a good programmer</a>, I have consistent trouble actually typing out all of those commands and flags.  Whether it's my memory or merely my lazy fingers matters not; I needed this to be encapsulated as a shell script that I could call just like grep.</p>
 
-Here's my condensed version.  I know some distributions include an 'rgrep' by default; since that name was available on both of mine, I simply took it.  Note that I appended the <em>.sh</em> extension so that I could easily force my web server to spit it out as text/plain &mdash; in my actual environment, it's just <em>rgrep</em>, and is stuck into a PATH-friendly directory for easy use.
+<p>Here's my condensed version.  I know some distributions include an 'rgrep' by default; since that name was available on both of mine, I simply took it.  Note that I appended the <em>.sh</em> extension so that I could easily force my web server to spit it out as text/plain &mdash; in my actual environment, it's just <em>rgrep</em>, and is stuck into a PATH-friendly directory for easy use.</p>
 
+<p><a href="http://threebrothers.org/brendan/blog/files/rgrep.sh">rgrep.sh</a></p>
 
-<a href="http://threebrothers.org/brendan/blog/files/rgrep.sh">rgrep.sh</a>
+<p>Usage: rgrep &lt;pattern&gt; &lt;directory&gt; &lt;grep arguments&gt;</p>
+]]>
+</content></entry><entry><title>A modern-day seekdir() bug that's older than me</title><link href="http://threebrothers.org/brendan/blog/a-modern-day-seekdir-bug-thats-older-than-me/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-15:/brendan/blog/a-modern-day-seekdir-bug-thats-older-than-me</id><updated>2008-05-15T16:23:00.0-08:00</updated><summary><![CDATA[
+Take a gander at Fixing seekdir(), an account of quashing a bug in the BSD directory libraries. This is a very interesting piece of UNIX history, and probably still exists in the most recent versions of Apple's OSX. My favorite part? =========================== 4.1 c.1 ======================================= /* Copyright (c...]]>
+</summary><content type="html"><![CDATA[
+<p>Take a gander at <a href="http://www.vnode.ch/fixing_seekdir">Fixing seekdir()</a>, an account of quashing a bug in the <acronym title="Berkley Software Distribution">BSD</acronym> directory libraries.  This is a very interesting piece of UNIX history, and probably still exists in the most recent versions of Apple's OSX.</p>
 
-Usage: rgrep &lt;pattern&gt; &lt;directory&gt; &lt;grep arguments&gt;]]>
-</content></entry><entry><title>A modern-day seekdir() bug that's older than me</title><link href="http://threebrothers.org/brendan/blog/a-modern-day-seekdir-bug-thats-older-than-me/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-15:/brendan/blog/a-modern-day-seekdir-bug-thats-older-than-me</id><updated>2008-05-15T16:23:00.0-08:00</updated><summary>Take a gander at Fixing seekdir(), an account of quashing a bug in the BSD directory libraries. This is a very interesting piece of UNIX history, and probably still exists in the most recent versions of Apple's OSX. My favorite part? =========================== 4.1 c.1 ======================================= /* Copyright (c...</summary><content type="html"><![CDATA[
-Take a gander at <a href="http://www.vnode.ch/fixing_seekdir">Fixing seekdir()</a>, an account of quashing a bug in the <acronym title="Berkley Software Distribution">BSD</acronym> directory libraries.  This is a very interesting piece of UNIX history, and probably still exists in the most recent versions of Apple's OSX.
+<p>My favorite part?</p>
 
-My favorite part?
-
-<typo:code>
-=========================== 4.1 c.1 =======================================
+<pre><code>=========================== 4.1 c.1 =======================================
 /* Copyright (c) 1982 Regents of the University of California */
-</typo:code>
+</code></pre>
 
-That's right &mdash; this bug has been lurking <em>since 1982</em>.]]>
-</content></entry><entry><title>Firefox 2 to 3: A Cautionary Tale</title><link href="http://threebrothers.org/brendan/blog/firefox-2-to-3-a-cautionary-tale/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-07:/brendan/blog/firefox-2-to-3-a-cautionary-tale</id><updated>2008-05-07T08:23:00.0-08:00</updated><summary>I've been using Firefox Beta 3 whenever I can, and I've really enjoyed it. It has huge gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy. Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would. Combine that lack...</summary><content type="html"><![CDATA[
-I've been using <a href="http://www.mozilla.com/en-US/firefox/all-beta.html">Firefox Beta 3</a> whenever I can, and I've really enjoyed it.  It has <em>huge</em> gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy.  Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would.  Combine that lack-of-notable-improvement with its piggish memory usage, and one could be questioning one's faith in Mozilla rather often.  I kept thinking to myself, "Man, I hope they work on this in the next release."
+<p>That's right &mdash; this bug has been lurking <em>since 1982</em>.</p>
+]]>
+</content></entry><entry><title>Firefox 2 to 3: A Cautionary Tale</title><link href="http://threebrothers.org/brendan/blog/firefox-2-to-3-a-cautionary-tale/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-07:/brendan/blog/firefox-2-to-3-a-cautionary-tale</id><updated>2008-05-07T08:23:00.0-08:00</updated><summary><![CDATA[
+I've been using Firefox Beta 3 whenever I can, and I've really enjoyed it. It has huge gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy. Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would. Combine that lack...]]>
+</summary><content type="html"><![CDATA[
+<p>I've been using <a href="http://www.mozilla.com/en-US/firefox/all-beta.html">Firefox Beta 3</a> whenever I can, and I've really enjoyed it.  It has <em>huge</em> gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy.  Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would.  Combine that lack-of-notable-improvement with its piggish memory usage, and one could be questioning one's faith in Mozilla rather often.  I kept thinking to myself, "Man, I hope they work on this in the next release."</p>
 
-So, when the Beta came out and was being lauded for its memory leak improvements, I jumped at it.  And man, was it better!  But of course, the nifty extensions that I've come to rely on at work (Firebug in particular) haven't yet been released for the 3.x branch.  So (on my home laptop, at least), I find myself switching between the old and new rather often.
+<p>So, when the Beta came out and was being lauded for its memory leak improvements, I jumped at it.  And man, was it better!  But of course, the nifty extensions that I've come to rely on at work (Firebug in particular) haven't yet been released for the 3.x branch.  So (on my home laptop, at least), I find myself switching between the old and new rather often.</p>
 
-The caution: <b>make sure to keep separate .mozilla directories for your different versions</b>!
+<p>The caution: <b>make sure to keep separate .mozilla directories for your different versions</b>!</p>
 
-After a while of switching back and forth, I found <em>both</em> copies to be horribly slow.  Using any form elements, clicking any links, and even attempting to type a new URL into the address bar caused Firefox to eat CPU cycles like nobody's business.  So, while I was really pleased that it used less memory, my sloppy switching techniques turned it into an unusable mess.  By deleting everything and storing separate directories (.mozilla2 and .mozilla3, with the active one symlinked as .mozilla), I seem to have resolved the issue for both versions.  Whew!]]>
-</content></entry><entry><title>Death by Duck-Typing</title><link href="http://threebrothers.org/brendan/blog/death-by-duck-typing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-01:/brendan/blog/death-by-duck-typing</id><updated>2008-05-01T10:48:00.0-08:00</updated><summary> Ruby is all about the duck-typing. Most of the time, I am too. But sometimes, it can lead to some very confusing and very nasty issues. Suppose you get a variable, h, from someone's cool helper function, and with it you want to build up a hash of Widgets. You have millions and billions of Widgets in your database, but you'...</summary><content type="html"><![CDATA[
-<img src="http://threebrothers.org/brendan/blog/files/duckt.gif" alt="Duckbot" style="float:right;" />
+<p>After a while of switching back and forth, I found <em>both</em> copies to be horribly slow.  Using any form elements, clicking any links, and even attempting to type a new URL into the address bar caused Firefox to eat CPU cycles like nobody's business.  So, while I was really pleased that it used less memory, my sloppy switching techniques turned it into an unusable mess.  By deleting everything and storing separate directories (.mozilla2 and .mozilla3, with the active one symlinked as .mozilla), I seem to have resolved the issue for both versions.  Whew!</p>
+]]>
+</content></entry><entry><title>Death by Duck-Typing</title><link href="http://threebrothers.org/brendan/blog/death-by-duck-typing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-01:/brendan/blog/death-by-duck-typing</id><updated>2008-05-01T10:48:00.0-08:00</updated><summary><![CDATA[
+ Ruby is all about the duck-typing. Most of the time, I am too. But sometimes, it can lead to some very confusing and very nasty issues. Suppose you get a variable, h, from someone's cool helper function, and with it you want to build up a hash of Widgets. You have millions and billions of Widgets in your database, but you'...]]>
+</summary><content type="html"><![CDATA[
+<p><img src="http://threebrothers.org/brendan/blog/files/duckt.gif" alt="Duckbot" style="float:right;" /></p>
 
-Ruby is all about the duck-typing.  Most of the time, I am too.  But sometimes, it can lead to some very confusing and very nasty issues.
+<p>Ruby is all about the duck-typing.  Most of the time, I am too.  But sometimes, it can lead to some very confusing and very nasty issues.</p>
 
-Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:
+<p>Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:
 <br style="clear:both;"/>
-<typo:code>
-h = get_my_h_now()
-# Get the 50 widgets with the highest ids and stick them into h
-Widget.find(:all, :limit => 50, :order => 'id DESC').map {
-  |w| h[w.id] = w
-}
-</typo:code>
+    h = get<em>my</em>h_now()
+    # Get the 50 widgets with the highest ids and stick them into h
+    Widget.find(:all, :limit => 50, :order => 'id DESC').map {
+      |w| h[w.id] = w
+    }</p>
 
-Pretty innocuous, right?  I mean, if the code works without errors, it's all good... right?  Right?
+<p>Pretty innocuous, right?  I mean, if the code works without errors, it's all good... right?  Right?</p>
 
-What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a Hash, but it gives you an Array.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <b>h</b> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem?What do you suppose this code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.
+<p>What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a Hash, but it gives you an Array.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <b>h</b> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem?What do you suppose this code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.</p>
 
-<typo:code>
-widget = {
-  :id => 123456789,
-  :type => 'Really cool',
-  :price => 999.99
+<pre><code>widget = {
+  :id =&gt; 123456789,
+  :type =&gt; 'Really cool',
+  :price =&gt; 999.99
 }
 id = widget[:id]
 h = []
@@ -117,178 +373,73 @@ h[id] = widget
 puts "Memory costs $#{h[id][:price]} per what???"
 m = `ps -o rss= -p #{Process.pid}`.to_i
 puts "Using #{m}kb"
-</typo:code>
+</code></pre>
 
-(hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage">ruby memory usage</a> syntax)
+<p>(hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage">ruby memory usage</a> syntax)</p>
 
-Surprised by the results?
+<p>Surprised by the results?</p>
 
-<typo:code>
-Using 1632kb
+<pre><code>Using 1632kb
 Memory costs $999.99 per what???
 Using 483960kb
-</typo:code>
-
-Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  Array has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an Array that are larger than its current size, and the Array will dynamically resize itself to accommodate.  This is only dangerous because Ruby's Arrays are not sparse; that is to say, when you address position 1,000,000 on a freshly created Array, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.
-
-So when you take a widget with id 123,456,789 and attempt to store it, using its id as the position... whew!  Ruby definitely has its work cut out for it, since you'll get over its <a href="http://whytheluckystiff.net/articles/theFullyUpturnedBin.html">initial 8-megabyte heap</a> very quickly.  If you do this sort of thing in Rails and you have many requests processing at the same time, your servers will be in swap death pretty quickly.  Chances are high that you won't catch an issue like this when using a development database with low-id Models, since you'll be addressing much lower positions.
-
-To be sure, duck-typing isn't the only perpetrator in this example: Array can take a good share of the blame, too.  However, we never would have got into this situation if it were impossible to attempt to address an Array when intending to address a Hash.  I still enjoy the looseness of Ruby, and (at this point) wouldn't trade it for the extra security of strict typing &mdash; it's just important to make sure that the quack you produce is the one which you intended.]]>
-</content></entry><entry><title>Indyennessee Trip: Everything Else</title><link href="http://threebrothers.org/brendan/blog/indyennessee-trip-everything-else/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-23:/brendan/blog/indyennessee-trip-everything-else</id><updated>2008-04-23T15:38:00.0-08:00</updated><summary>We took leave of the Partains on Thursday and had a little road trip down to Tennessee. Jessica and I made a two-CD mix for the drive down, although the trip lasted a big longer than that. I blame the pregnant ladies and their bathroom breaks. Below is the Meeksarosa off in the distance. We spent a few nights sitting out on...</summary><content type="html"><![CDATA[
-We took leave of the Partains on Thursday and had a little road trip down to Tennessee.  Jessica and I made a two-CD mix for the drive down, although the trip lasted a big longer than that.  I blame the pregnant ladies and their bathroom breaks.
-
-<img src="http://threebrothers.org/brendan/blog/files/01tf.jpg" />
-
-Below is the Meeksarosa off in the distance.  We spent a few nights sitting out on the porch, smoking pipes and chatting late into the night.  Jessica and I even did a <em>Turky in the Straw</em> performance, accompanied by Kenny and his mandolin.
-
-<img src="http://threebrothers.org/brendan/blog/files/02tf.jpg" />
-
-This is us in Franklin, trying to figure out what we're going to do next.  Sorry that you're blinking, Jessica &mdash; this was the best of several candid shots by Kenny that got progressively worse as his cameraman antics increased.
-
-<img src="http://threebrothers.org/brendan/blog/files/03tf.jpg" />
-
-Friday, Saturday and Sunday seemed to fly by, and we totally forgot to take any pictures on those days.  Lame, I know.  We spent those days playing lots of paper telephone, tricking people with talking computers, and sauntering around various shopping centers.
-
-Monday rolled around too quickly, and we had to catch our flight home.  But not before having brunch out with Beth &amp; Dan, and taking the really awesome group photo pictured below.
-
-<img src="http://threebrothers.org/brendan/blog/files/04tf.jpg" />
-
-We posed for a final picture before heading out to the airport.  It's nice that we'll be able to see our friends again so soon (Dan in early May, and everyone in the summer), but it's really lame that we're so far apart.  I really need someone to invent a working teleporter, and soon.
-
-<img src="http://threebrothers.org/brendan/blog/files/05tf.jpg" />
-
-We were definitely sad to leave our friends.  Like I said in the <a href="http://threebrothers.org/brendan/blog/articles/2008/04/19/indyennessee-trip-wednesday-thursday">last Indyennessee post</a>, I hate goodbyes.]]>
-</content></entry><entry><title>How Many Five-Year-Olds Can You Take In A Fight?</title><link href="http://threebrothers.org/brendan/blog/how-many-five-year-olds-can-you-take-in-a-fight/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-22:/brendan/blog/how-many-five-year-olds-can-you-take-in-a-fight</id><updated>2008-04-22T19:27:00.0-08:00</updated><summary>32 32, eh? Cool....</summary><content type="html"><![CDATA[
-<a href="http://www.justsayhi.com/bb/fight5" style="display: block; background: url(http://assets.justsayhi.com/badges/828/88/fight5.ly5us1fqq0.jpg) no-repeat; width: 296px; height: 84px; font-family: Arial, sans-serif; font-size: 42px; color: #fff; text-decoration: none; text-align: center; padding-top: 145px;">32</a>
-
-32, eh?  Cool.]]>
-</content></entry><entry><title>Indyennessee Trip: Wednesday/Thursday</title><link href="http://threebrothers.org/brendan/blog/indyennessee-trip-wednesday-thursday/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-19:/brendan/blog/indyennessee-trip-wednesday-thursday</id><updated>2008-04-19T20:07:00.0-08:00</updated><summary>Nathan was able to stay home to play on Wednesday, and &mdash; as evidenced below &mdash; play we did. The girls got their hair done in the morning; we boys spent our time playing with OSX's "say" utility. We used it to play a somewhat unsuccessful prank on the ladies when they came home, but it turned into a great group ac...</summary><content type="html"><![CDATA[
-Nathan was able to stay home to play on Wednesday, and &mdash; as evidenced below &mdash; play we did.  The girls got their hair done in the morning; we boys spent our time playing with OSX's "say" utility.  We used it to play a somewhat unsuccessful prank on the ladies when they came home, but it turned into a great group activity.
-
-<img src="http://threebrothers.org/brendan/blog/files/01wt.jpg" alt="Tada!"/>
-
-We then went to the <a href="http://www.imamuseum.org">Indianapolis Museum of Art</a>, which was really cool.  They have a nice collection, and I was especially pleased to find <a href="http://www.imamuseum.org/explore/artwork/894?highlight=182">Ribera's Aristotle</a> among those paintings in the European section.  There was also a really cool installation in the lobby that has inspired me to do something for a yet-to-be-determined future Thread Art Night.
-
-<img src="http://threebrothers.org/brendan/blog/files/02wt.jpg" alt="Stained glass"/>
-
-This stained glass window was taken from the building that Redeemer owns, prior to Redeemer coming into possession of the building.  Since the building originally housed <a href="http://www.whitehouse.gov/history/presidents/bh23.html">Benjamin Harrison's</a> church and the stained glass is a great example of work by Tiffany, the former owners of the building donated the whole window to the museum.
-
-<img src="http://threebrothers.org/brendan/blog/files/03wt.jpg" alt="Oooh" />
-
-We walked around after getting Thai food; Amos really wanted to hold my keys, and did a great job not losing them.  He also put on quite a show any time a car with thumping bass would drive by.
-
-<img src="http://threebrothers.org/brendan/blog/files/04wt.jpg" alt="What?" />
-
-Rockin' the bellies.
-
-<img src="http://threebrothers.org/brendan/blog/files/05wt.jpg" alt="By the river" />
-
-We got ice cream and sat down by the river.  The ducks were nice, but the geese were a tad aggressive.  Or so Jessica was convinced.
-
-<img src="http://threebrothers.org/brendan/blog/files/06wt.jpg" alt="Laphroaig!" />
-
-In the evening, we picked up a bottle of <a href="http://www.laphroaig.com/whiskies/15yo/index.asp?expanded=15_year_old">15-year old Laphroaig</a> and played Cranium.  The guys had fun talking about the wonderful complexity of scotch; so much fun, in fact, that we didn't even mind that the girls <em>stomped</em> us in the game.
-
-<img src="http://threebrothers.org/brendan/blog/files/07wt.jpg" alt="Parting is such sweet sorrow" />
-
-Remember the crazy installation that is pictured in my first post about this trip?  Early Thursday morning Nathan, Dan and I met two other guys from Redeemer (one of whom is the artist who made the installation) and had a lot of fun playing background/meditative music, using the installation's plethora of percussive parts.  After we got back, packed, and ate lunch, we had to say goodbye.  I hate goodbyes.]]>
-</content></entry><entry><title>The Bearded Coincidence</title><link href="http://threebrothers.org/brendan/blog/the-bearded-coincidence/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-18:/brendan/blog/the-bearded-coincidence</id><updated>2008-04-18T09:58:00.0-08:00</updated><summary>Herman Melville is my favorite author, hands down. I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish. I'll have a lot more to say about Herman Melville in a few weeks. I'm at the beginning of The Confidence-Man, the awesomene...</summary><content type="html"><![CDATA[
-Herman Melville is my favorite author, hands down.  I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish.
-
-I'll have a lot more to say about Herman Melville in a few weeks.  I'm at the beginning of <a href="http://en.wikipedia.org/wiki/The_Confidence-Man">The Confidence-Man</a>, the awesomeness of which <a href="http://cuttheknot.blogspot.com/2008/04/ralph-waldo-ellison-and-herman-melville.html">I've heard about</a> and am now experiencing first-hand.  In the meantime, I'd just like to point out the uncanny resemblance between Sam Beam of <a href="http://ilike.com/artist/Iron+%2526+Wine">Iron &amp; Wine</a> and Mr. Melville:
-
-<p><img src="http://threebrothers.org/brendan/blog/files/ironandwine.jpg" style="float:right;" alt="Iron &amp; Wine"/><img src="http://threebrothers.org/brendan/blog/files/melville.jpg" alt="Herman Meville" style="float:left;"/><br style="clear:both;"/></p>]]>
-</content></entry><entry><title>Indyennessee Trip: Tuesday</title><link href="http://threebrothers.org/brendan/blog/indyennessee-trip-tuesday/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-08:/brendan/blog/indyennessee-trip-tuesday</id><updated>2008-04-08T19:31:00.0-08:00</updated><summary>Amos had a ton of fun sending Nathan an email on my laptop. It consisted mostly of Z's, but that's only because pressing the power button doesn't write anything. Amos really liked looking out the window to see what was going on outside. He also thought he could climb straight up the glass, which obviously didn't work. We he...</summary><content type="html"><![CDATA[
-Amos had a ton of fun sending Nathan an email on my laptop.  It consisted mostly of Z's, but that's only because pressing the power button doesn't write anything.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/01tu.JPG" alt="Sending Nathan an email" />
-
-Amos really liked looking out the window to see what was going on outside.  He also thought he could climb straight up the glass, which obviously didn't work.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/02tu.JPG" alt="Checking out the world" />
-
-We headed down to the Library.  Dan and I spent some time checking out the currency display (I still can't figure out <em>why</em> the library was showing off old currency, but whatever).  We also perused the philosophy section and made longing comments about musty old books.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/03tu.JPG" alt="Currency" />
-
-Amos perched on top of Aunt Bethany (or rather, on top of Elijah) and did some more window gazing.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/04tu.JPG" alt="Atop his throne!" />
-
-The best part of the library: the kids' section!  They had an awesome green screen that we spent a ton of time using.  Video and pictures below.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/05tu.JPG" alt="Green screen" />
-
-<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/JuELh07JoBo&hl=en"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/JuELh07JoBo&hl=en" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
-
-We accidentally took some more video when leaving the library &mdash; too funny!
-
-<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/3OFEWWvXonI&hl=en"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/3OFEWWvXonI&hl=en" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>]]>
-</content></entry><entry><title>Indyennessee Trip: Monday</title><link href="http://threebrothers.org/brendan/blog/indyennessee-trip-monday/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-08:/brendan/blog/indyennessee-trip-monday</id><updated>2008-04-08T19:09:00.0-08:00</updated><summary>Amos and I began Monday morning with some iPhone play time. He managed to flip through every single photo I'd taken on the device, which was really fun for the both of us. After Nathan went to work, we spent the rest of the day walking around downtown Indy &mdash; we were quite the sight with two preggers and one toddler. A...</summary><content type="html"><![CDATA[
-Amos and I began Monday morning with some iPhone play time.  He managed to flip through every single photo I'd taken on the device, which was really fun for the both of us.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/01m.JPG" alt="Intrepid iPhone instruction" />
-
-After Nathan went to work, we spent the rest of the day walking around downtown Indy &mdash; we were quite the sight with two preggers and one toddler.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/02m.JPG" alt="Three Amigas" />
-
-Amos demanded to walk everywhere, which was both cute and difficult: he couldn't cross at streets alone, and that was really frustrating to him.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/03m.JPG" alt="Amos walks" />
-
-We stopped in at a toy shop on Massachusetts Ave and had a ton of fun looking at all the things available for kiddos.  Our beautiful dolls played with some Ugly Dolls (which are <b>way</b> cheaper in Indy), and all three families wound up buying one.  Chuckanuka! 
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/04m.JPG" alt="Dolls, ugly and beautiful" />
-
-Amos rocked out while we played.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/05m.JPG" alt="Amos rockin'" />
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/06m.JPG" alt="More walking" />
-
-We eventually made our way down to a big ol' war monument; apparently, Indy is big on monuments.  It has some direct tie to the planning and development of Washington D.C. and has many, many monuments.  Amos loved walking up the steps.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/07m.JPG" />]]>
-</content></entry><entry><title>Indyennessee Trip: Saturday/Sunday</title><link href="http://threebrothers.org/brendan/blog/indyennessee-trip-saturday-sunday/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-08:/brendan/blog/indyennessee-trip-saturday-sunday</id><updated>2008-04-08T18:45:00.0-08:00</updated><summary>We're on vacation in Indyennesse! We rolled into town Saturday evening, extremely happy to see the Partains and the Robbins once again. Nathan and Sarah moved from Seattle to Indy last summer, and we've been itching to see them and Amos again. Beth and Dan are back from Malawi to give birth to their first, Elijah. We fell r...</summary><content type="html"><![CDATA[
-We're on vacation in Indyennesse!  We rolled into town Saturday evening, extremely happy to see the Partains and the Robbins once again.  Nathan and Sarah moved from Seattle to Indy last summer, and we've been itching to see them and Amos again.  Beth and Dan are back from <a href="https://www.cia.gov/library/publications/the-world-factbook/geos/mi.html">Malawi</a> to give birth to their first, Elijah.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/01sa.JPG" alt="Reunion" />
-
-We fell right back into our old routines: eating, laughing, and a hefty dose of "philosophical" reasoning.  Jessica and I had quite a few stories to tell about our eventful traveling, so we spent most of our first two evenings chatting it up.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/01su.JPG" alt="Back at it" />
-
-Sunday morning we headed down to <a href="http://www.redeemindy.org">Redeemer Indy</a> &mdash; Nathan is the Worship Coordinator there, and Jason Dorsey (my former youth group leader from <a href="http://crosspointchurches.org">Green Lake</a>) is the Senior Pastor.  Below is a picture of an interesting art installation they have up in the sanctuary.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/02su.JPG" alt="Redeemer Indy" />
-
-We hung out with the Dorseys for a little bit on Monday, but it just made more sense to put the picture in this post.
-
-<img src="http://threebrothers.org/brendan/blog/files/indytrip/03su.JPG" alt="At the Dorseys'" />]]>
-</content></entry><entry><title>Good reasons to work from home</title><link href="http://threebrothers.org/brendan/blog/good-reasons-to-work-from-home/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-26:/brendan/blog/good-reasons-to-work-from-home</id><updated>2008-03-26T13:25:00.0-08:00</updated><summary> Jessica spoils me....</summary><content type="html"><![CDATA[
-<img src="http://threebrothers.org/brendan/blog/files/reason1.jpg" alt="Reason #1" />
-
-<img src="http://threebrothers.org/brendan/blog/files/reason2.jpg" alt="Reason #2" />
-
-<a href="http://jeskybera.blogspot.com">Jessica</a> spoils me.]]>
-</content></entry><entry><title>Cool (and practical) idea: Consistent Hashing</title><link href="http://threebrothers.org/brendan/blog/cool-and-practical-idea-consistent-hashing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-18:/brendan/blog/cool-and-practical-idea-consistent-hashing</id><updated>2008-03-18T11:14:00.0-08:00</updated><summary>The last few days have thrown a deluge of posts about applications of consistent hashing into my path. Enough so that I broke down to read one, then another, and then a third. I liked the way that third article read the most, so I decided to link to it a little more prominently: read on to discover what consistent hashing i...</summary><content type="html"><![CDATA[
-The last few days have thrown a <a href="http://highscalability.com/paper-consistent-hashing-and-random-trees-distributed-caching-protocols-relieving-hot-spots-world-wi">deluge of posts about applications of consistent hashing</a> into my path. Enough so that I broke down to read <a href="http://citeseer.ist.psu.edu/karger97consistent.html">one</a>, then <a href="http://www.lexemetech.com/2007/11/consistent-hashing.html">another</a>, and then a third.
-
-I liked the way that third article read the most, so I decided to link to it a little more prominently:
-read on to discover <a href="http://www.spiteful.com/2008/03/17/programmers-toolbox-part-3-consistent-hashing/">what consistent hashing is and why your caching layer should use it</a>.  Some choice bits:
-
-<blockquote><p><em>Letâs say youâre a hot startup and your database is starting to slow down. You decide to cache some results so that you can render web pages more quickly.  [You might] end up using what is known as the naÃ¯ve solution: put your N server IPs in an array and pick one using key % N.<br/>[...]<br/>[As] soon as you add a server and change N, most of your cache will become invalid. Your databases will wail and gnash their teeth as practically everything has to be pulled out of the DB and stuck back into the cache. If youâve got a popular site, what this really means is that someone is going to have to wait until 3am to add servers because that is the only time you can handle having a busted cache.</em></p><p>And...</p><p><em>If you are building a big system, you really need to consider what happens when machines fail. If the answer is âwe crush the databases,â congratulations: you will get to observe a cascading failure. I love this stuff, so hearing about cascading failures makes me smile. But it wonât have the same effect on your users.</em></p></blockquote>]]>
-</content></entry><entry><title>Visual Cognition and Bicycling</title><link href="http://threebrothers.org/brendan/blog/visual-cognition-and-bicycling/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-12:/brendan/blog/visual-cognition-and-bicycling</id><updated>2008-03-12T13:46:00.0-08:00</updated><summary>London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists. What interests me most about this is the fact that it's a verbatim copy of some very interesting visual cognition research done in the late 90s. Take a look at the original video here (warning: 7.5mb Java Applet). I foun...</summary><content type="html"><![CDATA[
-London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists.
+</code></pre>
+
+<p>Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  Array has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an Array that are larger than its current size, and the Array will dynamically resize itself to accommodate.  This is only dangerous because Ruby's Arrays are not sparse; that is to say, when you address position 1,000,000 on a freshly created Array, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.</p>
+
+<p>So when you take a widget with id 123,456,789 and attempt to store it, using its id as the position... whew!  Ruby definitely has its work cut out for it, since you'll get over its <a href="http://whytheluckystiff.net/articles/theFullyUpturnedBin.html">initial 8-megabyte heap</a> very quickly.  If you do this sort of thing in Rails and you have many requests processing at the same time, your servers will be in swap death pretty quickly.  Chances are high that you won't catch an issue like this when using a development database with low-id Models, since you'll be addressing much lower positions.</p>
+
+<p>To be sure, duck-typing isn't the only perpetrator in this example: Array can take a good share of the blame, too.  However, we never would have got into this situation if it were impossible to attempt to address an Array when intending to address a Hash.  I still enjoy the looseness of Ruby, and (at this point) wouldn't trade it for the extra security of strict typing &mdash; it's just important to make sure that the quack you produce is the one which you intended.</p>
+]]>
+</content></entry><entry><title>How Many Five-Year-Olds Can You Take In A Fight?</title><link href="http://threebrothers.org/brendan/blog/how-many-five-year-olds-can-you-take-in-a-fight/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-22:/brendan/blog/how-many-five-year-olds-can-you-take-in-a-fight</id><updated>2008-04-22T19:27:00.0-08:00</updated><summary><![CDATA[
+32 32, eh? Cool. ...]]>
+</summary><content type="html"><![CDATA[
+<p><a href="http://www.justsayhi.com/bb/fight5" style="display: block; background: url(http://assets.justsayhi.com/badges/828/88/fight5.ly5us1fqq0.jpg) no-repeat; width: 296px; height: 84px; font-family: Arial, sans-serif; font-size: 42px; color: #fff; text-decoration: none; text-align: center; padding-top: 145px;">32</a></p>
+
+<p>32, eh?  Cool.</p>
+]]>
+</content></entry><entry><title>The Bearded Coincidence</title><link href="http://threebrothers.org/brendan/blog/the-bearded-coincidence/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-18:/brendan/blog/the-bearded-coincidence</id><updated>2008-04-18T09:58:00.0-08:00</updated><summary><![CDATA[
+Herman Melville is my favorite author, hands down. I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish. I'll have a lot more to say about Herman Melville in a few weeks. I'm at the beginning of The Confidence-Man, the awesomene...]]>
+</summary><content type="html"><![CDATA[
+<p>Herman Melville is my favorite author, hands down.  I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish.</p>
+
+<p>I'll have a lot more to say about Herman Melville in a few weeks.  I'm at the beginning of <a href="http://en.wikipedia.org/wiki/The_Confidence-Man">The Confidence-Man</a>, the awesomeness of which <a href="http://cuttheknot.blogspot.com/2008/04/ralph-waldo-ellison-and-herman-melville.html">I've heard about</a> and am now experiencing first-hand.  In the meantime, I'd just like to point out the uncanny resemblance between Sam Beam of <a href="http://ilike.com/artist/Iron+%2526+Wine">Iron &amp; Wine</a> and Mr. Melville:</p>
+
+<p><img src="http://threebrothers.org/brendan/blog/files/ironandwine.jpg" style="float:right;" alt="Iron &amp; Wine"/><img src="http://threebrothers.org/brendan/blog/files/melville.jpg" alt="Herman Meville" style="float:left;"/><br style="clear:both;"/></p>
+]]>
+</content></entry><entry><title>Good reasons to work from home</title><link href="http://threebrothers.org/brendan/blog/good-reasons-to-work-from-home/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-26:/brendan/blog/good-reasons-to-work-from-home</id><updated>2008-03-26T13:25:00.0-08:00</updated><summary><![CDATA[
+ Jessica spoils me. ...]]>
+</summary><content type="html"><![CDATA[
+<p><img src="http://threebrothers.org/brendan/blog/files/reason1.jpg" alt="Reason #1" /></p>
+
+<p><img src="http://threebrothers.org/brendan/blog/files/reason2.jpg" alt="Reason #2" /></p>
+
+<p><a href="http://jeskybera.blogspot.com">Jessica</a> spoils me.</p>
+]]>
+</content></entry><entry><title>Cool (and practical) idea: Consistent Hashing</title><link href="http://threebrothers.org/brendan/blog/cool-and-practical-idea-consistent-hashing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-18:/brendan/blog/cool-and-practical-idea-consistent-hashing</id><updated>2008-03-18T11:14:00.0-08:00</updated><summary><![CDATA[
+The last few days have thrown a deluge of posts about applications of consistent hashing into my path. Enough so that I broke down to read one, then another, and then a third. I liked the way that third article read the most, so I decided to link to it a little more prominently: read on to discover what consistent hashing i...]]>
+</summary><content type="html"><![CDATA[
+<p>The last few days have thrown a <a href="http://highscalability.com/paper-consistent-hashing-and-random-trees-distributed-caching-protocols-relieving-hot-spots-world-wi">deluge of posts about applications of consistent hashing</a> into my path. Enough so that I broke down to read <a href="http://citeseer.ist.psu.edu/karger97consistent.html">one</a>, then <a href="http://www.lexemetech.com/2007/11/consistent-hashing.html">another</a>, and then a third.</p>
+
+<p>I liked the way that third article read the most, so I decided to link to it a little more prominently:
+read on to discover <a href="http://www.spiteful.com/2008/03/17/programmers-toolbox-part-3-consistent-hashing/">what consistent hashing is and why your caching layer should use it</a>.  Some choice bits:</p>
+
+<blockquote><p><em>Letâs say youâre a hot startup and your database is starting to slow down. You decide to cache some results so that you can render web pages more quickly.  [You might] end up using what is known as the naÃ¯ve solution: put your N server IPs in an array and pick one using key % N.<br/>[...]<br/>[As] soon as you add a server and change N, most of your cache will become invalid. Your databases will wail and gnash their teeth as practically everything has to be pulled out of the DB and stuck back into the cache. If youâve got a popular site, what this really means is that someone is going to have to wait until 3am to add servers because that is the only time you can handle having a busted cache.</em></p><p>And...</p><p><em>If you are building a big system, you really need to consider what happens when machines fail. If the answer is âwe crush the databases,â congratulations: you will get to observe a cascading failure. I love this stuff, so hearing about cascading failures makes me smile. But it wonât have the same effect on your users.</em></p></blockquote>
+]]>
+</content></entry><entry><title>Visual Cognition and Bicycling</title><link href="http://threebrothers.org/brendan/blog/visual-cognition-and-bicycling/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-12:/brendan/blog/visual-cognition-and-bicycling</id><updated>2008-03-12T13:46:00.0-08:00</updated><summary><![CDATA[
+London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists. What interests me most about this is the fact that it's a verbatim copy of some very interesting visual cognition research done in the late 90s. Take a look at the original video here (warning: 7.5mb Java Applet). I foun...]]>
+</summary><content type="html"><![CDATA[
+<p>London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists.</p>
 
 <div style="text-align:center;"><object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/47LCLoidJh4&rel=1&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/47LCLoidJh4&rel=1&border=0" type="application/x-shockwave-flash" wmode="transparent"width="425" height="355"></embed></object></div>
 
-What interests me most about this is the fact that it's a verbatim copy of some <a href="http://www.apa.org/monitor/apr01/blindness.html">very interesting visual cognition research</a> done in the late 90s.  Take a look at the <a href="http://viscog.beckman.uiuc.edu/grafs/demos/15.html">original video here</a> (warning: 7.5mb Java Applet).
+<p>What interests me most about this is the fact that it's a verbatim copy of some <a href="http://www.apa.org/monitor/apr01/blindness.html">very interesting visual cognition research</a> done in the late 90s.  Take a look at the <a href="http://viscog.beckman.uiuc.edu/grafs/demos/15.html">original video here</a> (warning: 7.5mb Java Applet).</p>
 
-I found the new video <a href="http://www.treehugger.com/files/2008/03/cyclist-awareness.php">via treehugger</a>, but they make no mention of the original research.]]>
-</content></entry><entry><title>Starbucks v. Walmart</title><link href="http://threebrothers.org/brendan/blog/starbucks-v-walmart/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-06:/brendan/blog/starbucks-v-walmart</id><updated>2008-03-06T10:40:00.0-08:00</updated><summary>Forget dividing states by political tendencies or CO2 emissions &mdash; the real question is, Starbucks or Walmart?. (via kottke.org)...</summary><content type="html"><![CDATA[
-Forget dividing states by political tendencies or CO<sub>2</sub> emissions &mdash; the real question is, <a href="http://www.stat.columbia.edu/~cook/movabletype/archives/2008/03/starbuckswalmar.html">Starbucks or Walmart?</a>.
+<p>I found the new video <a href="http://www.treehugger.com/files/2008/03/cyclist-awareness.php">via treehugger</a>, but they make no mention of the original research.</p>
+]]>
+</content></entry><entry><title>Starbucks v. Walmart</title><link href="http://threebrothers.org/brendan/blog/starbucks-v-walmart/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-06:/brendan/blog/starbucks-v-walmart</id><updated>2008-03-06T10:40:00.0-08:00</updated><summary><![CDATA[
+Forget dividing states by political tendencies or CO2 emissions &mdash; the real question is, Starbucks or Walmart?. (via kottke.org) ...]]>
+</summary><content type="html"><![CDATA[
+<p>Forget dividing states by political tendencies or CO<sub>2</sub> emissions &mdash; the real question is, <a href="http://www.stat.columbia.edu/~cook/movabletype/archives/2008/03/starbuckswalmar.html">Starbucks or Walmart?</a>.</p>
 
 <div style="text-align:center;">
 <img src="http://threebrothers.org/brendan/blog/files/sbpc.png" alt="Starbucks per capita" />
@@ -296,13 +447,16 @@ Forget dividing states by political tendencies or CO<sub>2</sub> emissions &mdas
 <img src="http://threebrothers.org/brendan/blog/files/wmpc.png" alt="Walmarts per capita" />
 </div>
 
-(<a href="http://www.kottke.org/remainder/08/03/15187.html">via kottke.org</a>)]]>
-</content></entry><entry><title>Bacon on Judicature</title><link href="http://threebrothers.org/brendan/blog/bacon-on-judicature/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-29:/brendan/blog/bacon-on-judicature</id><updated>2008-02-29T13:49:00.0-08:00</updated><summary>I recently finished reading Fracis Bacon's Essays, Civil and Moral; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive. One particular excerpt from Of Judicature struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyri...</summary><content type="html"><![CDATA[
-I recently finished reading <a href="http://www.uoregon.edu/~rbear/bacon.html">Fracis Bacon's <em>Essays, Civil and Moral</em></a>; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive.  One particular excerpt from <a href="http://www.uoregon.edu/~rbear/bacon.html#56"><em>Of Judicature</em></a> struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyright infringement and problem-solving in general:
+<p>(<a href="http://www.kottke.org/remainder/08/03/15187.html">via kottke.org</a>)</p>
+]]>
+</content></entry><entry><title>Bacon on Judicature</title><link href="http://threebrothers.org/brendan/blog/bacon-on-judicature/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-29:/brendan/blog/bacon-on-judicature</id><updated>2008-02-29T13:49:00.0-08:00</updated><summary><![CDATA[
+I recently finished reading Fracis Bacon's Essays, Civil and Moral; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive. One particular excerpt from Of Judicature struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyri...]]>
+</summary><content type="html"><![CDATA[
+<p>I recently finished reading <a href="http://www.uoregon.edu/~rbear/bacon.html">Fracis Bacon's <em>Essays, Civil and Moral</em></a>; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive.  One particular excerpt from <a href="http://www.uoregon.edu/~rbear/bacon.html#56"><em>Of Judicature</em></a> struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyright infringement and problem-solving in general:</p>
 
 <blockquote>The attendance of courts, is subject to four bad instruments. First, certain persons that are sowers of suits; which make the court swell, and the country pine. The second sort is of those, that engage courts in quarrels of jurisdiction, and are not truly <em>amici curi&aelig;</em>, but <em>parasiti curi&aelig;</em> [not friends but parasites of the court], in puffing a court up beyond her bounds, for their own scraps and advantage. The third sort, is of those that may be accounted the left hands of courts; persons that are full of nimble and sinister tricks and shifts, whereby they pervert the plain and direct courses of courts, and bring justice into oblique lines and labyrinths. And the fourth, is the poller and exacter of fees; which justifies the common resemblance of the courts of justice, to the bush whereunto, while the sheep flies for defence [sic] in weather, he is sure to lose part of his fleece.</blockquote>
 
-Summarized, this amounts to:
+<p>Summarized, this amounts to:</p>
 
 <ol>
   <li>An overabundance of lawsuits is detrimental to both the court system and the country as a whole.</li>
@@ -311,5 +465,24 @@ Summarized, this amounts to:
   <li>The courts ought to be a safe haven; because of greed, however, litigation often inflicts undue burden on the party needing safety.</li>
 </ol>
 
-It should be patently obvious (that pun was unintentional, but I'm enjoying it enough to leave it there) how often various reincarnations of these four points surface in today's technological landscape, and I would assert that all four are equally detrimental today as they were in the 1600s.]]>
+<p>It should be patently obvious (that pun was unintentional, but I'm enjoying it enough to leave it there) how often various reincarnations of these four points surface in today's technological landscape, and I would assert that all four are equally detrimental today as they were in the 1600s.</p>
+]]>
+</content></entry><entry><title>Ghost in the Shell: Closer to Reality?</title><link href="http://threebrothers.org/brendan/blog/ghost-in-the-shell/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-22:/brendan/blog/ghost-in-the-shell</id><updated>2008-02-22T17:08:00.0-08:00</updated><summary><![CDATA[
+A while ago, Jordan introduced me to Ghost in the Shell. It's an interesting anime series focused on the intersection of artificial intelligence, philosophy, cybernetics, and crime-fighting; the first season was really quite impressive. Much to my surprise, I stumbled across the following video during my daily news consumpt...]]>
+</summary><content type="html"><![CDATA[
+<p>A while ago, <a href="http://threebrothers.org/jordan/">Jordan</a> introduced me to <a href="http://en.wikipedia.org/wiki/Ghost_in_the_Shell">Ghost in the Shell</a>.  It's an interesting anime series focused on the intersection of artificial intelligence, philosophy, cybernetics, and crime-fighting; the <a href="http://en.wikipedia.org/wiki/Ghost_in_the_Shell:_Stand_Alone_Complex">first season</a> was really quite impressive.</p>
+
+<p>Much to my surprise, I stumbled across the following video during my daily news consumption.  Exoskeletons like the one demonstrated in this video play a key role in a few <acronym title="Ghost in the Shell">GitS</acronym> episodes, and I'm amazed to see how advanced the real life progress on these frightening machines has become.</p>
+
+<div style="text-align:center;"><embed src="http://www.liveleak.com/player.swf" width="450" height="370" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="autostart=false&token=109_1195663753" scale="showall" name="index"></embed></div>
+]]>
+</content></entry><entry><title>Contextual Spam?</title><link href="http://threebrothers.org/brendan/blog/contextual-spam/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-21:/brendan/blog/contextual-spam</id><updated>2008-02-21T21:57:00.0-08:00</updated><summary><![CDATA[
+Comment spam has come up in a few recent posts by people I know. I've seen my fair share of this, but I encountered something new today. My post on BitTorrent and the Oscars was recently hit with "Watch the Oscars Online" link spam. This is the only instance of this type of spam I've seen on my blog &mdash; everything else ...]]>
+</summary><content type="html"><![CDATA[
+<p>Comment spam has <a href="http://jolma.org/blog/?p=276">come up</a> in a few <a href="http://thenullpointer.net/wordpress/spam-and-recaptcha">recent posts</a> by people I know.  I've seen my fair share of this, but I encountered something new today.</p>
+
+<p>My post on <a href="http://threebrothers.org/brendan/blog/articles/2008/02/11/bittorrent-misnomers-and-the-oscars">BitTorrent and the Oscars</a> was recently hit with "Watch the Oscars Online" link spam.  This is the only instance of this type of spam I've seen on my blog &mdash; everything else involves prescription drugs and miscellaneous unmentionable things.</p>
+
+<p>Are spammers jumping on the contextual advertising bandwagon?</p>
+]]>
 </content></entry></feed>

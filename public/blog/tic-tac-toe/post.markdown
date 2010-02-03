@@ -1,2 +1,0 @@
-<p>I have perfected my <a href="http://abscond.net/ttt.html">Tic Tac Toe</a> AI.  I'll put the Java source up soon, and (hopefully) learn enough Perl to make a web based version of it.</p>
-<p>I also hope to make a parsing interface that can play some of the other web-based AIs to test them for flaws.  To test mine, I ran a loop that performs every available move--the computer had zero losses.</p>

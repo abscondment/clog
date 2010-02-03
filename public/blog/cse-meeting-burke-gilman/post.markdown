@@ -1,4 +1,0 @@
-<p>I met with a <acronym title="Computer Science &amp; Engineering">CSE</acronym> advisor today.  The meeting went well and was very encouraging; I'm not going to get my hopes up yet, but I'll still re-apply for Spring admission.</p>
-<p>I biked home from campus; it took me ~1hr 20min, and I only had to stop in one place.  I was surprised at how short the trip seemed; I think I'll try to do that regularly to keep in shape.</p>
-<p>Jessica is doing very well at her Computer Science class, and I think she deserves a gold star:<br />
-<img src="http://students.washington.edu/bribera/images/goldstar.gif" alt="Gold Star" /></p>

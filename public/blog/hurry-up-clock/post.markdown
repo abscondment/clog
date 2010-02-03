@@ -1,5 +1,0 @@
-Jessica is flying home as I type; her flight is supposed to land in 35 minutes, but the Southwest Airlines website says that it's delayed another 20.  C'mon, people... fly faster!  I can't wait for her to get home.
-
-There's an RUF Leadership dinner potluck thingy at my apartment tonight; that should be fun.  It'll be even more fun now that my babe is home.
-
-This weekend has been really tiring: I worked 11-7:30 at B&amp;N, then went directly to the youth group LAN party.  As all good LAN parties are, this one was an all-nighter.  So, I went to bed at around 11 the next morning.  I had to work at B&amp;N from 3-11:30 soon after.  Now I'm sleepy.  Sleeeeepy.  Ugh, and school starts tommorow.  Oh well... guess that'll just make me appreciate normal weeks more.  I want the break to extend another week so that I can actually do things that I want to do, like read and spend time with Jessica.  Ho hum.

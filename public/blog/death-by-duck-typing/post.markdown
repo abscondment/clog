@@ -4,43 +4,37 @@ Ruby is all about the duck-typing.  Most of the time, I am too.  But sometimes, 
 
 Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:
 <br style="clear:both;"/>
-<typo:code>
-h = get_my_h_now()
-# Get the 50 widgets with the highest ids and stick them into h
-Widget.find(:all, :limit => 50, :order => 'id DESC').map {
-  |w| h[w.id] = w
-}
-</typo:code>
+    h = get_my_h_now()
+    # Get the 50 widgets with the highest ids and stick them into h
+    Widget.find(:all, :limit => 50, :order => 'id DESC').map {
+      |w| h[w.id] = w
+    }
 
 Pretty innocuous, right?  I mean, if the code works without errors, it's all good... right?  Right?
 
 What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a Hash, but it gives you an Array.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <b>h</b> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem?What do you suppose this code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.
 
-<typo:code>
-widget = {
-  :id => 123456789,
-  :type => 'Really cool',
-  :price => 999.99
-}
-id = widget[:id]
-h = []
-m = `ps -o rss= -p #{Process.pid}`.to_i
-puts "Using #{m}kb"
-h[id] = widget
-puts "Memory costs $#{h[id][:price]} per what???"
-m = `ps -o rss= -p #{Process.pid}`.to_i
-puts "Using #{m}kb"
-</typo:code>
+    widget = {
+      :id => 123456789,
+      :type => 'Really cool',
+      :price => 999.99
+    }
+    id = widget[:id]
+    h = []
+    m = `ps -o rss= -p #{Process.pid}`.to_i
+    puts "Using #{m}kb"
+    h[id] = widget
+    puts "Memory costs $#{h[id][:price]} per what???"
+    m = `ps -o rss= -p #{Process.pid}`.to_i
+    puts "Using #{m}kb"
 
 (hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage">ruby memory usage</a> syntax)
 
 Surprised by the results?
 
-<typo:code>
-Using 1632kb
-Memory costs $999.99 per what???
-Using 483960kb
-</typo:code>
+    Using 1632kb
+    Memory costs $999.99 per what???
+    Using 483960kb
 
 Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  Array has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an Array that are larger than its current size, and the Array will dynamically resize itself to accommodate.  This is only dangerous because Ruby's Arrays are not sparse; that is to say, when you address position 1,000,000 on a freshly created Array, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.
 

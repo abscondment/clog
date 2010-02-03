@@ -1,5 +1,0 @@
-<p>I have seven minutes of internet access left.  I'm sitting in the Dallas/Forth Worth airport.  I've been here since 12:30 (+2 hrs from pacific) yesterday.</p>
-<p>My flight to Amarillo was cancelled last night; they were having mechanical problems and decided to scrub the flight.  I was given a voucher for 1 night's accommodation in a hotel that was already full; Delta representatives didn't seem to know where to send people like me and, since the vouchers aren't actually issued by Delta, we were told to call around and find a hotel that was open and would accept them.</p>
-<p>I slept in the airport.</p>
-<p>Now I'm waiting--I'll be really peeved if this plane gets cancelled.  The incoming flight from Amarillo was cancelled this morning; my flight is set 30 minutes late already.  I just want to see Jessica already!</p>
-<p>I'm probably not going to fly Delta again.</p>

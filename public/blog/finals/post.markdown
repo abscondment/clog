@@ -1,2 +1,0 @@
-<p>That's right Ladies and Gentlemen: Finals are here.  It's been a pretty hectic quarter, and I'm glad that it's almost over.  Instead of doing the usual moment-by-moment-update version of the grade reporting, I've decided to only post them once I've received all of them.</p>
-<p>I had my Italian final last Saturday; it went pretty well.  My Informatics final is tomorrow, and my Math final is on Wednesday.  Argh.</p>

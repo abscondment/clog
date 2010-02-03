@@ -4,12 +4,15 @@ The set up requires that people host their own music in a shared folder, and pla
 
 The problem I kept encountering is this: in order for the shortcut to work, Windows can't be required to provide a password to access the share.  However, the vast majority of tutorials suggest that setting
 
-<blockquote><typo:code>&nbsp;&nbsp;security = share</typo:code></blockquote>
+    security = share
 
 is the correct way to achieve this.  Unfortunately, this causes windows to misbehave: <b>"The account is not authorized to log in from this station,"</b> and other such nonsense.
 
 Fortunately, I found <a href="http://micheljansen.org/blog/entry/182">this configuration</a>, which had some components that all the others missed.  Here are key steps that had been absent in other configurations:
-<ul><li>Follow a standard user security method:<br /><typo:code>&nbsp;&nbsp;security = user</typo:code><br /></li><li>Make sure that Samba has a 'nobody' account set up with <em>no</em> password:<br /><typo:code># smbpasswd -an nobody</typo:code><br /><br /></li><li>Add the following to the <typo:code>[global]</typo:code> section:<br /><typo:code>&nbsp;&nbsp;map to guest = bad user</typo:code></li></ul>
+
+ * Follow a standard user security method:<br/>`security = user`
+ * Make sure that Samba has a 'nobody' account set up with <em>no</em> password:<br/>`# smbpasswd -an nobody`
+ * Add the following to the `[global]` section:<br/>`map to guest = bad user`
 
 Finally, I can contribute to the musical cacophony!
 

@@ -1,20 +1,20 @@
 This Thanksgiving, I'm reminded of the following passage:
 
 <b>Habakkuk 3:17-18</b>
-<typo:code>
-Though the fig tree does not bud
-       and there are no grapes on the vines,
-       though the olive crop fails
-       and the fields produce no food,
-       though there are no sheep in the pen
-       and no cattle in the stalls,
 
-yet I will rejoice in the LORD,
-       I will be joyful in God my Savior.
+    Though the fig tree does not bud
+           and there are no grapes on the vines,
+           though the olive crop fails
+           and the fields produce no food,
+           though there are no sheep in the pen
+           and no cattle in the stalls,
 
-The Sovereign LORD is my strength;
-       he makes my feet like the feet of a deer,
-       he enables me to go on the heights.</typo:code>
+    yet I will rejoice in the LORD,
+           I will be joyful in God my Savior.
+
+    The Sovereign LORD is my strength;
+           he makes my feet like the feet of a deer,
+           he enables me to go on the heights.
 
 We have many, many things for which to be thankful (<a href="http://threebrothers.org/brendan/blog/articles/2007/11/10/exciting-news">pregnancy</a>, for one, is especially high on this year's list). This abundance makes Habakkuk's prayer really abstract; it's unlikely that anyone reading this will ever experience the hunger, poverty, or war-induced subservience that inspired Habakkuk.
 

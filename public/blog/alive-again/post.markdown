@@ -1,1 +1,0 @@
-<a href="http://threebrothers.org">threebrothers.org</a> is running again after a brief three-week outage involving an incorrectly paired networking cable and a lazy system administrator.  As the lazy system administrator, I blame the cable.
