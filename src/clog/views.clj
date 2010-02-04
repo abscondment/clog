@@ -3,9 +3,6 @@
         [clojure.contrib seq-utils str-utils]
         [clog config helpers]))
 
-(def *markdown-processor*
-     (new com.petebevin.markdown.MarkdownProcessor))
-
 (defn blog-post [post previous-post next-post]
   (html
    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
@@ -23,7 +20,7 @@
       (header (post :title))
       [:div {:class "content"}
        [:h1 (post :title)]
-       (.. *markdown-processor* (markdown (post :body)))
+       (post :body)
        [:h4 (post :created_at)]
        [:br]
        [:div {:id "disqus_thread"}]
@@ -78,6 +75,15 @@
       (footer)]
      google-analytics]]))
 
+(defn sitemap-txt [posts]
+  (apply str "http://threebrothers.org/brendan/
+http://threebrothers.org/brendan/about/
+http://threebrothers.org/brendan/software/\n"
+         (map #(str "http://threebrothers.org/brendan/blog/"
+                    (% :url)
+                    "/\n")
+              posts)))
+
 (defn atom-xml [posts]
   (html
    "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -107,8 +113,9 @@
         [:updated (take 10 (post :created_at)) "T"
                   (drop 11 (post :created_at)) "-08:00"]
         [:summary
+         "<![CDATA[\n"
          (take 325
                (re-gsub #"[\s]+" " "
-                        (re-gsub #"(</?[^>]*>)" "" (post :body)))) "..."]
+                        (re-gsub #"(</?[^>]*>)" "" (post :body)))) "...]]>\n"]
         [:content {:type "html"} "<![CDATA[\n" (post :body) "]]>\n"]])
      posts)]))

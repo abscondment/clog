@@ -1,6 +1,9 @@
 (ns clog.db
   (:use [clojure.contrib.duck-streams]))
-  
+
+(def *markdown-processor*
+     (new com.petebevin.markdown.MarkdownProcessor))
+
 (defn all-posts []
   (reverse
    (sort-by
@@ -15,7 +18,7 @@
             {:url url
              :title (apply str (drop 9 (fnext yaml)))
              :created_at (apply str (drop 14 (last yaml)))
-             :body body})))
+             :body (.. *markdown-processor* (markdown body))})))
       (partition
        3
        (rest
