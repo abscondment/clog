@@ -108,6 +108,7 @@ http://threebrothers.org/brendan/blog/reminiscing-with-jeopardy/
 http://threebrothers.org/brendan/blog/programming-n-grams-in-d/
 http://threebrothers.org/brendan/blog/clear/
 http://threebrothers.org/brendan/blog/donate-blood/
+http://threebrothers.org/brendan/blog/warning-posting-slump/
 http://threebrothers.org/brendan/blog/freebsd-e-litaliano/
 http://threebrothers.org/brendan/blog/engagement-ring/
 http://threebrothers.org/brendan/blog/i-proposed-to-jessica-last-night/

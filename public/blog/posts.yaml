@@ -119,6 +119,9 @@ clear:
 donate-blood:
   title: Donate Blood
   created_at: 2004-12-06 12:58:00.0
+warning-posting-slump:
+  title: Warning: Posting Slump
+  created_at: 2004-11-15 12:34:00.0
 freebsd-e-litaliano:
   title: FreeBSD e l'italiano.
   created_at: 2004-11-02 13:46:00.0
