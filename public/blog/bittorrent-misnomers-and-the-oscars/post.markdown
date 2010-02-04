@@ -2,7 +2,7 @@ After reading on waxy.org about <a href="http://www.waxy.org/archive/2008/02/04/
 
 I tend to have atypical taste in movies, I found this article pretty interesting.  However, I don't buy one of the explanatory arguments that it offers:
 
-<blockquote><p><em>The very nature of the BitTorrent protocol itself tips the balance towards mass-market movie fare. BitTorrent has been designed to efficiently distribute massive amounts of data within a short time frame. Downloads get faster when there are more users available, and they slow down once people stop sharing. Itâs essentially a short-tail protocol that quite naturally works better for Oscar smash hits then for unknown Sundance flicks.</em></p></blockquote>
+<blockquote><p><em>The very nature of the BitTorrent protocol itself tips the balance towards mass-market movie fare. BitTorrent has been designed to efficiently distribute massive amounts of data within a short time frame. Downloads get faster when there are more users available, and they slow down once people stop sharing. It's essentially a short-tail protocol that quite naturally works better for Oscar smash hits then for unknown Sundance flicks.</em></p></blockquote>
 
 I personally don't use BitTorrent for downloading anything but open source software (like <a href="http://ftp.osuosl.org/pub/ubuntu-releases/7.10/ubuntu-7.10-alternate-i386.iso.torrent">Ubuntu <acronym title="GNU's Not Unix">GNU</acronym>/Linux</a>), but my experience along those lines has made me realize that this is a gross oversimplification; it doesn't explain the lack of a long tail in BitTorrent movies, nor does it do justice to what BitTorrent accomplishes.
 

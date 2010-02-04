@@ -26,7 +26,7 @@ Excerpts of <a href="http://www.biblegateway.com/passage/?book_id=24&chapter=16&
 <sup>5</sup>Everyone who is arrogant in heart is an abomination to the LORD;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;be assured, he will not go unpunished.
 
-<sup>7</sup>When a manâs ways please the LORD,<br />
+<sup>7</sup>When a man's ways please the LORD,<br />
 &nbsp;&nbsp;&nbsp;&nbsp;he makes even his enemies to be at peace with him.<br />
 <sup>8</sup>Better is a little with righteousness<br />
 &nbsp;&nbsp;&nbsp;&nbsp;than great revenues with injustice.<br />
