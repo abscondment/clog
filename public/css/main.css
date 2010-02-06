@@ -93,6 +93,8 @@ ul.menu li a:hover {
   text-align:justify;
 }
 
+.content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
+
 ul.list { margin-top:0; }
 ul.list li { margin-bottom:5px; }
 
