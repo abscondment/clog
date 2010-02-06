@@ -23,7 +23,7 @@
         (loop [return-posts (list)
                [post & more-posts :as posts] (all-posts)]
           (if (empty? posts) (reverse return-posts)
-              (let [;_ (if (post :updated) (println (post :url)))
+              (let [_ (if (post :updated) (println "Updating" (post :url)))
                     _ (if (post :updated)
                         (let [dir (java.io.File. (str "./public/blog/" (post :url)))
                               _ (if (not (.exists dir)) (.mkdir dir))
