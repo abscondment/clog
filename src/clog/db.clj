@@ -29,19 +29,18 @@
         (fn [yaml]
           (let [url (apply str (butlast (first yaml)))
                 exisitng-md5
-                ;(try
-                (slurp (str "./public/blog/" url "/post.markdown.md5sum"))
-                ;(catch FileNotFoundException e ""))
+                (try
+                 (slurp (str "./public/blog/" url "/post.markdown.md5sum"))
+                 (catch FileNotFoundException e ""))
                 body (slurp (str "./public/blog/" url "/post.markdown"))
                 new-md5 (md5-sum body)]
-            (do (println "found" exisitng-md5 "new" new-md5)
-                (if (not (empty? body))
-                  {:url url
-                   :title (apply str (drop 9 (fnext yaml)))
-                   :created_at (apply str (drop 14 (last yaml)))
-                   :body (.. markdown-processor (markdown body))
-                   :md5 new-md5
-                   :updated (not= exisitng-md5 new-md5)}))))
+            (if (not (empty? body))
+              {:url url
+               :title (apply str (drop 9 (fnext yaml)))
+               :created_at (apply str (drop 14 (last yaml)))
+               :body (lazy-seq (list (.. markdown-processor (markdown body))))
+               :md5 new-md5
+               :updated (not= exisitng-md5 new-md5)})))
         (partition
          3
          (rest

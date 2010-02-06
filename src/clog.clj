@@ -11,7 +11,7 @@
                  [post & more-posts :as posts] (all-posts)]
             (if (empty? posts) yaml
                 (let [_ (spit (str "./public/blog/" (post :url) ".markdown")
-                              (post :body))]
+                              (first (post :body)))]
                   (recur
                    (str yaml
                         (post :url) ":\n"

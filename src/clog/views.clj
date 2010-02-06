@@ -20,7 +20,7 @@
       (header (post :title))
       [:div {:class "content"}
        [:h1 (post :title)]
-       (post :body)
+       (first (post :body))
        [:h4 (post :created_at)]
        [:br]
        [:div {:id "disqus_thread"}]
@@ -116,6 +116,6 @@ http://threebrothers.org/brendan/software/\n"
          "<![CDATA[\n"
          (take 325
                (re-gsub #"[\s]+" " "
-                        (re-gsub #"(</?[^>]*>)" "" (post :body)))) "...]]>\n"]
-        [:content {:type "html"} "<![CDATA[\n" (post :body) "]]>\n"]])
+                        (re-gsub #"(</?[^>]*>)" "" (first (post :body))))) "...]]>\n"]
+        [:content {:type "html"} "<![CDATA[\n" (first (post :body)) "]]>\n"]])
      posts)]))
