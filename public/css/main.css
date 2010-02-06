@@ -21,6 +21,8 @@ h1 { font-size:1.7em; }
 h2 { font-size:1.4em; }
 h3 { font-size:1.2em; }
 
+ul li { list-style-type:square; }
+
 a {color:#00d;}
 a:visited {color:#666;}
 a:hover {color:#000;}
