@@ -1,6 +1,7 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/
 http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/
 http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/
 http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/
