@@ -1,7 +1,8 @@
 *.jar
 classes/*
-db/posts.db
 lib/*
 public/index.html
+public/blog/atom.xml
+public/blog/sitemap.*
 public/blog/*/*.html
 
