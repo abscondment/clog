@@ -23,17 +23,25 @@
         (loop [return-posts (list)
                [post & more-posts :as posts] (all-posts)]
           (if (empty? posts) (reverse return-posts)
-              (let [_ (if (post :updated) (println "Updating" (post :url)))
-                    _ (if (post :updated)
+              (let [updated (or (post :updated)
+                                (and (first return-posts)
+                                     ((first return-posts) :updated))
+                                (and (first more-posts)
+                                     ((first more-posts) :updated)))
+                    _ (if updated (println "Updating" (post :url)))
+                    _ (if updated
                         (let [dir (java.io.File. (str "./public/blog/" (post :url)))
                               _ (if (not (.exists dir)) (.mkdir dir))
-                              _ (spit (str "./public/blog/" (post :url) "/index.html")
+                              _ (spit (str "./public/blog/"
+                                           (post :url)
+                                           "/index.html")
                                       (blog-post post
                                                  (first more-posts)
                                                  (first return-posts)))
-                              _ (spit (str "./public/blog/" (post :url) "/post.markdown.md5sum")
-                                      (post :md5))
-                              ]))]
+                              _ (spit (str "./public/blog/"
+                                           (post :url)
+                                           "/post.markdown.md5sum")
+                                      (post :md5))]))]
                 (recur (conj return-posts post) more-posts))))]
     (do
       (spit "./public/index.html" (blog-index posts))
