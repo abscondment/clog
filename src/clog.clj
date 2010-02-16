@@ -46,4 +46,5 @@
     (do
       (spit "./public/index.html" (blog-index posts))
       (spit "./public/sitemap.txt" (sitemap-txt posts))
+      (spit "./public/sitemap.xml" (sitemap-xml posts))
       (spit "./public/blog/atom.xml" (atom-xml (take 20 posts))))))

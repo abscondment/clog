@@ -32,10 +32,13 @@
           [:div {:style "float:right;"}
            (link-to-post next-post) " &raquo;"])
         [:br {:style "clear:both;"}]]
-       [:script {:type "text/javascript" :src "http://disqus.com/forums/tbdo-brendan/embed.js"}]
+       [:script {:type "text/javascript"
+                 :src "http://disqus.com/forums/tbdo-brendan/embed.js"}]
        [:noscript
         [:p
-         [:a {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"} "View the discussion thread."]]]]
+         [:a
+          {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"}
+          "View the discussion thread."]]]]
       (footer (take 4 (post :created_at)))]
      [:script {:type "text/javascript" :src "/brendan/js/comments.js"}]
      google-analytics]]))
@@ -75,15 +78,6 @@
       (footer)]
      google-analytics]]))
 
-(defn sitemap-txt [posts]
-  (apply str "http://threebrothers.org/brendan/
-http://threebrothers.org/brendan/about/
-http://threebrothers.org/brendan/software/\n"
-         (map #(str "http://threebrothers.org/brendan/blog/"
-                    (% :url)
-                    "/\n")
-              posts)))
-
 (defn atom-xml [posts]
   (html
    "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -119,3 +113,55 @@ http://threebrothers.org/brendan/software/\n"
                         (re-gsub #"(</?[^>]*>)" "" (first (post :body))))) "...]]>\n"]
         [:content {:type "html"} "<![CDATA[\n" (first (post :body)) "]]>\n"]])
      posts)]))
+
+
+(defn sitemap-txt [posts]
+  (apply str "http://threebrothers.org/brendan/
+http://threebrothers.org/brendan/about/
+http://threebrothers.org/brendan/software/\n"
+         (map #(str "http://threebrothers.org/brendan/blog/"
+                    (% :url)
+                    "/\n")
+              posts)))
+
+
+(defn sitemap-xml [posts]
+  (let [[newer older] (split-at 20 posts)]
+    (html
+     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+     [:urlset
+      {:xmlns "http://www.sitemaps.org/schemas/sitemap/0.9"}
+      (map (fn [m]
+             [:url
+              [:loc (m :url)]
+              [:changefreq (or (m :changefreq) "yearly")]
+              [:priority (or (m :priority) 0.25)]])
+           (concat
+            ; Static urls
+            (list
+            {:url "http://threebrothers.org/brendan/"
+             :changefreq "weekly"
+             :priority 1.0}
+            {:url "http://threebrothers.org/brendan/about/"
+             :priority 0.5}
+            {:url "http://threebrothers.org/brendan/software/"
+             :changefreq "monthly"
+             :priority 0.75})
+            
+            ; Give newer posts higher priority & more updates
+            (map (fn [post]
+                   {:url
+                    (str "http://threebrothers.org/brendan/"
+                         (post :url) "/")
+                    :changefreq "monthly"
+                    :priority 0.75})
+                 newer)
+            
+            ; Give older posts lower priority & fewer updates
+            (map (fn [post]
+                   {:url
+                    (str "http://threebrothers.org/brendan/"
+                         (post :url) "/")})
+                 older)))])))
+
+
