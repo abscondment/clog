@@ -151,7 +151,7 @@ http://threebrothers.org/brendan/software/\n"
             ; Give newer posts higher priority & more updates
             (map (fn [post]
                    {:url
-                    (str "http://threebrothers.org/brendan/"
+                    (str "http://threebrothers.org/brendan/blog/"
                          (post :url) "/")
                     :changefreq "monthly"
                     :priority 0.75})
@@ -160,7 +160,7 @@ http://threebrothers.org/brendan/software/\n"
             ; Give older posts lower priority & fewer updates
             (map (fn [post]
                    {:url
-                    (str "http://threebrothers.org/brendan/"
+                    (str "http://threebrothers.org/brendan/blog/"
                          (post :url) "/")})
                  older)))])))
 
