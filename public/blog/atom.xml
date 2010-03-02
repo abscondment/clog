@@ -1,7 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-02-21T13:08:28-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Closures in Java, Ruby, and Duby</title><link href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id><updated>2010-02-05T23:26:57-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-03-02T00:33:11-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Memory and Ruby :symbols</title><link href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id><updated>2010-03-01T21:32:32-08:00</updated><summary><![CDATA[
+Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be rewritten in many different ways. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the Symbol. First, compare these two lines: (1) ...]]>
+</summary><content type="html"><![CDATA[
+<p>Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be <a href='http://refactormycode.com/codes/2-ruby-simple-loop' rel='nofollow external'>rewritten in many different ways</a>. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the <a href='http://ruby-doc.org/core/classes/Symbol.html' rel='nofollow external'>Symbol</a>.</p>
+
+<p>First, compare these two lines:</p>
+
+<pre><code>(1) {:foo  =&gt; 'bar', :qux  =&gt; 'quux'}
+(2) {'foo' =&gt; 'bar', 'qux' =&gt; 'quux'}
+</code></pre>
+
+<p>I'd say that Ruby developers default to (1) &ndash; at least, most Ruby code that I've worked with tends to favor that variant. This seems to be in part a matter of aesthetic taste, and a subtle way to differentiate between a map's keys and values. Sending a hash of symbolized keys to a method has become a fairly common way of implementing complex options &ndash; it's <a href='http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M002263' rel='nofollow external'>prevalent in Rails</a>. Rails uses this construct so often that it adds <a href='http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/Hash/Keys.html#M001190' rel='nofollow external'>extensions to the native <code>Hash</code></a> object to facilitate turning their <code>String</code> keys into <code>Symbols</code> and <em>vice versa</em>.</p>
+
+<h2>Symbols to the rescue!</h2>
+
+<p>There are some really common situations where (1) is the best option. A variation of <a href='http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols' rel='external'>the canonical example</a> follows: Say you're creating thousands of hashes to represent a common JSON object &ndash; a temperature reading. They all have the same key structure, but the data differ.</p>
+
+<pre><code>sea = {'lat' =&gt; 47.53, 'lon' =&gt; 122.30, 'temp' =&gt; 15.0}
+sf  = {'lat' =&gt; 37.79, 'lon' =&gt; 122.41, 'temp' =&gt; 25.0}
+
+puts sea.keys[0] == sf.keys[0] # true
+puts sea.keys[0].object_id     # 86288110
+puts sf.keys[0].object_id      # 86345290
+</code></pre>
+
+<p>So it's 15&deg;C in Seattle and 25&deg;C in San Francisco. Typical. What's more interesting is that although your keys are equal, they are two different <code>String</code> objects. With 1,000,000 such hashes, you're carrying around 3,000,000 strings that take up a lot more space than the <code>Float</code> entries.</p>
+
+<p>Symbols solve this issue. At the C level of Ruby, each symbol maps to an unsigned integer &ndash; the <a href='http://en.wikipedia.org/wiki/Symbol_table' rel='nofollow external'>symbol table</a> has one entry per symbol, and the entries exist as long as the process lives.</p>
+
+<h2>Wait, why is that still lying around?</h2>
+
+<p>Symbols are tiny and combine identity with equality, but <strong>they're never garbage collected</strong>. That's how the symbol table implementation works. So, replacing 3,000,000 Strings with 3 Symbols is a great improvement. But in a long-running process that does a lot of GC and uses random, unique keys, symbols can hurt.</p>
+
+<p>To illustrate the problem, I grepped through the iLike codebase for unique symbols. I stored them as Strings only, read the current memory usage, and then converted them all to Symbols using <code>to_sym</code>. The isolated increase in memory usage was ~<strong>1.2MB</strong> &ndash; and this test can't even find symbols created programmatically!</p>
+
+<p>Now, that figure represents &lt;1% of the memory used by a typical process of ours. But that consumption adds to Ruby's large low water mark for memory. If our application created symbols for arbitrary user input, we could easily choke a box into swapdeath. Incidentally, this is one reason why <code>HashWithIndifferentAccess</code> stores its keys internally as Strings &ndash; each Rails request creates a HWIA with all of the query parameters and GCs it later. Automatically converting query parameter names to symbols would create a vector for an easy <acronym title='Denial of Service'>DOS</acronym> attack.</p>
+
+<h2>Guidelines</h2>
+
+<p>So, how should Symbols be used?</p>
+
+<ul>
+<li>Common values that are used often/repeatedly for <em>identity</em> (i.e. our temperature hash keys) should be Symbols. They're all about identity.</li>
+<li>Unique, high cardinality values or values that will be discarded should not be Symbols. They need to be garbage collected.</li>
+</ul>
+]]>
+</content></entry><entry><title>Disabling Flash in Chrome, and Other Tricks</title><link href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id><updated>2010-02-25T20:48:12-08:00</updated><summary><![CDATA[
+I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture: google-chrome --disable-plugins Previously I had resorted to moving libflashplayer.so or removing read access from it, but this is a much more controlled method. The are a ton of other Chrome switches that I on...]]>
+</summary><content type="html"><![CDATA[
+<p>I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture:</p>
+
+<pre><code>google-chrome --disable-plugins
+</code></pre>
+
+<p>Previously I had resorted to moving <code>libflashplayer.so</code> or removing read access from it, but this is a much more controlled method.</p>
+
+<p>The are a ton of <a href="http://www.google.com/codesearch/p?hl=en#h0RrPvyPu-c/chrome/common/chrome_switches.cc">other Chrome switches</a> that I only found by browsing the source &ndash; good thing it's available. Among them is <code>allow-file-access-from-files</code>, which would have come in handy yesterday.</p>
+]]>
+</content></entry><entry><title>Closures in Java, Ruby, and Duby</title><link href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id><updated>2010-02-05T23:26:57-08:00</updated><summary><![CDATA[
 On Wednesday, I noticed Phil Hagelberg's Android-Duby app playground. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port iLike's Local Concerts app to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes Duby's promise to c...]]>
 </summary><content type="html"><![CDATA[
-<p>On Wednesday, I noticed Phil Hagelberg's <a href="http://github.com/technomancy/Garrett" title="Garret: A playground for Android Duby development">Android-Duby app playground</a>. This piqued my interest for several reasons, but a primary one is the <a href="http://twitter.com/philbogle/status/8606472974">work Phil Bogle is doing</a> to port <a href="http://www.ilike.com/mobile/concerts">iLike's <em>Local Concerts</em> app</a> to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes <a href="http://github.com/headius/duby">Duby</a>'s promise to convert Ruby-like syntax to JVM bytecode particularly enticing.</p>
+<p>On Wednesday, I noticed Phil Hagelberg's <a href="http://github.com/technomancy/Garrett" title="Garret: A playground for Android Duby development">Android-Duby app playground</a>. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port <a href="http://www.ilike.com/mobile/concerts">iLike's <em>Local Concerts</em> app</a> to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes <a href="http://github.com/headius/duby">Duby</a>'s promise to convert Ruby-like syntax to JVM bytecode particularly enticing.</p>
 
 <div class="rightImage"><img src="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/badges.png" alt="Bandit from 'The Treasure of the Sierra Madre'" /><br/><em>Closures? We don't need no stinkin' closures!</em></div>
 
@@ -428,21 +486,22 @@ I've been using Firefox Beta 3 whenever I can, and I've really enjoyed it. It ha
 </content></entry><entry><title>Death by Duck-Typing</title><link href="http://threebrothers.org/brendan/blog/death-by-duck-typing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-01:/brendan/blog/death-by-duck-typing</id><updated>2008-05-01T10:48:00.0-08:00</updated><summary><![CDATA[
  Ruby is all about the duck-typing. Most of the time, I am too. But sometimes, it can lead to some very confusing and very nasty issues. Suppose you get a variable, h, from someone's cool helper function, and with it you want to build up a hash of Widgets. You have millions and billions of Widgets in your database, but you'...]]>
 </summary><content type="html"><![CDATA[
-<p><img src="http://threebrothers.org/brendan/blog/files/duckt.gif" alt="Duckbot" style="float:right;" /></p>
+<p><img src="http://threebrothers.org/brendan/blog/files/duckt.gif" alt="Duckbot" style="border:0 0 0 1em;float:right;" /></p>
 
 <p>Ruby is all about the duck-typing.  Most of the time, I am too.  But sometimes, it can lead to some very confusing and very nasty issues.</p>
 
-<p>Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:
-<br style="clear:both;"/>
-    h = get<em>my</em>h_now()
-    # Get the 50 widgets with the highest ids and stick them into h
-    Widget.find(:all, :limit => 50, :order => 'id DESC').map {
-      |w| h[w.id] = w
-    }</p>
+<p>Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:</p>
+
+<pre><code>h = get_my_h_now()
+# Get the 50 widgets with the highest ids and stick them into h
+Widget.find(:all, :limit =&gt; 50, :order =&gt; 'id DESC').map {
+  |w| h[w.id] = w
+}
+</code></pre>
 
 <p>Pretty innocuous, right?  I mean, if the code works without errors, it's all good... right?  Right?</p>
 
-<p>What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a Hash, but it gives you an Array.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <b>h</b> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem?What do you suppose this code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.</p>
+<p>What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a <code>Hash</code>, but it gives you an <code>Array</code>.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <code>h</code> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem? What do you suppose the following code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.</p>
 
 <pre><code>widget = {
   :id =&gt; 123456789,
@@ -459,7 +518,7 @@ m = `ps -o rss= -p #{Process.pid}`.to_i
 puts "Using #{m}kb"
 </code></pre>
 
-<p>(hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage">ruby memory usage</a> syntax)</p>
+<p>(hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage" rel="external">ruby memory usage</a> syntax)</p>
 
 <p>Surprised by the results?</p>
 
@@ -468,11 +527,11 @@ Memory costs $999.99 per what???
 Using 483960kb
 </code></pre>
 
-<p>Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  Array has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an Array that are larger than its current size, and the Array will dynamically resize itself to accommodate.  This is only dangerous because Ruby's Arrays are not sparse; that is to say, when you address position 1,000,000 on a freshly created Array, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.</p>
+<p>Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  <code>Array</code> has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an <code>Array</code> that are larger than its current size, and the <code>Array</code> will dynamically resize itself to accommodate.  This is only dangerous because Ruby's <code>Array</code>s are not sparse; that is to say, when you address position 1,000,000 on a freshly created <code>Array</code>, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.</p>
 
-<p>So when you take a widget with id 123,456,789 and attempt to store it, using its id as the position... whew!  Ruby definitely has its work cut out for it, since you'll get over its <a href="http://whytheluckystiff.net/articles/theFullyUpturnedBin.html">initial 8-megabyte heap</a> very quickly.  If you do this sort of thing in Rails and you have many requests processing at the same time, your servers will be in swap death pretty quickly.  Chances are high that you won't catch an issue like this when using a development database with low-id Models, since you'll be addressing much lower positions.</p>
+<p>So when you take a widget with id 123,456,789 and attempt to store it, using its id as the position... whew!  Ruby definitely has its work cut out for it, since you'll get over its <a href="http://viewsourcecode.org/why/hacking/theFullyUpturnedBin.html" rel="external">initial 8-megabyte heap</a> very quickly.  If you do this sort of thing in Rails and you have many requests processing at the same time, your servers will be in swap death pretty quickly.  Chances are high that you won't catch an issue like this when using a development database with low-id Models, since you'll be addressing much lower positions.</p>
 
-<p>To be sure, duck-typing isn't the only perpetrator in this example: Array can take a good share of the blame, too.  However, we never would have got into this situation if it were impossible to attempt to address an Array when intending to address a Hash.  I still enjoy the looseness of Ruby, and (at this point) wouldn't trade it for the extra security of strict typing &mdash; it's just important to make sure that the quack you produce is the one which you intended.</p>
+<p>To be sure, duck-typing isn't the only perpetrator in this example: <code>Array</code> can take a good share of the blame, too.  However, we never would have got into this situation if it were impossible to attempt to address an <code>Array</code> when intending to address a <code>Hash</code>.  I still enjoy the looseness of Ruby, and (at this point) wouldn't trade it for the extra security of strict typing &mdash; it's just important to make sure that the quack you produce is the one which you intended.</p>
 ]]>
 </content></entry><entry><title>The Bearded Coincidence</title><link href="http://threebrothers.org/brendan/blog/the-bearded-coincidence/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-18:/brendan/blog/the-bearded-coincidence</id><updated>2008-04-18T09:58:00.0-08:00</updated><summary><![CDATA[
 Herman Melville is my favorite author, hands down. I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish. I'll have a lot more to say about Herman Melville in a few weeks. I'm at the beginning of The Confidence-Man, the awesomene...]]>
@@ -543,23 +602,5 @@ I recently finished reading Fracis Bacon's Essays, Civil and Moral; I found thes
 </ol>
 
 <p>It should be patently obvious (that pun was unintentional, but I'm enjoying it enough to leave it there) how often various reincarnations of these four points surface in today's technological landscape, and I would assert that all four are equally detrimental today as they were in the 1600s.</p>
-]]>
-</content></entry><entry><title>Ghost in the Shell: Closer to Reality?</title><link href="http://threebrothers.org/brendan/blog/ghost-in-the-shell/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-22:/brendan/blog/ghost-in-the-shell</id><updated>2008-02-22T17:08:00.0-08:00</updated><summary><![CDATA[
-A while ago, Jordan introduced me to Ghost in the Shell. It's an interesting anime series focused on the intersection of artificial intelligence, philosophy, cybernetics, and crime-fighting; the first season was really quite impressive. Much to my surprise, I stumbled across the following video during my daily news consumpt...]]>
-</summary><content type="html"><![CDATA[
-<p>A while ago, <a href="http://threebrothers.org/jordan/">Jordan</a> introduced me to <a href="http://en.wikipedia.org/wiki/Ghost_in_the_Shell">Ghost in the Shell</a>.  It's an interesting anime series focused on the intersection of artificial intelligence, philosophy, cybernetics, and crime-fighting; the <a href="http://en.wikipedia.org/wiki/Ghost_in_the_Shell:_Stand_Alone_Complex">first season</a> was really quite impressive.</p>
-
-<p>Much to my surprise, I stumbled across the following video during my daily news consumption.  Exoskeletons like the one demonstrated in this video play a key role in a few <acronym title="Ghost in the Shell">GitS</acronym> episodes, and I'm amazed to see how advanced the real life progress on these frightening machines has become.</p>
-
-<div style="text-align:center;"><embed src="http://www.liveleak.com/player.swf" width="450" height="370" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="autostart=false&token=109_1195663753" scale="showall" name="index"></embed></div>
-]]>
-</content></entry><entry><title>Contextual Spam?</title><link href="http://threebrothers.org/brendan/blog/contextual-spam/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-21:/brendan/blog/contextual-spam</id><updated>2008-02-21T21:57:00.0-08:00</updated><summary><![CDATA[
-Comment spam has come up in a few recent posts by people I know. I've seen my fair share of this, but I encountered something new today. My post on BitTorrent and the Oscars was recently hit with "Watch the Oscars Online" link spam. This is the only instance of this type of spam I've seen on my blog &mdash; everything else ...]]>
-</summary><content type="html"><![CDATA[
-<p>Comment spam has <a href="http://jolma.org/blog/?p=276">come up</a> in a few <a href="http://thenullpointer.net/wordpress/spam-and-recaptcha">recent posts</a> by people I know.  I've seen my fair share of this, but I encountered something new today.</p>
-
-<p>My post on <a href="http://threebrothers.org/brendan/blog/articles/2008/02/11/bittorrent-misnomers-and-the-oscars">BitTorrent and the Oscars</a> was recently hit with "Watch the Oscars Online" link spam.  This is the only instance of this type of spam I've seen on my blog &mdash; everything else involves prescription drugs and miscellaneous unmentionable things.</p>
-
-<p>Are spammers jumping on the contextual advertising bandwagon?</p>
 ]]>
 </content></entry></feed>
