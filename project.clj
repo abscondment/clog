@@ -7,6 +7,7 @@
                                                  commons-fileupload
                                                  org.mortbay.jetty/jetty]]
                  [org.markdownj/markdownj "0.3.0-1.0.2b4"]]
-  :dev-dependencies [[leiningen/lein-swank "1.1.0"]]
+  :dev-dependencies [[leiningen/lein-swank "1.1.0"]
+                     [leiningen-run "0.3"]]
   :namespaces [clog]
   :main clog)

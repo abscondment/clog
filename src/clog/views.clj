@@ -49,6 +49,8 @@
    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
    [:html {:xmlns "http://www.w3.org/1999/xhtml"}
     [:head
+     ; verification
+     [:meta {:name "blogcatalog" :content "9BC9690896"}]
      [:meta {:http-equiv "Content-Type" :content "text/html; charset=utf-8"}]
      [:link {:rel "stylesheet"
              :type "text/css"
