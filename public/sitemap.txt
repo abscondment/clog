@@ -1,6 +1,8 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/android-impressions/
+http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/
 http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/
 http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/
 http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/

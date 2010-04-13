@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-03-02T00:33:11-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Memory and Ruby :symbols</title><link href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id><updated>2010-03-01T21:32:32-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-04-13T00:30:51-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
+ Fitter, happier, more pastries. Thanks to my latest aquatic shenanigans, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone. Product quality Hardware Negative: Only 4.5GB of space by default (512MB flash + 4GB SD) Ge...]]>
+</summary><content type="html"><![CDATA[
+<div class='rightImage'>
+  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
+  <br/>
+  <em>Fitter, happier, more pastries.</em>
+</div>
+
+<p>Thanks to my <a href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/">latest aquatic shenanigans</a>, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone.</p>
+
+<h2>Product quality</h2>
+
+<h3>Hardware</h3>
+
+<p>Negative:</p>
+
+<ul>
+<li>Only 4.5GB of space by default (512MB flash + 4GB SD)</li>
+<li>Generally poorer battery performance than the iPhone</li>
+<li>Five buttons &ndash; <acronym title='Keep it simple, stupid!'>KISS</acronym></li>
+</ul>
+
+<p>Positive:</p>
+
+<ul>
+<li>Removable battery (I can't stress enough what a boon this is)</li>
+<li>Swappable micro SD card</li>
+<li>Screen is larger and higher resolution</li>
+<li>5 megapixel camera with flash (compare to the iPhone's flashless 3 megapixel)</li>
+<li>1GHz processor with 512MB RAM (600MHz/256MB for a 3GS)</li>
+</ul>
+
+<p>The Nexus One has a substantial, polished feel. It's not exactly <em>sexy</em> in the ways the iPhone is, but it certainly doesn't feel like a cheap imitation. The specifications are pretty substantial, too. Given the superior hardware, it's understandable that battery life is inferior. Who knows about either phone's long-term battery performance. If the lithium-ion gods frown on you after a few months, you'll be forking over $79 with Apple and only $25 with Google.</p>
+
+<h3>Software</h3>
+
+<p>Negative:</p>
+
+<ul>
+<li>Inferior and slightly confusing UI</li>
+<li>Inferior app selection</li>
+<li>Browser feels clunky compared to Safari</li>
+</ul>
+
+<p>Positive:</p>
+
+<ul>
+<li>Android OS is open source</li>
+<li>Android Market is growing</li>
+<li>Background apps</li>
+<li>Apps are cloud-oriented; no more syncing through slow, clunky iTunes</li>
+</ul>
+
+<div class='rightImage'>
+  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
+  <br/>
+  <em>Look at those wee, beady buttons.</em>
+</div>
+
+<p>I found the UI to be the biggest barrier for me. I disliked the Nexus One's <a href="http://www.youtube.com/watch?v=TPMS6tGOACo">pentavirate</a> of buttons before I had even turned it on. 'Back' and 'Search' are given permanent hardware real estate despite their limited applicability &ndash; many (if not most) apps have no use for them. 'Home' is present, but given a middle position with no tactile means of locating it &ndash; it's hard to switch apps in the dark.</p>
+
+<p>And then there's the 'Menu' button &ndash; this is where the biggest problems lie. I'm an engineer, but I have a <a href="http://ischool.uw.edu/informatics/prospective/at_uw.aspx">degree in Informatics</a> &ndash; I have enough interface design and usability knowledge to cause trouble. Here's what I see in the 'Menu' button: the iPhone makes good use of <em>affordances</em>; Android does not. What do I mean?</p>
+
+<blockquote>
+  <p><a name='rn1'></a><em>An <strong>affordance</strong> is an aspect of an object that makes it obvious how the object is to be used. [&hellip;] Affordances must be visible to aid interpretation.</em><sup><a href='#fn1'>1</a></sup></p>
+</blockquote>
+
+<p>The 'Menu' button doesn't make its functions obvious. If you press it, a menu comes up; if you hold it down, the on-screen keyboard appears. Both functions could be loosely associated with the button's graphic, but one would never guess them by simply looking at the button. This is minor, though; one can figure this functionality out quickly, and once it's known, that's that. What is bad is the precedent that this button sets for applications.</p>
+
+<p>The Android developer guide prefaces its section on <a href="http://developer.android.com/guide/practices/ui_guidelines/menu_design.html">Menu Design Guidelines</a> with this assertion:</p>
+
+<blockquote>
+  <p><em>A menu holds a set of commands (user actions) that are normally hidden, and are accessible by a button, key, or gesture.</em></p>
+</blockquote>
+
+<p>By convention, <strong>every Android interface has broken affordances</strong>. Apps are asked to obscure large portions of functionality in a hidden menu. Contrast this with Apple's in-depth <a href="http://developer.apple.com/iphone/library/documentation/UserExperience/Conceptual/MobileHIG/PrinciplesAndCharacteristics/PrinciplesAndCharacteristics.html#//apple_ref/doc/uid/TP40006556-CH7-SW1">iPhone Human Interface Guidelines</a>:</p>
+
+<blockquote>
+  <p><em>Presenting choices to the user [&hellip;] allows them to concentrate on accomplishing tasks with your application, instead of remembering how to operate it.</em></p>
+</blockquote>
+
+<p>People tout simplicity as being the aspect of Apple's design that makes it superior. What they're trying to articulate is that the consistent application of good affordances allows users to approach every interface with knowledge about how to use it. The UI is not only simple &ndash; it's <em>understood</em>. Apple's defaults are a shared set of <em>visible</em> controls &ndash; (almost) everything that can be done is displayed using a common language. Android causes apps to fragment the user's knowledge &mdash; you have to individually <em>discover</em> and then <em>remember</em> exactly what can be done by every app because much of the functionality is invisible.</p>
+
+<h2>For consumers and developers</h2>
+
+<div class='rightImage'>
+  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' />
+  <br/>
+  <em>The Apple Analytical Engine<br />only accepts papyrus punch cards.</em>
+</div>
+
+<p>I've spent a bit of time talking about what I perceive to be the biggest weakness in the Android platform. This section is <em>much</em> friendlier towards Android.</p>
+
+<p>Android is a platform for hackers. It's open source, and can be hacked using any <acronym title='Java Virtual Machine'>JVM</acronym> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.</p>
+
+<p>I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things <em>for Apple</em>. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T &ndash; we want competition to force continued innovation.</p>
+
+<p>There are copious blog posts discussing the negative ramifications of Apple's closed platform. If you've read none of them, <em><a href="http://diveintomark.org/archives/2010/01/29/tinkerers-sunset">Tinkerer's Sunset</a></em> and the <a href="http://al3x.net/2010/01/28/ipad.html">post of Alex Payne's</a> that inspired it (or at the very least inspired the title) are good start. I don't have much to add here. Limiting developers' tools or languages stifles innovation. The inverted version is what attracts me to Android: granting freedom to developers promotes innovation.</p>
+
+<h2>Conclusion</h2>
+
+<p>The Nexus One hardware and the openness of the Android platform outweigh any UI advantage held by the iPhone. As this assertion comes from a guy who spends upwards of 8 hours a day inside emacs or a Linux terminal, it should be taken with a few grains of salt. When my contract with AT&amp;T is up, however, I'll be looking to the Android market for my next phone. And I'd love to get ahold of an Android tablet.</p>
+
+<hr/>
+
+<p><sup>1</sup> <span class='fn'>Mary Beth Rosson and John M. Carroll, <em><a href='http://books.google.com/books?id=RRC9IODz4VsC&amp;pg=PA124'>Usability Engineering</a></em> (Morgan Kaufmann, 2002), 124. <a name='fn1' href='#rn1'>&crarr;</a></span></p>
+]]>
+</content></entry><entry><title>iPhone Toilet Debacle Redux: The Backlight</title><link href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-29:/brendan/blog/iphone-toilet-debacle-redux-backlight</id><updated>2010-03-29T13:43:21.0-08:00</updated><summary><![CDATA[
+Last Tuesday marked the 485th day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet. No...]]>
+</summary><content type="html"><![CDATA[
+<p>Last Tuesday marked the 485<sup>th</sup> day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet.</p>
+
+<div class='rightImage'><img src='http://threebrothers.org/brendan/images/cat-toilet.jpg' alt='' title='Credit: http://www.flickr.com/photos/harvardavenue/79221382/' /><br/><em>No!!!! My Phone!!!!</em></div>
+
+<p>You've probably experienced the sinking feeling that accompanies circumstances such as this one. My wife fished the phone out and I immediately shut it down, dried it off, and stuck it into a glass full of rice. What a crappy situation &ndash; pun indended. I began figuring out how I would justify buying a <em>third</em> ridiculously expensive phone-computer given my complete inability to protect said device.</p>
+
+<p>Over the next few days, I discovered that the phone was still largely functional. The backlight was completely dead, but I could receive calls, connect to WiFi, and (most importantly) the touchscreen still worked. Adjusting brightness settings did nothing for the backlight. My tests were brief, and I placed the phone back in its rice cocoon afterwards with hopes that more moisture would be absorbed.</p>
+
+<h2>Fixing the backlight</h2>
+
+<p>Fortunately, Phil hadn't yet <a href="http://thebogles.com/blog/2010/04/joining-google/">left for Google</a>, and he found some interesting claims about a method to fix a backlight that had died a watery death. The steps were:</p>
+
+<ol>
+<li>Backup the phone</li>
+<li>Perform a factory restore</li>
+<li>Adjust the brightness settings</li>
+</ol>
+
+<p>I was skeptical, but after 5 days of no progress I thought it was worth a shot. Because I don't really ever leave Linux, I hadn't yet updated to the 3.1.3 OS release. I did this upgrade in lieu of the 'factory restore' step, and (after completing step 3) was delighted to find my backlight fully functional! Major kudos to Phil for locating this information.</p>
+
+<p>It's interesting to engage in wild speculation about the hardware/software details that could lead to this. Perhaps some hardware state was corrupted by a short, and the resulting value had no valid meaning for the backlight. Normal brightness adjustment operated on the value, but didn't change enough of it to make it meaningful again (perhaps bit operations on an int that was saved as much larger than it's theoretical max &ndash; only operating on the lower order bits). Part of the upgrade/restore procedure writes sane defaults into these locations, restoring functionality. Who knows.</p>
+
+<h3>Coda</h3>
+
+<p>In the intervening days between my phone's death and revival, I got to play with a Nexus One from work. I'll write a post comparing the two soon. And I'm <em>really</em> glad that I don't have to shell out for a new phone... yet.</p>
+]]>
+</content></entry><entry><title>Memory and Ruby :symbols</title><link href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id><updated>2010-03-01T21:32:32.0-08:00</updated><summary><![CDATA[
 Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be rewritten in many different ways. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the Symbol. First, compare these two lines: (1) ...]]>
 </summary><content type="html"><![CDATA[
 <p>Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be <a href='http://refactormycode.com/codes/2-ruby-simple-loop' rel='nofollow external'>rewritten in many different ways</a>. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the <a href='http://ruby-doc.org/core/classes/Symbol.html' rel='nofollow external'>Symbol</a>.</p>
@@ -44,7 +181,7 @@ puts sf.keys[0].object_id      # 86345290
 <li>Unique, high cardinality values or values that will be discarded should not be Symbols. They need to be garbage collected.</li>
 </ul>
 ]]>
-</content></entry><entry><title>Disabling Flash in Chrome, and Other Tricks</title><link href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id><updated>2010-02-25T20:48:12-08:00</updated><summary><![CDATA[
+</content></entry><entry><title>Disabling Flash in Chrome, and Other Tricks</title><link href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id><updated>2010-02-25T20:48:12.0-08:00</updated><summary><![CDATA[
 I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture: google-chrome --disable-plugins Previously I had resorted to moving libflashplayer.so or removing read access from it, but this is a much more controlled method. The are a ton of other Chrome switches that I on...]]>
 </summary><content type="html"><![CDATA[
 <p>I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture:</p>
@@ -56,7 +193,7 @@ I just learned that there is a handy switch one can pass while launching Chrome 
 
 <p>The are a ton of <a href="http://www.google.com/codesearch/p?hl=en#h0RrPvyPu-c/chrome/common/chrome_switches.cc">other Chrome switches</a> that I only found by browsing the source &ndash; good thing it's available. Among them is <code>allow-file-access-from-files</code>, which would have come in handy yesterday.</p>
 ]]>
-</content></entry><entry><title>Closures in Java, Ruby, and Duby</title><link href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id><updated>2010-02-05T23:26:57-08:00</updated><summary><![CDATA[
+</content></entry><entry><title>Closures in Java, Ruby, and Duby</title><link href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id><updated>2010-02-05T23:26:57.0-08:00</updated><summary><![CDATA[
 On Wednesday, I noticed Phil Hagelberg's Android-Duby app playground. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port iLike's Local Concerts app to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes Duby's promise to c...]]>
 </summary><content type="html"><![CDATA[
 <p>On Wednesday, I noticed Phil Hagelberg's <a href="http://github.com/technomancy/Garrett" title="Garret: A playground for Android Duby development">Android-Duby app playground</a>. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port <a href="http://www.ilike.com/mobile/concerts">iLike's <em>Local Concerts</em> app</a> to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes <a href="http://github.com/headius/duby">Duby</a>'s promise to convert Ruby-like syntax to JVM bytecode particularly enticing.</p>
@@ -140,7 +277,7 @@ run_block(&amp;make_block)
 
 <p><br style="clear:both;"/></p>
 ]]>
-</content></entry><entry><title>iPad: Falling Short of the Past</title><link href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id><updated>2010-01-30T09:51:51-08:00</updated><summary><![CDATA[
+</content></entry><entry><title>iPad: Falling Short of the Past</title><link href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id><updated>2010-01-30T09:51:51.0-08:00</updated><summary><![CDATA[
  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will inveigle unsuspecting hackers into a gloomy extinction. For the most part, however, the response has amounted to a banal whine a...]]>
 </summary><content type="html"><![CDATA[
 <p>
@@ -223,7 +360,7 @@ run_block(&amp;make_block)
   <a href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1" rel="nofollow">Ecclesiastes</a>
 </p>
 ]]>
-</content></entry><entry><title>Updating gems for Ruby 1.9</title><link href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id><updated>2010-01-27T06:41:33-08:00</updated><summary><![CDATA[
+</content></entry><entry><title>Updating gems for Ruby 1.9</title><link href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id><updated>2010-01-27T06:41:33.0-08:00</updated><summary><![CDATA[
 I recently updated two libraries for Ruby 1.9 compatibility and made them available on Gemcutter. Both of these libraries include hefty C extensions written against the 1.8 headers. After reading Evan Miller's fantastic article on how not to sort by average rating, I really wanted to apply his solution. However, I quickly r...]]>
 </summary><content type="html"><![CDATA[
 <p>I recently updated two libraries for Ruby 1.9 compatibility and made them available on <a href="http://gemcutter.org" rel="nofollow">Gemcutter</a>. Both of these libraries include hefty C extensions written against the 1.8 headers.</p>
@@ -288,7 +425,7 @@ struct RArray {
 
 <p>Now that I use these three macros instead of direct member access, these extensions are compatible with both Ruby versions. So have fun triangulating and crunching statistics in Ruby 1.9!</p>
 ]]>
-</content></entry><entry><title>Solving cryptograms in Clojure</title><link href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id><updated>2009-12-31T10:33:07-08:00</updated><summary><![CDATA[
+</content></entry><entry><title>Solving cryptograms in Clojure</title><link href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id><updated>2009-12-31T10:33:07.0-08:00</updated><summary><![CDATA[
  While working on Project Euler, I discovered Peter Norvig's elegant Sudoku solver implementation. Although the associated TDD discussion brought me much humor, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany:...]]>
 </summary><content type="html"><![CDATA[
 <p>
@@ -571,36 +708,5 @@ London Transport is running an interesting ad campaign to encourage drivers to w
 <p>What interests me most about this is the fact that it's a verbatim copy of some <a href="http://www.apa.org/monitor/apr01/blindness.html">very interesting visual cognition research</a> done in the late 90s.  Take a look at the <a href="http://viscog.beckman.uiuc.edu/grafs/demos/15.html">original video here</a> (warning: 7.5mb Java Applet).</p>
 
 <p>I found the new video <a href="http://www.treehugger.com/files/2008/03/cyclist-awareness.php">via treehugger</a>, but they make no mention of the original research.</p>
-]]>
-</content></entry><entry><title>Starbucks v. Walmart</title><link href="http://threebrothers.org/brendan/blog/starbucks-v-walmart/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-06:/brendan/blog/starbucks-v-walmart</id><updated>2008-03-06T10:40:00.0-08:00</updated><summary><![CDATA[
-Forget dividing states by political tendencies or CO2 emissions &mdash; the real question is, Starbucks or Walmart?. (via kottke.org) ...]]>
-</summary><content type="html"><![CDATA[
-<p>Forget dividing states by political tendencies or CO<sub>2</sub> emissions &mdash; the real question is, <a href="http://www.stat.columbia.edu/~cook/movabletype/archives/2008/03/starbuckswalmar.html">Starbucks or Walmart?</a>.</p>
-
-<div style="text-align:center;">
-<img src="http://threebrothers.org/brendan/blog/files/sbpc.png" alt="Starbucks per capita" />
-
-<img src="http://threebrothers.org/brendan/blog/files/wmpc.png" alt="Walmarts per capita" />
-</div>
-
-<p>(<a href="http://www.kottke.org/remainder/08/03/15187.html">via kottke.org</a>)</p>
-]]>
-</content></entry><entry><title>Bacon on Judicature</title><link href="http://threebrothers.org/brendan/blog/bacon-on-judicature/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-02-29:/brendan/blog/bacon-on-judicature</id><updated>2008-02-29T13:49:00.0-08:00</updated><summary><![CDATA[
-I recently finished reading Fracis Bacon's Essays, Civil and Moral; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive. One particular excerpt from Of Judicature struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyri...]]>
-</summary><content type="html"><![CDATA[
-<p>I recently finished reading <a href="http://www.uoregon.edu/~rbear/bacon.html">Fracis Bacon's <em>Essays, Civil and Moral</em></a>; I found these essays to span the range between insightful, enjoyable, tedious, insipid, and outright offensive.  One particular excerpt from <a href="http://www.uoregon.edu/~rbear/bacon.html#56"><em>Of Judicature</em></a> struck me as particularly insightful, and nearly prescient of today's litigious attitude towards copyright infringement and problem-solving in general:</p>
-
-<blockquote>The attendance of courts, is subject to four bad instruments. First, certain persons that are sowers of suits; which make the court swell, and the country pine. The second sort is of those, that engage courts in quarrels of jurisdiction, and are not truly <em>amici curi&aelig;</em>, but <em>parasiti curi&aelig;</em> [not friends but parasites of the court], in puffing a court up beyond her bounds, for their own scraps and advantage. The third sort, is of those that may be accounted the left hands of courts; persons that are full of nimble and sinister tricks and shifts, whereby they pervert the plain and direct courses of courts, and bring justice into oblique lines and labyrinths. And the fourth, is the poller and exacter of fees; which justifies the common resemblance of the courts of justice, to the bush whereunto, while the sheep flies for defence [sic] in weather, he is sure to lose part of his fleece.</blockquote>
-
-<p>Summarized, this amounts to:</p>
-
-<ol>
-  <li>An overabundance of lawsuits is detrimental to both the court system and the country as a whole.</li>
-  <li>There are those (the <em>parasiti curi&aelig;</em>) who seek for the court to tread beyond its boundaries for their own gain.</li>
-  <li>There are those who by confusion and trickery seek to mask and subvert justice in general.</li>
-  <li>The courts ought to be a safe haven; because of greed, however, litigation often inflicts undue burden on the party needing safety.</li>
-</ol>
-
-<p>It should be patently obvious (that pun was unintentional, but I'm enjoying it enough to leave it there) how often various reincarnations of these four points surface in today's technological landscape, and I would assert that all four are equally detrimental today as they were in the 1600s.</p>
 ]]>
 </content></entry></feed>

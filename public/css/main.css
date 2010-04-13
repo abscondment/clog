@@ -27,9 +27,11 @@ a {color:#00d;}
 a:visited {color:#666;}
 a:hover {color:#000;}
 
+acronym { border-bottom:1px dotted #333; cursor: help; }
+
 .envelope {
   margin:0;
-  padding:1em;
+  padding:1.5em 2em;
   border:0.5em solid #00a000;
   top:0em;
   bottom:0em;
@@ -39,8 +41,8 @@ a:hover {color:#000;}
 }
 
 .header {
-  margin:0 0 1.5em 14.5em;
-  padding:0 0 0 0;
+  margin:0 0 0.5em 13em;
+  padding:0 0 0.5em 0;
   font-weight:bold;
   border-bottom:1px solid #999;
 }
@@ -84,14 +86,17 @@ ul.menu li a:hover {
 .lbar {
   float:left;
   width:13em;
-  border-right:0.5em solid #006000;
   min-height:25em;
 }
 
 .content {
-  margin-left:14.5em;
-  text-align:justify;
+  margin:0 0 0 13em;
+  width:37em;
+  line-height:1.4em;         
 }
+.wide { width:auto; }
+
+.header, .content { font-size:1.1em; }
 
 .content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
 
