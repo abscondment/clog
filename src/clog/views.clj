@@ -5,9 +5,8 @@
 
 (defn blog-post [post previous-post next-post]
   (html
-   "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
-   \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-   [:html {:xmlns "http://www.w3.org/1999/xhtml"}
+   "<!DOCTYPE html>\n"
+   [:html
     [:head
      [:meta {:http-equiv "Content-Type" :content "text/html; charset=utf-8"}]
      [:link {:rel "stylesheet"
@@ -15,6 +14,7 @@
              :href "/brendan/css/main.css"}]
      [:title (post :title) " - Brendan Ribera"]]
     [:body
+     {:onload "setTimeout(\"deferredLoad();\", 5);"}
      [:div {:class "envelope"}
       (lbar)
       (header (post :title))
@@ -32,22 +32,18 @@
           [:div {:style "float:right;"}
            (link-to-post next-post) " &raquo;"])
         [:br {:style "clear:both;"}]]
-       [:script {:type "text/javascript"
-                 :src "http://disqus.com/forums/tbdo-brendan/embed.js"}]
        [:noscript
         [:p
          [:a
           {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"}
           "View the discussion thread."]]]]
       (footer (take 4 (post :created_at)))]
-     [:script {:type "text/javascript" :src "/brendan/js/comments.js"}]
-     google-analytics]]))
+     [:script {:type "text/javascript" :src "/brendan/js/blog.js"}]]]))
 
 (defn blog-index [posts]
   (html
-   "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"
-   \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-   [:html {:xmlns "http://www.w3.org/1999/xhtml"}
+   "<!DOCTYPE html>\n"
+   [:html
     [:head
      ; verification
      [:meta {:name "blogcatalog" :content "9BC9690896"}]
