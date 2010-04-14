@@ -27,7 +27,7 @@ a {color:#00d;}
 a:visited {color:#666;}
 a:hover {color:#000;}
 
-acronym { border-bottom:1px dotted #333; cursor: help; }
+abbr, acronym { border-bottom:1px dotted #333; cursor: help; }
 
 .envelope {
   margin:0;

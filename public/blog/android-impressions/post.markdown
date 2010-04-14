@@ -1,5 +1,5 @@
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
+  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' alt='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
   <br/>
   <em>Fitter, happier, more pastries.</em>
 </div>
@@ -14,7 +14,7 @@ Negative:
 
  * Only 4.5GB of space by default (512MB flash + 4GB SD)
  * Generally poorer battery performance than the iPhone
- * Five buttons &ndash; <acronym title='Keep it simple, stupid!'>KISS</acronym>
+ * Five buttons &ndash; <abbr title='Keep it simple, stupid!'>KISS</abbr>
 
 Positive:
 
@@ -42,7 +42,7 @@ Positive:
  * Apps are cloud-oriented; no more syncing through slow, clunky iTunes
 
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
+  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' alt='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
   <br/>
   <em>Look at those wee, beady buttons.</em>
 </div>
@@ -68,14 +68,14 @@ People tout simplicity as being the aspect of Apple's design that makes it super
 ## For consumers and developers
 
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' />
+  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' alt='Babbage Analytical Engine' />
   <br/>
   <em>The Apple Analytical Engine<br />only accepts papyrus punch cards.</em>
 </div>
 
 I've spent a bit of time talking about what I perceive to be the biggest weakness in the Android platform. This section is *much* friendlier towards Android.
 
-Android is a platform for hackers. It's open source, and can be hacked using any <acronym title='Java Virtual Machine'>JVM</acronym> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the [approved tools/languages](http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler) , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.
+Android is a platform for hackers. It's open source, and can be hacked using any <abbr title='Java Virtual Machine'>JVM</abbr> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the [approved tools/languages](http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler) , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.
 
 I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things *for Apple*. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T &ndash; we want competition to force continued innovation.
 

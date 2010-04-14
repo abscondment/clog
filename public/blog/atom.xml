@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-04-13T00:30:51-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-04-14T16:01:17-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
  Fitter, happier, more pastries. Thanks to my latest aquatic shenanigans, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone. Product quality Hardware Negative: Only 4.5GB of space by default (512MB flash + 4GB SD) Ge...]]>
 </summary><content type="html"><![CDATA[
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
+  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' alt='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
   <br/>
   <em>Fitter, happier, more pastries.</em>
 </div>
@@ -18,7 +18,7 @@
 <ul>
 <li>Only 4.5GB of space by default (512MB flash + 4GB SD)</li>
 <li>Generally poorer battery performance than the iPhone</li>
-<li>Five buttons &ndash; <acronym title='Keep it simple, stupid!'>KISS</acronym></li>
+<li>Five buttons &ndash; <abbr title='Keep it simple, stupid!'>KISS</abbr></li>
 </ul>
 
 <p>Positive:</p>
@@ -53,7 +53,7 @@
 </ul>
 
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
+  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' alt='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
   <br/>
   <em>Look at those wee, beady buttons.</em>
 </div>
@@ -85,14 +85,14 @@
 <h2>For consumers and developers</h2>
 
 <div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' />
+  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' alt='Babbage Analytical Engine' />
   <br/>
   <em>The Apple Analytical Engine<br />only accepts papyrus punch cards.</em>
 </div>
 
 <p>I've spent a bit of time talking about what I perceive to be the biggest weakness in the Android platform. This section is <em>much</em> friendlier towards Android.</p>
 
-<p>Android is a platform for hackers. It's open source, and can be hacked using any <acronym title='Java Virtual Machine'>JVM</acronym> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.</p>
+<p>Android is a platform for hackers. It's open source, and can be hacked using any <abbr title='Java Virtual Machine'>JVM</abbr> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.</p>
 
 <p>I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things <em>for Apple</em>. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T &ndash; we want competition to force continued innovation.</p>
 
