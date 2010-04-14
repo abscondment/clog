@@ -18,6 +18,7 @@
      [:div {:class "envelope"}
       (lbar)
       (header (post :title))
+      "\n"
       [:div {:class "content"}
        [:h1 (post :title)]
        (first (post :body))
