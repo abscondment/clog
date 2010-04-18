@@ -1,24 +1,9 @@
-(ns clog
+(ns clog.core
   (:use [clojure.contrib.duck-streams]
         [clog config db views])
   (:gen-class))
 
 (defn -main [& args]
-  
-  (comment
-    (spit "./public/blog/posts.yaml"
-          (loop [yaml "---\n"
-                 [post & more-posts :as posts] (all-posts)]
-            (if (empty? posts) yaml
-                (let [_ (spit (str "./public/blog/" (post :url) ".markdown")
-                              (first (post :body)))]
-                  (recur
-                   (str yaml
-                        (post :url) ":\n"
-                        "  title: " (post :title) "\n"
-                        "  created_at: " (post :created_at) "\n")
-                   more-posts))))))
-  
   (let [posts
         (loop [return-posts (list)
                [post & more-posts :as posts] (all-posts)]
@@ -47,4 +32,6 @@
       (spit "./public/index.html" (blog-index posts))
       (spit "./public/sitemap.txt" (sitemap-txt posts))
       (spit "./public/sitemap.xml" (sitemap-xml posts))
-      (spit "./public/blog/atom.xml" (atom-xml (take 20 posts))))))
+      (spit "./public/blog/atom.xml" (atom-xml (take 20 posts)))
+      (shutdown-agents))))
+

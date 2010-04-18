@@ -14,14 +14,14 @@
              :href "/brendan/css/main.css"}]
      [:title (post :title) " - Brendan Ribera"]]
     [:body
-     {:onload "setTimeout(\"deferredLoad();\", 5);"}
+     {:onload "setTimeout('deferredLoad();', 5);"}
      [:div {:class "envelope"}
       (lbar)
       (header (post :title))
       "\n"
       [:div {:class "content"}
        [:h1 (post :title)]
-       (first (post :body))
+       @(post :body)
        [:h4 (post :created_at)]
        [:br]
        [:div {:id "disqus_thread"}]
@@ -109,8 +109,8 @@
          "<![CDATA[\n"
          (take 325
                (re-gsub #"[\s]+" " "
-                        (re-gsub #"(</?[^>]*>)" "" (first (post :body))))) "...]]>\n"]
-        [:content {:type "html"} "<![CDATA[\n" (first (post :body)) "]]>\n"]])
+                        (re-gsub #"(</?[^>]*>)" "" @(post :body)))) "...]]>\n"]
+        [:content {:type "html"} "<![CDATA[\n" @(post :body) "]]>\n"]])
      posts)]))
 
 

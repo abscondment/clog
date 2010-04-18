@@ -6,4 +6,4 @@ if [ -n "${CLASSPATH:-}" ]; then
 else
     export CLASSPATH="${EXT%:}"
 fi
-java clog
+java clog.core

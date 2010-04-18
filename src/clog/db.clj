@@ -1,5 +1,6 @@
 (ns clog.db
-  (:use [clojure.contrib.duck-streams])
+  (:use [clojure.contrib.io]
+        [clj-yaml])
   (:import
    (java.io FileNotFoundException)
    (java.security NoSuchAlgorithmException MessageDigest)
@@ -17,7 +18,6 @@
      (catch NoSuchAlgorithmException e
        (throw (new RuntimeException e))))))
 
-
 (defn all-posts []
   (let [markdown-processor (new com.petebevin.markdown.MarkdownProcessor)]
     (reverse
@@ -26,8 +26,8 @@
       (filter
        not-empty
        (map
-        (fn [yaml]
-          (let [url (apply str (butlast (first yaml)))
+        (fn [post]
+          (let [url (:url post)
                 exisitng-md5
                 (try
                  (slurp (str "./public/blog/" url "/post.markdown.md5sum"))
@@ -35,13 +35,10 @@
                 body (slurp (str "./public/blog/" url "/post.markdown"))
                 new-md5 (md5-sum body)]
             (if (not (empty? body))
-              {:url url
-               :title (apply str (drop 9 (fnext yaml)))
-               :created_at (apply str (drop 14 (last yaml)))
-               :body (lazy-seq (list (.. markdown-processor (markdown body))))
-               :md5 new-md5
-               :updated (not= exisitng-md5 new-md5)})))
-        (partition
-         3
-         (rest
-          (read-lines "./public/blog/posts.yaml")))))))))
+              (merge
+               post
+               {:body (delay (.. markdown-processor (markdown body)))
+                :md5 new-md5
+                :updated (not= exisitng-md5 new-md5)}))))
+        (parse-string
+         (slurp "./public/blog/posts.yaml"))))))))
