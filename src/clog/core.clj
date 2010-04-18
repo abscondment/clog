@@ -1,37 +1,36 @@
 (ns clog.core
-  (:use [clojure.contrib.duck-streams]
+  (:use [clojure.contrib.io :only [spit file]]
         [clog config db views])
   (:gen-class))
 
+(defn update [post prev next]
+  (if (or (:updated post)
+          (:updated prev)
+          (:updated next))
+    (let [url (post :url)
+          dir (java.io.File. (str "./public/blog/" url))]
+      (do
+        (println "Updating" url)
+        (if (not (.exists dir)) (.mkdir dir))
+        (spit (file "public" "blog" url "index.html")
+              (blog-post post prev next))
+        (spit (file "public" "blog" url "post.markdown.md5sum")
+              (post :md5))))))
+
+(defn update-posts [to-update]
+  (loop [return-posts (list)
+         [post & more-posts :as posts] to-update]
+    (if (empty? posts) (reverse return-posts)
+        (do
+          (update post (first more-posts) (first return-posts))
+          (recur (conj return-posts post) more-posts)))))
+
 (defn -main [& args]
-  (let [posts
-        (loop [return-posts (list)
-               [post & more-posts :as posts] (all-posts)]
-          (if (empty? posts) (reverse return-posts)
-              (let [updated (or (post :updated)
-                                (and (first return-posts)
-                                     ((first return-posts) :updated))
-                                (and (first more-posts)
-                                     ((first more-posts) :updated)))
-                    _ (if updated (println "Updating" (post :url)))
-                    _ (if updated
-                        (let [dir (java.io.File. (str "./public/blog/" (post :url)))
-                              _ (if (not (.exists dir)) (.mkdir dir))
-                              _ (spit (str "./public/blog/"
-                                           (post :url)
-                                           "/index.html")
-                                      (blog-post post
-                                                 (first more-posts)
-                                                 (first return-posts)))
-                              _ (spit (str "./public/blog/"
-                                           (post :url)
-                                           "/post.markdown.md5sum")
-                                      (post :md5))]))]
-                (recur (conj return-posts post) more-posts))))]
+  (let [posts (update-posts (all-posts))]
     (do
-      (spit "./public/index.html" (blog-index posts))
-      (spit "./public/sitemap.txt" (sitemap-txt posts))
-      (spit "./public/sitemap.xml" (sitemap-xml posts))
-      (spit "./public/blog/atom.xml" (atom-xml (take 20 posts)))
+      (spit (file "public" "index.html") (blog-index posts))
+      (spit (file "public" "sitemap.txt") (sitemap-txt posts))
+      (spit (file "public" "sitemap.xml") (sitemap-xml posts))
+      (spit (file "public" "blog" "atom.xml") (atom-xml (take 20 posts)))
       (shutdown-agents))))
 

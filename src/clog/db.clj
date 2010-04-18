@@ -1,6 +1,6 @@
 (ns clog.db
-  (:use [clojure.contrib.io]
-        [clj-yaml])
+  (:use [clojure.contrib.io :only [file]]
+        [clj-yaml :only [parse-string]])
   (:import
    (java.io FileNotFoundException)
    (java.security NoSuchAlgorithmException MessageDigest)
@@ -18,27 +18,25 @@
      (catch NoSuchAlgorithmException e
        (throw (new RuntimeException e))))))
 
+(defn existing-md5-for [url]
+  (try
+   (slurp (str (file "public" "blog" url "post.markdown.md5sum")))
+   (catch FileNotFoundException e "")))
+
 (defn all-posts []
   (let [markdown-processor (new com.petebevin.markdown.MarkdownProcessor)]
     (reverse
-     (sort-by
-      :created_at
-      (filter
-       not-empty
+     (sort-by :created_at
+      (filter not-empty
        (map
         (fn [post]
-          (let [url (:url post)
-                exisitng-md5
-                (try
-                 (slurp (str "./public/blog/" url "/post.markdown.md5sum"))
-                 (catch FileNotFoundException e ""))
-                body (slurp (str "./public/blog/" url "/post.markdown"))
+          (let [body (slurp (str (file "public" "blog" (post :url) "post.markdown")))
                 new-md5 (md5-sum body)]
             (if (not (empty? body))
-              (merge
-               post
-               {:body (delay (.. markdown-processor (markdown body)))
-                :md5 new-md5
-                :updated (not= exisitng-md5 new-md5)}))))
+              (merge post
+                     {:body (delay (.. markdown-processor (markdown body)))
+                      :md5 new-md5
+                      :updated (not= (existing-md5-for (post :url))
+                                     new-md5)}))))
         (parse-string
-         (slurp "./public/blog/posts.yaml"))))))))
+         (slurp (str (file "public" "blog" "posts.yaml"))))))))))
