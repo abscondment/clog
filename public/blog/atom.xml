@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:24:13-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:31:30-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
 Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
 </summary><content type="html"><![CDATA[
 <h2>Preamble</h2>
@@ -46,7 +46,7 @@ WALL_E/
 
 <p>These files are pretty boring, but they can be concatenated since they're basically just MPEG streams. My initial approach was to cat them together and pipe the result to ffmpeg, which took up no additional disk space and had the virtue of lazily deferring IO while the encoder churned.</p>
 
-<pre><code>cat *.VOB | ffmpeg -y -i - *...*
+<pre><code>cat *.VOB | ffmpeg -y -i - &lt;em&gt;...&lt;/em&gt;
 </code></pre>
 
 <p>As nice as this plan was, I couldn't get it to work. My audio stream would disappear, and I couldn't figure out how to tell ffmpeg that it existed. The end result was beautiful video with no sound.</p>

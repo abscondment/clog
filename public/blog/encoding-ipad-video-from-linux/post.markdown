@@ -40,7 +40,7 @@ The first step is to figure out exactly what we want to extract, and then to gra
 
 These files are pretty boring, but they can be concatenated since they're basically just MPEG streams. My initial approach was to cat them together and pipe the result to ffmpeg, which took up no additional disk space and had the virtue of lazily deferring IO while the encoder churned.
 
-    cat *.VOB | ffmpeg -y -i - *...*
+    cat *.VOB | ffmpeg -y -i - [...]
     
 As nice as this plan was, I couldn't get it to work. My audio stream would disappear, and I couldn't figure out how to tell ffmpeg that it existed. The end result was beautiful video with no sound.
 
