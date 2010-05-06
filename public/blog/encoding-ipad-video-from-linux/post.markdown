@@ -59,7 +59,7 @@ Follow this [helpful tutorial to build ffmpeg](http://ubuntuforums.org/showpost.
 
 The [iPad specifications](http://www.apple.com/ipad/specs/) indicate that it can do h.264 video up to 720p at 30fps with AAC sound at 160Kbps, 48kHz. To achieve this, I did a 2-pass encoding based on an [encoding guide](http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/) and a list of [ffmpeg cheats](http://rodrigopolo.com/ffmpeg/cheats.html). I also did a lot of trial and error encoding, and my most pertinent piece of advice is this: test on a small VOB first. Fail quickly.
 
-<code style='display:block;padding:1em 2em;background-color:#efefef;border-color:#ddd;border-style: solid;border-width: 1px 0px;'>
+<code class='codeBlock'>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
   <br/><br/>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0:0.0 -map 0.2:0.1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4

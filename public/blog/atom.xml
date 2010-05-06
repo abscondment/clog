@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:31:30-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:37:38-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
 Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
 </summary><content type="html"><![CDATA[
 <h2>Preamble</h2>
@@ -46,7 +46,7 @@ WALL_E/
 
 <p>These files are pretty boring, but they can be concatenated since they're basically just MPEG streams. My initial approach was to cat them together and pipe the result to ffmpeg, which took up no additional disk space and had the virtue of lazily deferring IO while the encoder churned.</p>
 
-<pre><code>cat *.VOB | ffmpeg -y -i - &lt;em&gt;...&lt;/em&gt;
+<pre><code>cat *.VOB | ffmpeg -y -i - [...]
 </code></pre>
 
 <p>As nice as this plan was, I couldn't get it to work. My audio stream would disappear, and I couldn't figure out how to tell ffmpeg that it existed. The end result was beautiful video with no sound.</p>
@@ -67,7 +67,7 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 
 <p>The <a href="http://www.apple.com/ipad/specs/">iPad specifications</a> indicate that it can do h.264 video up to 720p at 30fps with AAC sound at 160Kbps, 48kHz. To achieve this, I did a 2-pass encoding based on an <a href="http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/">encoding guide</a> and a list of <a href="http://rodrigopolo.com/ffmpeg/cheats.html">ffmpeg cheats</a>. I also did a lot of trial and error encoding, and my most pertinent piece of advice is this: test on a small VOB first. Fail quickly.</p>
 
-<p><code style='display:block;padding:1em 2em;background-color:#efefef;border-color:#ddd;border-style: solid;border-width: 1px 0px;'>
+<p><code class='codeBlock'>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
   <br/><br/>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0:0.0 -map 0.2:0.1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
