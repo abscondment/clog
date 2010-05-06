@@ -72,6 +72,7 @@ ul.menu li a {
   text-align:center;
   text-decoration:none;
   text-transform:capitalize;
+  letter-spacing: 0.15em;
 
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -99,6 +100,7 @@ ul.menu li a:hover {
 .header, .content { font-size:1.1em; }
 
 .content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
+.content .borderedImage { border:1px solid #666; }
 
 ul.list { margin-top:0; }
 ul.list li { margin-bottom:5px; }

@@ -1,4 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-04-14T16:01:17-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:24:13-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
+Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
+</summary><content type="html"><![CDATA[
+<h2>Preamble</h2>
+
+<p>I hesitate to publish these instructions because <a href="http://www.osnews.com/story/23236/Why_Our_Civilization_s_Video_Art_and_Culture_is_Threatened_by_the_MPEG-LA">h.264 is patent-encumbered and dangerous</a>, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion.</p>
+
+<h2>The Goal</h2>
+
+<p>I was given an iPad. We own several DVDs that my son Ezra loves to watch, and I would like to let him watch them on the iPad. I selected <em>WALL&bull;E</em> and tried to use <code>dvd::rip</code> (via Ubuntu's vanilla <code>dvdrip</code> package), but it failed miserably. It 'read' 100 titles, each of which really turned out to be the movie with its chapters in the wrong order.</p>
+
+<h2>World Domination in Four Easy Steps</h2>
+
+<p>Because the point-and-click method had failed, I turned to the command line. I never should have left, really. Here's the solution I found after much digging and trial-and-error.</p>
+
+<ul>
+<li>Extract the VOBs</li>
+<li>Concatenate the VOBs</li>
+<li>Build a better ffmpeg</li>
+<li>Encode!</li>
+</ul>
+
+<h3>Extract the VOBs</h3>
+
+<p>The first step is to figure out exactly what we want to extract, and then to grab it. I used <code>dvdbackup</code> for this.</p>
+
+<pre><code># Show info about this disk
+brendan@ishmael:~/Videos$ dvdbackup -I | less
+# Output indicated that the main Title Set is 3
+brendan@ishmael:~/Videos$ dvdbackup -T 3
+brendan@ishmael:~/Videos$ tree -s WALL_E/
+WALL_E/
+`-- [       4096]  VIDEO_TS
+    |-- [     163840]  VTS_03_0.BUP
+    |-- [     163840]  VTS_03_0.IFO
+    |-- [  170770432]  VTS_03_0.VOB
+    |-- [ 1073739776]  VTS_03_1.VOB
+    |-- [ 1073739776]  VTS_03_2.VOB
+    |-- [ 1073739776]  VTS_03_3.VOB
+    |-- [ 1073739776]  VTS_03_4.VOB
+    |-- [ 1073739776]  VTS_03_5.VOB
+    `-- [  111591424]  VTS_03_6.VOB
+</code></pre>
+
+<h3>Concatenate the VOBs</h3>
+
+<p>These files are pretty boring, but they can be concatenated since they're basically just MPEG streams. My initial approach was to cat them together and pipe the result to ffmpeg, which took up no additional disk space and had the virtue of lazily deferring IO while the encoder churned.</p>
+
+<pre><code>cat *.VOB | ffmpeg -y -i - *...*
+</code></pre>
+
+<p>As nice as this plan was, I couldn't get it to work. My audio stream would disappear, and I couldn't figure out how to tell ffmpeg that it existed. The end result was beautiful video with no sound.</p>
+
+<p>Instead, I piped them to one big file and operated on that. I also omitted the 0 file, since it turned out to be the DVD menu animations.</p>
+
+<pre><code>rm VTS_03_0.VOB
+for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
+</code></pre>
+
+<h3>Build a better ffmpeg</h3>
+
+<p>Because my goal was to use this on my iPad, I had rather nonstandard requirements: h.264 video and AAC audio with an MPEG-4 container. As I mentioned before, these formats are far from ideal &ndash; use OGG/Theora when you can. Presumably because they are non-free, the default Ubuntu ffmpeg package doesn't include these encoders. You'll need to replace it.</p>
+
+<p>Follow this <a href="http://ubuntuforums.org/showpost.php?p=8345112&amp;postcount=636">helpful tutorial to build ffmpeg</a> and various encoders from source. I enabled all of the options.</p>
+
+<h3>Encode!</h3>
+
+<p>The <a href="http://www.apple.com/ipad/specs/">iPad specifications</a> indicate that it can do h.264 video up to 720p at 30fps with AAC sound at 160Kbps, 48kHz. To achieve this, I did a 2-pass encoding based on an <a href="http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/">encoding guide</a> and a list of <a href="http://rodrigopolo.com/ffmpeg/cheats.html">ffmpeg cheats</a>. I also did a lot of trial and error encoding, and my most pertinent piece of advice is this: test on a small VOB first. Fail quickly.</p>
+
+<p><code style='display:block;padding:1em 2em;background-color:#efefef;border-color:#ddd;border-style: solid;border-width: 1px 0px;'>
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
+  <br/><br/>
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0:0.0 -map 0.2:0.1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
+</code></p>
+
+<p>Outside of the typical ffmpeg files/encoders/rates, there are a few interesting settings:</p>
+
+<ul>
+<li><strong>-r 30000/1001</strong>: set the frame rate to ~30fps</li>
+<li><strong>-pass &lt;N&gt;</strong>: indicate which pass we're doing</li>
+<li><strong>-vpre &lt;value&gt;</strong>: indicate which libx264 preset file to apply</li>
+<li><strong>-threads 0</strong>: let the encoder choose how many threads to use based on your hardware. Set this to utilize multicore/proc.</li>
+<li><strong>-an</strong>: disable audio, since the first pass only looks at video</li>
+<li><strong>-f mp4 /dev/null</strong>: set type to mp4 and output to /dev/null, since the first pass stores its statistics in secondary files and the actual video output should be thrown away.</li>
+<li><strong>-map 0.0:0.0 -map 0.2:0.1</strong>: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of <code>ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac</code> (extracting just audio) until I found the right stream.</li>
+</ul>
+
+<p>This produces a fairly high quality DVD rip that should be iPad compatible. Unfortunately, you'll need to leave the wonderful world of Linux to actually put the file on your iPad. Don't you just feel dirty doing this? I know I do. In lieu of that, you could host it on a local webserver. I can stream this bitrate over WiFi via nginx perfectly well.</p>
+
+<h2>Closing Thoughts</h2>
+
+<p>The file I produced is currently not iPhone compatible. From what I can tell, the iPhone can only handle <a href="http://www.ilounge.com/index.php/articles/comments/the-complete-guide-to-ipod-video-formats-and-display-resolutions/">640x480 video at 1.5mbps</a>. You could do one of three things: tune the ffmpeg parameters to produce a video that'll work on both, produce one separate file for each device, or do what I did and eschew the the low resolution option.</p>
+
+<p>I'd like to figure out how to do this encoding on the fly. <code>hdparm</code> says my DVD transfer speeds clock in around 2-3MB/sec, which should stay ahead of the CPU during encoding. It would be wonderful if the only additional disk space taken up by this process were for intermediate first-pass statistics and the final encoded video. As things happened, I copied the files once from CD and again to concatenate them. That's less than ideal.</p>
+
+<p>I'd also like to showcase an open codec like OGG/Theora, since I strongly believe in that cause. Doing that now can be an exercise for the reader, and it shouldn't be too hard; it's just a matter of finding the correct ffmpeg parameters.</p>
+]]>
+</content></entry><entry><title>Removing the Cast</title><link href="http://threebrothers.org/brendan/blog/removing-the-cast/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-23:/brendan/blog/removing-the-cast</id><updated>2010-04-23T22:20:08.0-08:00</updated><summary><![CDATA[
+Three months ago, I broke my right hand while biking to work. I made a questionable decision involving slippery metal grating on the University Bridge, and found myself doing a not-so-graceful, 20 MPH handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand. My arm was in a cast for a...]]>
+</summary><content type="html"><![CDATA[
+<p>Three months ago, I broke my right hand while biking to work. I made a questionable decision involving <a href="http://www.historylink.org/index.cfm?DisplayPage=output.cfm&amp;file_id=3139">slippery metal grating on the University Bridge</a>, and found myself doing a not-so-graceful, 20 <abbr title='Miles-per-hour'>MPH</abbr> handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand.</p>
+
+<p>My arm was in a cast for approximately five weeks. The nature of this situation was, as you can imagine, <em>really</em> obnoxious. The aftermath of cast-wearing proved equally obnoxious: with nothing to do, muscles atrophy; joints and tendons stiffen. I found myself training to make a fist or to be strong enough to chop carrots. It was five more weeks before my wrist and hand were strong enough for me to ride to work.</p>
+
+<div class='rightImage'>
+  <img src='http://threebrothers.org/brendan/images/broken-hand-sketch.png' alt='Me with a cast' />
+</div>
+
+<p>In these weeks of recovery, I realized just how much <em>immobilization</em> had contributed to my weakened state. Small, anonymous actions are constantly reinforcing our ability to move. Small, frustrating exercises littered the path back to full recovery. As I rode the bus home yet again (while practicing flexion exercises that made me look insane), this struck me: Your work environment can be a cast, or it can be a bicycle.</p>
+
+<p>Part of what I love about small companies is that they make the bicycle the norm. There's little tolerance for inactivity or wasted motion &ndash; you must be habitually productive, or you fall off. Biking to work doesn't only get you there; it makes you stronger and fitter, too. The startups that I've worked with have all had cultures that reinforce, stretch, and strengthen their employees.</p>
+
+<p>Autonomy, creativity, and low-friction communication. My goal is to always work in an environment like this. And I never want to <a href="http://www.wetherobots.com/2008/06/16/meeting-time/">feel like this</a> again.</p>
+
+<p>Challenge yourself &ndash; learn a new <a href="http://clojure.org">language</a>, a new <a href="http://lucene.apache.org/mahout/taste.html">technology</a>, or a new <a href="http://projecteuler.net/index.php?section=problems&amp;id=66">mathematical concept</a>. Think about <a href="http://www.paulgraham.com/organic.html">seeing the problems around you</a>. Get on the bicycle and ride. As for me, I'm excited to now be doing this <a href="http://www.urbanspoon.com/about">at Urbanspoon</a>.</p>
+]]>
+</content></entry><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
  Fitter, happier, more pastries. Thanks to my latest aquatic shenanigans, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone. Product quality Hardware Negative: Only 4.5GB of space by default (512MB flash + 4GB SD) Ge...]]>
 </summary><content type="html"><![CDATA[
 <div class='rightImage'>
@@ -687,26 +803,5 @@ Herman Melville is my favorite author, hands down. I could describe his writing 
 <p><img src="http://threebrothers.org/brendan/blog/files/reason2.jpg" alt="Reason #2" /></p>
 
 <p><a href="http://jeskybera.blogspot.com">Jessica</a> spoils me.</p>
-]]>
-</content></entry><entry><title>Cool (and practical) idea: Consistent Hashing</title><link href="http://threebrothers.org/brendan/blog/cool-and-practical-idea-consistent-hashing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-18:/brendan/blog/cool-and-practical-idea-consistent-hashing</id><updated>2008-03-18T11:14:00.0-08:00</updated><summary><![CDATA[
-The last few days have thrown a deluge of posts about applications of consistent hashing into my path. Enough so that I broke down to read one, then another, and then a third. I liked the way that third article read the most, so I decided to link to it a little more prominently: read on to discover what consistent hashing i...]]>
-</summary><content type="html"><![CDATA[
-<p>The last few days have thrown a <a href="http://highscalability.com/paper-consistent-hashing-and-random-trees-distributed-caching-protocols-relieving-hot-spots-world-wi">deluge of posts about applications of consistent hashing</a> into my path. Enough so that I broke down to read <a href="http://citeseer.ist.psu.edu/karger97consistent.html">one</a>, then <a href="http://www.lexemetech.com/2007/11/consistent-hashing.html">another</a>, and then a third.</p>
-
-<p>I liked the way that third article read the most, so I decided to link to it a little more prominently:
-read on to discover <a href="http://www.spiteful.com/2008/03/17/programmers-toolbox-part-3-consistent-hashing/">what consistent hashing is and why your caching layer should use it</a>.  Some choice bits:</p>
-
-<blockquote><p><em>Let's say you're a hot startup and your database is starting to slow down. You decide to cache some results so that you can render web pages more quickly.  [You might] end up using what is known as the na&iuml;ve solution: put your N server IPs in an array and pick one using key % N.<br/>[...]<br/>[As] soon as you add a server and change N, most of your cache will become invalid. Your databases will wail and gnash their teeth as practically everything has to be pulled out of the DB and stuck back into the cache. If you've got a popular site, what this really means is that someone is going to have to wait until 3am to add servers because that is the only time you can handle having a busted cache.</em></p><p>And...</p><p><em>If you are building a big system, you really need to consider what happens when machines fail. If the answer is "we crush the databases," congratulations: you will get to observe a cascading failure. I love this stuff, so hearing about cascading failures makes me smile. But it won't have the same effect on your users.</em></p></blockquote>
-]]>
-</content></entry><entry><title>Visual Cognition and Bicycling</title><link href="http://threebrothers.org/brendan/blog/visual-cognition-and-bicycling/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-12:/brendan/blog/visual-cognition-and-bicycling</id><updated>2008-03-12T13:46:00.0-08:00</updated><summary><![CDATA[
-London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists. What interests me most about this is the fact that it's a verbatim copy of some very interesting visual cognition research done in the late 90s. Take a look at the original video here (warning: 7.5mb Java Applet). I foun...]]>
-</summary><content type="html"><![CDATA[
-<p>London Transport is running an interesting ad campaign to encourage drivers to watch out for bicyclists.</p>
-
-<div style="text-align:center;"><object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/47LCLoidJh4&rel=1&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/47LCLoidJh4&rel=1&border=0" type="application/x-shockwave-flash" wmode="transparent"width="425" height="355"></embed></object></div>
-
-<p>What interests me most about this is the fact that it's a verbatim copy of some <a href="http://www.apa.org/monitor/apr01/blindness.html">very interesting visual cognition research</a> done in the late 90s.  Take a look at the <a href="http://viscog.beckman.uiuc.edu/grafs/demos/15.html">original video here</a> (warning: 7.5mb Java Applet).</p>
-
-<p>I found the new video <a href="http://www.treehugger.com/files/2008/03/cyclist-awareness.php">via treehugger</a>, but they make no mention of the original research.</p>
 ]]>
 </content></entry></feed>

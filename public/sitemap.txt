@@ -1,6 +1,8 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/
+http://threebrothers.org/brendan/blog/removing-the-cast/
 http://threebrothers.org/brendan/blog/android-impressions/
 http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/
 http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/
