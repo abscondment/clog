@@ -1,6 +1,10 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/
+http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/
+http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/
+http://threebrothers.org/brendan/blog/the-birth-of-ivo-clark-ribera/
 http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/
 http://threebrothers.org/brendan/blog/removing-the-cast/
 http://threebrothers.org/brendan/blog/android-impressions/

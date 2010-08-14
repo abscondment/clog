@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-05-06T15:37:38-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-08-09T23:46:17-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>This Week's Links</title><link href="http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-18:/brendan/blog/this-weeks-links-2010-06-18</id><updated>2010-06-18T09:27:15.0-08:00</updated><summary><![CDATA[
+Math Moving Remy in Hardware: Pixar's Use of Harmonic Functions Cosines and correlation Software Sed One-Liners Explained You're Doing It Wrong Startups Getting a Divorce from a VC Your company has a knowledge debt problem ...]]>
+</summary><content type="html"><![CDATA[
+<h3>Math</h3>
+
+<ul>
+<li><a href="http://www1.ams.org/samplings/feature-column/fcarc-harmonic">Moving Remy in Hardware: Pixar's Use of Harmonic Functions</a></li>
+<li><a href="http://www.johndcook.com/blog/2010/06/17/covariance-and-law-of-cosines/">Cosines and correlation</a></li>
+</ul>
+
+<h3>Software</h3>
+
+<ul>
+<li><a href="http://www.catonmat.net/series/sed-one-liners-explained">Sed One-Liners Explained</a></li>
+<li><a href="http://queue.acm.org/detail.cfm?id=1814327">You're Doing It Wrong</a></li>
+</ul>
+
+<h3>Startups</h3>
+
+<ul>
+<li><a href="http://justanentrepreneur.com/?p=32">Getting a Divorce from a VC</a></li>
+<li><a href="http://nathanmarz.com/blog/knowledge-debt/">Your company has a knowledge debt problem</a></li>
+</ul>
+]]>
+</content></entry><entry><title>Cleaning up with Some Shell Commands</title><link href="http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-08:/brendan/blog/cleaning-up-with-some-shell-commands</id><updated>2010-06-08T11:25:13.0-08:00</updated><summary><![CDATA[
+Today, I encountered an interesting problem when syncing my music library between two different computers. Whenever I buy a CD (and yes, I still buy CDs on occasion &mdash; albeit ones that are used or heavily discounted), I rip it into FLAC. But sometimes, I'll have ripped an MP3 version of the same album on a different co...]]>
+</summary><content type="html"><![CDATA[
+<p>Today, I encountered an interesting problem when syncing my music library
+between two different computers. Whenever I buy a CD (and yes, I still
+buy CDs on occasion &mdash; albeit ones that are used or heavily
+discounted), I rip it into <a href="http://flac.sourceforge.net/">FLAC</a>. But
+sometimes, I'll have ripped an MP3 version of the same album on a
+different computer. Merging the differing libraries fills my main
+music repository with FLAC and MP3 versions of the same songs, which
+is not exactly what I want. I'd much rather throw away the lower
+bitrate files when a lossless one exits.</p>
+
+<p>My solution is for the general form of "given a directory full of
+files matching pattern X, delete files matching pattern Y", although
+it will require parameter tweaking to be applied outside of the
+context of my music library.</p>
+
+<pre><code>find . -name '*.flac' | cut -d"/" -f 1-3 | uniq | while read line; do
+  echo rm -f "$line/"*.mp3
+done
+</code></pre>
+
+<p>I'll dissect how it works:</p>
+
+<ul>
+<li><b>find . -name '*.flac'</b>: Gets the path for all flac files under this root.</li>
+<li><b>cut -d"/" -f 1-3</b>: Removes the actual filename. My paths are of the form "./Artist/Album/Track.extension", so I cut out everything after the second "/".</li>
+<li><b>uniq</b>: Ensure that each album directory is only listed once.</li>
+<li><b>while read line; do [...] done</b>: Grabs each line of input and makes it available inside the loop as the <code>$line</code> variable.</li>
+</ul>
+
+<p>The inside of the loop performs a simple <code>rm</code> &ndash; actually, the
+posted line only <em>echoes</em> the command, which is much better for
+testing. To adapt this for other purposes, tweak the file matching
+lines and the <code>cut</code> line. Test first with <code>ls</code> or <code>echo</code>. Don't
+accidentally delete your data.</p>
+]]>
+</content></entry><entry><title>Amazon MP3 Downloader on 64-bit Ubuntu (Lucid Lynx)</title><link href="http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-04:/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx</id><updated>2010-06-04T12:55:37.0-08:00</updated><summary><![CDATA[
+I recently upgraded nearly all of my 32-bit Linux installations to the latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find that I couldn't install the Amazon MP3 downloader. For whatever reason, they've decided to only support a 32-bit installation. Fortunately, 64-bit users can still install and use 32-bi...]]>
+</summary><content type="html"><![CDATA[
+<p>I recently upgraded nearly all of my 32-bit Linux installations to the
+latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find
+that I couldn't install the Amazon MP3 downloader. For whatever
+reason, they've decided to only support a 32-bit installation.
+Fortunately, 64-bit users can still install and use 32-bit packages
+through a handy tool called <code>getlibs</code>.</p>
+
+<p>There's a thread about <a href="http://ubuntuforums.org/showthread.php?t=474790">using getlibs</a> on the
+Ubuntu forums that I found helpful, but (for the amazonmp3 package, at
+least) that tool alone is insufficient. I began by installing
+<code>getlibs</code> and forcing the installation of <code>amazonmp3</code>, which leaves it
+without any dependencies and quite inoperable. <code>getlibs</code> attempts to
+resolve these 32-bit dependencies and install them outsite of apt system.</p>
+
+<pre><code>wget http://frozenfox.freehostia.com/cappy/getlibs-all.deb
+sudo dpkg -i getlibs-all.deb
+wget http://amazonm-002.vo.llnwd.net/u/d1/clients/en_US/1.0.9/amazonmp3_1.0.9~ibex_i386.deb?httpHeader%5FContent-Disposition=attachment%3B%20filename%3Damazonmp3.deb&amp;amp;marketplace=1
+sudo dpkg -i --force-all amazonmp3.deb
+sudo getlibs /usr/bin/amazonmp3
+</code></pre>
+
+<p>At this point, you'll see a frustrating spew of "No match"
+notices for various libboost libraries. Through <code>aptitude search libboost</code>,
+I realized that Lucid had upgraded to version 1.40.0, but
+the Amazon was built for the 1.34.1 version that comes with
+Intrepid/Jaunty. <code>getlibs</code> works within the constraints of your
+current apt sources, so it couldn't resolve these dependencies.</p>
+
+<pre><code>No match for libboost_filesystem-gcc42-1_34_1.so.1.34.1
+No match for libboost_regex-gcc42-1_34_1.so.1.34.1
+No match for libboost_date_time-gcc42-1_34_1.so.1.34.1
+No match for libboost_signals-gcc42-1_34_1.so.1.34.1
+No match for libboost_iostreams-gcc42-1_34_1.so.1.34.1
+No match for libboost_thread-gcc42-mt-1_34_1.so.1.34.1
+</code></pre>
+
+<p>Fortunately, the repositories for previous distributions are still
+accessible and can be searched fairly easily. Installing these
+dependencies manually through getlibs will make them available to the
+amazonmp3 binary.</p>
+
+<pre><code>sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
+</code></pre>
+
+<p>Now <code>amazonmp3</code> works correctly, although don't be surprised if you
+encounter a few issues. For instance, it attempts to use load the
+64-bit libgvfsdbus.so library on startup, but doesn't seem to care
+when that loading fails. C'est la vie.</p>
+]]>
+</content></entry><entry><title>The Birth of Ivo Clark Ribera</title><link href="http://threebrothers.org/brendan/blog/the-birth-of-ivo-clark-ribera/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-31:/brendan/blog/the-birth-of-ivo-clark-ribera</id><updated>2010-05-31T22:06:33.0-08:00</updated><summary><![CDATA[
+Roughly three weeks ago &ndash; on Wednesday, May 12th &ndash; Ivo was born. Jessica gave birth in a tub in the living room of our house, and it was amazing. Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose ...]]>
+</summary><content type="html"><![CDATA[
+<p>Roughly three weeks ago &ndash; on Wednesday, May 12<sup>th</sup> &ndash; Ivo was born. <a href="http://jeskybera.blogspot.com/2010/05/birth-story.html">Jessica gave birth</a> in a tub in the living room of our house, and it was amazing.</p>
+
+<p>Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose to birth without medication and seriously consider whether that would be the right route to repeat. We eventually decided to up the ante; not only would we birth naturally the second time, but we'd do it at home. I'm so glad we chose this, because the second birth presented an incredible contrast to the first one.</p>
+
+<p>Part of our consternation after the first birth was due to the near mythical birth stories that Jessica read beforehand. We experienced a hard, painful labor that was nothing like the joyous, ecstatic ones recounted by many natural childbirth books. Our expectations were high the first time, low the second, and a little misplaced during both.</p>
+
+<p>Three weeks ago we were nine days "overdue". Despite the fact that our midwife had been unsuccessful at breaking Jessica's water that morning and that the acupuncturist was ignoring our repeated phone calls, the semblance of early labor teased us into walking. And walk we did &ndash; all around Madison &ndash; waiting in vain for a call from the acupuncturist, all the while timing very noncommittal contractions. Yet, somehow I knew it would happen that day.</p>
+
+<p><img src="http://threebrothers.org/brendan/images/ivo-birth/01.jpg" alt="Hugging" /></p>
+
+<p>After lunch at <a href="http://www.urbanspoon.com/r/1/1130/restaurant/Madison-Park/Cactus-Madison-Park-Seattle">Cactus</a>, we headed home to walk some more. This is when the fun began &ndash; and I mean that quite literally. We had <em>fun</em> walking around, talking, and speculating about how events would progress. A package containing the digital camera I had purchase for Mothers' Day arrived &ndash; just in time! Jessica's contractions were increasing in frequency, but remained painless. Then a few of them started to feel perhaps the slightest bit painful. We updated our midwife, Cindie, and she told us to call for the tub. Jessica still wasn't convinced that she was <em>actually</em> in labor, and we dallied for another hour before actually placing the call.</p>
+
+<p><img src="http://threebrothers.org/brendan/images/ivo-birth/02.jpg" alt="The labor tub" /></p>
+
+<p>The contractions continued to accelerate slowly, but Jessica still found them to be completely tolerable. Our friend Brenna came over (she was present at Ezra's birth, too), and we all waited. Jessica and I sat on the couch, hugged during each contraction, watched <em>So I Married an Axe Murderer</em>, and got to enjoy each other's company. It was like a fun, carefree date. At some point the tub arrived, and we waited for it to fill. The contractions grew more serious, but Jessica still marveled at how easy they were to deal with. We laughed, snuggled, and expressed our complete mystery at how easy things were.</p>
+
+<p><img src="http://threebrothers.org/brendan/images/ivo-birth/03.jpg" alt="That's a real 9cm contraction!" /></p>
+
+<p>Cindie arrived and checked Jessica &ndash; she was 9 centimeters, and <strong>laughing</strong> about it. We were exuberant and flabbergasted &ndash; reaching this point last time had <em>not</em> been easy, but now it was (again, quite literally) a walk in the park. We hugged through a few more contractions, and then Jessica started feeling like she needed to push. This was crazy &ndash; last time, Jessica had <em>no</em> urge to push. We felt so incredibly blessed as each new stage came and passed perfectly. So Jessica climbed into the tub &ndash; by herself &ndash; and started laboring in the water.</p>
+
+<p><img src="http://threebrothers.org/brendan/images/ivo-birth/04.jpg" alt="Pushing in the tub" /></p>
+
+<p>I've always been really impressed with Jessica; being with her through birth completely outshines the other impressive things I've seen her do. The pushing phase of her first birth was the worst, most painful part &ndash; and it lasted a long time to boot. She was understandably worried about doing it again, but she went into it without hesitation. And the results were drastically different &ndash; she pushed for a mere 15 minutes before Ivo's amniotic sac started to crown. She started shouting, "Water bubble! Water bubble!" in an enthusiastic-and-perhaps-a-bit-delirious voice. Shortly after, she pushed Ivo out completely &ndash; with a ridiculous squeal of delight, "YAY!".</p>
+
+<p><img src="http://threebrothers.org/brendan/images/ivo-birth/05.jpg" alt="Ivo is born!" /></p>
+
+<p>Ivo came out with his bag of waters intact, and it floated around him in the tub like a diaphanous cape. He started breathing right away. We laughed and hugged and marveled over how splendidly the whole affair went &ndash; it really was an affirmative answer to our prayers. And it made me appreciate Jessica's ability to handle any situation. Her two births reminded me of this verse:</p>
+
+<blockquote>
+  <p><em>I know how to be brought low, and I know how to abound. In any and every circumstance, I have learned the secret of facing plenty and hunger, abundance and need. I can do all things through him who strengthens me.</em>
+  <br/>Philippians 4:12-13</p>
+</blockquote>
+
+<p>What a trip! It was like the best date/vacation/present-opening we'd had in a long time. And if you told me that's how it was going to turn out a few months ago, I'd have looked at you a little funny. It was wonderful to go through this with Jessica and watch all of her bad, difficult birth experiences be redeemed and replaced with happy, fun ones. And it's wonderful to have another healthy, perfect little son.</p>
+]]>
+</content></entry><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
 Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
 </summary><content type="html"><![CDATA[
 <h2>Preamble</h2>
@@ -70,7 +228,7 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 <p><code class='codeBlock'>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
   <br/><br/>
-  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0:0.0 -map 0.2:0.1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0 -map 0.2 -async 1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
 </code></p>
 
 <p>Outside of the typical ffmpeg files/encoders/rates, there are a few interesting settings:</p>
@@ -82,7 +240,8 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 <li><strong>-threads 0</strong>: let the encoder choose how many threads to use based on your hardware. Set this to utilize multicore/proc.</li>
 <li><strong>-an</strong>: disable audio, since the first pass only looks at video</li>
 <li><strong>-f mp4 /dev/null</strong>: set type to mp4 and output to /dev/null, since the first pass stores its statistics in secondary files and the actual video output should be thrown away.</li>
-<li><strong>-map 0.0:0.0 -map 0.2:0.1</strong>: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of <code>ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac</code> (extracting just audio) until I found the right stream.</li>
+<li><strong>-map 0.0 -map 0.2</strong>: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of <code>ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac</code> (extracting just audio) until I found the right stream.</li>
+<li><strong>-async 1</strong>: make the audio and video streams line up. Not necessary for all rips, but was in this case.</li>
 </ul>
 
 <p>This produces a fairly high quality DVD rip that should be iPad compatible. Unfortunately, you'll need to leave the wonderful world of Linux to actually put the file on your iPad. Don't you just feel dirty doing this? I know I do. In lieu of that, you could host it on a local webserver. I can stream this bitrate over WiFi via nginx perfectly well.</p>
@@ -94,6 +253,8 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 <p>I'd like to figure out how to do this encoding on the fly. <code>hdparm</code> says my DVD transfer speeds clock in around 2-3MB/sec, which should stay ahead of the CPU during encoding. It would be wonderful if the only additional disk space taken up by this process were for intermediate first-pass statistics and the final encoded video. As things happened, I copied the files once from CD and again to concatenate them. That's less than ideal.</p>
 
 <p>I'd also like to showcase an open codec like OGG/Theora, since I strongly believe in that cause. Doing that now can be an exercise for the reader, and it shouldn't be too hard; it's just a matter of finding the correct ffmpeg parameters.</p>
+
+<p><strong>Updated</strong>: I changed some audio-specific parameters because the sound wasn't lining up with the video.</p>
 ]]>
 </content></entry><entry><title>Removing the Cast</title><link href="http://threebrothers.org/brendan/blog/removing-the-cast/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-23:/brendan/blog/removing-the-cast</id><updated>2010-04-23T22:20:08.0-08:00</updated><summary><![CDATA[
 Three months ago, I broke my right hand while biking to work. I made a questionable decision involving slippery metal grating on the University Bridge, and found myself doing a not-so-graceful, 20 MPH handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand. My arm was in a cast for a...]]>
@@ -724,84 +885,5 @@ Take a gander at Fixing seekdir(), an account of quashing a bug in the BSD direc
 </code></pre>
 
 <p>That's right &mdash; this bug has been lurking <em>since 1982</em>.</p>
-]]>
-</content></entry><entry><title>Firefox 2 to 3: A Cautionary Tale</title><link href="http://threebrothers.org/brendan/blog/firefox-2-to-3-a-cautionary-tale/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-07:/brendan/blog/firefox-2-to-3-a-cautionary-tale</id><updated>2008-05-07T08:23:00.0-08:00</updated><summary><![CDATA[
-I've been using Firefox Beta 3 whenever I can, and I've really enjoyed it. It has huge gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy. Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would. Combine that lack...]]>
-</summary><content type="html"><![CDATA[
-<p>I've been using <a href="http://www.mozilla.com/en-US/firefox/all-beta.html">Firefox Beta 3</a> whenever I can, and I've really enjoyed it.  It has <em>huge</em> gains over Firefox 2 and Internet Explorer in the area of memory consumption, and that makes me really happy.  Firefox 2.x was fun and all, but it didn't really shine over the 1.x series in the ways that I hoped it would.  Combine that lack-of-notable-improvement with its piggish memory usage, and one could be questioning one's faith in Mozilla rather often.  I kept thinking to myself, "Man, I hope they work on this in the next release."</p>
-
-<p>So, when the Beta came out and was being lauded for its memory leak improvements, I jumped at it.  And man, was it better!  But of course, the nifty extensions that I've come to rely on at work (Firebug in particular) haven't yet been released for the 3.x branch.  So (on my home laptop, at least), I find myself switching between the old and new rather often.</p>
-
-<p>The caution: <b>make sure to keep separate .mozilla directories for your different versions</b>!</p>
-
-<p>After a while of switching back and forth, I found <em>both</em> copies to be horribly slow.  Using any form elements, clicking any links, and even attempting to type a new URL into the address bar caused Firefox to eat CPU cycles like nobody's business.  So, while I was really pleased that it used less memory, my sloppy switching techniques turned it into an unusable mess.  By deleting everything and storing separate directories (.mozilla2 and .mozilla3, with the active one symlinked as .mozilla), I seem to have resolved the issue for both versions.  Whew!</p>
-]]>
-</content></entry><entry><title>Death by Duck-Typing</title><link href="http://threebrothers.org/brendan/blog/death-by-duck-typing/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-01:/brendan/blog/death-by-duck-typing</id><updated>2008-05-01T10:48:00.0-08:00</updated><summary><![CDATA[
- Ruby is all about the duck-typing. Most of the time, I am too. But sometimes, it can lead to some very confusing and very nasty issues. Suppose you get a variable, h, from someone's cool helper function, and with it you want to build up a hash of Widgets. You have millions and billions of Widgets in your database, but you'...]]>
-</summary><content type="html"><![CDATA[
-<p><img src="http://threebrothers.org/brendan/blog/files/duckt.gif" alt="Duckbot" style="border:0 0 0 1em;float:right;" /></p>
-
-<p>Ruby is all about the duck-typing.  Most of the time, I am too.  But sometimes, it can lead to some very confusing and very nasty issues.</p>
-
-<p>Suppose you get a variable, <b>h</b>, from someone's cool helper function, and with it you want to build up a hash of Widgets.  You have millions and billions of Widgets in your database, but you're only dealing with the most recently added ones.  So you do something like this:</p>
-
-<pre><code>h = get_my_h_now()
-# Get the 50 widgets with the highest ids and stick them into h
-Widget.find(:all, :limit =&gt; 50, :order =&gt; 'id DESC').map {
-  |w| h[w.id] = w
-}
-</code></pre>
-
-<p>Pretty innocuous, right?  I mean, if the code works without errors, it's all good... right?  Right?</p>
-
-<p>What if the cool helper function you're using doesn't do quite what you expect it to do?  Let's say you're expecting a <code>Hash</code>, but it gives you an <code>Array</code>.  Aw, buckets!  The joy of duck-typing: Your code will still work.  The curse of duck-typing: <em>Your code will still work</em>.  That's right &mdash; treat <code>h</code> as a black box, and (when keying off of your model's id) the outputs are the same.  It quacks just fine... so what's the problem? What do you suppose the following code outputs?  Oh, and please: don't run this snippet in irb; use the actual ruby interpreter or you'll never finish reading this article.</p>
-
-<pre><code>widget = {
-  :id =&gt; 123456789,
-  :type =&gt; 'Really cool',
-  :price =&gt; 999.99
-}
-id = widget[:id]
-h = []
-m = `ps -o rss= -p #{Process.pid}`.to_i
-puts "Using #{m}kb"
-h[id] = widget
-puts "Memory costs $#{h[id][:price]} per what???"
-m = `ps -o rss= -p #{Process.pid}`.to_i
-puts "Using #{m}kb"
-</code></pre>
-
-<p>(hat tip to Laurel Fan for the succinct <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage" rel="external">ruby memory usage</a> syntax)</p>
-
-<p>Surprised by the results?</p>
-
-<pre><code>Using 1632kb
-Memory costs $999.99 per what???
-Using 483960kb
-</code></pre>
-
-<p>Yikes!  How did storing one little Widget suck up more than 470 megabytes of RAM?  The answer is all in the value of <b>id</b> and the nature of Ruby's arrays.  Ruby offers many convenient-yet-dangerous pieces of functionality (duck-typing, for one).  <code>Array</code> has a particular piece of dangerous convenience: dynamic allocation.  You can address positions on an <code>Array</code> that are larger than its current size, and the <code>Array</code> will dynamically resize itself to accommodate.  This is only dangerous because Ruby's <code>Array</code>s are not sparse; that is to say, when you address position 1,000,000 on a freshly created <code>Array</code>, Ruby has to allocate and store 1,000,000 nils and all of the pointer and class overhead associated with those nils.</p>
-
-<p>So when you take a widget with id 123,456,789 and attempt to store it, using its id as the position... whew!  Ruby definitely has its work cut out for it, since you'll get over its <a href="http://viewsourcecode.org/why/hacking/theFullyUpturnedBin.html" rel="external">initial 8-megabyte heap</a> very quickly.  If you do this sort of thing in Rails and you have many requests processing at the same time, your servers will be in swap death pretty quickly.  Chances are high that you won't catch an issue like this when using a development database with low-id Models, since you'll be addressing much lower positions.</p>
-
-<p>To be sure, duck-typing isn't the only perpetrator in this example: <code>Array</code> can take a good share of the blame, too.  However, we never would have got into this situation if it were impossible to attempt to address an <code>Array</code> when intending to address a <code>Hash</code>.  I still enjoy the looseness of Ruby, and (at this point) wouldn't trade it for the extra security of strict typing &mdash; it's just important to make sure that the quack you produce is the one which you intended.</p>
-]]>
-</content></entry><entry><title>The Bearded Coincidence</title><link href="http://threebrothers.org/brendan/blog/the-bearded-coincidence/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-04-18:/brendan/blog/the-bearded-coincidence</id><updated>2008-04-18T09:58:00.0-08:00</updated><summary><![CDATA[
-Herman Melville is my favorite author, hands down. I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish. I'll have a lot more to say about Herman Melville in a few weeks. I'm at the beginning of The Confidence-Man, the awesomene...]]>
-</summary><content type="html"><![CDATA[
-<p>Herman Melville is my favorite author, hands down.  I could describe his writing like a fine wine: it's dark and complex, full of subtlety and nuance; it's full-bodied and has an incredibly long finish.</p>
-
-<p>I'll have a lot more to say about Herman Melville in a few weeks.  I'm at the beginning of <a href="http://en.wikipedia.org/wiki/The_Confidence-Man">The Confidence-Man</a>, the awesomeness of which <a href="http://cuttheknot.blogspot.com/2008/04/ralph-waldo-ellison-and-herman-melville.html">I've heard about</a> and am now experiencing first-hand.  In the meantime, I'd just like to point out the uncanny resemblance between Sam Beam of <a href="http://ilike.com/artist/Iron+%2526+Wine">Iron &amp; Wine</a> and Mr. Melville:</p>
-
-<p><img src="http://threebrothers.org/brendan/blog/files/ironandwine.jpg" style="float:right;" alt="Iron &amp; Wine"/><img src="http://threebrothers.org/brendan/blog/files/melville.jpg" alt="Herman Meville" style="float:left;"/><br style="clear:both;"/></p>
-]]>
-</content></entry><entry><title>Good reasons to work from home</title><link href="http://threebrothers.org/brendan/blog/good-reasons-to-work-from-home/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-03-26:/brendan/blog/good-reasons-to-work-from-home</id><updated>2008-03-26T13:25:00.0-08:00</updated><summary><![CDATA[
- Jessica spoils me. ...]]>
-</summary><content type="html"><![CDATA[
-<p><img src="http://threebrothers.org/brendan/blog/files/reason1.jpg" alt="Reason #1" /></p>
-
-<p><img src="http://threebrothers.org/brendan/blog/files/reason2.jpg" alt="Reason #2" /></p>
-
-<p><a href="http://jeskybera.blogspot.com">Jessica</a> spoils me.</p>
 ]]>
 </content></entry></feed>

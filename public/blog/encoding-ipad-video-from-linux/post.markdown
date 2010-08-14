@@ -62,7 +62,7 @@ The [iPad specifications](http://www.apple.com/ipad/specs/) indicate that it can
 <code class='codeBlock'>
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
   <br/><br/>
-  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0:0.0 -map 0.2:0.1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0 -map 0.2 -async 1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
 </code>
 
 Outside of the typical ffmpeg files/encoders/rates, there are a few interesting settings:
@@ -73,7 +73,8 @@ Outside of the typical ffmpeg files/encoders/rates, there are a few interesting 
  * **-threads 0**: let the encoder choose how many threads to use based on your hardware. Set this to utilize multicore/proc.
  * **-an**: disable audio, since the first pass only looks at video
  * **-f mp4 /dev/null**: set type to mp4 and output to /dev/null, since the first pass stores its statistics in secondary files and the actual video output should be thrown away.
- * **-map 0.0:0.0 -map 0.2:0.1**: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of `ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac` (extracting just audio) until I found the right stream.
+ * **-map 0.0 -map 0.2**: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of `ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac` (extracting just audio) until I found the right stream.
+ * **-async 1**: make the audio and video streams line up. Not necessary for all rips, but was in this case.
 
 This produces a fairly high quality DVD rip that should be iPad compatible. Unfortunately, you'll need to leave the wonderful world of Linux to actually put the file on your iPad. Don't you just feel dirty doing this? I know I do. In lieu of that, you could host it on a local webserver. I can stream this bitrate over WiFi via nginx perfectly well.
 
@@ -84,3 +85,5 @@ The file I produced is currently not iPhone compatible. From what I can tell, th
 I'd like to figure out how to do this encoding on the fly. `hdparm` says my DVD transfer speeds clock in around 2-3MB/sec, which should stay ahead of the CPU during encoding. It would be wonderful if the only additional disk space taken up by this process were for intermediate first-pass statistics and the final encoded video. As things happened, I copied the files once from CD and again to concatenate them. That's less than ideal.
 
 I'd also like to showcase an open codec like OGG/Theora, since I strongly believe in that cause. Doing that now can be an exercise for the reader, and it shouldn't be too hard; it's just a matter of finding the correct ffmpeg parameters.
+
+**Updated**: I changed some audio-specific parameters because the sound wasn't lining up with the video.
