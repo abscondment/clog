@@ -1,6 +1,7 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/reinvent-the-wheel/
 http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/
 http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/
 http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/
