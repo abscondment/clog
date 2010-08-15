@@ -13,7 +13,7 @@ body {
   right:0.5em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.header, h1, h2, h3, h4, h5, h6 {
   font-family:Georgia,serif;
   font-weight:normal;
 }
@@ -41,9 +41,9 @@ abbr, acronym { border-bottom:1px dotted #333; cursor: help; }
 }
 
 .header {
-  margin:0 0 0.5em 13em;
+  margin:0 0 0.5em 11.85em;
   padding:0 0 0.5em 0;
-  font-weight:bold;
+  font-size:1.2em;
   border-bottom:1px solid #999;
 }
 
@@ -74,8 +74,8 @@ ul.menu li a {
   text-transform:capitalize;
   letter-spacing: 0.15em;
 
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -moz-border-radius: 0.37em;
+  -webkit-border-radius: 0.37em;
 }
 ul.menu li a.selected {
   background-color:#006000;
@@ -91,13 +91,12 @@ ul.menu li a:hover {
 }
 
 .content {
-  margin:0 0 0 13em;
-  width:37em;
-  line-height:1.4em;         
+  margin:0 1em 0 14em;
+  width:42em;
+  line-height:1.6em;
+  text-align:justify;
 }
 .wide { width:auto; }
-
-.header, .content { font-size:1.1em; }
 
 .content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
 .content .borderedImage { border:1px solid #666; }

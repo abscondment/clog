@@ -2,6 +2,7 @@
   (:use [compojure html]
         [clojure.contrib seq-utils str-utils]
         [clog config helpers]))
+; [net.cgrand.enlive-html :only [deftemplate content set-attr do-> clone-for]]
 
 (defn blog-post [post previous-post next-post]
   (html
@@ -12,6 +13,10 @@
      [:link {:rel "stylesheet"
              :type "text/css"
              :href "/brendan/css/main.css"}]
+     [:link {:rel "stylesheet"
+             :type "text/css"
+             :media "only screen and (max-device-width: 480px)"
+             :href "/brendan/css/iPhone.css"}]
      [:title (post :title) " - Brendan Ribera"]]
     [:body
      {:onload "setTimeout('deferredLoad();', 5);"}
@@ -52,6 +57,10 @@
      [:link {:rel "stylesheet"
              :type "text/css"
              :href "/brendan/css/main.css"}]
+     [:link {:rel "stylesheet"
+             :type "text/css"
+             :media "only screen and (max-device-width: 480px)"
+             :href "/brendan/css/iPhone.css"}]
      [:link {:rel "alternate"
              :type "application/atom+xml"
              :title (*config* :blog-title)
