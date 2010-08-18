@@ -39,4 +39,6 @@
                       :updated (not= (existing-md5-for (post :url))
                                      new-md5)}))))
         (parse-string
-         (slurp (str (file "public" "blog" "posts.yaml"))))))))))
+         (slurp
+          (str
+           (file "public" "blog" "posts.yaml"))))))))))

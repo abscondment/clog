@@ -1,175 +1,111 @@
 (ns clog.views
-  (:use [compojure html]
-        [clojure.contrib seq-utils str-utils]
+  (:use [net.cgrand.enlive-html :only [append after clone-for content deftemplate do-> get-resource html-content html-snippet last-child prepend set-attr]]
+        [clojure.contrib.str-utils :only [re-gsub]]
         [clog config helpers]))
-; [net.cgrand.enlive-html :only [deftemplate content set-attr do-> clone-for]]
 
-(defn blog-post [post previous-post next-post]
-  (html
-   "<!DOCTYPE html>\n"
-   [:html
-    [:head
-     [:meta {:http-equiv "Content-Type" :content "text/html; charset=utf-8"}]
-     [:link {:rel "stylesheet"
-             :type "text/css"
-             :href "/brendan/css/main.css"}]
-     [:link {:rel "stylesheet"
-             :type "text/css"
-             :media "only screen and (max-device-width: 480px)"
-             :href "/brendan/css/iPhone.css"}]
-     [:title (post :title) " - Brendan Ribera"]]
-    [:body
-     {:onload "setTimeout('deferredLoad();', 5);"}
-     [:div {:class "envelope"}
-      (lbar)
-      (header (post :title))
-      "\n"
-      [:div {:class "content"}
-       [:h1 (post :title)]
-       @(post :body)
-       [:h4 (post :created_at)]
-       [:br]
-       [:div {:id "disqus_thread"}]
-       [:div {:style "clear:both;margin:2em 0 1em 0;"}
-        (if previous-post
-          [:div {:style "float:left;"}
-           "&laquo; " (link-to-post previous-post)])
-        (if next-post
-          [:div {:style "float:right;"}
-           (link-to-post next-post) " &raquo;"])
-        [:br {:style "clear:both;"}]]
-       [:noscript
-        [:p
-         [:a
-          {:href "http://disqus.com/forums/tbdo-brendan/?url=ref"}
-          "View the discussion thread."]]]]
-      (footer (take 4 (post :created_at)))]
-     [:script {:type "text/javascript" :src "/brendan/js/blog.js"}]]]))
+(defn- load-snippet [path] (html-snippet (get-resource path slurp)))
 
-(defn blog-index [posts]
-  (html
-   "<!DOCTYPE html>\n"
-   [:html
-    [:head
-     ; verification
-     [:meta {:name "blogcatalog" :content "9BC9690896"}]
-     [:meta {:http-equiv "Content-Type" :content "text/html; charset=utf-8"}]
-     [:link {:rel "stylesheet"
-             :type "text/css"
-             :href "/brendan/css/main.css"}]
-     [:link {:rel "stylesheet"
-             :type "text/css"
-             :media "only screen and (max-device-width: 480px)"
-             :href "/brendan/css/iPhone.css"}]
-     [:link {:rel "alternate"
-             :type "application/atom+xml"
-             :title (*config* :blog-title)
-             :href "http://feeds.feedburner.com/threebrothers/brendan"}]
-     [:title (*config* :blog-title) " - Brendan Ribera"]]
-    [:body
-     [:div {:class "envelope"}
-      (lbar)
-      (header (*config* :blog-title))
-      [:div {:class "content"}
-       [:div
-        "Recent posts:"
-        (map
-         (fn [year-posts]
-           [:div {:style "margin-top:10px;"}
-            [:b (first year-posts)]
-            [:ul {:class "list"}
-             (map #(vector :li (link-to-post %) " - " (% :created_at))
-                  (reverse (sort-by :created_at (last year-posts))))]])
-         (reverse (group-by #(apply str (take 4 (% :created_at))) posts)))]
-       [:a {:href "http://feeds.feedburner.com/threebrothers/brendan"}
-        [:img {:src "/brendan/images/feed.png" :alt "Feed"}]]]
-      (footer)]
-     google-analytics]]))
+;; snippets that we'll reuse.
+(def head (load-snippet "head.snippet"))
+(def menu (load-snippet "menu.snippet"))
+(def footer (load-snippet "footer.snippet"))
 
-(defn atom-xml [posts]
-  (html
-   "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-   [:feed {:xmlns "http://www.w3.org/2005/Atom"}
-    [:title (*config* :blog-title)]
-    [:subtitle "Three Planes of Thought Which to Sail"]
-    [:link {:href "http://threebrothers.org/brendan/blog/atom.xml"
-            :rel "self"}]
-    [:link {:href "http://threebrothers.org/brendan/"}]
-    [:id "tag:threebrothers.org,2010-01-07:/brendan/blog"]
-    [:updated (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss-08:00")
-                       (java.util.Date.))]
-    [:author
-     [:name "Brendan Ribera"]
-     [:email "brendan.ribera+blogatom@gmail.com"]]
-    (map
-     (fn [post]
-       [:entry
-        [:title (post :title)]
-        [:link {:href (str "http://threebrothers.org/brendan/blog/" (post :url) "/")
-                :rel "alternate"
-                :type "text/html"}]
-        [:id "tag:threebrothers.org,"
-             (take 10 (post :created_at))
-             ":/brendan/blog/"
-             (post :url)]
-        [:updated (take 10 (post :created_at)) "T"
-                  (drop 11 (post :created_at)) "-08:00"]
-        [:summary
-         "<![CDATA[\n"
-         (take 325
-               (re-gsub #"[\s]+" " "
-                        (re-gsub #"(</?[^>]*>)" "" @(post :body)))) "...]]>\n"]
-        [:content {:type "html"} "<![CDATA[\n" @(post :body) "]]>\n"]])
-     posts)]))
+(def header [{:tag :a :attrs {:href "/brendan/"} :content "Brendan"}
+             (html-snippet " &raquo; " (*config* :title))])
+(def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
+
+(defn- group-by-year [posts]
+  (group-by #(apply str (take 4 (% :created_at))) posts))
+
+(defn- list-posts [posts]
+  (clone-for [{:keys [title url created_at]} posts]
+             [:a] (do-> (content title)
+                        (set-attr :href (url-for-post url))
+                        (after (str " - " created_at)))))
+
+(defn- years-and-posts [posts]
+  (let [posts (group-by-year posts)]
+    (clone-for [[year selected] posts]
+                      [:div.year :b] (content year)
+                      [:ul.posts :li.post] (list-posts selected))))
+
+
+
+(deftemplate index "index.template" [posts]
+  [:head] (append head)
+  [:div.footer] (content footer)
+  [:#menu] (content menu)
+  [:div.header] (content header)
+  [:div.content :div :div.years] (years-and-posts posts)
+  [:.currentYear] (content current-year))
+
+
+
+(deftemplate blog-post "post.template" [post prev-post next-post]
+  [:head] (append head)
+  [:div.footer] (content footer)
+  [:#menu] (content menu)
+  [:div.header] (content [(first header)
+                                 (html-snippet (str " &raquo; " (post :title)))])
+  [:div.content] (prepend
+                         {:tag :h1  :content (html-snippet (post :title))}
+                         (html-snippet @(post :body)))
+  [:#previousPost] (if prev-post
+                     (content
+                      (html-snippet "&laquo;&nbsp;")
+                      (link-to-post prev-post)))
+  [:#nextPost] (if next-post
+                 (content
+                  (link-to-post next-post)
+                  (html-snippet "&nbsp;&raquo;")))
+  [:.currentYear] (content current-year))
+
+
+
+(deftemplate atom-xml "atom.template" [posts]
+  [:feed :> :title] (content (*config* :title))
+  [:feed :> :updated] (content (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss-08:00")
+                                               (java.util.Date.)))
+  [:feed :> :entry] (clone-for
+                     [{:keys [title url body created_at]} posts]
+                     [:title] (content title)
+                     [:link] (set-attr :href (full-url (url-for-post url))
+                                              :rel "alternate"
+                                              :type "text/html")
+                     [:id] (content "tag:" (*config* :domain) ","
+                                           (apply str (take 10 created_at)) ":/brendan/blog/" url)
+                     [:updated] (content
+                                 (apply str (take 10 created_at)) "T" (apply str (drop 11 created_at)) "-08:00")
+                     [:summary] (html-content
+                                 (apply str
+                                        (take 325
+                                              (re-gsub
+                                               #"[\s]+" " "
+                                               (re-gsub
+                                                #"(</?[^>]*>)" "" @body))))
+                                 "...")
+                     [:content] (do->
+                                 (set-attr :type "html")
+                                 (html-content @body))))
+
+
+
+(deftemplate sitemap-xml "sitemap.template" [posts]
+  [:urlset :> last-child] (after
+                           (interleave
+                            (repeat "\n")
+                            (map (fn [{:keys [url]}]
+                                   {:tag :url
+                                    :content
+                                    [{:tag :loc :content (full-url (url-for-post url))}
+                                     {:tag :changefreq :content "monthly"}
+                                     {:tag :priority :content "1.0"}]})
+                                 posts))))
+
 
 
 (defn sitemap-txt [posts]
-  (apply str "http://threebrothers.org/brendan/
-http://threebrothers.org/brendan/about/
-http://threebrothers.org/brendan/software/\n"
-         (map #(str "http://threebrothers.org/brendan/blog/"
-                    (% :url)
-                    "/\n")
-              posts)))
-
-
-(defn sitemap-xml [posts]
-  (let [[newer older] (split-at 20 posts)]
-    (html
-     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-     [:urlset
-      {:xmlns "http://www.sitemaps.org/schemas/sitemap/0.9"}
-      (map (fn [m]
-             [:url
-              [:loc (m :url)]
-              [:changefreq (or (m :changefreq) "yearly")]
-              [:priority (or (m :priority) 0.25)]])
-           (concat
-            ; Static urls
-            (list
-            {:url "http://threebrothers.org/brendan/"
-             :changefreq "weekly"
-             :priority 1.0}
-            {:url "http://threebrothers.org/brendan/about/"
-             :priority 0.5}
-            {:url "http://threebrothers.org/brendan/software/"
-             :changefreq "monthly"
-             :priority 0.75})
-            
-            ; Give newer posts higher priority & more updates
-            (map (fn [post]
-                   {:url
-                    (str "http://threebrothers.org/brendan/blog/"
-                         (post :url) "/")
-                    :changefreq "monthly"
-                    :priority 0.75})
-                 newer)
-            
-            ; Give older posts lower priority & fewer updates
-            (map (fn [post]
-                   {:url
-                    (str "http://threebrothers.org/brendan/blog/"
-                         (post :url) "/")})
-                 older)))])))
-
-
+  (apply str
+   (concat
+    (map #(str (full-url %) "\n") (*config* :static-paths))
+    (map #(str (full-url (url-for-post %)) "\n") posts))))

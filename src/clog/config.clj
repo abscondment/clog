@@ -1,3 +1,8 @@
 (ns clog.config)
 
-(def *config* {:blog-title "Wine, Water, and Blood"})
+(def *config* {:title "Wine, Water, and Blood"
+               :domain "threebrothers.org"
+               :static-paths ["/brendan/"
+                              "/brendan/about/"
+                              "/brendan/software/"]
+               })
