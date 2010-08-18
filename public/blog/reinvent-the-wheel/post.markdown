@@ -20,7 +20,7 @@ In the end, I saved money over buying a new wheel &ndash; even when considering 
 
 But this brings us to an interesting juxtaposition. To your average, non-mechanic cyclist, I undertook an extraordinary amount of effort and personal risk to create something that is machine manufactured *en masse* and readily available at any bike shop. I reinvented the wheel, in both the literal and the clich&eacute;d sense.
 
-This is the standard response one has when looking at an unknown, black box system. But when I look at my bike I see, as it were, a semi-transparent box at a higher resolution. I [built my Vitus 979 from scratch](../vitus-979-reborn/), so each subsystem and component jumps out. I quickly jumped through these mental states:
+This is the standard response one has when looking at an unknown, black box system. But when I look at my bike I see, as it were, a semi-transparent box at a higher resolution. I [built my Vitus 979 from scratch](http://threebrothers.org/brendan/blog/vitus-979-reborn/), so each subsystem and component jumps out. I quickly jumped through these mental states:
 
 <div class="codeBlock"><em>My rim is broken. My older frame and 8-speed Dura-Ace drivetrain limits my rear hub choices, so I'm not going to be able to buy a brand-new wheel replacement. It's also questionable whether I'll find any 8-speed Dura-Ace wheelsets, new or used. It'd be expensive to upgrade the whole drivetrain, and I have an awesome, <a href="http://www.sheldonbrown.com/k7.html#uniglide">rare Uniglide hub</a>. I should just learn how to build a wheel; that way, I can get a really nice rim, too, and come away from this with a better bike than before.</em></div>
 

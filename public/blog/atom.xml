@@ -1,29 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>Wine, Water, and Blood</title><subtitle>Three Planes of Thought Which to Sail</subtitle><link href="http://threebrothers.org/brendan/blog/atom.xml" rel="self" /><link href="http://threebrothers.org/brendan/" /><id>tag:threebrothers.org,2010-01-07:/brendan/blog</id><updated>2010-08-15T15:34:41-08:00</updated><author><name>Brendan Ribera</name><email>brendan.ribera+blogatom@gmail.com</email></author><entry><title>Reinvent the Wheel</title><link href="http://threebrothers.org/brendan/blog/reinvent-the-wheel/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-08-14:/brendan/blog/reinvent-the-wheel</id><updated>2010-08-14T15:19:29.0-08:00</updated><summary><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Wine, Water, and Blood</title>
+  <subtitle>Three Planes of Thought Which to Sail</subtitle>
+  <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
+  <link href="http://threebrothers.org/brendan/" />
+  <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
+  <updated>2010-08-18T13:15:30-08:00</updated>
+  <author>
+    <name>Brendan Ribera</name>
+    <email>brendan.ribera+blogatom@gmail.com</email>
+  </author>
+  <entry>
+    <title>Reinvent the Wheel</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/reinvent-the-wheel/" />
+    <id>tag:threebrothers.org,2010-08-14:/brendan/blog/reinvent-the-wheel</id>
+    <updated>2010-08-14T15:19:29.0-08:00</updated>
+    <summary><![CDATA[
 I spent a few days of last week pursuing a novel activity: building a bicycle wheel. I followed Sheldon Brown's excellent wheelbuiding guide, and I've been quite pleased with the results. Thus far the wheel has been smooth and true, and I feel rather enlightened by the whole experience. This marked a milestone of sorts in m...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>I spent a few days of last week pursuing a novel activity: building a bicycle wheel. I followed Sheldon Brown's <a href="http://www.sheldonbrown.com/wheelbuild.html">excellent wheelbuiding guide</a>, and I've been quite pleased with the results. Thus far the wheel has been smooth and true, and I feel rather enlightened by the whole experience.</p>
 
-<p>This marked a milestone of sorts in my journey as an amateur mechanic. It's one of those (seemingly) daunting tasks that (seemingly) impresses others once completed: &quot;Wow, and you actually rode on that without experiencing some horrific and injurious crash? Cool!&quot; But it also produces a fair amount of skepticism: &quot;Why not just buy one?&quot;, &quot;Wow, seems like a lot of unnecessary work...&quot; and so on.</p>
+<p>This marked a milestone of sorts in my journey as an amateur mechanic. It's one of those (seemingly) daunting tasks that (seemingly) impresses others once completed: "Wow, and you actually rode on that without experiencing some horrific and injurious crash? Cool!" But it also produces a fair amount of skepticism: "Why not just buy one?", "Wow, seems like a lot of unnecessary work..." and so on.</p>
 
-<div style="text-align:center;"><img src="http://threebrothers.org/brendan/images/reinvent-wheel.jpg" alt="Lacing the wheel." /><br/><em>Lacing the wheel.</em></div>
+<div style="text-align:center;"><img alt="Lacing the wheel." src="http://threebrothers.org/brendan/images/reinvent-wheel.jpg" /><br /><em>Lacing the wheel.</em></div>
 
 <p>There were, quite naturally, a few jokes about me reinventing the wheel. And these set me to thinking.</p>
 
-<p>I've seen firsthand what reinventing the wheel means in the software world. I once spent a few weeks fixing bugs in a Lucene-based search system. I say &quot;based&quot; because most of Lucene's sensible, extensible default implementations had been ripped out and completely rewritten in some crazed attempt at optimization.</p>
+<p>I've seen firsthand what reinventing the wheel means in the software world. I once spent a few weeks fixing bugs in a Lucene-based search system. I say "based" because most of Lucene's sensible, extensible default implementations had been ripped out and completely rewritten in some crazed attempt at optimization.</p>
 
-<p>From my latecomer's viewpoint, this seemed like a classic case of <a href="http://en.wikipedia.org/wiki/Not_Invented_Here"><abbr title="Not Invented Here">NIH</abbr> syndrome</a>. It cost our company quite a few man-hours to undo the unnecessary complexity &ndash; reverting to <em>simple</em> subclasses of most of Lucene's internals fixed most of our bugs, and it made the thing that much easier to test and maintain.</p>
+<p>From my latecomer's viewpoint, this seemed like a classic case of <a href="http://en.wikipedia.org/wiki/Not_Invented_Here"><abbr title="Not Invented Here">NIH</abbr> syndrome</a>. It cost our company quite a few man-hours to undo the unnecessary complexity – reverting to <em>simple</em> subclasses of most of Lucene's internals fixed most of our bugs, and it made the thing that much easier to test and maintain.</p>
 
 <h2>A Different Approach</h2>
 
 <p>Back to wheels.</p>
 
-<p>In the end, I saved money over buying a new wheel &ndash; even when considering the price of two new chain whips (a one-time tool purchase). I traded sleep for mechanical knowledge. In both regards, I feel that I came out ahead on the very first wheel; with a lifetime of cycling (and therefore broken wheels to replace) ahead of me, I'm certain that this was a wise move.</p>
+<p>In the end, I saved money over buying a new wheel – even when considering the price of two new chain whips (a one-time tool purchase). I traded sleep for mechanical knowledge. In both regards, I feel that I came out ahead on the very first wheel; with a lifetime of cycling (and therefore broken wheels to replace) ahead of me, I'm certain that this was a wise move.</p>
 
-<div style="text-align:center;"><img src="http://threebrothers.org/brendan/images/ancient-wheel.jpg" alt="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" title="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" /><br/><em>Ancient wheel.</em></div>
+<div style="text-align:center;"><img title="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" alt="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" src="http://threebrothers.org/brendan/images/ancient-wheel.jpg" /><br /><em>Ancient wheel.</em></div>
 
-<p>But this brings us to an interesting juxtaposition. To your average, non-mechanic cyclist, I undertook an extraordinary amount of effort and personal risk to create something that is machine manufactured <em>en masse</em> and readily available at any bike shop. I reinvented the wheel, in both the literal and the clich&eacute;d sense.</p>
+<p>But this brings us to an interesting juxtaposition. To your average, non-mechanic cyclist, I undertook an extraordinary amount of effort and personal risk to create something that is machine manufactured <em>en masse</em> and readily available at any bike shop. I reinvented the wheel, in both the literal and the clichéd sense.</p>
 
-<p>This is the standard response one has when looking at an unknown, black box system. But when I look at my bike I see, as it were, a semi-transparent box at a higher resolution. I <a href="../vitus-979-reborn/">built my Vitus 979 from scratch</a>, so each subsystem and component jumps out. I quickly jumped through these mental states:</p>
+<p>This is the standard response one has when looking at an unknown, black box system. But when I look at my bike I see, as it were, a semi-transparent box at a higher resolution. I <a href="http://threebrothers.org/brendan/blog/vitus-979-reborn/">built my Vitus 979 from scratch</a>, so each subsystem and component jumps out. I quickly jumped through these mental states:</p>
 
 <div class="codeBlock"><em>My rim is broken. My older frame and 8-speed Dura-Ace drivetrain limits my rear hub choices, so I'm not going to be able to buy a brand-new wheel replacement. It's also questionable whether I'll find any 8-speed Dura-Ace wheelsets, new or used. It'd be expensive to upgrade the whole drivetrain, and I have an awesome, <a href="http://www.sheldonbrown.com/k7.html#uniglide">rare Uniglide hub</a>. I should just learn how to build a wheel; that way, I can get a really nice rim, too, and come away from this with a better bike than before.</em></div>
 
@@ -33,19 +51,26 @@ I spent a few days of last week pursuing a novel activity: building a bicycle wh
 
 <p>The database example is rather salient: I worked for a company that started its metadata system with a vanilla MySQL backend, but later added spellchecking and autocorrection via a native <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> function. Rails provides another great example. It can be used like a black box, and you can build a functioning website without ever taking a look inside. But you'll always be at a disadvantage to the person who can quickly trace a behavior into some Rails internal and extend its functionality.</p>
 
-<div style="text-align:center;"><img src="http://threebrothers.org/brendan/images/forces-wheel.jpg" alt="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" title="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" /><br/><em>Understanding the forces in play on a bicycle wheel.<br/>From </em><a href="http://www.amazon.com/Bicycle-Wheel-3rd-Jobst-Brandt/dp/0960723668">The Bicycle Wheel</a><em> by Jobst Brandt.</em></div>
+<div style="text-align:center;"><img title="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" alt="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" src="http://threebrothers.org/brendan/images/forces-wheel.jpg" /><br /><em>Understanding the forces in play on a bicycle wheel.<br />From </em><a href="http://www.amazon.com/Bicycle-Wheel-3rd-Jobst-Brandt/dp/0960723668">The Bicycle Wheel</a><em> by Jobst Brandt.</em></div>
 
-<p>Don't put your black boxes on a pedestal as if they can never be opened &ndash; this behavior is just <a href="http://nathanmarz.com/blog/your-company-has-a-knowledge-debt-problem.html">another form of knowledge debt</a>. Don't forgo learning about and tinkering with a system just because it's established. In this regard, reinventing is good practice &ndash; in fact, I'd conjecture that is where most innovation originates.</p>
+<p>Don't put your black boxes on a pedestal as if they can never be opened – this behavior is just <a href="http://nathanmarz.com/blog/your-company-has-a-knowledge-debt-problem.html">another form of knowledge debt</a>. Don't forgo learning about and tinkering with a system just because it's established. In this regard, reinventing is good practice – in fact, I'd conjecture that is where most innovation originates.</p>
 
-<p>Paul Graham recently wrote that <em><a href="http://www.paulgraham.com/addiction.html">&quot;if people don't think you're weird, you're living badly</em>&quot;</a>. Abstraction is incredibly useful, but it's invaluable to <em>also</em> have a deep, systemic knowledge of the lower layer. People default to having only a shallow, cursory understanding of the things they depend on. But I see a definite advantage to being weirdly interested in the innards. And very often one must re-walk the paths of a device's invention to obtain this level of understanding.</p>
+<p>Paul Graham recently wrote that <em><a href="http://www.paulgraham.com/addiction.html">"if people don't think you're weird, you're living badly</a></em>". Abstraction is incredibly useful, but it's invaluable to <em>also</em> have a deep, systemic knowledge of the lower layer. People default to having only a shallow, cursory understanding of the things they depend on. But I see a definite advantage to being weirdly interested in the innards. And very often one must re-walk the paths of a device's invention to obtain this level of understanding.</p>
 
 <p>So, learn little by little about the systems you use daily. If you use open source software, you'll find this to be rather straightforward, and there will almost always be another enthusiastic person available to lend a hand. You'll find the accretions of knowledge to be invaluable; they'll color the way you approach problems and the solutions you recognize.</p>
 
 <p>Oh, and please don't look at me funny if I ever mention my latent desire to build a <a href="http://www.otherpower.com/steamengine.shtml">homebrewed steam engine and alternator</a>.</p>
 ]]>
-</content></entry><entry><title>This Week's Links</title><link href="http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-18:/brendan/blog/this-weeks-links-2010-06-18</id><updated>2010-06-18T09:27:15.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>This Week's Links</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/" />
+    <id>tag:threebrothers.org,2010-06-18:/brendan/blog/this-weeks-links-2010-06-18</id>
+    <updated>2010-06-18T09:27:15.0-08:00</updated>
+    <summary><![CDATA[
 Math Moving Remy in Hardware: Pixar's Use of Harmonic Functions Cosines and correlation Software Sed One-Liners Explained You're Doing It Wrong Startups Getting a Divorce from a VC Your company has a knowledge debt problem ...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <h3>Math</h3>
 
 <ul>
@@ -67,12 +92,19 @@ Math Moving Remy in Hardware: Pixar's Use of Harmonic Functions Cosines and corr
 <li><a href="http://nathanmarz.com/blog/knowledge-debt/">Your company has a knowledge debt problem</a></li>
 </ul>
 ]]>
-</content></entry><entry><title>Cleaning up with Some Shell Commands</title><link href="http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-08:/brendan/blog/cleaning-up-with-some-shell-commands</id><updated>2010-06-08T11:25:13.0-08:00</updated><summary><![CDATA[
-Today, I encountered an interesting problem when syncing my music library between two different computers. Whenever I buy a CD (and yes, I still buy CDs on occasion &mdash; albeit ones that are used or heavily discounted), I rip it into FLAC. But sometimes, I'll have ripped an MP3 version of the same album on a different co...]]>
-</summary><content type="html"><![CDATA[
+</content>
+  </entry><entry>
+    <title>Cleaning up with Some Shell Commands</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/" />
+    <id>tag:threebrothers.org,2010-06-08:/brendan/blog/cleaning-up-with-some-shell-commands</id>
+    <updated>2010-06-08T11:25:13.0-08:00</updated>
+    <summary><![CDATA[
+Today, I encountered an interesting problem when syncing my music library between two different computers. Whenever I buy a CD (and yes, I still buy CDs on occasion — albeit ones that are used or heavily discounted), I rip it into FLAC. But sometimes, I'll have ripped an MP3 version of the same album on a different co...]]>
+</summary>
+    <content type="html"><![CDATA[
 <p>Today, I encountered an interesting problem when syncing my music library
 between two different computers. Whenever I buy a CD (and yes, I still
-buy CDs on occasion &mdash; albeit ones that are used or heavily
+buy CDs on occasion — albeit ones that are used or heavily
 discounted), I rip it into <a href="http://flac.sourceforge.net/">FLAC</a>. But
 sometimes, I'll have ripped an MP3 version of the same album on a
 different computer. Merging the differing libraries fills my main
@@ -99,15 +131,22 @@ done
 <li><b>while read line; do [...] done</b>: Grabs each line of input and makes it available inside the loop as the <code>$line</code> variable.</li>
 </ul>
 
-<p>The inside of the loop performs a simple <code>rm</code> &ndash; actually, the
+<p>The inside of the loop performs a simple <code>rm</code> – actually, the
 posted line only <em>echoes</em> the command, which is much better for
 testing. To adapt this for other purposes, tweak the file matching
 lines and the <code>cut</code> line. Test first with <code>ls</code> or <code>echo</code>. Don't
 accidentally delete your data.</p>
 ]]>
-</content></entry><entry><title>Amazon MP3 Downloader on 64-bit Ubuntu (Lucid Lynx)</title><link href="http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-06-04:/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx</id><updated>2010-06-04T12:55:37.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Amazon MP3 Downloader on 64-bit Ubuntu (Lucid Lynx)</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/" />
+    <id>tag:threebrothers.org,2010-06-04:/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx</id>
+    <updated>2010-06-04T12:55:37.0-08:00</updated>
+    <summary><![CDATA[
 I recently upgraded nearly all of my 32-bit Linux installations to the latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find that I couldn't install the Amazon MP3 downloader. For whatever reason, they've decided to only support a 32-bit installation. Fortunately, 64-bit users can still install and use 32-bi...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>I recently upgraded nearly all of my 32-bit Linux installations to the
 latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find
 that I couldn't install the Amazon MP3 downloader. For whatever
@@ -163,54 +202,68 @@ encounter a few issues. For instance, it attempts to use load the
 64-bit libgvfsdbus.so library on startup, but doesn't seem to care
 when that loading fails. C'est la vie.</p>
 ]]>
-</content></entry><entry><title>The Birth of Ivo Clark Ribera</title><link href="http://threebrothers.org/brendan/blog/the-birth-of-ivo-clark-ribera/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-31:/brendan/blog/the-birth-of-ivo-clark-ribera</id><updated>2010-05-31T22:06:33.0-08:00</updated><summary><![CDATA[
-Roughly three weeks ago &ndash; on Wednesday, May 12th &ndash; Ivo was born. Jessica gave birth in a tub in the living room of our house, and it was amazing. Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose ...]]>
-</summary><content type="html"><![CDATA[
-<p>Roughly three weeks ago &ndash; on Wednesday, May 12<sup>th</sup> &ndash; Ivo was born. <a href="http://jeskybera.blogspot.com/2010/05/birth-story.html">Jessica gave birth</a> in a tub in the living room of our house, and it was amazing.</p>
+</content>
+  </entry><entry>
+    <title>The Birth of Ivo Clark Ribera</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/the-birth-of-ivo-clark-ribera/" />
+    <id>tag:threebrothers.org,2010-05-31:/brendan/blog/the-birth-of-ivo-clark-ribera</id>
+    <updated>2010-05-31T22:06:33.0-08:00</updated>
+    <summary><![CDATA[
+Roughly three weeks ago – on Wednesday, May 12th – Ivo was born. Jessica gave birth in a tub in the living room of our house, and it was amazing. Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Roughly three weeks ago – on Wednesday, May 12<sup>th</sup> – Ivo was born. <a href="http://jeskybera.blogspot.com/2010/05/birth-story.html">Jessica gave birth</a> in a tub in the living room of our house, and it was amazing.</p>
 
 <p>Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose to birth without medication and seriously consider whether that would be the right route to repeat. We eventually decided to up the ante; not only would we birth naturally the second time, but we'd do it at home. I'm so glad we chose this, because the second birth presented an incredible contrast to the first one.</p>
 
 <p>Part of our consternation after the first birth was due to the near mythical birth stories that Jessica read beforehand. We experienced a hard, painful labor that was nothing like the joyous, ecstatic ones recounted by many natural childbirth books. Our expectations were high the first time, low the second, and a little misplaced during both.</p>
 
-<p>Three weeks ago we were nine days "overdue". Despite the fact that our midwife had been unsuccessful at breaking Jessica's water that morning and that the acupuncturist was ignoring our repeated phone calls, the semblance of early labor teased us into walking. And walk we did &ndash; all around Madison &ndash; waiting in vain for a call from the acupuncturist, all the while timing very noncommittal contractions. Yet, somehow I knew it would happen that day.</p>
+<p>Three weeks ago we were nine days "overdue". Despite the fact that our midwife had been unsuccessful at breaking Jessica's water that morning and that the acupuncturist was ignoring our repeated phone calls, the semblance of early labor teased us into walking. And walk we did – all around Madison – waiting in vain for a call from the acupuncturist, all the while timing very noncommittal contractions. Yet, somehow I knew it would happen that day.</p>
 
-<p><img src="http://threebrothers.org/brendan/images/ivo-birth/01.jpg" alt="Hugging" /></p>
+<p><img alt="Hugging" src="http://threebrothers.org/brendan/images/ivo-birth/01.jpg" /></p>
 
-<p>After lunch at <a href="http://www.urbanspoon.com/r/1/1130/restaurant/Madison-Park/Cactus-Madison-Park-Seattle">Cactus</a>, we headed home to walk some more. This is when the fun began &ndash; and I mean that quite literally. We had <em>fun</em> walking around, talking, and speculating about how events would progress. A package containing the digital camera I had purchase for Mothers' Day arrived &ndash; just in time! Jessica's contractions were increasing in frequency, but remained painless. Then a few of them started to feel perhaps the slightest bit painful. We updated our midwife, Cindie, and she told us to call for the tub. Jessica still wasn't convinced that she was <em>actually</em> in labor, and we dallied for another hour before actually placing the call.</p>
+<p>After lunch at <a href="http://www.urbanspoon.com/r/1/1130/restaurant/Madison-Park/Cactus-Madison-Park-Seattle">Cactus</a>, we headed home to walk some more. This is when the fun began – and I mean that quite literally. We had <em>fun</em> walking around, talking, and speculating about how events would progress. A package containing the digital camera I had purchase for Mothers' Day arrived – just in time! Jessica's contractions were increasing in frequency, but remained painless. Then a few of them started to feel perhaps the slightest bit painful. We updated our midwife, Cindie, and she told us to call for the tub. Jessica still wasn't convinced that she was <em>actually</em> in labor, and we dallied for another hour before actually placing the call.</p>
 
-<p><img src="http://threebrothers.org/brendan/images/ivo-birth/02.jpg" alt="The labor tub" /></p>
+<p><img alt="The labor tub" src="http://threebrothers.org/brendan/images/ivo-birth/02.jpg" /></p>
 
 <p>The contractions continued to accelerate slowly, but Jessica still found them to be completely tolerable. Our friend Brenna came over (she was present at Ezra's birth, too), and we all waited. Jessica and I sat on the couch, hugged during each contraction, watched <em>So I Married an Axe Murderer</em>, and got to enjoy each other's company. It was like a fun, carefree date. At some point the tub arrived, and we waited for it to fill. The contractions grew more serious, but Jessica still marveled at how easy they were to deal with. We laughed, snuggled, and expressed our complete mystery at how easy things were.</p>
 
-<p><img src="http://threebrothers.org/brendan/images/ivo-birth/03.jpg" alt="That's a real 9cm contraction!" /></p>
+<p><img alt="That's a real 9cm contraction!" src="http://threebrothers.org/brendan/images/ivo-birth/03.jpg" /></p>
 
-<p>Cindie arrived and checked Jessica &ndash; she was 9 centimeters, and <strong>laughing</strong> about it. We were exuberant and flabbergasted &ndash; reaching this point last time had <em>not</em> been easy, but now it was (again, quite literally) a walk in the park. We hugged through a few more contractions, and then Jessica started feeling like she needed to push. This was crazy &ndash; last time, Jessica had <em>no</em> urge to push. We felt so incredibly blessed as each new stage came and passed perfectly. So Jessica climbed into the tub &ndash; by herself &ndash; and started laboring in the water.</p>
+<p>Cindie arrived and checked Jessica – she was 9 centimeters, and <strong>laughing</strong> about it. We were exuberant and flabbergasted – reaching this point last time had <em>not</em> been easy, but now it was (again, quite literally) a walk in the park. We hugged through a few more contractions, and then Jessica started feeling like she needed to push. This was crazy – last time, Jessica had <em>no</em> urge to push. We felt so incredibly blessed as each new stage came and passed perfectly. So Jessica climbed into the tub – by herself – and started laboring in the water.</p>
 
-<p><img src="http://threebrothers.org/brendan/images/ivo-birth/04.jpg" alt="Pushing in the tub" /></p>
+<p><img alt="Pushing in the tub" src="http://threebrothers.org/brendan/images/ivo-birth/04.jpg" /></p>
 
-<p>I've always been really impressed with Jessica; being with her through birth completely outshines the other impressive things I've seen her do. The pushing phase of her first birth was the worst, most painful part &ndash; and it lasted a long time to boot. She was understandably worried about doing it again, but she went into it without hesitation. And the results were drastically different &ndash; she pushed for a mere 15 minutes before Ivo's amniotic sac started to crown. She started shouting, "Water bubble! Water bubble!" in an enthusiastic-and-perhaps-a-bit-delirious voice. Shortly after, she pushed Ivo out completely &ndash; with a ridiculous squeal of delight, "YAY!".</p>
+<p>I've always been really impressed with Jessica; being with her through birth completely outshines the other impressive things I've seen her do. The pushing phase of her first birth was the worst, most painful part – and it lasted a long time to boot. She was understandably worried about doing it again, but she went into it without hesitation. And the results were drastically different – she pushed for a mere 15 minutes before Ivo's amniotic sac started to crown. She started shouting, "Water bubble! Water bubble!" in an enthusiastic-and-perhaps-a-bit-delirious voice. Shortly after, she pushed Ivo out completely – with a ridiculous squeal of delight, "YAY!".</p>
 
-<p><img src="http://threebrothers.org/brendan/images/ivo-birth/05.jpg" alt="Ivo is born!" /></p>
+<p><img alt="Ivo is born!" src="http://threebrothers.org/brendan/images/ivo-birth/05.jpg" /></p>
 
-<p>Ivo came out with his bag of waters intact, and it floated around him in the tub like a diaphanous cape. He started breathing right away. We laughed and hugged and marveled over how splendidly the whole affair went &ndash; it really was an affirmative answer to our prayers. And it made me appreciate Jessica's ability to handle any situation. Her two births reminded me of this verse:</p>
+<p>Ivo came out with his bag of waters intact, and it floated around him in the tub like a diaphanous cape. He started breathing right away. We laughed and hugged and marveled over how splendidly the whole affair went – it really was an affirmative answer to our prayers. And it made me appreciate Jessica's ability to handle any situation. Her two births reminded me of this verse:</p>
 
 <blockquote>
   <p><em>I know how to be brought low, and I know how to abound. In any and every circumstance, I have learned the secret of facing plenty and hunger, abundance and need. I can do all things through him who strengthens me.</em>
-  <br/>Philippians 4:12-13</p>
+  <br />Philippians 4:12-13</p>
 </blockquote>
 
 <p>What a trip! It was like the best date/vacation/present-opening we'd had in a long time. And if you told me that's how it was going to turn out a few months ago, I'd have looked at you a little funny. It was wonderful to go through this with Jessica and watch all of her bad, difficult birth experiences be redeemed and replaced with happy, fun ones. And it's wonderful to have another healthy, perfect little son.</p>
 ]]>
-</content></entry><entry><title>Encoding iPad Video from Linux</title><link href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id><updated>2010-05-04T22:59:55.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Encoding iPad Video from Linux</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" />
+    <id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id>
+    <updated>2010-05-04T22:59:55.0-08:00</updated>
+    <summary><![CDATA[
 Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <h2>Preamble</h2>
 
 <p>I hesitate to publish these instructions because <a href="http://www.osnews.com/story/23236/Why_Our_Civilization_s_Video_Art_and_Culture_is_Threatened_by_the_MPEG-LA">h.264 is patent-encumbered and dangerous</a>, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion.</p>
 
 <h2>The Goal</h2>
 
-<p>I was given an iPad. We own several DVDs that my son Ezra loves to watch, and I would like to let him watch them on the iPad. I selected <em>WALL&bull;E</em> and tried to use <code>dvd::rip</code> (via Ubuntu's vanilla <code>dvdrip</code> package), but it failed miserably. It 'read' 100 titles, each of which really turned out to be the movie with its chapters in the wrong order.</p>
+<p>I was given an iPad. We own several DVDs that my son Ezra loves to watch, and I would like to let him watch them on the iPad. I selected <em>WALL•E</em> and tried to use <code>dvd::rip</code> (via Ubuntu's vanilla <code>dvdrip</code> package), but it failed miserably. It 'read' 100 titles, each of which really turned out to be the movie with its chapters in the wrong order.</p>
 
 <h2>World Domination in Four Easy Steps</h2>
 
@@ -262,7 +315,7 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 
 <h3>Build a better ffmpeg</h3>
 
-<p>Because my goal was to use this on my iPad, I had rather nonstandard requirements: h.264 video and AAC audio with an MPEG-4 container. As I mentioned before, these formats are far from ideal &ndash; use OGG/Theora when you can. Presumably because they are non-free, the default Ubuntu ffmpeg package doesn't include these encoders. You'll need to replace it.</p>
+<p>Because my goal was to use this on my iPad, I had rather nonstandard requirements: h.264 video and AAC audio with an MPEG-4 container. As I mentioned before, these formats are far from ideal – use OGG/Theora when you can. Presumably because they are non-free, the default Ubuntu ffmpeg package doesn't include these encoders. You'll need to replace it.</p>
 
 <p>Follow this <a href="http://ubuntuforums.org/showpost.php?p=8345112&amp;postcount=636">helpful tutorial to build ffmpeg</a> and various encoders from source. I enabled all of the options.</p>
 
@@ -270,9 +323,9 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 
 <p>The <a href="http://www.apple.com/ipad/specs/">iPad specifications</a> indicate that it can do h.264 video up to 720p at 30fps with AAC sound at 160Kbps, 48kHz. To achieve this, I did a 2-pass encoding based on an <a href="http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/">encoding guide</a> and a list of <a href="http://rodrigopolo.com/ffmpeg/cheats.html">ffmpeg cheats</a>. I also did a lot of trial and error encoding, and my most pertinent piece of advice is this: test on a small VOB first. Fail quickly.</p>
 
-<p><code class='codeBlock'>
+<p><code class="codeBlock">
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
-  <br/><br/>
+  <br /><br />
   ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0 -map 0.2 -async 1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
 </code></p>
 
@@ -301,31 +354,45 @@ for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
 
 <p><strong>Updated</strong>: I changed some audio-specific parameters because the sound wasn't lining up with the video.</p>
 ]]>
-</content></entry><entry><title>Removing the Cast</title><link href="http://threebrothers.org/brendan/blog/removing-the-cast/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-23:/brendan/blog/removing-the-cast</id><updated>2010-04-23T22:20:08.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Removing the Cast</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/removing-the-cast/" />
+    <id>tag:threebrothers.org,2010-04-23:/brendan/blog/removing-the-cast</id>
+    <updated>2010-04-23T22:20:08.0-08:00</updated>
+    <summary><![CDATA[
 Three months ago, I broke my right hand while biking to work. I made a questionable decision involving slippery metal grating on the University Bridge, and found myself doing a not-so-graceful, 20 MPH handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand. My arm was in a cast for a...]]>
-</summary><content type="html"><![CDATA[
-<p>Three months ago, I broke my right hand while biking to work. I made a questionable decision involving <a href="http://www.historylink.org/index.cfm?DisplayPage=output.cfm&amp;file_id=3139">slippery metal grating on the University Bridge</a>, and found myself doing a not-so-graceful, 20 <abbr title='Miles-per-hour'>MPH</abbr> handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand.</p>
+</summary>
+    <content type="html"><![CDATA[
+<p>Three months ago, I broke my right hand while biking to work. I made a questionable decision involving <a href="http://www.historylink.org/index.cfm?DisplayPage=output.cfm&amp;file_id=3139">slippery metal grating on the University Bridge</a>, and found myself doing a not-so-graceful, 20 <abbr title="Miles-per-hour">MPH</abbr> handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand.</p>
 
 <p>My arm was in a cast for approximately five weeks. The nature of this situation was, as you can imagine, <em>really</em> obnoxious. The aftermath of cast-wearing proved equally obnoxious: with nothing to do, muscles atrophy; joints and tendons stiffen. I found myself training to make a fist or to be strong enough to chop carrots. It was five more weeks before my wrist and hand were strong enough for me to ride to work.</p>
 
-<div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/broken-hand-sketch.png' alt='Me with a cast' />
+<div class="rightImage">
+  <img alt="Me with a cast" src="http://threebrothers.org/brendan/images/broken-hand-sketch.png" />
 </div>
 
 <p>In these weeks of recovery, I realized just how much <em>immobilization</em> had contributed to my weakened state. Small, anonymous actions are constantly reinforcing our ability to move. Small, frustrating exercises littered the path back to full recovery. As I rode the bus home yet again (while practicing flexion exercises that made me look insane), this struck me: Your work environment can be a cast, or it can be a bicycle.</p>
 
-<p>Part of what I love about small companies is that they make the bicycle the norm. There's little tolerance for inactivity or wasted motion &ndash; you must be habitually productive, or you fall off. Biking to work doesn't only get you there; it makes you stronger and fitter, too. The startups that I've worked with have all had cultures that reinforce, stretch, and strengthen their employees.</p>
+<p>Part of what I love about small companies is that they make the bicycle the norm. There's little tolerance for inactivity or wasted motion – you must be habitually productive, or you fall off. Biking to work doesn't only get you there; it makes you stronger and fitter, too. The startups that I've worked with have all had cultures that reinforce, stretch, and strengthen their employees.</p>
 
 <p>Autonomy, creativity, and low-friction communication. My goal is to always work in an environment like this. And I never want to <a href="http://www.wetherobots.com/2008/06/16/meeting-time/">feel like this</a> again.</p>
 
-<p>Challenge yourself &ndash; learn a new <a href="http://clojure.org">language</a>, a new <a href="http://lucene.apache.org/mahout/taste.html">technology</a>, or a new <a href="http://projecteuler.net/index.php?section=problems&amp;id=66">mathematical concept</a>. Think about <a href="http://www.paulgraham.com/organic.html">seeing the problems around you</a>. Get on the bicycle and ride. As for me, I'm excited to now be doing this <a href="http://www.urbanspoon.com/about">at Urbanspoon</a>.</p>
+<p>Challenge yourself – learn a new <a href="http://clojure.org">language</a>, a new <a href="http://lucene.apache.org/mahout/taste.html">technology</a>, or a new <a href="http://projecteuler.net/index.php?section=problems&amp;id=66">mathematical concept</a>. Think about <a href="http://www.paulgraham.com/organic.html">seeing the problems around you</a>. Get on the bicycle and ride. As for me, I'm excited to now be doing this <a href="http://www.urbanspoon.com/about">at Urbanspoon</a>.</p>
 ]]>
-</content></entry><entry><title>Android Impressions</title><link href="http://threebrothers.org/brendan/blog/android-impressions/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id><updated>2010-04-13T00:30:36.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Android Impressions</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/android-impressions/" />
+    <id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id>
+    <updated>2010-04-13T00:30:36.0-08:00</updated>
+    <summary><![CDATA[
  Fitter, happier, more pastries. Thanks to my latest aquatic shenanigans, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone. Product quality Hardware Negative: Only 4.5GB of space by default (512MB flash + 4GB SD) Ge...]]>
-</summary><content type="html"><![CDATA[
-<div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/android-baked-goods.jpg' title='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' alt='Credit: http://www.flickr.com/photos/niallkennedy/4118685804/' />
-  <br/>
+</summary>
+    <content type="html"><![CDATA[
+<div class="rightImage">
+  <img alt="Credit: http://www.flickr.com/photos/niallkennedy/4118685804/" title="Credit: http://www.flickr.com/photos/niallkennedy/4118685804/" src="http://threebrothers.org/brendan/images/android-baked-goods.jpg" />
+  <br />
   <em>Fitter, happier, more pastries.</em>
 </div>
 
@@ -340,7 +407,7 @@ Three months ago, I broke my right hand while biking to work. I made a questiona
 <ul>
 <li>Only 4.5GB of space by default (512MB flash + 4GB SD)</li>
 <li>Generally poorer battery performance than the iPhone</li>
-<li>Five buttons &ndash; <abbr title='Keep it simple, stupid!'>KISS</abbr></li>
+<li>Five buttons – <abbr title="Keep it simple, stupid!">KISS</abbr></li>
 </ul>
 
 <p>Positive:</p>
@@ -374,18 +441,18 @@ Three months ago, I broke my right hand while biking to work. I made a questiona
 <li>Apps are cloud-oriented; no more syncing through slow, clunky iTunes</li>
 </ul>
 
-<div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/nexus-one-buttons.jpg' title='Credit: http://www.flickr.com/photos/naka7a/4356824760/' alt='Credit: http://www.flickr.com/photos/naka7a/4356824760/' />
-  <br/>
+<div class="rightImage">
+  <img alt="Credit: http://www.flickr.com/photos/naka7a/4356824760/" title="Credit: http://www.flickr.com/photos/naka7a/4356824760/" src="http://threebrothers.org/brendan/images/nexus-one-buttons.jpg" />
+  <br />
   <em>Look at those wee, beady buttons.</em>
 </div>
 
-<p>I found the UI to be the biggest barrier for me. I disliked the Nexus One's <a href="http://www.youtube.com/watch?v=TPMS6tGOACo">pentavirate</a> of buttons before I had even turned it on. 'Back' and 'Search' are given permanent hardware real estate despite their limited applicability &ndash; many (if not most) apps have no use for them. 'Home' is present, but given a middle position with no tactile means of locating it &ndash; it's hard to switch apps in the dark.</p>
+<p>I found the UI to be the biggest barrier for me. I disliked the Nexus One's <a href="http://www.youtube.com/watch?v=TPMS6tGOACo">pentavirate</a> of buttons before I had even turned it on. 'Back' and 'Search' are given permanent hardware real estate despite their limited applicability – many (if not most) apps have no use for them. 'Home' is present, but given a middle position with no tactile means of locating it – it's hard to switch apps in the dark.</p>
 
-<p>And then there's the 'Menu' button &ndash; this is where the biggest problems lie. I'm an engineer, but I have a <a href="http://ischool.uw.edu/informatics/prospective/at_uw.aspx">degree in Informatics</a> &ndash; I have enough interface design and usability knowledge to cause trouble. Here's what I see in the 'Menu' button: the iPhone makes good use of <em>affordances</em>; Android does not. What do I mean?</p>
+<p>And then there's the 'Menu' button – this is where the biggest problems lie. I'm an engineer, but I have a <a href="http://ischool.uw.edu/informatics/prospective/at_uw.aspx">degree in Informatics</a> – I have enough interface design and usability knowledge to cause trouble. Here's what I see in the 'Menu' button: the iPhone makes good use of <em>affordances</em>; Android does not. What do I mean?</p>
 
 <blockquote>
-  <p><a name='rn1'></a><em>An <strong>affordance</strong> is an aspect of an object that makes it obvious how the object is to be used. [&hellip;] Affordances must be visible to aid interpretation.</em><sup><a href='#fn1'>1</a></sup></p>
+  <p><a name="rn1"></a><em>An <strong>affordance</strong> is an aspect of an object that makes it obvious how the object is to be used. […] Affordances must be visible to aid interpretation.</em><sup><a href="#fn1">1</a></sup></p>
 </blockquote>
 
 <p>The 'Menu' button doesn't make its functions obvious. If you press it, a menu comes up; if you hold it down, the on-screen keyboard appears. Both functions could be loosely associated with the button's graphic, but one would never guess them by simply looking at the button. This is minor, though; one can figure this functionality out quickly, and once it's known, that's that. What is bad is the precedent that this button sets for applications.</p>
@@ -399,24 +466,24 @@ Three months ago, I broke my right hand while biking to work. I made a questiona
 <p>By convention, <strong>every Android interface has broken affordances</strong>. Apps are asked to obscure large portions of functionality in a hidden menu. Contrast this with Apple's in-depth <a href="http://developer.apple.com/iphone/library/documentation/UserExperience/Conceptual/MobileHIG/PrinciplesAndCharacteristics/PrinciplesAndCharacteristics.html#//apple_ref/doc/uid/TP40006556-CH7-SW1">iPhone Human Interface Guidelines</a>:</p>
 
 <blockquote>
-  <p><em>Presenting choices to the user [&hellip;] allows them to concentrate on accomplishing tasks with your application, instead of remembering how to operate it.</em></p>
+  <p><em>Presenting choices to the user […] allows them to concentrate on accomplishing tasks with your application, instead of remembering how to operate it.</em></p>
 </blockquote>
 
-<p>People tout simplicity as being the aspect of Apple's design that makes it superior. What they're trying to articulate is that the consistent application of good affordances allows users to approach every interface with knowledge about how to use it. The UI is not only simple &ndash; it's <em>understood</em>. Apple's defaults are a shared set of <em>visible</em> controls &ndash; (almost) everything that can be done is displayed using a common language. Android causes apps to fragment the user's knowledge &mdash; you have to individually <em>discover</em> and then <em>remember</em> exactly what can be done by every app because much of the functionality is invisible.</p>
+<p>People tout simplicity as being the aspect of Apple's design that makes it superior. What they're trying to articulate is that the consistent application of good affordances allows users to approach every interface with knowledge about how to use it. The UI is not only simple – it's <em>understood</em>. Apple's defaults are a shared set of <em>visible</em> controls – (almost) everything that can be done is displayed using a common language. Android causes apps to fragment the user's knowledge — you have to individually <em>discover</em> and then <em>remember</em> exactly what can be done by every app because much of the functionality is invisible.</p>
 
 <h2>For consumers and developers</h2>
 
-<div class='rightImage'>
-  <img src='http://threebrothers.org/brendan/images/babbage-engine.jpg' alt='Babbage Analytical Engine' />
-  <br/>
+<div class="rightImage">
+  <img alt="Babbage Analytical Engine" src="http://threebrothers.org/brendan/images/babbage-engine.jpg" />
+  <br />
   <em>The Apple Analytical Engine<br />only accepts papyrus punch cards.</em>
 </div>
 
 <p>I've spent a bit of time talking about what I perceive to be the biggest weakness in the Android platform. This section is <em>much</em> friendlier towards Android.</p>
 
-<p>Android is a platform for hackers. It's open source, and can be hacked using any <abbr title='Java Virtual Machine'>JVM</abbr> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked &ndash; that is, you can use them with any network.</p>
+<p>Android is a platform for hackers. It's open source, and can be hacked using any <abbr title="Java Virtual Machine">JVM</abbr> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked – that is, you can use them with any network.</p>
 
-<p>I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things <em>for Apple</em>. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T &ndash; we want competition to force continued innovation.</p>
+<p>I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things <em>for Apple</em>. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T – we want competition to force continued innovation.</p>
 
 <p>There are copious blog posts discussing the negative ramifications of Apple's closed platform. If you've read none of them, <em><a href="http://diveintomark.org/archives/2010/01/29/tinkerers-sunset">Tinkerer's Sunset</a></em> and the <a href="http://al3x.net/2010/01/28/ipad.html">post of Alex Payne's</a> that inspired it (or at the very least inspired the title) are good start. I don't have much to add here. Limiting developers' tools or languages stifles innovation. The inverted version is what attracts me to Android: granting freedom to developers promotes innovation.</p>
 
@@ -424,18 +491,25 @@ Three months ago, I broke my right hand while biking to work. I made a questiona
 
 <p>The Nexus One hardware and the openness of the Android platform outweigh any UI advantage held by the iPhone. As this assertion comes from a guy who spends upwards of 8 hours a day inside emacs or a Linux terminal, it should be taken with a few grains of salt. When my contract with AT&amp;T is up, however, I'll be looking to the Android market for my next phone. And I'd love to get ahold of an Android tablet.</p>
 
-<hr/>
+<hr />
 
-<p><sup>1</sup> <span class='fn'>Mary Beth Rosson and John M. Carroll, <em><a href='http://books.google.com/books?id=RRC9IODz4VsC&amp;pg=PA124'>Usability Engineering</a></em> (Morgan Kaufmann, 2002), 124. <a name='fn1' href='#rn1'>&crarr;</a></span></p>
+<p><sup>1</sup> <span class="fn">Mary Beth Rosson and John M. Carroll, <em><a href="http://books.google.com/books?id=RRC9IODz4VsC&amp;pg=PA124">Usability Engineering</a></em> (Morgan Kaufmann, 2002), 124. <a href="#rn1" name="fn1">↵</a></span></p>
 ]]>
-</content></entry><entry><title>iPhone Toilet Debacle Redux: The Backlight</title><link href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-29:/brendan/blog/iphone-toilet-debacle-redux-backlight</id><updated>2010-03-29T13:43:21.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>iPhone Toilet Debacle Redux: The Backlight</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/" />
+    <id>tag:threebrothers.org,2010-03-29:/brendan/blog/iphone-toilet-debacle-redux-backlight</id>
+    <updated>2010-03-29T13:43:21.0-08:00</updated>
+    <summary><![CDATA[
 Last Tuesday marked the 485th day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet. No...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>Last Tuesday marked the 485<sup>th</sup> day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet.</p>
 
-<div class='rightImage'><img src='http://threebrothers.org/brendan/images/cat-toilet.jpg' alt='' title='Credit: http://www.flickr.com/photos/harvardavenue/79221382/' /><br/><em>No!!!! My Phone!!!!</em></div>
+<div class="rightImage"><img title="Credit: http://www.flickr.com/photos/harvardavenue/79221382/" alt="" src="http://threebrothers.org/brendan/images/cat-toilet.jpg" /><br /><em>No!!!! My Phone!!!!</em></div>
 
-<p>You've probably experienced the sinking feeling that accompanies circumstances such as this one. My wife fished the phone out and I immediately shut it down, dried it off, and stuck it into a glass full of rice. What a crappy situation &ndash; pun indended. I began figuring out how I would justify buying a <em>third</em> ridiculously expensive phone-computer given my complete inability to protect said device.</p>
+<p>You've probably experienced the sinking feeling that accompanies circumstances such as this one. My wife fished the phone out and I immediately shut it down, dried it off, and stuck it into a glass full of rice. What a crappy situation – pun indended. I began figuring out how I would justify buying a <em>third</em> ridiculously expensive phone-computer given my complete inability to protect said device.</p>
 
 <p>Over the next few days, I discovered that the phone was still largely functional. The backlight was completely dead, but I could receive calls, connect to WiFi, and (most importantly) the touchscreen still worked. Adjusting brightness settings did nothing for the backlight. My tests were brief, and I placed the phone back in its rice cocoon afterwards with hopes that more moisture would be absorbed.</p>
 
@@ -451,16 +525,23 @@ Last Tuesday marked the 485th day since I dropped my first-generation iPhone in 
 
 <p>I was skeptical, but after 5 days of no progress I thought it was worth a shot. Because I don't really ever leave Linux, I hadn't yet updated to the 3.1.3 OS release. I did this upgrade in lieu of the 'factory restore' step, and (after completing step 3) was delighted to find my backlight fully functional! Major kudos to Phil for locating this information.</p>
 
-<p>It's interesting to engage in wild speculation about the hardware/software details that could lead to this. Perhaps some hardware state was corrupted by a short, and the resulting value had no valid meaning for the backlight. Normal brightness adjustment operated on the value, but didn't change enough of it to make it meaningful again (perhaps bit operations on an int that was saved as much larger than it's theoretical max &ndash; only operating on the lower order bits). Part of the upgrade/restore procedure writes sane defaults into these locations, restoring functionality. Who knows.</p>
+<p>It's interesting to engage in wild speculation about the hardware/software details that could lead to this. Perhaps some hardware state was corrupted by a short, and the resulting value had no valid meaning for the backlight. Normal brightness adjustment operated on the value, but didn't change enough of it to make it meaningful again (perhaps bit operations on an int that was saved as much larger than it's theoretical max – only operating on the lower order bits). Part of the upgrade/restore procedure writes sane defaults into these locations, restoring functionality. Who knows.</p>
 
 <h3>Coda</h3>
 
 <p>In the intervening days between my phone's death and revival, I got to play with a Nexus One from work. I'll write a post comparing the two soon. And I'm <em>really</em> glad that I don't have to shell out for a new phone... yet.</p>
 ]]>
-</content></entry><entry><title>Memory and Ruby :symbols</title><link href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id><updated>2010-03-01T21:32:32.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Memory and Ruby :symbols</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" />
+    <id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id>
+    <updated>2010-03-01T21:32:32.0-08:00</updated>
+    <summary><![CDATA[
 Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be rewritten in many different ways. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the Symbol. First, compare these two lines: (1) ...]]>
-</summary><content type="html"><![CDATA[
-<p>Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be <a href='http://refactormycode.com/codes/2-ruby-simple-loop' rel='nofollow external'>rewritten in many different ways</a>. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the <a href='http://ruby-doc.org/core/classes/Symbol.html' rel='nofollow external'>Symbol</a>.</p>
+</summary>
+    <content type="html"><![CDATA[
+<p>Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be <a rel="nofollow external" href="http://refactormycode.com/codes/2-ruby-simple-loop">rewritten in many different ways</a>. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the <a rel="nofollow external" href="http://ruby-doc.org/core/classes/Symbol.html">Symbol</a>.</p>
 
 <p>First, compare these two lines:</p>
 
@@ -468,11 +549,11 @@ Ruby provides a really flexible and sugary syntax. A lot can be expressed in one
 (2) {'foo' =&gt; 'bar', 'qux' =&gt; 'quux'}
 </code></pre>
 
-<p>I'd say that Ruby developers default to (1) &ndash; at least, most Ruby code that I've worked with tends to favor that variant. This seems to be in part a matter of aesthetic taste, and a subtle way to differentiate between a map's keys and values. Sending a hash of symbolized keys to a method has become a fairly common way of implementing complex options &ndash; it's <a href='http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M002263' rel='nofollow external'>prevalent in Rails</a>. Rails uses this construct so often that it adds <a href='http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/Hash/Keys.html#M001190' rel='nofollow external'>extensions to the native <code>Hash</code></a> object to facilitate turning their <code>String</code> keys into <code>Symbols</code> and <em>vice versa</em>.</p>
+<p>I'd say that Ruby developers default to (1) – at least, most Ruby code that I've worked with tends to favor that variant. This seems to be in part a matter of aesthetic taste, and a subtle way to differentiate between a map's keys and values. Sending a hash of symbolized keys to a method has become a fairly common way of implementing complex options – it's <a rel="nofollow external" href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M002263">prevalent in Rails</a>. Rails uses this construct so often that it adds <a rel="nofollow external" href="http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/Hash/Keys.html#M001190">extensions to the native <code>Hash</code></a> object to facilitate turning their <code>String</code> keys into <code>Symbols</code> and <em>vice versa</em>.</p>
 
 <h2>Symbols to the rescue!</h2>
 
-<p>There are some really common situations where (1) is the best option. A variation of <a href='http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols' rel='external'>the canonical example</a> follows: Say you're creating thousands of hashes to represent a common JSON object &ndash; a temperature reading. They all have the same key structure, but the data differ.</p>
+<p>There are some really common situations where (1) is the best option. A variation of <a rel="external" href="http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols">the canonical example</a> follows: Say you're creating thousands of hashes to represent a common JSON object – a temperature reading. They all have the same key structure, but the data differ.</p>
 
 <pre><code>sea = {'lat' =&gt; 47.53, 'lon' =&gt; 122.30, 'temp' =&gt; 15.0}
 sf  = {'lat' =&gt; 37.79, 'lon' =&gt; 122.41, 'temp' =&gt; 25.0}
@@ -482,17 +563,17 @@ puts sea.keys[0].object_id     # 86288110
 puts sf.keys[0].object_id      # 86345290
 </code></pre>
 
-<p>So it's 15&deg;C in Seattle and 25&deg;C in San Francisco. Typical. What's more interesting is that although your keys are equal, they are two different <code>String</code> objects. With 1,000,000 such hashes, you're carrying around 3,000,000 strings that take up a lot more space than the <code>Float</code> entries.</p>
+<p>So it's 15°C in Seattle and 25°C in San Francisco. Typical. What's more interesting is that although your keys are equal, they are two different <code>String</code> objects. With 1,000,000 such hashes, you're carrying around 3,000,000 strings that take up a lot more space than the <code>Float</code> entries.</p>
 
-<p>Symbols solve this issue. At the C level of Ruby, each symbol maps to an unsigned integer &ndash; the <a href='http://en.wikipedia.org/wiki/Symbol_table' rel='nofollow external'>symbol table</a> has one entry per symbol, and the entries exist as long as the process lives.</p>
+<p>Symbols solve this issue. At the C level of Ruby, each symbol maps to an unsigned integer – the <a rel="nofollow external" href="http://en.wikipedia.org/wiki/Symbol_table">symbol table</a> has one entry per symbol, and the entries exist as long as the process lives.</p>
 
 <h2>Wait, why is that still lying around?</h2>
 
 <p>Symbols are tiny and combine identity with equality, but <strong>they're never garbage collected</strong>. That's how the symbol table implementation works. So, replacing 3,000,000 Strings with 3 Symbols is a great improvement. But in a long-running process that does a lot of GC and uses random, unique keys, symbols can hurt.</p>
 
-<p>To illustrate the problem, I grepped through the iLike codebase for unique symbols. I stored them as Strings only, read the current memory usage, and then converted them all to Symbols using <code>to_sym</code>. The isolated increase in memory usage was ~<strong>1.2MB</strong> &ndash; and this test can't even find symbols created programmatically!</p>
+<p>To illustrate the problem, I grepped through the iLike codebase for unique symbols. I stored them as Strings only, read the current memory usage, and then converted them all to Symbols using <code>to_sym</code>. The isolated increase in memory usage was ~<strong>1.2MB</strong> – and this test can't even find symbols created programmatically!</p>
 
-<p>Now, that figure represents &lt;1% of the memory used by a typical process of ours. But that consumption adds to Ruby's large low water mark for memory. If our application created symbols for arbitrary user input, we could easily choke a box into swapdeath. Incidentally, this is one reason why <code>HashWithIndifferentAccess</code> stores its keys internally as Strings &ndash; each Rails request creates a HWIA with all of the query parameters and GCs it later. Automatically converting query parameter names to symbols would create a vector for an easy <acronym title='Denial of Service'>DOS</acronym> attack.</p>
+<p>Now, that figure represents &lt;1% of the memory used by a typical process of ours. But that consumption adds to Ruby's large low water mark for memory. If our application created symbols for arbitrary user input, we could easily choke a box into swapdeath. Incidentally, this is one reason why <code>HashWithIndifferentAccess</code> stores its keys internally as Strings – each Rails request creates a HWIA with all of the query parameters and GCs it later. Automatically converting query parameter names to symbols would create a vector for an easy <acronym title="Denial of Service">DOS</acronym> attack.</p>
 
 <h2>Guidelines</h2>
 
@@ -503,9 +584,16 @@ puts sf.keys[0].object_id      # 86345290
 <li>Unique, high cardinality values or values that will be discarded should not be Symbols. They need to be garbage collected.</li>
 </ul>
 ]]>
-</content></entry><entry><title>Disabling Flash in Chrome, and Other Tricks</title><link href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id><updated>2010-02-25T20:48:12.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Disabling Flash in Chrome, and Other Tricks</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" />
+    <id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id>
+    <updated>2010-02-25T20:48:12.0-08:00</updated>
+    <summary><![CDATA[
 I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture: google-chrome --disable-plugins Previously I had resorted to moving libflashplayer.so or removing read access from it, but this is a much more controlled method. The are a ton of other Chrome switches that I on...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture:</p>
 
 <pre><code>google-chrome --disable-plugins
@@ -513,18 +601,25 @@ I just learned that there is a handy switch one can pass while launching Chrome 
 
 <p>Previously I had resorted to moving <code>libflashplayer.so</code> or removing read access from it, but this is a much more controlled method.</p>
 
-<p>The are a ton of <a href="http://www.google.com/codesearch/p?hl=en#h0RrPvyPu-c/chrome/common/chrome_switches.cc">other Chrome switches</a> that I only found by browsing the source &ndash; good thing it's available. Among them is <code>allow-file-access-from-files</code>, which would have come in handy yesterday.</p>
+<p>The are a ton of <a href="http://www.google.com/codesearch/p?hl=en#h0RrPvyPu-c/chrome/common/chrome_switches.cc">other Chrome switches</a> that I only found by browsing the source – good thing it's available. Among them is <code>allow-file-access-from-files</code>, which would have come in handy yesterday.</p>
 ]]>
-</content></entry><entry><title>Closures in Java, Ruby, and Duby</title><link href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id><updated>2010-02-05T23:26:57.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Closures in Java, Ruby, and Duby</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/" />
+    <id>tag:threebrothers.org,2010-02-05:/brendan/blog/closures-in-java-ruby-and-duby</id>
+    <updated>2010-02-05T23:26:57.0-08:00</updated>
+    <summary><![CDATA[
 On Wednesday, I noticed Phil Hagelberg's Android-Duby app playground. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port iLike's Local Concerts app to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes Duby's promise to c...]]>
-</summary><content type="html"><![CDATA[
-<p>On Wednesday, I noticed Phil Hagelberg's <a href="http://github.com/technomancy/Garrett" title="Garret: A playground for Android Duby development">Android-Duby app playground</a>. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port <a href="http://www.ilike.com/mobile/concerts">iLike's <em>Local Concerts</em> app</a> to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes <a href="http://github.com/headius/duby">Duby</a>'s promise to convert Ruby-like syntax to JVM bytecode particularly enticing.</p>
+</summary>
+    <content type="html"><![CDATA[
+<p>On Wednesday, I noticed Phil Hagelberg's <a title="Garret: A playground for Android Duby development" href="http://github.com/technomancy/Garrett">Android-Duby app playground</a>. This piqued my interest for several reasons, but a primary one is the work Phil Bogle is doing to port <a href="http://www.ilike.com/mobile/concerts">iLike's <em>Local Concerts</em> app</a> to the Android platform. Many people have found Java's syntax to be too rigid and verbose, and this makes <a href="http://github.com/headius/duby">Duby</a>'s promise to convert Ruby-like syntax to JVM bytecode particularly enticing.</p>
 
-<div class="rightImage"><img src="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/badges.png" alt="Bandit from 'The Treasure of the Sierra Madre'" /><br/><em>Closures? We don't need no stinkin' closures!</em></div>
+<div class="rightImage"><img alt="Bandit from 'The Treasure of the Sierra Madre'" src="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/badges.png" /><br /><em>Closures? We don't need no stinkin' closures!</em></div>
 
 <p>Having only taken a cursory glance at the concept, we both agreed that Duby would be most useful if it supported Ruby's block syntax. Phil (Bogle) was expressing frustration with Java's lame substitute for closures: the anonymous class. Not only is the construct syntactically and conceptually verbose, but the restriction of scoped access to only final variables is <a href="http://www.cuberick.com/2009/08/anonymous-inner-classes-poor-mans.html">vastly inferior to true closures</a>.</p>
 
-<p>Let's begin with some definitions. For our purposes, closure is <em>not</em> the emotional freedom you achieve after letting go of something big and devastating. Rather, it's a function that is a <em>first-class object</em> &mdash; this means it can be passed and stored as a standard variable &mdash; that is bound to variables in a certain scope. Both Java and Ruby achieve passing by instantiating Objects for new closures.</p>
+<p>Let's begin with some definitions. For our purposes, closure is <em>not</em> the emotional freedom you achieve after letting go of something big and devastating. Rather, it's a function that is a <em>first-class object</em> — this means it can be passed and stored as a standard variable — that is bound to variables in a certain scope. Both Java and Ruby achieve passing by instantiating Objects for new closures.</p>
 
 <p>Examine this contrived example:</p>
 
@@ -550,7 +645,7 @@ public Runnable printClosure(String text) {
 1 error
 </code></pre>
 
-<p>To make this work as desired, we need to copy <code>text</code> into a final variable: <code>final String fText = text;</code>. As a side effect, the Java "closure" won't be able to modify variables it refers to or see modifications made to them. But why? The answer lies in the particulars of Java scoping. This instance of <code>Runnable</code> is an anonymous inner class &mdash; it has its own unique scope and limited access to the scopes of other classes. The <code>text</code> variable disappears once the <code>printClosure</code> function returns, so our <code>Runnable</code> can't hang on to it. It also can't really <em>see</em> it &mdash; making it <code>final</code> makes it OK for the value to be read after that scope is being eaten by GC.</p>
+<p>To make this work as desired, we need to copy <code>text</code> into a final variable: <code>final String fText = text;</code>. As a side effect, the Java "closure" won't be able to modify variables it refers to or see modifications made to them. But why? The answer lies in the particulars of Java scoping. This instance of <code>Runnable</code> is an anonymous inner class — it has its own unique scope and limited access to the scopes of other classes. The <code>text</code> variable disappears once the <code>printClosure</code> function returns, so our <code>Runnable</code> can't hang on to it. It also can't really <em>see</em> it — making it <code>final</code> makes it OK for the value to be read after that scope is being eaten by GC.</p>
 
 <p>But this severely limits the usefulness of passing the function. The following Ruby can't be implemented with Java's anonymous inner class:</p>
 
@@ -577,11 +672,11 @@ run_block(&amp;make_block)
 # again with 1: 2
 </code></pre>
 
-<div class="rightImage"><img src="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/scope.png" alt="Credit: http://www.flickr.com/photos/doviende/95495500/" title="Credit: http://www.flickr.com/photos/doviende/95495500/" /><br/><em>That's not a scope. <b>This</b> is a scope!</em></div>
+<div class="rightImage"><img title="Credit: http://www.flickr.com/photos/doviende/95495500/" alt="Credit: http://www.flickr.com/photos/doviende/95495500/" src="http://threebrothers.org/brendan/blog/closures-in-java-ruby-and-duby/scope.png" /><br /><em>That's not a scope. <b>This</b> is a scope!</em></div>
 
 <p>See, Ruby's blocks are closures. They are <a href="http://onestepback.org/index.cgi/Tech/Ruby/RubyBindings.rdoc">given the local scope</a> in which they're created. So <code>block</code> can always see and change <code>a</code> and <code>b</code>, and there's only ever one instance of <code>a</code> and <code>b</code>. No duplication. Full access. This let's us create some truly <a href="http://weblog.raganwald.com/2007/01/closures-and-higher-order-functions.html">awesome control structures and higher-order functions</a> that are unimaginable in Java. Ruby does this by always providing a <code>Binding</code> object for the current scope. A closure will copy the current binding and add new local variables to it, leaving the preexisting variables accessible.</p>
 
-<p>A natural question now follows: "Can we do real closures in any JVM language?" Well, actually, yeah. <a href="http://clojure.org/functional_programming#toc2">Clojure does it</a>, and <a href="http://www.scala-lang.org/node/4960">so does Scala</a>. That question was something of a straw man &mdash; a little bit of thought will lead us to conclude that Java's syntax is to blame rather than the machine itself. And as luck would have it, Duby does it too.</p>
+<p>A natural question now follows: "Can we do real closures in any JVM language?" Well, actually, yeah. <a href="http://clojure.org/functional_programming#toc2">Clojure does it</a>, and <a href="http://www.scala-lang.org/node/4960">so does Scala</a>. That question was something of a straw man — a little bit of thought will lead us to conclude that Java's syntax is to blame rather than the machine itself. And as luck would have it, Duby does it too.</p>
 
 <p>However, Duby has one interesting constraint: its compiler can optionally produce either <code>.class</code> or <code>.java</code> files. This places us back within the restrictive confines of Java syntax! Fortunately, the Duby folk have come up with a really neat hack to make the closures work.</p>
 
@@ -593,22 +688,29 @@ run_block(&amp;make_block)
 <li>Performs all operations (whether from the closure or in the local scope) on shared variables by accessing them as members of the binding object.</li>
 </ul>
 
-<p>The binding object gets to live beyond the life of the local scope since the closure holds on to its reference. It provides public access to its members, so either the local scope or the closure can modify these free variables. Unfortunately, the syntax for writing this is so verbose and fragile that it completely destroys its viability &mdash; unless a compiler like Duby's is producing the code.</p>
+<p>The binding object gets to live beyond the life of the local scope since the closure holds on to its reference. It provides public access to its members, so either the local scope or the closure can modify these free variables. Unfortunately, the syntax for writing this is so verbose and fragile that it completely destroys its viability — unless a compiler like Duby's is producing the code.</p>
 
 <p>For more details, check out <a href="http://kenai.com/projects/duby/pages/DubyBlocks">the DubyBlocks Wiki page</a>.</p>
 
-<p><br style="clear:both;"/></p>
+<p><br style="clear:both;" /></p>
 ]]>
-</content></entry><entry><title>iPad: Falling Short of the Past</title><link href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id><updated>2010-01-30T09:51:51.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>iPad: Falling Short of the Past</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" />
+    <id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id>
+    <updated>2010-01-30T09:51:51.0-08:00</updated>
+    <summary><![CDATA[
  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will inveigle unsuspecting hackers into a gloomy extinction. For the most part, however, the response has amounted to a banal whine a...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>
-  <img src="http://threebrothers.org/brendan/images/jobs-ipad.png" alt="Steve Jobs and the iPad" style="float:right;margin:0 0 0 1em;" />
-  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will <a href="http://al3x.net/2010/01/28/ipad.html" rel="nofollow">inveigle unsuspecting hackers into a gloomy extinction</a>. For the most part, however, the response has amounted to a <a href="http://www.youtube.com/watch?v=lQnT0zp8Ya4" rel="nofollow">banal whine</a> about Flash, multitasking, and maxi pads. Why anyone would complain about <em>not</em> being continually tortured by Flash is beyond me&mdash;but that's another post entirely.
+  <img style="float:right;margin:0 0 0 1em;" alt="Steve Jobs and the iPad" src="http://threebrothers.org/brendan/images/jobs-ipad.png" />
+  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will <a rel="nofollow" href="http://al3x.net/2010/01/28/ipad.html">inveigle unsuspecting hackers into a gloomy extinction</a>. For the most part, however, the response has amounted to a <a rel="nofollow" href="http://www.youtube.com/watch?v=lQnT0zp8Ya4">banal whine</a> about Flash, multitasking, and maxi pads. Why anyone would complain about <em>not</em> being continually tortured by Flash is beyond me—but that's another post entirely.
 </p>
 
 <p>
-  I'm continually led to appreciate the history of Computer Science. I write software for a living, and I've used a number of different languages. I began in O-BASIC, and I've taken an analogous path to the one described by Paul Graham in <em><a href="http://www.paulgraham.com/icad.html" rel="nofollow">Revenge of the Nerds</a></em>:
+  I'm continually led to appreciate the history of Computer Science. I write software for a living, and I've used a number of different languages. I began in O-BASIC, and I've taken an analogous path to the one described by Paul Graham in <em><a rel="nofollow" href="http://www.paulgraham.com/icad.html">Revenge of the Nerds</a></em>:
 </p>
 
 <blockquote>
@@ -620,11 +722,11 @@ run_block(&amp;make_block)
 </blockquote>
 
 <p>
-  &quot;Programming languages have almost caught up with 1958.&quot; Something about that really resonates with me, and I don't think it's only because I've been drinking the Lisp-flavored Clojure Kool-Aid. In fact, I'm sure it's not.
+  "Programming languages have almost caught up with 1958." Something about that really resonates with me, and I don't think it's only because I've been drinking the Lisp-flavored Clojure Kool-Aid. In fact, I'm sure it's not.
 </p>
 
 <p>
-  I remember the day I had the <acronym title="Model-View-Controller">MVC</acronym> epiphany. I'd worked a little bit in <a href="http://static.springsource.org/spring/docs/2.0.x/reference/mvc.html" rel="nofollow">Spring's framework</a> and had recently dove into the relatively soothing balm of Rails. My prior projects hadn't had any really clean separation. &quot;Man,&quot; I thought, &quot;what a great, new invention. I don't know how people developed web applications before MVC existed.&quot; Then I discovered that <a href="http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html">MVC originated in Xerox PARC in the 70s</a>. Of course, I should have known better&mdash;I had to read all sorts of PARC papers in school. Never underestimate your own capacity to forget important and interesting information.
+  I remember the day I had the <acronym title="Model-View-Controller">MVC</acronym> epiphany. I'd worked a little bit in <a rel="nofollow" href="http://static.springsource.org/spring/docs/2.0.x/reference/mvc.html">Spring's framework</a> and had recently dove into the relatively soothing balm of Rails. My prior projects hadn't had any really clean separation. "Man," I thought, "what a great, new invention. I don't know how people developed web applications before MVC existed." Then I discovered that <a href="http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html">MVC originated in Xerox PARC in the 70s</a>. Of course, I should have known better—I had to read all sorts of PARC papers in school. Never underestimate your own capacity to forget important and interesting information.
 </p>
 
 <p>
@@ -632,28 +734,28 @@ run_block(&amp;make_block)
 </p>
 
 <p>
-  Now, it would be silly of me to quote <em>Revenge of the Nerds</em> and then make some (de)moralizing point about &quot;industry best practices.&quot; My point thus far is this: for a given problem, it's likely that an efficient and elegant solution exists already (even if only in concept). And very often, it was invented <em>years</em> ago. <b>It is good to be well-versed in the history of your trade.</b> This will help you know how to think about whole classes of problems. And this&mdash;finally&mdash;brings me back to the iPad.
+  Now, it would be silly of me to quote <em>Revenge of the Nerds</em> and then make some (de)moralizing point about "industry best practices." My point thus far is this: for a given problem, it's likely that an efficient and elegant solution exists already (even if only in concept). And very often, it was invented <em>years</em> ago. <b>It is good to be well-versed in the history of your trade.</b> This will help you know how to think about whole classes of problems. And this—finally—brings me back to the iPad.
 </p>
 
 <p>
-  <img src="http://threebrothers.org/brendan/images/parcpad.png" alt="The ParcPad" style="float:left;margin:0 1em 0 0;" />
-  Critics are right to be at least a little disappointed, but not due to the likes of Flash or multitasking. The iPhone and iPad are still behind research prototyped at PARC (yes, them again) in the late 80s. Mark Weiser's <a href="http://sandbox.xerox.com/ubicomp/" rel="nofollow">Ubiquitous Computing research</a> conceived of and built a variety of devices for home and office use&mdash;called tabs, pads, and boards&mdash;sized just like iPhones, iPads, and large LCD screens. They even wrote software and built networking devices to stitch the environment together.
+  <img style="float:left;margin:0 1em 0 0;" alt="The ParcPad" src="http://threebrothers.org/brendan/images/parcpad.png" />
+  Critics are right to be at least a little disappointed, but not due to the likes of Flash or multitasking. The iPhone and iPad are still behind research prototyped at PARC (yes, them again) in the late 80s. Mark Weiser's <a rel="nofollow" href="http://sandbox.xerox.com/ubicomp/">Ubiquitous Computing research</a> conceived of and built a variety of devices for home and office use—called tabs, pads, and boards—sized just like iPhones, iPads, and large LCD screens. They even wrote software and built networking devices to stitch the environment together.
 </p>
 
 <p>
-  It's obvious that Xerox has had a profound impact on Steve Jobs, from the Lisa to the iPhone. When I first heard about the iPhone in 2007, I instantly thought of the ParcTab. Hardware has improved tremendously since the ParcTab experiments and <a href="http://www.ubiq.com/weiser/researchreports.htm" rel="nofollow">papers</a>. Apple now reaps the benefits of faster and cheaper processors, ram, and storage. Wireless networking is pervasive and fast. Screens are vastly better, and touch inputs have obviously improved. The device is supremely capable. But the ubiquitous user interface is completely absent.
+  It's obvious that Xerox has had a profound impact on Steve Jobs, from the Lisa to the iPhone. When I first heard about the iPhone in 2007, I instantly thought of the ParcTab. Hardware has improved tremendously since the ParcTab experiments and <a rel="nofollow" href="http://www.ubiq.com/weiser/researchreports.htm">papers</a>. Apple now reaps the benefits of faster and cheaper processors, ram, and storage. Wireless networking is pervasive and fast. Screens are vastly better, and touch inputs have obviously improved. The device is supremely capable. But the ubiquitous user interface is completely absent.
 </p>
 
 <p>
-  I recently advised a nontechnical friend about purchasing an iPhone. She wanted to know how it interfaced with her computer and TV. &quot;It really doesn't,&quot; was my response. But she expected it to. It doesn't take an engineer to see that devices like the iPhone and iPad <em>ought</em> to operate as an extension to the computer or TV. Instead, we have this media syncing model that's reminiscent of some lousy corporate <acronym title="Personal digital assistant">PDA</acronym>. Technology pundits who are quibbling about little features are missing the point: the iPad should have made the jump to seamless, ubiquitous integration. This would have been a technological revolution equivalent to the introduction of the iPhone. This is the next step.
+  I recently advised a nontechnical friend about purchasing an iPhone. She wanted to know how it interfaced with her computer and TV. "It really doesn't," was my response. But she expected it to. It doesn't take an engineer to see that devices like the iPhone and iPad <em>ought</em> to operate as an extension to the computer or TV. Instead, we have this media syncing model that's reminiscent of some lousy corporate <acronym title="Personal digital assistant">PDA</acronym>. Technology pundits who are quibbling about little features are missing the point: the iPad should have made the jump to seamless, ubiquitous integration. This would have been a technological revolution equivalent to the introduction of the iPhone. This is the next step.
 </p>
 
 <p>
-  Both the iPhone and the iPad should operate as stand-alone devices. But they could bring so much more power and flexibility if they also acted as extensions to a desktop, laptop, or distributed network. A general-purpose, network-aware, hand-held device that can continue operating without the network. Access this computer and that; give a presentation on this screen; share files with these people; receive and send email; play a game; order lunch&mdash;and use any of your iPhone, iPad, or MacBook at any point in the progression, with the others automatically and wirelessly synced. This is what I expected of Apple.
+  Both the iPhone and the iPad should operate as stand-alone devices. But they could bring so much more power and flexibility if they also acted as extensions to a desktop, laptop, or distributed network. A general-purpose, network-aware, hand-held device that can continue operating without the network. Access this computer and that; give a presentation on this screen; share files with these people; receive and send email; play a game; order lunch—and use any of your iPhone, iPad, or MacBook at any point in the progression, with the others automatically and wirelessly synced. This is what I expected of Apple.
 </p>
 
 <p>
-  Indeed, Mark Weiser accurately predicted our current systems in 1996. In <a href="http://www.ubiq.com/hypertext/weiser/acmfuture2endnote.htm">The Coming age of Calm Technology</a>, he describes a transition from the internet and distributed computing to &quot;The <acronym title="Ubiquitous Computing">UC</acronym> Era&quot;&mdash;and he said it would take place between 2005 and 2020. He describes the philosophy of UC with four tenets:
+  Indeed, Mark Weiser accurately predicted our current systems in 1996. In <a href="http://www.ubiq.com/hypertext/weiser/acmfuture2endnote.htm">The Coming age of Calm Technology</a>, he describes a transition from the internet and distributed computing to "The <acronym title="Ubiquitous Computing">UC</acronym> Era"—and he said it would take place between 2005 and 2020. He describes the philosophy of UC with four tenets:
 </p>
 
 <ul>
@@ -672,24 +774,31 @@ run_block(&amp;make_block)
 </p>
 
 <p>
-  <br/>
+  <br />
   <em>
-    What has been is what will be,<br/>
-    &nbsp;&nbsp;&nbsp;and what has been done is what will be done,<br/>
-    &nbsp;&nbsp;&nbsp;and there is nothing new under the sun.
+    What has been is what will be,<br />
+       and what has been done is what will be done,<br />
+       and there is nothing new under the sun.
   </em>
-  <br/>
-  <a href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1" rel="nofollow">Ecclesiastes</a>
+  <br />
+  <a rel="nofollow" href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1">Ecclesiastes</a>
 </p>
 ]]>
-</content></entry><entry><title>Updating gems for Ruby 1.9</title><link href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id><updated>2010-01-27T06:41:33.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Updating gems for Ruby 1.9</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" />
+    <id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id>
+    <updated>2010-01-27T06:41:33.0-08:00</updated>
+    <summary><![CDATA[
 I recently updated two libraries for Ruby 1.9 compatibility and made them available on Gemcutter. Both of these libraries include hefty C extensions written against the 1.8 headers. After reading Evan Miller's fantastic article on how not to sort by average rating, I really wanted to apply his solution. However, I quickly r...]]>
-</summary><content type="html"><![CDATA[
-<p>I recently updated two libraries for Ruby 1.9 compatibility and made them available on <a href="http://gemcutter.org" rel="nofollow">Gemcutter</a>. Both of these libraries include hefty C extensions written against the 1.8 headers.</p>
+</summary>
+    <content type="html"><![CDATA[
+<p>I recently updated two libraries for Ruby 1.9 compatibility and made them available on <a rel="nofollow" href="http://gemcutter.org">Gemcutter</a>. Both of these libraries include hefty C extensions written against the 1.8 headers.</p>
 
-<p>After reading Evan Miller's fantastic article on <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">how <em>not</em> to sort by average rating</a>, I really wanted to apply his solution. However, I quickly ran into a problem: the magical <span style="font-family:courier new,mono;">statistics2</span> library he used was nowhere to be found. At least, it wasn't available as a gem, and wasn't included in the standard distribution. Wait, you say people actually <a href="http://raa.ruby-lang.org/project/statistics2/" rel="nofollow">shared libraries before RubyGems</a>?! I guess so. I quickly updated the packaging, added Hoe support and released it as a gem&mdash;with <a href="http://github.com/abscondment/statistics2">source on Github</a> and <a href="http://gemcutter.org/gems/statistics2">gem on Gemcutter</a>.</p>
+<p>After reading Evan Miller's fantastic article on <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">how <em>not</em> to sort by average rating</a>, I really wanted to apply his solution. However, I quickly ran into a problem: the magical <span style="font-family:courier new,mono;">statistics2</span> library he used was nowhere to be found. At least, it wasn't available as a gem, and wasn't included in the standard distribution. Wait, you say people actually <a rel="nofollow" href="http://raa.ruby-lang.org/project/statistics2/">shared libraries before RubyGems</a>?! I guess so. I quickly updated the packaging, added Hoe support and released it as a gem—with <a href="http://github.com/abscondment/statistics2">source on Github</a> and <a href="http://gemcutter.org/gems/statistics2">gem on Gemcutter</a>.</p>
 
-<p>At some point, I needed to do spatial clustering with more points than can comfortably run in a na&iuml;ve linear search. <a href="http://thebogles.com/blog/">Phil Bogle</a> suggested that perhaps a Voronoi diagram could be useful to me, and from this came RubyVor. RubyVor provides efficient calculation of Voronoi diagrams and Delaunay triangulation by wrapping <a href="http://ect.bell-labs.com/who/sjf/">Steven Fortune's C program</a> in a Ruby extension. It too was released as <a href="http://github.com/abscondment/rubyvor">a Github project</a> and a <a href="http://gemcutter.org/gems/rubyvor">Gemcutter gem</a>.</p>
+<p>At some point, I needed to do spatial clustering with more points than can comfortably run in a naïve linear search. <a href="http://thebogles.com/blog/">Phil Bogle</a> suggested that perhaps a Voronoi diagram could be useful to me, and from this came RubyVor. RubyVor provides efficient calculation of Voronoi diagrams and Delaunay triangulation by wrapping <a href="http://ect.bell-labs.com/who/sjf/">Steven Fortune's C program</a> in a Ruby extension. It too was released as <a href="http://github.com/abscondment/rubyvor">a Github project</a> and a <a href="http://gemcutter.org/gems/rubyvor">Gemcutter gem</a>.</p>
 
 <p>Both the libraries wouldn't compile against 1.9 headers due to changes in basic type structs. The symptom of this problem is messages like the following that spew during extension compilation.</p>
 
@@ -728,7 +837,7 @@ struct RArray {
 };
 </code></pre>
 
-<p>The 1.9 Array has a <em>much</em> more complicated structure. In a 1.8 extension, a programmer would often write things like <span style="font-family:courier new,mono;">RARRAY(a)->ptr</span> to iterate directly over the array via pointers. In 1.9, however, accessing the pointer is more verbose and convoluted. Since this is less than ideal, the Ruby developers simplify things with new macros in 1.9 (<span style="font-family:courier new,mono;">RARRAY_PTR(a)</span> in this case). These also provide nice a level of indirection that can allow the underlying structs to change, but the client code to function without change.</p>
+<p>The 1.9 Array has a <em>much</em> more complicated structure. In a 1.8 extension, a programmer would often write things like <span style="font-family:courier new,mono;">RARRAY(a)-&gt;ptr</span> to iterate directly over the array via pointers. In 1.9, however, accessing the pointer is more verbose and convoluted. Since this is less than ideal, the Ruby developers simplify things with new macros in 1.9 (<span style="font-family:courier new,mono;">RARRAY_PTR(a)</span> in this case). These also provide nice a level of indirection that can allow the underlying structs to change, but the client code to function without change.</p>
 
 <p>The solution to making these gems compatible with both versions lies in this layer of abstraction: if we can write and use Ruby 1.8 versions of certain 1.9 macros, the code will be struct-agnostic. Below is my fix for RubyVor; it's important to note that structs other than RArray and RFloat also changed, so this isn't a solution for every issue. This is a general pattern that can be used for fixing C-level struct incompatibility. You'll need to figure out the correct 1.8 version of any macros for other structs.</p>
 
@@ -747,11 +856,18 @@ struct RArray {
 
 <p>Now that I use these three macros instead of direct member access, these extensions are compatible with both Ruby versions. So have fun triangulating and crunching statistics in Ruby 1.9!</p>
 ]]>
-</content></entry><entry><title>Solving cryptograms in Clojure</title><link href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id><updated>2009-12-31T10:33:07.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Solving cryptograms in Clojure</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" />
+    <id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id>
+    <updated>2009-12-31T10:33:07.0-08:00</updated>
+    <summary><![CDATA[
  While working on Project Euler, I discovered Peter Norvig's elegant Sudoku solver implementation. Although the associated TDD discussion brought me much humor, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany:...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>
-  While working on <a href="http://projecteuler.net/index.php?section=problems&amp;id=96" rel="nofollow">Project Euler</a>, I discovered Peter Norvig's elegant <a href="http://norvig.com/sudoku.html">Sudoku solver</a> implementation. Although the associated <a href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html" rel="nofollow"><acronym title="Test-driven development">TDD</acronym> discussion</a> brought me <a href="http://pindancing.blogspot.com/2009/09/sudoku-in-coders-at-work.html" rel="nofollow">much humor</a>, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany: one could also model <a href="http://en.wikipedia.org/wiki/Cryptogram" rel="nofollow">cryptograms</a> as a constraint problem and find a solution in a nearly identical manner. Here is my account of implementing such a solution.
+  While working on <a rel="nofollow" href="http://projecteuler.net/index.php?section=problems&amp;id=96">Project Euler</a>, I discovered Peter Norvig's elegant <a href="http://norvig.com/sudoku.html">Sudoku solver</a> implementation. Although the associated <a rel="nofollow" href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html"><acronym title="Test-driven development">TDD</acronym> discussion</a> brought me <a rel="nofollow" href="http://pindancing.blogspot.com/2009/09/sudoku-in-coders-at-work.html">much humor</a>, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany: one could also model <a rel="nofollow" href="http://en.wikipedia.org/wiki/Cryptogram">cryptograms</a> as a constraint problem and find a solution in a nearly identical manner. Here is my account of implementing such a solution.
 </p>
 
 <h2>Formulation</h2>
@@ -761,7 +877,7 @@ struct RArray {
 </p>
 
 <p>
-  I want to list the possible solutions for an encrypted word, and then use search and constraint propagation to eliminate these possibilities. To find the solution list, I'll convert each word into what I term its <em>base form</em>. This is done by replacing each character with a representation of its order of appearance. For example, both "seas" and "that" become "ABCA". Using integers naturally limits this technique to words with 10 or fewer distinct characters, so I have opted to use upper-case characters instead. To make a comprehensive list, I group all words in <span style="font-family:courier new,mono;font-size:0.8em;">/usr/share/dict/words</span> by their base form to create a dictionary keyed on base forms. We can then look up candidate solutions using the base form for any encrypted word. This solution is similar to the one required by the ever popular <a href="http://www.google.com/search?q=anagram+interview+question" rel="nofollow">anagram interview question</a>. It quite naturally introduces a limitation to our solver; namely, in order to decrypt a word it must appear in the computer's word list. I find this list on a standard *NIX distribution to be quite sufficient.
+  I want to list the possible solutions for an encrypted word, and then use search and constraint propagation to eliminate these possibilities. To find the solution list, I'll convert each word into what I term its <em>base form</em>. This is done by replacing each character with a representation of its order of appearance. For example, both "seas" and "that" become "ABCA". Using integers naturally limits this technique to words with 10 or fewer distinct characters, so I have opted to use upper-case characters instead. To make a comprehensive list, I group all words in <span style="font-family:courier new,mono;font-size:0.8em;">/usr/share/dict/words</span> by their base form to create a dictionary keyed on base forms. We can then look up candidate solutions using the base form for any encrypted word. This solution is similar to the one required by the ever popular <a rel="nofollow" href="http://www.google.com/search?q=anagram+interview+question">anagram interview question</a>. It quite naturally introduces a limitation to our solver; namely, in order to decrypt a word it must appear in the computer's word list. I find this list on a standard *NIX distribution to be quite sufficient.
 </p>
 
 <p>
@@ -783,9 +899,9 @@ struct RArray {
 </p>
 
 <p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
-  ;;; Candidates<br/>
-  ("vkkvkl" ["beebes" "inning" "peeped" "peeper" "teeter"])<br/><br/>
-  ;;; New rules<br/>
+  ;;; Candidates<br />
+  ("vkkvkl" ["beebes" "inning" "peeped" "peeper" "teeter"])<br /><br />
+  ;;; New rules<br />
   {\v \p}
 </p>
 
@@ -794,11 +910,11 @@ struct RArray {
 </p>
 
 <p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
-  ;;; New base form for "vkkvkl", given our rules<br/>
-  "pBBpBC"<br/><br/>
-  ;;; New hybrid base forms for existing candidates<br/>
-  ["ABBABC" "ABBABC" "pBBpBC" "pBBpBC" "ABBABC"])<br/><br/>
-  ;;; New candidates<br/>
+  ;;; New base form for "vkkvkl", given our rules<br />
+  "pBBpBC"<br /><br />
+  ;;; New hybrid base forms for existing candidates<br />
+  ["ABBABC" "ABBABC" "pBBpBC" "pBBpBC" "ABBABC"])<br /><br />
+  ;;; New candidates<br />
   ("vkkvkl" ["peeped" "peeper"])
 </p>
 
@@ -812,43 +928,57 @@ struct RArray {
   <li>If any encrypted word has no candidates, we are in an inconsistent state. Return nil.</li>
   <li>Otherwise, if <em>all</em> words have only one candidate, return. We've found a solution!</li>
   <li>Otherwise, if any encrypted word has only one candidate, accept that candidate as a solution. Update the existing rules in light of this solution and apply them to all the other candidates recursively.</li>
-  <li>Otherwise, return what we have so far &mdash; all words still have more than one candidate, so we have deduced all that we can. We'll fall back on search to progress further.</li>
+  <li>Otherwise, return what we have so far — all words still have more than one candidate, so we have deduced all that we can. We'll fall back on search to progress further.</li>
 </ol>
 
 <h2>Search</h2>
 
 <p>
   Now that we have the basic tools for modeling and enforcing the constraints, we can easily write a function to fully apply given rules to a set of candidates.
-  However, as seen above in point 4, we can encounter a state where we've eliminated some candidates but have not found a solution. Indeed, this is the <em>initial</em> problem state. In order to begin (and later to progress), we need to choose an encrypted word and one of its candidates and run with that pair. If it's an invalid pairing, we will reach an inconsistent state and backtrack to try the next pairing. This is a basic depth-first search. Our search will return the first valid result (where "valid" means all encrypted words are solved). We can optimize the search by always starting with first candidate of whichever <em>unsolved</em> encrypted word has the fewest number of candidates &mdash; this trims the search tree fairly well. We can also ensure that the set of decryption rules is actually changed by a given candidate before attempting to search further.
+  However, as seen above in point 4, we can encounter a state where we've eliminated some candidates but have not found a solution. Indeed, this is the <em>initial</em> problem state. In order to begin (and later to progress), we need to choose an encrypted word and one of its candidates and run with that pair. If it's an invalid pairing, we will reach an inconsistent state and backtrack to try the next pairing. This is a basic depth-first search. Our search will return the first valid result (where "valid" means all encrypted words are solved). We can optimize the search by always starting with first candidate of whichever <em>unsolved</em> encrypted word has the fewest number of candidates — this trims the search tree fairly well. We can also ensure that the set of decryption rules is actually changed by a given candidate before attempting to search further.
 </p>
 
 <h2>Concluding thoughts</h2>
 
 <p>
-  Cryptograms often have many, many solutions. The first solution found by search is often <em>not</em> the most correct one &mdash; especially in terms of human language. There are some things that could be done in the search function to improve the chance of correctness: e.g. picking the next candidate by word/letter frequency. A more advanced system could use some <acronym title="Natural Language Processing">NLP</acronym> techniques to determine whether the decrypted solution passed as human language. All of these are moot, considering that the benefit provided wouldn't outweigh complexity they would add to this simple algorithm.
+  Cryptograms often have many, many solutions. The first solution found by search is often <em>not</em> the most correct one — especially in terms of human language. There are some things that could be done in the search function to improve the chance of correctness: e.g. picking the next candidate by word/letter frequency. A more advanced system could use some <acronym title="Natural Language Processing">NLP</acronym> techniques to determine whether the decrypted solution passed as human language. All of these are moot, considering that the benefit provided wouldn't outweigh complexity they would add to this simple algorithm.
 </p>
 
 <h3>Caveat developer</h3>
 
 <p>
   I'm providing my implementation as a reference. Given that I'm a novice Clojurer, it's liable to be hideous and non-idiomatic. I found working in Clojure to be extremely satisfying, both for this project and for the Sudoku one. My solution is a mere 132 lines (whitespace/comments included), so this is obviously a very expressive language.
-  I've been very impressed by flexibility of its <a href="http://technomancy.us/132">persistent data structures</a> and its <a href="http://clojure.org/lazy" rel="nofollow">lazy evaluation</a>. These make it a very powerful language, and it's definitely a tool I want to sharpen.
+  I've been very impressed by flexibility of its <a href="http://technomancy.us/132">persistent data structures</a> and its <a rel="nofollow" href="http://clojure.org/lazy">lazy evaluation</a>. These make it a very powerful language, and it's definitely a tool I want to sharpen.
 </p>
 
 <p><a href="/files/cryptogram.clj">cryptogram.clj</a></p>
 ]]>
-</content></entry><entry><title>Oh, by the way: Baby!</title><link href="http://threebrothers.org/brendan/blog/baby/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-14:/brendan/blog/baby</id><updated>2008-08-14T11:09:00.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Oh, by the way: Baby!</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/baby/" />
+    <id>tag:threebrothers.org,2008-08-14:/brendan/blog/baby</id>
+    <updated>2008-08-14T11:09:00.0-08:00</updated>
+    <summary><![CDATA[
 Since threebrothers.org has been down for a while, I missed some very important things. One month and one day ago, Jessica gave birth to Ezra Wray Ribera. I have a son! There are a bunch of pictures up on Flickr: http://flickr.com/photos/bribera/tags/ezra. That is all. ...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>Since threebrothers.org has been down for a while, I missed some very important things.  One month and one day ago, <a href="http://jeskybera.blogspot.com/2008/07/baby-formerly-known-as-spud.html">Jessica gave birth to Ezra Wray Ribera</a>.  I have a son!</p>
 
-<p><img src="http://farm4.static.flickr.com/3085/2730011801_0b6c13dd9d.jpg" alt="Ezra Wray Ribera" /></p>
+<p><img alt="Ezra Wray Ribera" src="http://farm4.static.flickr.com/3085/2730011801_0b6c13dd9d.jpg" /></p>
 
 <p>There are a bunch of pictures up on Flickr: <a href="http://flickr.com/photos/bribera/tags/ezra">http://flickr.com/photos/bribera/tags/ezra</a>.  That is all.</p>
 ]]>
-</content></entry><entry><title>Copyright Progress</title><link href="http://threebrothers.org/brendan/blog/copyright-progress/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-13:/brendan/blog/copyright-progress</id><updated>2008-08-13T10:29:00.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Copyright Progress</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/copyright-progress/" />
+    <id>tag:threebrothers.org,2008-08-13:/brendan/blog/copyright-progress</id>
+    <updated>2008-08-13T10:29:00.0-08:00</updated>
+    <summary><![CDATA[
 I was excited to read this morning that the Court of Appeals has upheld an open-source copyright license. To quote Lawrence Lessig's summary: In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condi...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>I was excited to read this morning that <a href="http://lessig.org/blog/2008/08/huge_and_important_news_free_l.html">the Court of Appeals has upheld an open-source copyright license</a>.  To quote Lawrence Lessig's summary:</p>
 
 <blockquote><em>In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condition, the license disappears, meaning you're simply a copyright infringer. This is the theory of the GPL and all CC licenses. Put precisely, whether or not they are also contracts, they are copyright licenses which expire if you fail to abide by the terms of the license.</em></blockquote>
@@ -859,28 +989,42 @@ I was excited to read this morning that the Court of Appeals has upheld an open-
 
 <p>Another update: In another area of the copyright arena, Stanford's <acronym title="Center for Internet and Society">CIS</acronym> has succeeded in obtaining a ruling from the New York Supreme Court <em>rejecting</em> the idea that is <a href="http://cyberlaw.stanford.edu/node/5833">no de minimis use for recordings</a> (again <a href="http://lessig.org/blog/2008/08/and_another_big_win_today_for.html">via lessig.org</a>).  Woot!</p>
 ]]>
-</content></entry><entry><title>Verizon Filters Ports 80 and 25</title><link href="http://threebrothers.org/brendan/blog/verizon-filters-ports-80-and-25/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-08-11:/brendan/blog/verizon-filters-ports-80-and-25</id><updated>2008-08-11T15:52:00.0-08:00</updated><summary><![CDATA[
-The gracious hosts of this server have recently upgraded to Verizon FiOS, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25. This is why, dear reader, I have reconfigured my blog to live on port 8080. Apparently, these ports are only used for &quot;business purposes&quot;, an...]]>
-</summary><content type="html"><![CDATA[
-<p>The gracious hosts of this server have recently upgraded to Verizon <acronym title="Fiber Optic Service">FiOS</acronym>, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25.  This is why, dear reader, I have reconfigured my blog to live on port 8080.  Apparently, these ports are only used for &quot;business purposes&quot;, and businesses need to pay more.  While I now have more bandwidth, I am also greatly impaired in my ability to use it.</p>
+</content>
+  </entry><entry>
+    <title>Verizon Filters Ports 80 and 25</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/verizon-filters-ports-80-and-25/" />
+    <id>tag:threebrothers.org,2008-08-11:/brendan/blog/verizon-filters-ports-80-and-25</id>
+    <updated>2008-08-11T15:52:00.0-08:00</updated>
+    <summary><![CDATA[
+The gracious hosts of this server have recently upgraded to Verizon FiOS, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25. This is why, dear reader, I have reconfigured my blog to live on port 8080. Apparently, these ports are only used for "business purposes", an...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>The gracious hosts of this server have recently upgraded to Verizon <acronym title="Fiber Optic Service">FiOS</acronym>, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25.  This is why, dear reader, I have reconfigured my blog to live on port 8080.  Apparently, these ports are only used for "business purposes", and businesses need to pay more.  While I now have more bandwidth, I am also greatly impaired in my ability to use it.</p>
 
 <p>This further polarizes my beliefs about business rules and technology, which can be summarized as, "don't interfere, you incompetent nincompoops!"  I could spend an inordinate amount of time and energy dissecting the various facets of idiocy I have uncovered attempting to obtain an <acronym title="Internet Service Provider">ISP</acronym> at my new apartment.  To peel back the layers of tampering, throttling, and filtering from this proverbial onion would make even the most stalwart vegetable cutter cry.  I read through the fine, disingenuous print of each company's <acronym title="Terms of Service">TOS</acronym>, and each time it is like turning on the shower and receiving a cascade of putrescent sewage.  Each one of these companies is a moldering, pus-filled lesion on the face of the internet.</p>
 
 <p>So, please: clean up your acts.  Bandwidth should not be accompanied by throttles, filters, or intermittent magical interference.  If I have a service plan advertised at a speed of 3.0 megabits per second, I expect:</p>
 
 <ol>
-  <li>That this speed is consistent &mdash; it doesn't change unless there is a <em>problem</em> with the service, and problems ought not to be expected.</li>
-  <li>The bandwidth I purchase can be used across the entirety of the <a href="http://en.wikipedia.org/wiki/OSI_model"><acronym title="Open Systems Interconnection Basic Reference Model">OSI model</acronym></a>. This means no monkeying with anything &mdash; very similar to the consistency requirement from point 1.</li>
-  <li>Since there are 2,592,000 seconds in a 30-day period, I expect to be able to download approximately 949.22 gigabytes of data in a 30-day period.  Of course, the same &quot;problems&quot; disclaimer applies here &mdash; of course I don't expect <a href="http://en.wikipedia.org/wiki/Myth_of_the_nines">5 nines</a> of uptime, or even 3.</li>
+  <li>That this speed is consistent — it doesn't change unless there is a <em>problem</em> with the service, and problems ought not to be expected.</li>
+  <li>The bandwidth I purchase can be used across the entirety of the <a href="http://en.wikipedia.org/wiki/OSI_model"><acronym title="Open Systems Interconnection Basic Reference Model">OSI model</acronym></a>. This means no monkeying with anything — very similar to the consistency requirement from point 1.</li>
+  <li>Since there are 2,592,000 seconds in a 30-day period, I expect to be able to download approximately 949.22 gigabytes of data in a 30-day period.  Of course, the same "problems" disclaimer applies here — of course I don't expect <a href="http://en.wikipedia.org/wiki/Myth_of_the_nines">5 nines</a> of uptime, or even 3.</li>
 </ol>
 
 <p>Postscript:</p>
 
-<p>I'm aware that Verizon is the only brand with which I am associating this vituperation, and I don't think that's entirely fair.  Verizon's port filtering leans towards the innocuous end of the moldering, pus-filled lesion spectrum &mdash; it's a few orders of magnitude less despicable than some of the despicable things being done by ISPs.  However, it happens to be the particular lesion that I am faced with looking at, and so I will not forgo associating their name with their actions.</p>
+<p>I'm aware that Verizon is the only brand with which I am associating this vituperation, and I don't think that's entirely fair.  Verizon's port filtering leans towards the innocuous end of the moldering, pus-filled lesion spectrum — it's a few orders of magnitude less despicable than some of the despicable things being done by ISPs.  However, it happens to be the particular lesion that I am faced with looking at, and so I will not forgo associating their name with their actions.</p>
 ]]>
-</content></entry><entry><title>There and back again: the return to Linux (updated)</title><link href="http://threebrothers.org/brendan/blog/there-and-back-again-the-return-to-linux/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-21:/brendan/blog/there-and-back-again-the-return-to-linux</id><updated>2008-05-21T21:55:00.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>There and back again: the return to Linux (updated)</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/there-and-back-again-the-return-to-linux/" />
+    <id>tag:threebrothers.org,2008-05-21:/brendan/blog/there-and-back-again-the-return-to-linux</id>
+    <updated>2008-05-21T21:55:00.0-08:00</updated>
+    <summary><![CDATA[
 When I started at iLike in October, I chose a MacBook Pro as my development machine. After months of my attempting to adapt to OSX, that Macbook is now running Linux. Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' UI, I consistently found OSX cloyin...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>When I started at <a href="http://ilike.com/user/brendanribera">iLike</a> in October, I chose a MacBook Pro as my development machine.  After months of my attempting to adapt to OSX, that Macbook is now running Linux.  Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' <acronym title="User Interface">UI</acronym>, I consistently found OSX cloying and claustrophobia-inducing when compared to a standard Linux environment.  So I nuked it.</p>
 
 <p>Here are some interesting things I learned in the process:</p>
@@ -888,34 +1032,44 @@ When I started at iLike in October, I chose a MacBook Pro as my development mach
 <ul>
   <li>OSX relies on a ~200MB EFI system partition.  The MacBook's BIOS looks for this partition <em>everywhere</em> before performing a standard boot from the hard drive's <acronym title="Master Boot Record">MBR</acronym>.  There are two "gotchas" as a result of this silly operating system <acronym title="Digital Rights Management">DRM</acronym>:
     <ol>
-      <li>If you want to dual boot with <em>any</em> other operating system, you have to use a proprietary program from within OSX to write to the EFI partition.  This isn't that hard, since the program works well and nearly all of the online documentation instructs the user to perform this method.<br/><br/></li>
-      <li>If you're like me and you don't want to dual boot, you have to set an MSDOS disklabel on the hard drive's first partition and make it bootable before the MacBook's BIOS will attempt to boot it.  I found that at one of the few sites referring to <a href="http://slu.ms/articles/ubuntu-linux-on-the-macbook">booting only Linux on a MacBook</a>.  Additionally, booting will involve ~20 seconds of annoying white screen while the MacBook's BIOS searches desperately for the missing EFI partition.<br/><br/></li>
+      <li>If you want to dual boot with <em>any</em> other operating system, you have to use a proprietary program from within OSX to write to the EFI partition.  This isn't that hard, since the program works well and nearly all of the online documentation instructs the user to perform this method.<br /><br /></li>
+      <li>If you're like me and you don't want to dual boot, you have to set an MSDOS disklabel on the hard drive's first partition and make it bootable before the MacBook's BIOS will attempt to boot it.  I found that at one of the few sites referring to <a href="http://slu.ms/articles/ubuntu-linux-on-the-macbook">booting only Linux on a MacBook</a>.  Additionally, booting will involve ~20 seconds of annoying white screen while the MacBook's BIOS searches desperately for the missing EFI partition.<br /><br /></li>
     </ol>
   </li>
-  <li>Since the MacBook has a Core 2 Duo, you can install the poorly-named AMD64 branch of whatever distribution you're using.  If you happen to install Ubuntu like I did, peruse the <a href="http://ubuntuforums.org/forumdisplay.php?s=e33b9a6ef38cfc8fadd59b78fb2e8c18&amp;f=343">x86 64-bit Users Ubuntu forum</a> to get abreast of any odd architecture-related issues.  Since many programs (Firefox and Thunderbird, for example) are 32-bit, it's important to get all of the necessary 32-bit compatibility libraries installed.<br/><br/>In Ubuntu, lacking these libraries means that a fresh download of Firefox or Thunderbird won't be able to access the internet &mdash; lame.  To solve, install <tt>lib32nss-mdns</tt> (ala <a href="http://ubuntuforums.org/showthread.php?t=796225">this thread</a>).</li>
+  <li>Since the MacBook has a Core 2 Duo, you can install the poorly-named AMD64 branch of whatever distribution you're using.  If you happen to install Ubuntu like I did, peruse the <a href="http://ubuntuforums.org/forumdisplay.php?s=e33b9a6ef38cfc8fadd59b78fb2e8c18&amp;f=343">x86 64-bit Users Ubuntu forum</a> to get abreast of any odd architecture-related issues.  Since many programs (Firefox and Thunderbird, for example) are 32-bit, it's important to get all of the necessary 32-bit compatibility libraries installed.<br /><br />In Ubuntu, lacking these libraries means that a fresh download of Firefox or Thunderbird won't be able to access the internet — lame.  To solve, install <tt>lib32nss-mdns</tt> (ala <a href="http://ubuntuforums.org/showthread.php?t=796225">this thread</a>).</li>
 </ul>
 
-<p><b>Update:</b> <a href="http://thenullpointer.net">Dustin</a> asks what my particular complaints are.  Well, here goes...</p><div>&lt;joking&gt;<ul style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"><li style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;">The missing right-hand mouse button</li></ul>&lt;/joking&gt;<br/><br/></div><p>Seriously, though; it was a combination of these things:</p>
+<p><b>Update:</b> <a href="http://thenullpointer.net">Dustin</a> asks what my particular complaints are.  Well, here goes...</p><div>&lt;joking&gt;<ul style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"><li style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;">The missing right-hand mouse button</li></ul>&lt;/joking&gt;<br /><br /></div><p>Seriously, though; it was a combination of these things:</p>
 
 <ul>
-  <li>The crazy focus model: you can't actually click on a control inside a window unless that window already has focus.<br/><br/>Imagine that Thunderbird has the focus and is sitting in one of two monitors; if I want to view a different tab in the instance of Firefox that sits on the other monitor (Firefox is visible, but doesn't have focus), I have to click twice: once to attain focus, once to actually click the tab I want to view.<br/><br/></li>
-  <li>Shortcut keys.  I know, everything can be changed; it's just ridiculous to have to go through and reset all of the defaults<br/><br/></li>
-  <li>1-dimensional desktop.<br/><br/>I didn't have <a href="http://www.apple.com/macosx/features/spaces.html">Leopard and its "Spaces"</a>, which would probably have scratched this itch.  But I've really grown to be <em>dependent</em> on Compiz and all of the little ways you can customize it.  Even with Spaces, you just don't have the same degree of granularity that Compiz offers.  Plus, I'll add the totally emotional, worthless argument that Spaces is an obvious knock-off of Compiz since Linux desktops have been doing this for a good long while.<br/><br/></li>
-  <li>Performance &mdash; both mine and the machine's.<br/><br/>OSX can't keep up with a well-tuned Linux installation.  Sure, both Linux and OSX can run laps around your year-old, bloated Windows installation.  Nevertheless, I kept getting frustrated with how things would freeze up.  Windows has the <acronym title="Blue Screen Of Death">BSOD</acronym>; OSX has the <acronym title="Beach Ball of Frustration">BBOF</acronym>.<br/><br/>Additionally, my own performance was suboptimal under OSX.  Perhaps if I had made a complete switch (and not retained my Linux <em>skillz</em> by using it at home and work every day) I would have adapted; as it is, I kept on tripping on these and other subtle UI differences.<br/><br/></li>
+  <li>The crazy focus model: you can't actually click on a control inside a window unless that window already has focus.<br /><br />Imagine that Thunderbird has the focus and is sitting in one of two monitors; if I want to view a different tab in the instance of Firefox that sits on the other monitor (Firefox is visible, but doesn't have focus), I have to click twice: once to attain focus, once to actually click the tab I want to view.<br /><br /></li>
+  <li>Shortcut keys.  I know, everything can be changed; it's just ridiculous to have to go through and reset all of the defaults<br /><br /></li>
+  <li>1-dimensional desktop.<br /><br />I didn't have <a href="http://www.apple.com/macosx/features/spaces.html">Leopard and its "Spaces"</a>, which would probably have scratched this itch.  But I've really grown to be <em>dependent</em> on Compiz and all of the little ways you can customize it.  Even with Spaces, you just don't have the same degree of granularity that Compiz offers.  Plus, I'll add the totally emotional, worthless argument that Spaces is an obvious knock-off of Compiz since Linux desktops have been doing this for a good long while.<br /><br /></li>
+  <li>Performance — both mine and the machine's.<br /><br />OSX can't keep up with a well-tuned Linux installation.  Sure, both Linux and OSX can run laps around your year-old, bloated Windows installation.  Nevertheless, I kept getting frustrated with how things would freeze up.  Windows has the <acronym title="Blue Screen Of Death">BSOD</acronym>; OSX has the <acronym title="Beach Ball of Frustration">BBOF</acronym>.<br /><br />Additionally, my own performance was suboptimal under OSX.  Perhaps if I had made a complete switch (and not retained my Linux <em>skillz</em> by using it at home and work every day) I would have adapted; as it is, I kept on tripping on these and other subtle UI differences.<br /><br /></li>
   <li>In general, Linux is a much more developer-friendly environment.  I find it faster to set up, and faster to alter.  That has to do with personal preference and knowledge more than anything else.</li>
 </ul>
 ]]>
-</content></entry><entry><title>Grep and Subversion</title><link href="http://threebrothers.org/brendan/blog/grep-and-subversion/" rel="alternate" type="text/html" /><id>tag:threebrothers.org,2008-05-16:/brendan/blog/grep-and-subversion</id><updated>2008-05-16T15:38:00.0-08:00</updated><summary><![CDATA[
+</content>
+  </entry><entry>
+    <title>Grep and Subversion</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/grep-and-subversion/" />
+    <id>tag:threebrothers.org,2008-05-16:/brendan/blog/grep-and-subversion</id>
+    <updated>2008-05-16T15:38:00.0-08:00</updated>
+    <summary><![CDATA[
 A while ago, Grant supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents. This was the solution to a thread about counting the number of occurrences of a given word (HACK, in this case) within your project; the final response did this rather nicely. I'...]]>
-</summary><content type="html"><![CDATA[
+</summary>
+    <content type="html"><![CDATA[
 <p>A while ago, <a href="http://twitter.com/grantr">Grant</a> supplied a nice shell hack for recursively grepping through a subversion enlistment while ignoring the .svn directory contents.  This was the solution to a <a href="http://twitter.com/laurelfan/statuses/774697353">thread</a> about <a href="http://twitter.com/abscondment/statuses/774699294">counting</a> the number of occurrences of a given word (HACK, in this case) within your project; <a href="http://twitter.com/grantr/statuses/774701774">the final response</a> did this rather nicely.</p>
 
 <p>I've found myself wanting to needing this more and more: searching for all instances in which a certain method is called, for all uses of a particular phrase, for all uses of a <acronym title="Cascading StyleSheets">CSS</acronym> class, <em>et cetera</em>.  And <a href="http://www.hhhh.org/wiml/virtues.html">like a good programmer</a>, I have consistent trouble actually typing out all of those commands and flags.  Whether it's my memory or merely my lazy fingers matters not; I needed this to be encapsulated as a shell script that I could call just like grep.</p>
 
-<p>Here's my condensed version.  I know some distributions include an 'rgrep' by default; since that name was available on both of mine, I simply took it.  Note that I appended the <em>.sh</em> extension so that I could easily force my web server to spit it out as text/plain &mdash; in my actual environment, it's just <em>rgrep</em>, and is stuck into a PATH-friendly directory for easy use.</p>
+<p>Here's my condensed version.  I know some distributions include an 'rgrep' by default; since that name was available on both of mine, I simply took it.  Note that I appended the <em>.sh</em> extension so that I could easily force my web server to spit it out as text/plain — in my actual environment, it's just <em>rgrep</em>, and is stuck into a PATH-friendly directory for easy use.</p>
 
 <p><a href="http://threebrothers.org/brendan/blog/files/rgrep.sh">rgrep.sh</a></p>
 
 <p>Usage: rgrep &lt;pattern&gt; &lt;directory&gt; &lt;grep arguments&gt;</p>
 ]]>
-</content></entry></feed>
+</content>
+  </entry>
+
+</feed>

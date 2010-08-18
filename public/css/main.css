@@ -94,18 +94,18 @@ ul.menu li a:hover {
   margin:0 1em 0 14em;
   width:42em;
   line-height:1.6em;
-  text-align:justify;
 }
 .wide { width:auto; }
 
 .content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
 .content .borderedImage { border:1px solid #666; }
 
-ul.list { margin-top:0; }
-ul.list li { margin-bottom:5px; }
+ul.posts { margin-top:0; }
+ul.posts li.post { margin-bottom:5px; }
 
-.codeBlock, pre { padding:1em 2em;border-style:solid;border-width:1px 0;border-color:#ddd;background-color:#efefef; word-wrap:break-word; }
+div.years {margin-top:10px;}
 
+.codeBlock, pre { padding:2em 3em;line-height:2em;border-style:solid;border-width:1px 0;border-color:#ddd;background-color:#efefef; word-wrap:break-word; }
 .codeBlock {display:block;}
 
 .footer {
