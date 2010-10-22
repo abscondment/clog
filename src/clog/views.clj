@@ -43,6 +43,7 @@
 
 (deftemplate blog-post "post.template" [post prev-post next-post]
   [:head] (append head)
+  [:head :title] (content (html-snippet (str (post :title) " - Brendan Ribera")))
   [:div.footer] (content footer)
   [:#menu] (content menu)
   [:div.header] (content [(first header)
