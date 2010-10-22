@@ -3,8 +3,10 @@ body { font-size:2.7em; }
 .lbar { float:none; min-height:0; }
 .lbar, .content, .header { width:100%; margin:0; padding:0; }
 
-ul.menu li a {margin:0 0 0.5em 0; font-size:1.1em;}
-
+ul.menu { margin-left:2%; }
+ul.menu li { float:left;margin:0 1% 0.5em 0;width:32%; }
+ul.menu li a {margin:0; font-size:0.8em;}
+.header { margin:0 0 1em 0; font-size:1em; clear:both; }
 .envelope { padding:0.5em; }
-.header { margin:0 0 1em 0; font-size:1em; }
+
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .content ol, .content ul { text-align:left; }
