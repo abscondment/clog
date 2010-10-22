@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
     <link href="../css/iPhone.css" media="only screen and (max-device-width: 480px)" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   </head>
   <body>
     <div class="envelope">
@@ -43,11 +44,32 @@ Copyright &copy; Brendan Ribera 2010. This work is licensed under a <a rel="lice
       document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
     </script>
     <script type="text/javascript">
+    <!--
       try {
         var pageTracker = _gat._getTracker("UA-12753089-1");
         pageTracker._setDomainName(".threebrothers.org");
         pageTracker._trackPageview();
       } catch(err) {}
+      
+      var gotRow = function(json, textStatus) {
+        if (json && json['week'] && json['monday']) {
+          var lastDate = json['week'];
+          var lastMax = json['monday'].split(',')[0];
+          if (lastDate && lastMax && lastMax.length > 0) {
+            //$('.content').append(' I can do ' + lastMax + ' pullups in a row (as of ' + lastDate + ').');
+          }
+        }
+      };
+
+      var loadRow = function(json, textStatus) {
+        if (json && json['data']) {
+          var id = json['data'][0];
+          jQuery.getJSON('http://www.socrata.com/api/views/acxm-4dem/rows/' + id + '.json?jsonp=?', gotRow);
+        }
+      };
+      
+      jQuery.getJSON('http://www.socrata.com/api/views/acxm-4dem/rows.json?jsonp=?&row_ids_only=true&max_rows=1', loadRow);
+    // -->
     </script>    
   </body>
 </html>
