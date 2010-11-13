@@ -2,7 +2,8 @@
   (:use [clojure.contrib.io :only [file]]
         [clog config helpers]
         [clog.db :as db]
-        [clog.views :as views]))
+        [clog.views :as views])
+  (:gen-class))
 
 (defn- update [next post prev]
   (if (or (:updated post)

@@ -5,6 +5,5 @@
                  [enlive "1.0.0-SNAPSHOT"]
                  [clj-yaml "0.2.0-SNAPSHOT"]
                  [org.markdownj/markdownj "0.3.0-1.0.2b4"]]
-  :dev-dependencies [[swank-clojure "1.2.1"]
-                     [leiningen-run "0.3"]]
+  :dev-dependencies [[swank-clojure "1.3.0-SNAPSHOT"]]
   :main clog.core)
