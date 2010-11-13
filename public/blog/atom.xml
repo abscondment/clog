@@ -5,12 +5,466 @@
   <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
   <link href="http://threebrothers.org/brendan/" />
   <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
-  <updated>2010-09-21T00:01:59-08:00</updated>
+  <updated>2010-10-29T00:54:41-08:00</updated>
   <author>
     <name>Brendan Ribera</name>
     <email>brendan.ribera+blogatom@gmail.com</email>
   </author>
   <entry>
+    <title>Rails 2 Upgrade Turbulence: a Series</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/" />
+    <id>tag:threebrothers.org,2010-11-21:/brendan/blog/rails2-upgrade-turbulence</id>
+    <updated>2010-11-21T07:39:56.7-08:00</updated>
+    <summary><![CDATA[
+Here are several posts on Rails 2 upgrade issues that I encountered at Urbanspoon: General Cleanup Disabling Sessions ActiveRecord Woes git-svn Workflow Warts Troubleshooting a Slow Production Deployment I've found it common for startups to get stuck on old versions of Rails because the incremental upgrade task is always lo...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Here are several posts on Rails 2 upgrade issues that I encountered at Urbanspoon:</p>
+
+<ul>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup">General Cleanup</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions">Disabling Sessions</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes">ActiveRecord Woes</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts">git-svn Workflow Warts</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment">Troubleshooting a Slow Production Deployment</a></li>
+</ul>
+
+<p>I've found it common for startups to get stuck on old versions of Rails because the incremental upgrade task is always lower priority than feature work (rightfully so). As time progresses, the task becomes more and more daunting. I bit the bullet and upgraded our site.</p>
+
+<p>Considering that Rails 3 is out now, we're still a touch behind the times. That said, there are still interesting things one could learn from the process of taking a real site (that serves quite a bit of traffic) from Rails 1.1.6 to 2.3.10.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Troubleshooting a Slow Production Deployment</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment</id>
+    <updated>2010-10-21T06:55:09.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Staging and testing a big release is important, but there are some factors that can only be obsereved in the true production environment. Sure, I can replay the most interesting 80% of a yesterday's traffic against a test server without it failing – but I'm only ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Staging and testing a big release is important, but there are some factors that
+can only be obsereved in the true production environment. Sure, I can replay the
+most interesting 80% of a yesterday's traffic against a test server without it
+failing – but I'm only <em>one user</em> making <em>sequential</em> requests. This
+completely dodges the question of how the new code will work at scale.</p>
+
+<p>The <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/">ActiveRecord changes around association loading in Rails 2</a>
+made me particularly curious about the production behavior of Urbanspoon. We had
+recently added two identical servers to our production rotation, so I took over
+one and did a test deploy of the Rails 2 branch.</p>
+
+<p>Initial traffic (balanced to about 3% of our load) looked good – snappy
+response times and no exceptions. But when I bumped it up to take a full share,
+performance was substandard. The Rails 2 server was running at <em>nearly twice the load</em>
+of its counterpart, and was taking <em>on average twice as much time</em> to serve
+requests. Yech. We loaded up Rails 1, and performance improved... although
+this test server was still slower than the control. What a quandary.</p>
+
+<h2>Monitoring works.</h2>
+
+<p>Since we run munin, we have easy access to historical performance. My debugging
+tools/steps were:</p>
+
+<ol>
+<li>top - get a quick, side-by-side eyeball of CPU, load, iowait, memory usage.</li>
+<li>munin
+<ul><li>Rails times: total, views, db
+<ul><li>total time and db time in Rails 2 was twice that in Rails 1</li>
+<li>Raised the question of whether these are even comparable across
+different major Rails revisions.</li></ul></li>
+<li>Load/Memory graphs – same story as top.</li>
+<li>Interrupt graphs
+<ul><li>Wow – lots of "Rescheduling interrupts" on the slow server.</li></ul></li></ul></li>
+<li>cat /proc/cpuinfo, /proc/meminfo, /proc/interrupts, /proc/ioports (AHCI on
+one, but not the other?), ifconfig, etc.
+<ul><li>Are these machines actually the same? Lots of subtle differences.</li></ul></li>
+</ol>
+
+<p>These were all useful, but they didn't give me a definitive answer. The machines
+looked different, but the old code ran significantly faster than the new code.
+Yet all reports easily reached by Google lead me to believe Rails 2 might even
+give us a speed <em>boost</em>. So was it really slower, was there a hardware issue, or
+what?</p>
+
+<h2>Debugging works.</h2>
+
+<p>At this point, I switched into the :debug log-level to see if I could spot any
+subtle issues. Was ActiveRecord sending a flood of extra association loads that
+we should force into a join? Was memcache getting hit at all? Were our DB times
+slow due to bad network performance?</p>
+
+<p>Very quickly, I noticed something suspicious: our memcache keys looked like
+absolute urls. Ah, great. Looks like we were being bit yet again by the new
+<a href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/">Rails 2 named routes</a> – nameley,
+that *_url routes now produce an absoluter URL instead of a relative one. In
+addition to this, Rails 2 changed the <a href="http://github.com/rails/rails/blob/v2.3.10/actionpack/lib/action_controller/caching/fragments.rb#L33">fragment_cache_key method to include a
+prefix</a> – so no matter what, fragment caching in Rails 2
+would have totally new keys.</p>
+
+<p>So on our most popular pages, we were using a completely different keyspace.
+All of the Rails 1 servers were using an identical keyspace, and the one Rails 2
+was in its own. This memcache filled quickly, but the new server's keys got
+ejected at a <em>much</em> higher rate. Its cache misses were through the roof, and
+therefore so were its load and response times (although, isn't it nice when
+averaging a 120ms response time is "through the roof"?).</p>
+
+<p>Neat. But fixing the keys didn't bring performance up to par with the other
+server. We noticed two things:</p>
+
+<ul>
+<li>Those pesky "Rescheduling interrupts" were still there &amp;ndash at three
+orders of maginitude more per second from the slow server to the other.</li>
+<li><abbr title="Advanced Host Controller Interface">AHCI</abbr> was disabled
+on the slow server.</li>
+</ul>
+
+<p>Even after enabling AHCI and doing an OS reload, the "identical" servers were
+none too identical. So we took a leap of faith and  deployed Rails 2 to the
+other, faster one, and performance was as expected. We're still working with
+our hosting company to figure out what's wrong with the slow machine.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>git-svn Workflow Warts</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-git-svn-workflow-warts</id>
+    <updated>2010-10-21T06:23:23.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Now that I had confidence that the code was production-ready, it was time to merge changes back into trunk. We still have a main SVN repository, although most people use the git-svn bridge. This proved problematic in three ways which have nothing to do with Rails whats...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Now that I had confidence that the code was production-ready, it was
+time to merge changes back into trunk. We still have a main SVN
+repository, although most people use the git-svn bridge. This proved
+problematic in three ways which have <em>nothing to do with Rails</em>
+whatsoever, but could prove useful to know about.</p>
+
+<h2>git-svn rebase problems</h2>
+
+<p>I use a git-svn repository where the <code>master</code> branch tracks the trunk
+of SVN. I branched from <code>master</code> to create the <code>dev_rails2</code> topic
+branch. This follows the canonical example:</p>
+
+<pre><code>          A---B---C dev_rails2
+         /
+    D---E---F---G master
+</code></pre>
+
+<p>I also pushed <code>master</code> and <code>dev_rails2</code> to a remote Git repository. A
+few co-workers and I worked in the <code>dev_rails2</code> branch and checked in
+to the remote repository, and I pulled all changes back into my local
+branch.</p>
+
+<p>To prevent the gigantic merge that the Rails 2 upgrade would create, I
+pulled trunk into the topic branch weekly. This involved:</p>
+
+<ul>
+<li>git checkout master</li>
+<li>git svn rebase</li>
+<li>git checkout dev_rails2</li>
+<li>git merge master</li>
+<li>(resolve conflicts)</li>
+</ul>
+
+<p>If you do things this way, you have to use a more obscure git-svn
+command to commit your changes – dcommit won't work. Can you
+spot the reason from looking at my workflow? No? Well, don't feel
+too bad; I didn't anticipate the problem either.</p>
+
+<p>If you merge <code>master</code> into <code>dev_rails2</code> as I did, you will eventually
+want to merge <code>dev_rails2</code> back into master to commit. This can happen
+with no conflicts if you resolved everything in <code>master</code> –&gt;
+<code>dev_rails2</code> merges already.</p>
+
+<p>So I'd do this:
+ * git checkout master
+ * git svn rebase
+ * git merge dev_rails2 <em>(succeeded)</em></p>
+
+<p>But then in order for <code>git svn dcommit</code> to work, I'd need to do this: 
+ * git svn rebase <em>(failed spectacularly)</em>
+ * git svn dcommit <em>(doesn't work without the prior succeeding)</em></p>
+
+<p>The last step will rewind all of your merged changesets (which now
+include some of the existing commits in Subversion) and apply them
+to the current state of subversion. This generates conflicts because
+it's attempting to diff the already resolved state against Subversion,
+and the resolution often would not apply cleanly.</p>
+
+<p>The correct solution is:</p>
+
+<pre><code>git svn set-tree [first-hash]..[last-hash]
+</code></pre>
+
+<p>To <a href="http://www.kernel.org/pub/software/scm/git/docs/git-svn.html" rel="external nofollow"><abbr title="Quote the Effing Manual">QTFM</abbr></a>:</p>
+
+<pre><code>You should consider using dcommit instead of this command. Commit
+specified commit or tree objects to SVN. This relies on your imported
+fetch data being up-to-date. This makes absolutely no attempts to do
+patching when committing to SVN, it simply overwrites files with those
+specified in the tree or commit. All merging is assumed to have taken
+place independently of git svn functions.
+</code></pre>
+
+<p>Huh? <code>set-tree</code>? Yeah, I'd never heard of it either. And I fixed my problem
+before I learned about it. In order to save revision history, I decided to
+re-resolve all of the conflicts (sometimes badly, since there were too many
+commits to remember every bit of minutiae) and fix the bad commits later.
+This meant I'd have the following:</p>
+
+<ol>
+<li>Changes made in <code>master</code> (and therefore Subversion) that I wanted to keep.</li>
+<li>Changes made in <code>dev_rails2</code> that I wanted to keep, but that also contained
+random, badly-resolved conflicts.</li>
+<li>Changes to fix the bad resolutions.</li>
+</ol>
+
+<p>Because the <code>dev_rails2</code> branch was in a good (i.e. a correctly merged view
+of the final product that I wanted to commit) state, I managed to get #3 by
+making a separate clone of it and copying files into the checkout in which I
+had run (and resolved) <code>git svn rebase</code>. This allowed me to preserve ~130
+commit comments worth of Rails 2 upgrade knowledge. But man, I wish I had
+known about <code>set-tree</code> beforehand.</p>
+
+<h2>git-svn dcommit problems</h2>
+
+<p>After finally merging in <code>dev_rails2</code> and getting a clean <code>git svn rebase</code>, I
+was ready to commit. Not so fast – <code>git svn dcommit</code> failed rather
+quickly:</p>
+
+<pre><code>[hash] doesn't exist in the repository at /usr/lib/git-core/git-svn [...]
+Failed to read object [hash] at /usr/lib/git-core/git-svn line [...]
+</code></pre>
+
+<p>Who knows what <code>set-tree</code> would have done here. Two of my changes had made it
+into Subversion, but the process halted on the commit in which I had copied
+the new mysql<em>replication</em>adapter plugin into vendor/plugins. After Googling
+around, I discovered this <a href="http://de-co-de.blogspot.com/2009/02/git-svn-and-submodules.html">great post about submodules</a>
+causing this of failure.</p>
+
+<p>Although I didn't have a git submodule, the basic issue turns out to be the
+same. Something in my commit (I believe it was an empty directory) appeared
+differently in the subversion changeset. When git-svn attempted to map this
+back to the git objects it knew about, a mismatch occurred. The object existed
+in one repository but not the other, so the system (wisely) errored out.</p>
+
+<p>Unfortunately, fixing this was not as simple as deleting the bad directory
+in HEAD. git-svn has to commit your work sequentially, so I needed to rewrite
+history.</p>
+
+<pre><code>$ git tag broken [hash that failed to commit]
+$ git checkout broken
+$ # remove the directory, re-add with correct name, cross fingers
+$ git commit --amend
+$ git rebase --onto HEAD broken master
+</code></pre>
+
+<p>After rewriting the svn-incompatible changes, <code>git svn dcommit</code> worked! But <em>of course</em> there was one more issue.</p>
+
+<h2>.svn directories in the tree</h2>
+
+<p>I had to update quite a few plugins, and I did this by checking out the source
+code and copying it into place in vendor/plugins. This was a short-sighted way
+of doing things, but using git-svn puts one in the unenviable position of being
+able to use neither git submodules nor svn:externals. Unfortunately, git-svn is
+more than happy to let you check full copies of Subversion repositories into
+your own Subversion repository. Mind blowing, no?</p>
+
+<p>The affect of this is that when you <code>svn up</code>, Subversion fails to update because
+it can't actually add the .svn directories that are in the source tree –
+it'd overwrite the ones that it truly needs! Also unfortunate is that you can't
+delete them locally because <em>a)</em> they don't exist yet and <em>b)</em> even if they did,
+the svn client helpfully ignores any attempts to operate on files named .svn. So
+this is broken and will fail:</p>
+
+<pre><code>svn del -m 'Delete .svn checkin' path/to/bad/.svn
+</code></pre>
+
+<p>Instead, one must delete the checked-in .svn directory on the remote server:</p>
+
+<pre><code>svn del -m 'Delete .svn checkin' svn+ssh://svn-server/trunk/path/to/bad/.svn
+</code></pre>
+
+<p>Whew!</p>
+]]>
+</content>
+  </entry><entry>
+    <title>ActiveRecord Woes</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-activerecord-woes</id>
+    <updated>2010-10-21T06:02:13.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. ActiveRecord associations have changed. There are some gotchas, at least compared to the Rails 1.1.6 frame of mind. Join v. Queries Instead of forcing a join against the tables for every incuded association, ActiveRecord is now smart enough to split things into separat...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>ActiveRecord associations have changed. There are some gotchas, at least compared to the Rails 1.1.6 frame of mind.</p>
+
+<h2>Join v. Queries</h2>
+
+<p>Instead of forcing a join against the tables for every incuded association, ActiveRecord is now smart enough to split things into separate, on-index loads of each model. It then slaps the correct assocations back together. If separate loading is not possible, it can fall back on the join model.</p>
+
+<h3>Broken SQL</h3>
+
+<p>The nature of programmatically generating SQL is that, well, things break. Specifically, if you find with both <code>:include</code> and <code>:joins</code> statements, you'll be in for a rude awakening. Whether single or multiple, every query will include the specified <code>:joins</code>. If your application expected a single, joined query (as with Rails 1.x), and you now get multiple, this will break.</p>
+
+<p>You can also use <code>:include</code> and have <code>:conditions</code> or <code>:order</code> statements with unqualified column names. These also get applied to each of the queries, but since the columns don't exist in every table we're querying, things break. If you qualify the column names, ActiveRecord is smart enough to perform the join for you instead of executing separate queries.</p>
+
+<h2>Associations</h2>
+
+<p>As I hinted in code when writing about <a href="http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/">Bulk-loading associations with ActiveRecord</a>, you need to be careful when using normal Array operators on collection-like associations. You can easily add to an association without expecting an insert.</p>
+
+<p>E.g., <code>Restaurant.find(:first).cuisines &lt;&lt; Cuisine.find(:first)</code> now generates an insert statement that establishes that relation instead of simply pushing the Cuisine object into an array.</p>
+
+<p>To manipulate the collection directly without doing anything in the database, you must use <code>association.target</code>:</p>
+
+<pre><code>Restaurant.find(:first).cuisines.target &lt;&lt; Cuisine.find(:first)
+</code></pre>
+]]>
+</content>
+  </entry><entry>
+    <title>Disabling Sessions</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-disabling-sessions</id>
+    <updated>2010-10-21T05:45:55.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Urbanspoon uses sessions to store various bits of information in the database that users might want to see again. We have a neat hack that Adam wrote to turn off sessions for bots so that we don't need to touch that table unless necessary. Unfortunately, his trick depe...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Urbanspoon uses sessions to store various bits of information in the database that users might want to see again. We have a neat hack that Adam wrote to <a href="http://gurge.com/blog/2007/01/08/turn-off-rails-sessions-for-robots/">turn off sessions for bots</a> so that we don't need to touch that table unless necessary.</p>
+
+<p>Unfortunately, his trick depends on the Rails 1.x ability to toggle sessions progammatically. Rails 2 opted for lazy loading – if you don't access it, it never gets loaded. There is, in fact, no out-of-the-box way to disable the session progammatically at request time.</p>
+
+<p>The trick I used to make this work is simple: choose the session store for a given request in a <code>before_filter</code>. I made a simple session that dumps all its data into a Hash, but never persists anything.</p>
+
+<noscript>
+  <pre>
+    <code>
+# NoSession acts like a session, but doesn't get stored anywhere. Sneaky.
+class NoSession &lt; AbstractSession
+  class &lt;&lt; self
+    def find_session(session_id); end
+    def create_session(session_id, data={})
+      new(session_id, data)
+    end
+    def delete_all(condition=nil); end
+  end
+
+  def update_session(data); end
+  def destroy; end
+end    
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653039.js?file=no_session.rb"></script>
+
+<p>I then created a subclass of our session store (SqlSessionStore, in our case) that has a class-level toggle ("disabled") which it uses to choose the backing session class when it is called.</p>
+
+<noscript>
+  <pre>
+    <code>
+class OptionalSessionStore &lt; SqlSessionStore
+
+  cattr_accessor :enabled_session_class  
+  cattr_accessor :disabled
+
+  class &lt;&lt; self
+    def disabled=(v)
+      if self.disabled != v
+        @@disabled = v
+        self.toggle_session_class
+      end
+    end
+
+    def toggle_session_class
+      if self.disabled
+        SqlSessionStore.session_class = NoSession
+      else
+        SqlSessionStore.session_class = self.enabled_session_class
+      end
+    end  
+  end
+
+  def call(env)
+    # Make sure our disabled state is current
+    self.class.toggle_session_class
+    super(env)
+  end
+end
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653053.js?file=optional_session_store.rb"></script>
+
+<p>I now use a before filter to enable or disable sessions even for code paths that attempt to access them.</p>
+
+<noscript>
+  <pre>
+    <code>
+before_filter :toggle_session
+
+def toggle_session    
+  # Disable the session if we spy a bot (or it was disabled elsewhere), enable otherwise.
+  if @disable_session.nil?
+    @disable_session = UrbanspoonUtil.is_megatron?(request.user_agent)
+  end
+  OptionalSessionStore.disabled = @disable_session
+end
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653049.js?file=toggle_session.rb"></script>
+]]>
+</content>
+  </entry><entry>
+    <title>General Cleanup</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-general-cleanup</id>
+    <updated>2010-10-21T05:31:37.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Some generic cleanup tasks: @request/@params/etc are deprecated, drop the '@' everywhere. application.rb becomes application_controller.rb start_form_tag and end_form_tag are deprecated; use form_for instead. ActiveRecord associations have changed. Named routing has ch...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Some generic cleanup tasks:</p>
+
+<ul>
+<li>@request/@params/etc are deprecated, drop the '@' everywhere.</li>
+<li>application.rb becomes application_controller.rb</li>
+<li>start_form_tag and end_form_tag are deprecated; use form_for instead.</li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/">ActiveRecord associations have changed</a>.</li>
+<li>Named routing has changed. Previously, every route created a method of the form 'some_page_url', which generated a relative path to the related url. Now, both 'some_page_url' and 'some_page_path' are generated. The _url method now gives an absolute url, while _path is relative.</li>
+<li>Most gems/plugins need to be upgraded or replaced. Yay for more current versions!</li>
+</ul>
+
+<p>I found these <a href="http://www.slashdotdash.net/2007/12/03/rails-2-upgrade-notes/">Rails 2 Upgrade Notes</a> to be pretty helpful.</p>
+
+<p>Also, there's nothing like a little <code>grep</code>/<code>cut</code>/<code>sed</code> to make short work of replacing <em>en masse</em>:</p>
+
+<noscript>
+  <pre>
+    <code>
+ack @request . | cut -d ':' -f 1 | uniq | xargs sed -i 's/@request/request/g'
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653085.js?file=replace.sh"></script>
+]]>
+</content>
+  </entry><entry>
     <title>Bulk-loading associations with ActiveRecord</title>
     <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/" />
     <id>tag:threebrothers.org,2010-09-13:/brendan/blog/bulk-loading-associations-with-active-record</id>
@@ -1073,271 +1527,6 @@ run_block(&amp;make_block)
   <br />
   <a rel="nofollow" href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1">Ecclesiastes</a>
 </p>
-]]>
-</content>
-  </entry><entry>
-    <title>Updating gems for Ruby 1.9</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/updating-gems-for-ruby-1-9/" />
-    <id>tag:threebrothers.org,2010-01-27:/brendan/blog/updating-gems-for-ruby-1-9</id>
-    <updated>2010-01-27T06:41:33.0-08:00</updated>
-    <summary><![CDATA[
-I recently updated two libraries for Ruby 1.9 compatibility and made them available on Gemcutter. Both of these libraries include hefty C extensions written against the 1.8 headers. After reading Evan Miller's fantastic article on how not to sort by average rating, I really wanted to apply his solution. However, I quickly r...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>I recently updated two libraries for Ruby 1.9 compatibility and made them available on <a rel="nofollow" href="http://gemcutter.org">Gemcutter</a>. Both of these libraries include hefty C extensions written against the 1.8 headers.</p>
-
-<p>After reading Evan Miller's fantastic article on <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">how <em>not</em> to sort by average rating</a>, I really wanted to apply his solution. However, I quickly ran into a problem: the magical <span style="font-family:courier new,mono;">statistics2</span> library he used was nowhere to be found. At least, it wasn't available as a gem, and wasn't included in the standard distribution. Wait, you say people actually <a rel="nofollow" href="http://raa.ruby-lang.org/project/statistics2/">shared libraries before RubyGems</a>?! I guess so. I quickly updated the packaging, added Hoe support and released it as a gem—with <a href="http://github.com/abscondment/statistics2">source on Github</a> and <a href="http://gemcutter.org/gems/statistics2">gem on Gemcutter</a>.</p>
-
-<p>At some point, I needed to do spatial clustering with more points than can comfortably run in a naïve linear search. <a href="http://thebogles.com/blog/">Phil Bogle</a> suggested that perhaps a Voronoi diagram could be useful to me, and from this came RubyVor. RubyVor provides efficient calculation of Voronoi diagrams and Delaunay triangulation by wrapping <a href="http://ect.bell-labs.com/who/sjf/">Steven Fortune's C program</a> in a Ruby extension. It too was released as <a href="http://github.com/abscondment/rubyvor">a Github project</a> and a <a href="http://gemcutter.org/gems/rubyvor">Gemcutter gem</a>.</p>
-
-<p>Both the libraries wouldn't compile against 1.9 headers due to changes in basic type structs. The symptom of this problem is messages like the following that spew during extension compilation.</p>
-
-<pre><code>rb_cComputation.c:39: error: 'struct RArray' has no member named 'ptr'
-rb_cComputation.c:45: error: 'struct RArray' has no member named 'len'
-rb_cComputation.c:284: error: 'struct RFloat' has no member named 'value'
-</code></pre>
-
-<p>So what's going on here? Well, the answer is simple: Ruby 1.8 used different C structs; the member values we once accessed directly are no longer where the code thinks they ought to be. Just to illustrate, take a look at the RArray struct:</p>
-
-<pre><code>/* Ruby 1.8 */
-struct RArray {
-  struct RBasic basic;
-  long len;
-  union {
-    long capa;
-    VALUE shared;
-  } aux;
-  VALUE *ptr;
-};
-
-/* Ruby 1.9 */
-struct RArray {
-  struct RBasic basic;
-  union {
-    struct {
-      long len;
-      union {
-        long capa;
-        VALUE shared;
-      } aux;
-      VALUE *ptr;
-    } heap;
-    VALUE ary[RARRAY_EMBED_LEN_MAX];
-  } as;
-};
-</code></pre>
-
-<p>The 1.9 Array has a <em>much</em> more complicated structure. In a 1.8 extension, a programmer would often write things like <span style="font-family:courier new,mono;">RARRAY(a)-&gt;ptr</span> to iterate directly over the array via pointers. In 1.9, however, accessing the pointer is more verbose and convoluted. Since this is less than ideal, the Ruby developers simplify things with new macros in 1.9 (<span style="font-family:courier new,mono;">RARRAY_PTR(a)</span> in this case). These also provide nice a level of indirection that can allow the underlying structs to change, but the client code to function without change.</p>
-
-<p>The solution to making these gems compatible with both versions lies in this layer of abstraction: if we can write and use Ruby 1.8 versions of certain 1.9 macros, the code will be struct-agnostic. Below is my fix for RubyVor; it's important to note that structs other than RArray and RFloat also changed, so this isn't a solution for every issue. This is a general pattern that can be used for fixing C-level struct incompatibility. You'll need to figure out the correct 1.8 version of any macros for other structs.</p>
-
-<pre><code>#ifndef RUBY_19
-#ifndef RFLOAT_VALUE
-#define RFLOAT_VALUE(v) (RFLOAT(v)-&gt;value)
-#endif
-#ifndef RARRAY_LEN
-#define RARRAY_LEN(v) (RARRAY(v)-&gt;len)
-#endif
-#ifndef RARRAY_PTR
-#define RARRAY_PTR(v) (RARRAY(v)-&gt;ptr)
-#endif
-#endif
-</code></pre>
-
-<p>Now that I use these three macros instead of direct member access, these extensions are compatible with both Ruby versions. So have fun triangulating and crunching statistics in Ruby 1.9!</p>
-]]>
-</content>
-  </entry><entry>
-    <title>Solving cryptograms in Clojure</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/solving-cryptograms-in-clojure/" />
-    <id>tag:threebrothers.org,2009-12-31:/brendan/blog/solving-cryptograms-in-clojure</id>
-    <updated>2009-12-31T10:33:07.0-08:00</updated>
-    <summary><![CDATA[
- While working on Project Euler, I discovered Peter Norvig's elegant Sudoku solver implementation. Although the associated TDD discussion brought me much humor, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany:...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>
-  While working on <a rel="nofollow" href="http://projecteuler.net/index.php?section=problems&amp;id=96">Project Euler</a>, I discovered Peter Norvig's elegant <a href="http://norvig.com/sudoku.html">Sudoku solver</a> implementation. Although the associated <a rel="nofollow" href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html"><acronym title="Test-driven development">TDD</acronym> discussion</a> brought me <a rel="nofollow" href="http://pindancing.blogspot.com/2009/09/sudoku-in-coders-at-work.html">much humor</a>, it was the efficacy and flexibility of constraint propagation and search that really stuck with me. As I implemented this solver in Clojure, I had a small epiphany: one could also model <a rel="nofollow" href="http://en.wikipedia.org/wiki/Cryptogram">cryptograms</a> as a constraint problem and find a solution in a nearly identical manner. Here is my account of implementing such a solution.
-</p>
-
-<h2>Formulation</h2>
-
-<p>
-  The problem is rather different than Sudoku. In some ways, it's simpler: we don't need to figure out which rows, columns, and boxes are affected by each state change. That eliminates a lot of bookkeeping, which is fortunate; figuring out how to compare a set of partially decrypted words to see whether they match an encrypted word and the current puzzle state is enough of a hassle.
-</p>
-
-<p>
-  I want to list the possible solutions for an encrypted word, and then use search and constraint propagation to eliminate these possibilities. To find the solution list, I'll convert each word into what I term its <em>base form</em>. This is done by replacing each character with a representation of its order of appearance. For example, both "seas" and "that" become "ABCA". Using integers naturally limits this technique to words with 10 or fewer distinct characters, so I have opted to use upper-case characters instead. To make a comprehensive list, I group all words in <span style="font-family:courier new,mono;font-size:0.8em;">/usr/share/dict/words</span> by their base form to create a dictionary keyed on base forms. We can then look up candidate solutions using the base form for any encrypted word. This solution is similar to the one required by the ever popular <a rel="nofollow" href="http://www.google.com/search?q=anagram+interview+question">anagram interview question</a>. It quite naturally introduces a limitation to our solver; namely, in order to decrypt a word it must appear in the computer's word list. I find this list on a standard *NIX distribution to be quite sufficient.
-</p>
-
-<p>
-  In Clojure, a single entry in the base form dictionary looks something like this:
-</p>
-
-<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
-  {"ABBABC" ["beebes" "inning" "peeped" "peeper" "teeter"]}
-</p>
-
-<p>
-  When an encrypted word has only one candidate on its list, we can consider it solved and propagate that choice. If we encounter a state where an encrypted word has an empty candidate list, we know we've propagated impossibly conflicting constraints. Unlike the Sudoku problem, simply maintaining a list of potential valid states isn't enough. We really need to store a list of all applied decryption rules, and use them as follows.
-</p>
-
-<h2>Rules and eliminating candidates</h2>
-
-<p>
-  Say we have the following encrypted word/candidate list with some yet-to-be-applied rules:
-</p>
-
-<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
-  ;;; Candidates<br />
-  ("vkkvkl" ["beebes" "inning" "peeped" "peeper" "teeter"])<br /><br />
-  ;;; New rules<br />
-  {\v \p}
-</p>
-
-<p>
-  The new rules say we should translate every encrypted "v" to a "p". We can integrate this into the base form and generate a partially decrypted base form for the encrypted word. We can then use that to further eliminate candidates.
-</p>
-
-<p style="font-family:courier new,mono;font-size:0.8em;margin-left:2em;">
-  ;;; New base form for "vkkvkl", given our rules<br />
-  "pBBpBC"<br /><br />
-  ;;; New hybrid base forms for existing candidates<br />
-  ["ABBABC" "ABBABC" "pBBpBC" "pBBpBC" "ABBABC"])<br /><br />
-  ;;; New candidates<br />
-  ("vkkvkl" ["peeped" "peeper"])
-</p>
-
-<h2>Propagation</h2>
-
-<p>
-  Propagating the constraints is straightforward. We follow four simple rules:
-</p>
-
-<ol>
-  <li>If any encrypted word has no candidates, we are in an inconsistent state. Return nil.</li>
-  <li>Otherwise, if <em>all</em> words have only one candidate, return. We've found a solution!</li>
-  <li>Otherwise, if any encrypted word has only one candidate, accept that candidate as a solution. Update the existing rules in light of this solution and apply them to all the other candidates recursively.</li>
-  <li>Otherwise, return what we have so far — all words still have more than one candidate, so we have deduced all that we can. We'll fall back on search to progress further.</li>
-</ol>
-
-<h2>Search</h2>
-
-<p>
-  Now that we have the basic tools for modeling and enforcing the constraints, we can easily write a function to fully apply given rules to a set of candidates.
-  However, as seen above in point 4, we can encounter a state where we've eliminated some candidates but have not found a solution. Indeed, this is the <em>initial</em> problem state. In order to begin (and later to progress), we need to choose an encrypted word and one of its candidates and run with that pair. If it's an invalid pairing, we will reach an inconsistent state and backtrack to try the next pairing. This is a basic depth-first search. Our search will return the first valid result (where "valid" means all encrypted words are solved). We can optimize the search by always starting with first candidate of whichever <em>unsolved</em> encrypted word has the fewest number of candidates — this trims the search tree fairly well. We can also ensure that the set of decryption rules is actually changed by a given candidate before attempting to search further.
-</p>
-
-<h2>Concluding thoughts</h2>
-
-<p>
-  Cryptograms often have many, many solutions. The first solution found by search is often <em>not</em> the most correct one — especially in terms of human language. There are some things that could be done in the search function to improve the chance of correctness: e.g. picking the next candidate by word/letter frequency. A more advanced system could use some <acronym title="Natural Language Processing">NLP</acronym> techniques to determine whether the decrypted solution passed as human language. All of these are moot, considering that the benefit provided wouldn't outweigh complexity they would add to this simple algorithm.
-</p>
-
-<h3>Caveat developer</h3>
-
-<p>
-  I'm providing my implementation as a reference. Given that I'm a novice Clojurer, it's liable to be hideous and non-idiomatic. I found working in Clojure to be extremely satisfying, both for this project and for the Sudoku one. My solution is a mere 132 lines (whitespace/comments included), so this is obviously a very expressive language.
-  I've been very impressed by flexibility of its <a href="http://technomancy.us/132">persistent data structures</a> and its <a rel="nofollow" href="http://clojure.org/lazy">lazy evaluation</a>. These make it a very powerful language, and it's definitely a tool I want to sharpen.
-</p>
-
-<p><a href="/files/cryptogram.clj">cryptogram.clj</a></p>
-]]>
-</content>
-  </entry><entry>
-    <title>Oh, by the way: Baby!</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/baby/" />
-    <id>tag:threebrothers.org,2008-08-14:/brendan/blog/baby</id>
-    <updated>2008-08-14T11:09:00.0-08:00</updated>
-    <summary><![CDATA[
-Since threebrothers.org has been down for a while, I missed some very important things. One month and one day ago, Jessica gave birth to Ezra Wray Ribera. I have a son! There are a bunch of pictures up on Flickr: http://flickr.com/photos/bribera/tags/ezra. That is all. ...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>Since threebrothers.org has been down for a while, I missed some very important things.  One month and one day ago, <a href="http://jeskybera.blogspot.com/2008/07/baby-formerly-known-as-spud.html">Jessica gave birth to Ezra Wray Ribera</a>.  I have a son!</p>
-
-<p><img alt="Ezra Wray Ribera" src="http://farm4.static.flickr.com/3085/2730011801_0b6c13dd9d.jpg" /></p>
-
-<p>There are a bunch of pictures up on Flickr: <a href="http://flickr.com/photos/bribera/tags/ezra">http://flickr.com/photos/bribera/tags/ezra</a>.  That is all.</p>
-]]>
-</content>
-  </entry><entry>
-    <title>Copyright Progress</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/copyright-progress/" />
-    <id>tag:threebrothers.org,2008-08-13:/brendan/blog/copyright-progress</id>
-    <updated>2008-08-13T10:29:00.0-08:00</updated>
-    <summary><![CDATA[
-I was excited to read this morning that the Court of Appeals has upheld an open-source copyright license. To quote Lawrence Lessig's summary: In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condi...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>I was excited to read this morning that <a href="http://lessig.org/blog/2008/08/huge_and_important_news_free_l.html">the Court of Appeals has upheld an open-source copyright license</a>.  To quote Lawrence Lessig's summary:</p>
-
-<blockquote><em>In non-technical terms, the Court has held that free licenses such as the CC licenses set conditions (rather than covenants) on the use of copyrighted work. When you violate the condition, the license disappears, meaning you're simply a copyright infringer. This is the theory of the GPL and all CC licenses. Put precisely, whether or not they are also contracts, they are copyright licenses which expire if you fail to abide by the terms of the license.</em></blockquote>
-
-<p>It's wonderful when things work the way they're designed.</p>
-
-<p>Update: Groklaw has <a href="http://www.groklaw.net/article.php?story=2008081313212422">some additional information</a>.</p>
-
-<p>Another update: In another area of the copyright arena, Stanford's <acronym title="Center for Internet and Society">CIS</acronym> has succeeded in obtaining a ruling from the New York Supreme Court <em>rejecting</em> the idea that is <a href="http://cyberlaw.stanford.edu/node/5833">no de minimis use for recordings</a> (again <a href="http://lessig.org/blog/2008/08/and_another_big_win_today_for.html">via lessig.org</a>).  Woot!</p>
-]]>
-</content>
-  </entry><entry>
-    <title>Verizon Filters Ports 80 and 25</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/verizon-filters-ports-80-and-25/" />
-    <id>tag:threebrothers.org,2008-08-11:/brendan/blog/verizon-filters-ports-80-and-25</id>
-    <updated>2008-08-11T15:52:00.0-08:00</updated>
-    <summary><![CDATA[
-The gracious hosts of this server have recently upgraded to Verizon FiOS, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25. This is why, dear reader, I have reconfigured my blog to live on port 8080. Apparently, these ports are only used for "business purposes", an...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>The gracious hosts of this server have recently upgraded to Verizon <acronym title="Fiber Optic Service">FiOS</acronym>, which should have been a great boon to threebrothers.org; however, Verizon filters ports 80 and 25.  This is why, dear reader, I have reconfigured my blog to live on port 8080.  Apparently, these ports are only used for "business purposes", and businesses need to pay more.  While I now have more bandwidth, I am also greatly impaired in my ability to use it.</p>
-
-<p>This further polarizes my beliefs about business rules and technology, which can be summarized as, "don't interfere, you incompetent nincompoops!"  I could spend an inordinate amount of time and energy dissecting the various facets of idiocy I have uncovered attempting to obtain an <acronym title="Internet Service Provider">ISP</acronym> at my new apartment.  To peel back the layers of tampering, throttling, and filtering from this proverbial onion would make even the most stalwart vegetable cutter cry.  I read through the fine, disingenuous print of each company's <acronym title="Terms of Service">TOS</acronym>, and each time it is like turning on the shower and receiving a cascade of putrescent sewage.  Each one of these companies is a moldering, pus-filled lesion on the face of the internet.</p>
-
-<p>So, please: clean up your acts.  Bandwidth should not be accompanied by throttles, filters, or intermittent magical interference.  If I have a service plan advertised at a speed of 3.0 megabits per second, I expect:</p>
-
-<ol>
-  <li>That this speed is consistent — it doesn't change unless there is a <em>problem</em> with the service, and problems ought not to be expected.</li>
-  <li>The bandwidth I purchase can be used across the entirety of the <a href="http://en.wikipedia.org/wiki/OSI_model"><acronym title="Open Systems Interconnection Basic Reference Model">OSI model</acronym></a>. This means no monkeying with anything — very similar to the consistency requirement from point 1.</li>
-  <li>Since there are 2,592,000 seconds in a 30-day period, I expect to be able to download approximately 949.22 gigabytes of data in a 30-day period.  Of course, the same "problems" disclaimer applies here — of course I don't expect <a href="http://en.wikipedia.org/wiki/Myth_of_the_nines">5 nines</a> of uptime, or even 3.</li>
-</ol>
-
-<p>Postscript:</p>
-
-<p>I'm aware that Verizon is the only brand with which I am associating this vituperation, and I don't think that's entirely fair.  Verizon's port filtering leans towards the innocuous end of the moldering, pus-filled lesion spectrum — it's a few orders of magnitude less despicable than some of the despicable things being done by ISPs.  However, it happens to be the particular lesion that I am faced with looking at, and so I will not forgo associating their name with their actions.</p>
-]]>
-</content>
-  </entry><entry>
-    <title>There and back again: the return to Linux (updated)</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/there-and-back-again-the-return-to-linux/" />
-    <id>tag:threebrothers.org,2008-05-21:/brendan/blog/there-and-back-again-the-return-to-linux</id>
-    <updated>2008-05-21T21:55:00.0-08:00</updated>
-    <summary><![CDATA[
-When I started at iLike in October, I chose a MacBook Pro as my development machine. After months of my attempting to adapt to OSX, that Macbook is now running Linux. Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' UI, I consistently found OSX cloyin...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>When I started at <a href="http://ilike.com/user/brendanribera">iLike</a> in October, I chose a MacBook Pro as my development machine.  After months of my attempting to adapt to OSX, that Macbook is now running Linux.  Macs have always been lauded for their superior usability; while I can corroborate this sentiment with respect to Windows' <acronym title="User Interface">UI</acronym>, I consistently found OSX cloying and claustrophobia-inducing when compared to a standard Linux environment.  So I nuked it.</p>
-
-<p>Here are some interesting things I learned in the process:</p>
-
-<ul>
-  <li>OSX relies on a ~200MB EFI system partition.  The MacBook's BIOS looks for this partition <em>everywhere</em> before performing a standard boot from the hard drive's <acronym title="Master Boot Record">MBR</acronym>.  There are two "gotchas" as a result of this silly operating system <acronym title="Digital Rights Management">DRM</acronym>:
-    <ol>
-      <li>If you want to dual boot with <em>any</em> other operating system, you have to use a proprietary program from within OSX to write to the EFI partition.  This isn't that hard, since the program works well and nearly all of the online documentation instructs the user to perform this method.<br /><br /></li>
-      <li>If you're like me and you don't want to dual boot, you have to set an MSDOS disklabel on the hard drive's first partition and make it bootable before the MacBook's BIOS will attempt to boot it.  I found that at one of the few sites referring to <a href="http://slu.ms/articles/ubuntu-linux-on-the-macbook">booting only Linux on a MacBook</a>.  Additionally, booting will involve ~20 seconds of annoying white screen while the MacBook's BIOS searches desperately for the missing EFI partition.<br /><br /></li>
-    </ol>
-  </li>
-  <li>Since the MacBook has a Core 2 Duo, you can install the poorly-named AMD64 branch of whatever distribution you're using.  If you happen to install Ubuntu like I did, peruse the <a href="http://ubuntuforums.org/forumdisplay.php?s=e33b9a6ef38cfc8fadd59b78fb2e8c18&amp;f=343">x86 64-bit Users Ubuntu forum</a> to get abreast of any odd architecture-related issues.  Since many programs (Firefox and Thunderbird, for example) are 32-bit, it's important to get all of the necessary 32-bit compatibility libraries installed.<br /><br />In Ubuntu, lacking these libraries means that a fresh download of Firefox or Thunderbird won't be able to access the internet — lame.  To solve, install <tt>lib32nss-mdns</tt> (ala <a href="http://ubuntuforums.org/showthread.php?t=796225">this thread</a>).</li>
-</ul>
-
-<p><b>Update:</b> <a href="http://thenullpointer.net">Dustin</a> asks what my particular complaints are.  Well, here goes...</p><div>&lt;joking&gt;<ul style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"><li style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;">The missing right-hand mouse button</li></ul>&lt;/joking&gt;<br /><br /></div><p>Seriously, though; it was a combination of these things:</p>
-
-<ul>
-  <li>The crazy focus model: you can't actually click on a control inside a window unless that window already has focus.<br /><br />Imagine that Thunderbird has the focus and is sitting in one of two monitors; if I want to view a different tab in the instance of Firefox that sits on the other monitor (Firefox is visible, but doesn't have focus), I have to click twice: once to attain focus, once to actually click the tab I want to view.<br /><br /></li>
-  <li>Shortcut keys.  I know, everything can be changed; it's just ridiculous to have to go through and reset all of the defaults<br /><br /></li>
-  <li>1-dimensional desktop.<br /><br />I didn't have <a href="http://www.apple.com/macosx/features/spaces.html">Leopard and its "Spaces"</a>, which would probably have scratched this itch.  But I've really grown to be <em>dependent</em> on Compiz and all of the little ways you can customize it.  Even with Spaces, you just don't have the same degree of granularity that Compiz offers.  Plus, I'll add the totally emotional, worthless argument that Spaces is an obvious knock-off of Compiz since Linux desktops have been doing this for a good long while.<br /><br /></li>
-  <li>Performance — both mine and the machine's.<br /><br />OSX can't keep up with a well-tuned Linux installation.  Sure, both Linux and OSX can run laps around your year-old, bloated Windows installation.  Nevertheless, I kept getting frustrated with how things would freeze up.  Windows has the <acronym title="Blue Screen Of Death">BSOD</acronym>; OSX has the <acronym title="Beach Ball of Frustration">BBOF</acronym>.<br /><br />Additionally, my own performance was suboptimal under OSX.  Perhaps if I had made a complete switch (and not retained my Linux <em>skillz</em> by using it at home and work every day) I would have adapted; as it is, I kept on tripping on these and other subtle UI differences.<br /><br /></li>
-  <li>In general, Linux is a much more developer-friendly environment.  I find it faster to set up, and faster to alter.  That has to do with personal preference and knowledge more than anything else.</li>
-</ul>
 ]]>
 </content>
   </entry>

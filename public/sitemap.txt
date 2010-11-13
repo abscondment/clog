@@ -1,6 +1,12 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/
+http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/
+http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts/
+http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/
+http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions/
+http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/
 http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/
 http://threebrothers.org/brendan/blog/reinvent-the-wheel/
 http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/

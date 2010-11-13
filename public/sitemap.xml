@@ -15,6 +15,12 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/reinvent-the-wheel/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
