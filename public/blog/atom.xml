@@ -5,16 +5,119 @@
   <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
   <link href="http://threebrothers.org/brendan/" />
   <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
-  <updated>2010-10-29T00:54:41-08:00</updated>
+  <updated>2010-11-17T00:21:14-08:00</updated>
   <author>
     <name>Brendan Ribera</name>
     <email>brendan.ribera+blogatom@gmail.com</email>
   </author>
   <entry>
+    <title>Facebook Connect, IE, and the Mysterious IFrame</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe/" />
+    <id>tag:threebrothers.org,2010-11-16:/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe</id>
+    <updated>2010-11-16T22:36:45.0-08:00</updated>
+    <summary><![CDATA[
+The Facebook Connect JavaScript does some really neat things to function the way it does, but one of its behaviors is unexpected and downright buggy. When attempting to establish a cross-domain communication channel in Internet Explorer (IE8, at least – perhaps not the others), it loads a duplicate copy of the current...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>The Facebook Connect JavaScript does some really neat things to
+function the way it does, but one of its behaviors is unexpected and
+downright buggy. When attempting to establish a cross-domain
+communication channel in Internet Explorer (IE8, at least –
+perhaps not the others), it loads a duplicate copy of the current page
+in an IFrame. That's right – IE8 users attempt to make two hits
+to the same page for a single view.</p>
+
+<h2>A tale of broken CAPTCHAs</h2>
+
+<p>This behaviour is entirely undocumented. I mean, go ahead – check
+<a rel="nofollow" href="http://developers.facebook.com/docs/reference/javascript/">the Javascript SDK</a>
+– you won't find any mention of it. It's a really bad
+behavior, too. If you have Facebook Connect (or a Like button, for
+that matter) on any page that has some transient state (say, a CAPTCHA
+that gets invalidated and regenerated every time the page loads),
+loading the page a second time can invalidate the version that the
+user actually interacts with.</p>
+
+<p>This was the case for our production user registration flow for a long
+time. The first hit displayed an image for one CAPTCHA, and the second
+hit surreptitiously invalidated it so that there was no possible way
+the user could solve the CAPTCHA. Thanks, guys.</p>
+
+<p>The reason for this double hit is straightforward. The <a href="http://www.w3.org/Security/wiki/Same_Origin_Policy">same-origin policy</a> 
+restricts how scripts can communicate with different
+domains. For the most part, interesting interactions are
+restricted. The whole idea of Facebook Connect is predicated on the
+idea that their JavaScript will run on your site and provide you with
+functionality from a different domain, so they had to find a way to
+bypass the restrictions. There are, quite naturally,
+<a href="http://softwareas.com/cross-domain-communication-with-iframes">some tricky ways to make things work using IFrames</a>. But
+following the ever-present JavaScript mantra, Not All Browsers Will
+Behave the Same Way. I actually doubt whether browsers behave at all,
+ever.</p>
+
+<p>It seems that Facebook's engineers found IE8 wouldn't do their bidding
+unless the communication channel IFrame was hosted on the same domain
+as the main site. Oh, and that IFrame needs to run their JavaScript,
+too. So what better way to ensure this than, uh, reload the current
+page (which we know has the Connect JavaScript) in a hidden
+IFrame. No site is going to care if they rack up double hits from a
+large percentage of their user base, right? As they helpfully append
+<code>fb_xd_fragment</code> as a query parameter, you can just make a special
+case short-circuit in your routing based on that. Right? Right?</p>
+
+<h2>A solution emerges</h2>
+
+<p>Remember how I linked to those oh-so-helpful JavaScript SDK docs that
+had nothing whatsoever to say about this problem? They are (shock of
+all shocks) incomplete. Littered all over the Internet, you'll find
+references to a mythical <strong>Cross Domain Communication Channel file</strong>
+that solves this
+problem. Stale versions of <a href="http://developers.facebook.com/search?q=Cross_Domain_Communication_Channel">Facebook's own documentation</a>
+and
+<a href="https://github.com/facebook/connect-js/wiki/custom-channel-url">connect-js Github page</a>
+hint at it, although the current versions of both are devoid of references.</p>
+
+<p>The channel file is a static chunk of HTML hosted on your domain that
+does nothing but load the Facebook Connect JavaScript. Through a
+now-undocumented configuration parameter, you can tell the Connect
+JavaScript on your site to load <em>that file</em> in the IFrame instead of
+loading a copy of your current page. Problem solved!</p>
+
+<p>Why wouldn't Facebook document this? Oh, wait – they did... sort
+of. It's listed as part of
+<a rel="nofollow" href="http://developers.facebook.com/docs/reference/oldjavascript/FB.Facebook.init">the old JavaScript API</a>.
+Oh, but wait. Apparently the API <em>has</em> changed a little, and
+<code>xdChannelUrl</code> should just be <code>channelUrl</code>. They're close enough,
+right? That's like, hardly worth mentioning. Or documenting.</p>
+
+<p>So now you do something like this:</p>
+
+<pre><code>FB.init({
+          apiKey: 'OMGWTFBBQ',
+          status: true,
+          cookie: true,
+          xfbml: true,
+          channelUrl: window.location.protocol + '//your-site.com/xd_receiver.html'
+        });
+</code></pre>
+
+<p>And in xd_receiver.html, you do this:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt; 
+&lt;html&gt;&lt;head&gt;&lt;title&gt;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;script src="//connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+
+<p>Voilà! Facebook can use this static, lightweight, stateless
+page to achieve their ends instead of loading the current page a
+second time. Set some way-in-the-future cache headers on that sucker
+and call it good.</p>
+]]>
+</content>
+  </entry><entry>
     <title>Rails 2 Upgrade Turbulence: a Series</title>
     <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/" />
-    <id>tag:threebrothers.org,2010-11-21:/brendan/blog/rails2-upgrade-turbulence</id>
-    <updated>2010-11-21T07:39:56.7-08:00</updated>
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-turbulence</id>
+    <updated>2010-10-21T07:39:56.7-08:00</updated>
     <summary><![CDATA[
 Here are several posts on Rails 2 upgrade issues that I encountered at Urbanspoon: General Cleanup Disabling Sessions ActiveRecord Woes git-svn Workflow Warts Troubleshooting a Slow Production Deployment I've found it common for startups to get stuck on old versions of Rails because the incremental upgrade task is always lo...]]>
 </summary>
@@ -1437,96 +1540,6 @@ run_block(&amp;make_block)
 <p>For more details, check out <a href="http://kenai.com/projects/duby/pages/DubyBlocks">the DubyBlocks Wiki page</a>.</p>
 
 <p><br style="clear:both;" /></p>
-]]>
-</content>
-  </entry><entry>
-    <title>iPad: Falling Short of the Past</title>
-    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/ipad-falling-short-of-the-past/" />
-    <id>tag:threebrothers.org,2010-01-30:/brendan/blog/ipad-falling-short-of-the-past</id>
-    <updated>2010-01-30T09:51:51.0-08:00</updated>
-    <summary><![CDATA[
- Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will inveigle unsuspecting hackers into a gloomy extinction. For the most part, however, the response has amounted to a banal whine a...]]>
-</summary>
-    <content type="html"><![CDATA[
-<p>
-  <img style="float:right;margin:0 0 0 1em;" alt="Steve Jobs and the iPad" src="http://threebrothers.org/brendan/images/jobs-ipad.png" />
-  Steve Jobs announced the iPad this week, and technologists have run the gamut of responses. Some people think it will fart rainbows. Some think its reason-defying sorcery and closed software will <a rel="nofollow" href="http://al3x.net/2010/01/28/ipad.html">inveigle unsuspecting hackers into a gloomy extinction</a>. For the most part, however, the response has amounted to a <a rel="nofollow" href="http://www.youtube.com/watch?v=lQnT0zp8Ya4">banal whine</a> about Flash, multitasking, and maxi pads. Why anyone would complain about <em>not</em> being continually tortured by Flash is beyond me—but that's another post entirely.
-</p>
-
-<p>
-  I'm continually led to appreciate the history of Computer Science. I write software for a living, and I've used a number of different languages. I began in O-BASIC, and I've taken an analogous path to the one described by Paul Graham in <em><a rel="nofollow" href="http://www.paulgraham.com/icad.html">Revenge of the Nerds</a></em>:
-</p>
-
-<blockquote>
-  <p>
-    <em>
-      If you look at these languages in order, Java, Perl, Python, you notice an interesting pattern. At least, you notice this pattern if you are a Lisp hacker. Each one is progressively more like Lisp. Python copies even features that many Lisp hackers consider to be mistakes. You could translate simple Lisp programs into Python line for line. It's 2002, and programming languages have almost caught up with 1958.
-    </em>
-  </p>
-</blockquote>
-
-<p>
-  "Programming languages have almost caught up with 1958." Something about that really resonates with me, and I don't think it's only because I've been drinking the Lisp-flavored Clojure Kool-Aid. In fact, I'm sure it's not.
-</p>
-
-<p>
-  I remember the day I had the <acronym title="Model-View-Controller">MVC</acronym> epiphany. I'd worked a little bit in <a rel="nofollow" href="http://static.springsource.org/spring/docs/2.0.x/reference/mvc.html">Spring's framework</a> and had recently dove into the relatively soothing balm of Rails. My prior projects hadn't had any really clean separation. "Man," I thought, "what a great, new invention. I don't know how people developed web applications before MVC existed." Then I discovered that <a href="http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html">MVC originated in Xerox PARC in the 70s</a>. Of course, I should have known better—I had to read all sorts of PARC papers in school. Never underestimate your own capacity to forget important and interesting information.
-</p>
-
-<p>
-  Here's the interesting thing: we're constantly leaving what's rooted in history and rigor for the technique <em>du jour</em>. Lisp isn't for everyone, but enough incredibly smart people swear by it that it should give you pause. There may be a good alternative to MVC for your application, but chances are you've exchanged it for a fragile pile of highly-coupled, poorly organized classes. You may think it's OK to treat a Java interface like a C header file (yes, I maintained code that had this charming characteristic), but this simply indicates that you don't know the first thing about object-oriented programming.
-</p>
-
-<p>
-  Now, it would be silly of me to quote <em>Revenge of the Nerds</em> and then make some (de)moralizing point about "industry best practices." My point thus far is this: for a given problem, it's likely that an efficient and elegant solution exists already (even if only in concept). And very often, it was invented <em>years</em> ago. <b>It is good to be well-versed in the history of your trade.</b> This will help you know how to think about whole classes of problems. And this—finally—brings me back to the iPad.
-</p>
-
-<p>
-  <img style="float:left;margin:0 1em 0 0;" alt="The ParcPad" src="http://threebrothers.org/brendan/images/parcpad.png" />
-  Critics are right to be at least a little disappointed, but not due to the likes of Flash or multitasking. The iPhone and iPad are still behind research prototyped at PARC (yes, them again) in the late 80s. Mark Weiser's <a rel="nofollow" href="http://sandbox.xerox.com/ubicomp/">Ubiquitous Computing research</a> conceived of and built a variety of devices for home and office use—called tabs, pads, and boards—sized just like iPhones, iPads, and large LCD screens. They even wrote software and built networking devices to stitch the environment together.
-</p>
-
-<p>
-  It's obvious that Xerox has had a profound impact on Steve Jobs, from the Lisa to the iPhone. When I first heard about the iPhone in 2007, I instantly thought of the ParcTab. Hardware has improved tremendously since the ParcTab experiments and <a rel="nofollow" href="http://www.ubiq.com/weiser/researchreports.htm">papers</a>. Apple now reaps the benefits of faster and cheaper processors, ram, and storage. Wireless networking is pervasive and fast. Screens are vastly better, and touch inputs have obviously improved. The device is supremely capable. But the ubiquitous user interface is completely absent.
-</p>
-
-<p>
-  I recently advised a nontechnical friend about purchasing an iPhone. She wanted to know how it interfaced with her computer and TV. "It really doesn't," was my response. But she expected it to. It doesn't take an engineer to see that devices like the iPhone and iPad <em>ought</em> to operate as an extension to the computer or TV. Instead, we have this media syncing model that's reminiscent of some lousy corporate <acronym title="Personal digital assistant">PDA</acronym>. Technology pundits who are quibbling about little features are missing the point: the iPad should have made the jump to seamless, ubiquitous integration. This would have been a technological revolution equivalent to the introduction of the iPhone. This is the next step.
-</p>
-
-<p>
-  Both the iPhone and the iPad should operate as stand-alone devices. But they could bring so much more power and flexibility if they also acted as extensions to a desktop, laptop, or distributed network. A general-purpose, network-aware, hand-held device that can continue operating without the network. Access this computer and that; give a presentation on this screen; share files with these people; receive and send email; play a game; order lunch—and use any of your iPhone, iPad, or MacBook at any point in the progression, with the others automatically and wirelessly synced. This is what I expected of Apple.
-</p>
-
-<p>
-  Indeed, Mark Weiser accurately predicted our current systems in 1996. In <a href="http://www.ubiq.com/hypertext/weiser/acmfuture2endnote.htm">The Coming age of Calm Technology</a>, he describes a transition from the internet and distributed computing to "The <acronym title="Ubiquitous Computing">UC</acronym> Era"—and he said it would take place between 2005 and 2020. He describes the philosophy of UC with four tenets:
-</p>
-
-<ul>
-  <li>The purpose of a computer is to help you do something else.</li>
-  <li>The best computer is a quiet, invisible servant.</li>
-  <li>The more you can do by intuition the smarter you are; the computer should extend your unconscious.</li>
-  <li>Technology should create calm.</li>
-</ul>
-
-<p>
-  This is the standard to which Apple should be held. We're collectively forgetting how good the iPad <em>should</em> be, because we're forgetting how much brilliant computer science research has already been done. Like Java, Perl, and Python, the present incarnation will inch towards superior and older definition. And although I disagree with them philosophically about the openness of their systems to hackers, I believe they will soon reach the ubiquitous computing standard. This will be good for technology all around.
-</p>
-
-<p>
-  Just remember to peer back a few decades occasionally and recall exactly how much we should expect from modern-day engineering.
-</p>
-
-<p>
-  <br />
-  <em>
-    What has been is what will be,<br />
-       and what has been done is what will be done,<br />
-       and there is nothing new under the sun.
-  </em>
-  <br />
-  <a rel="nofollow" href="http://www.gnpcb.org/esv/search/?q=Ecclesiastes+1">Ecclesiastes</a>
-</p>
 ]]>
 </content>
   </entry>
