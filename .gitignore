@@ -5,4 +5,5 @@ public/index.html
 public/blog/atom.xml
 public/blog/sitemap.*
 public/blog/*/*.html
+public/blog/*/*.md5sum
 
