@@ -1,0 +1,1598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Wine, Water, and Blood</title>
+  <subtitle>Three Planes of Thought Which to Sail</subtitle>
+  <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
+  <link href="http://threebrothers.org/brendan/" />
+  <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
+  <updated>2010-11-25T00:33:39-08:00</updated>
+  <author>
+    <name>Brendan Ribera</name>
+    <email>brendan.ribera+blogatom@gmail.com</email>
+  </author>
+  <entry>
+    <title>Stirling's approximation in Clojure</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/" />
+    <id>tag:threebrothers.org,2010-11-24:/brendan/blog/stirlings-approximation-formula-clojure</id>
+    <updated>2010-11-24T24:12:38.0-08:00</updated>
+    <summary><![CDATA[
+In my copious free time (hah!), I've been working through Probability Theory: A Concise Course by Y.A. Rozanov. The first chapter contains a great factorial approximation that anyone doing computer-based statistics or combinatorics ought to know: This is Stirling's Approximation. As n grows, this function gets closer and cl...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>In my copious free time (hah!), I've been working through <a href="http://store.doverpublications.com/0486635449.html">Probability Theory: A Concise Course</a> by Y.A. Rozanov.
+The first chapter contains a great factorial approximation that anyone doing
+computer-based statistics or combinatorics ought to know:</p>
+
+<p><img alt="n! ∼ √(2πn) * (n/e)^n" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/stirlings-approximation.png" /></p>
+
+<p>This is <strong>Stirling's Approximation</strong>. As <em>n</em> grows, this function gets
+closer and closer to the actual value of <em>n!</em>. More formally, the <strong>∼</strong> operator means that when A(n) ∼ B(n),</p>
+
+<p><img alt="lim n-&gt;&amp;infinity; A(n)/B(n) = 1" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/sim.png" /></p>
+
+<p>I was curious about the actual behavior of this formula, so I decided
+to plot the expected convergence. To do this, I wrote up simple Clojure versions
+of both functions and charted the expected convergence using Incanter.</p>
+
+<script src="https://gist.github.com/715040.js?file=stirling-naive.clj"></script>
+
+<noscript>
+  <pre>
+    <code>
+(use '(incanter core charts io latex))
+
+(defn stirling [#^Integer n]
+  (* (Math/sqrt (* 2 n Math/PI))
+     (Math/pow n n)
+     (Math/pow Math/E (* -1 n))))
+
+(defn fact [#^Integer n]
+  (reduce * (range 2 (inc n))))
+
+(let [n-vals (range 5 1000)]
+  (view
+   (xy-plot n-vals
+            (map #(- (/ (fact %) (stirling %)) 1.0) n-vals)
+            :x-label "n"
+            :y-label "factorial(n)/stirling(n) - 1")))
+    </code>
+  </pre>
+</noscript>
+
+<p>The graph produced by this doesn't exactly pass muster.</p>
+
+<p><img alt="Hmm, that doesn't look right." src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/chart-glitch.png" /></p>
+
+<p>We've been bit by one of the classic problems of numerical computing: the way
+that a number is represented internally limits what can be done with it. In our
+case, we've exceeded the range of values that a Java Double can handle. It has 8
+bytes split into a 52-bit mantissa, an 11-bit exponent, and a single sign bit
+(<a rel="nofollow" href="http://www.mobilefish.com/tutorials/java/java_quickguide_double.html">in detail</a>).
+The max value it can hold is 1.7976931348623157×10<sup>308</sup>. Once we
+exceed that value, everything is simply "Infinity".</p>
+
+<script src="https://gist.github.com/715041.js?file=overflow.clj"></script>
+
+<noscript>
+  <pre>
+    <code>
+user&gt; (fact 200)
+788657867364790503552363213932185062295135977687173263294742533244359449963403342920304284011984623904177212138919638830257642790242637105061926624952829931113462857270763317237396988943922445621451664240254033291864131227428294853277524242407573903240321257405579568660226031904170324062351700858796178922222789623703897374720000000000000000000000000000000000000000000000000
+user&gt; (class (fact 200))
+java.math.BigInteger
+
+user&gt; (stirling 200)
+Infinity
+user&gt; (class (stirling 200))
+java.lang.Double
+    </code>
+  </pre>
+</noscript>
+
+<p>Clojure magically moves from Integer arithmetic to BigInteger arithmetic
+when we overstep the Integer upper bound of 2<sup>31</sup>-1. But we get no such
+love from the functions in java.lang.Math.*, which quickly (at n=144) overflow
+to Infinity.</p>
+
+<p>Now, the entire point of this function is to have a fast approximation of the
+factorial <strong>for large <em>n</em></strong>, so this is an issue that we need to overcome. The
+naïve version is actually completely useless, since it only functions
+for small <em>n</em>.</p>
+
+<p>So let's fix it.</p>
+
+<p>We need to convert our function to use an arbitrary precision decimal type.
+As far as I can tell, Math.PI only comes in double precision. We'd need to have
+an <em>n</em> of, oh, 9,223,372,036,854,775,807 before we exceeded the Double range
+and needed to change the way we compute first expression. I don't think anyone
+is actually going to seriously try doing factorials that large, but if you are,
+you can make use of this <a href="http://www.merriampark.com/bigsqrt.htm">free BigSquareRoot class that uses BigDecimals</a>.</p>
+
+<p>For my purposes, only the division and multiplication in the second expression
+need to be converted. Java has a handy BigDecimal class that fits the
+arbitrary-precision bill:</p>
+
+<script src="https://gist.github.com/715046.js?file=stirling-big.clj"></script>
+
+<noscript>
+  <pre>
+    <code>
+(defn stirling-big [#^Integer n]
+  (.multiply
+   (BigDecimal. (Math/sqrt (* 2 Math/PI n)))
+   (.pow (.divide (BigDecimal. n)
+                  (BigDecimal. Math/E)
+                  java.math.MathContext/DECIMAL128)
+         n java.math.MathContext/DECIMAL128)))
+    </code>
+  </pre>
+</noscript>
+
+<p>We also need to use BigDecimal division in the comparison function, but I'll
+leave that as an exercise for the reader. The outcome is quite pleasing from
+the numerical error standpoint:</p>
+
+<p><img alt="That's better" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/chart-good.png" /></p>
+
+<p>You can see that as <em>n</em> gets larger, the ratio of the functions asymptotically
+approaches 1. Stirling's approximation gets more and more accurate with larger
+<em>n</em>, which is exactly what we want.</p>
+
+<p>And the performance is great, too! Check out the differences:</p>
+
+<p><img alt="Performance for the first 64 values of n" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/time-short.png" />
+<img alt="Performance for all values of n" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/time-full.png" /></p>
+
+<p>The raw factorial function is superior for small <em>n</em>, which is to be expected.
+The factorial function has noticeable performance perturbations in the local
+view, but these mostly disappear in the full view. The factorial function seems
+to perform in quadratic time relative to <em>n</em>, while Stirling's formula has a
+very low constant cost.</p>
+
+<p>So remember Stirling's formula if you find yourself computing large factorials.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Facebook Connect, IE, and the Mysterious IFrame</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe/" />
+    <id>tag:threebrothers.org,2010-11-16:/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe</id>
+    <updated>2010-11-16T22:36:45.0-08:00</updated>
+    <summary><![CDATA[
+The Facebook Connect JavaScript does some really neat things to function the way it does, but one of its behaviors is unexpected and downright buggy. When attempting to establish a cross-domain communication channel in Internet Explorer (IE8, at least – perhaps not the others), it loads a duplicate copy of the current...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>The Facebook Connect JavaScript does some really neat things to
+function the way it does, but one of its behaviors is unexpected and
+downright buggy. When attempting to establish a cross-domain
+communication channel in Internet Explorer (IE8, at least –
+perhaps not the others), it loads a duplicate copy of the current page
+in an IFrame. That's right – IE8 users attempt to make two hits
+to the same page for a single view.</p>
+
+<h2>A tale of broken CAPTCHAs</h2>
+
+<p>This behaviour is entirely undocumented. I mean, go ahead – check
+<a rel="nofollow" href="http://developers.facebook.com/docs/reference/javascript/">the Javascript SDK</a>
+– you won't find any mention of it. It's a really bad
+behavior, too. If you have Facebook Connect (or a Like button, for
+that matter) on any page that has some transient state (say, a CAPTCHA
+that gets invalidated and regenerated every time the page loads),
+loading the page a second time can invalidate the version that the
+user actually interacts with.</p>
+
+<p>This was the case for our production user registration flow for a long
+time. The first hit displayed an image for one CAPTCHA, and the second
+hit surreptitiously invalidated it so that there was no possible way
+the user could solve the CAPTCHA. Thanks, guys.</p>
+
+<p>The reason for this double hit is straightforward. The <a href="http://www.w3.org/Security/wiki/Same_Origin_Policy">same-origin policy</a> 
+restricts how scripts can communicate with different
+domains. For the most part, interesting interactions are
+restricted. The whole idea of Facebook Connect is predicated on the
+idea that their JavaScript will run on your site and provide you with
+functionality from a different domain, so they had to find a way to
+bypass the restrictions. There are, quite naturally,
+<a href="http://softwareas.com/cross-domain-communication-with-iframes">some tricky ways to make things work using IFrames</a>. But
+following the ever-present JavaScript mantra, Not All Browsers Will
+Behave the Same Way. I actually doubt whether browsers behave at all,
+ever.</p>
+
+<p>It seems that Facebook's engineers found IE8 wouldn't do their bidding
+unless the communication channel IFrame was hosted on the same domain
+as the main site. Oh, and that IFrame needs to run their JavaScript,
+too. So what better way to ensure this than, uh, reload the current
+page (which we know has the Connect JavaScript) in a hidden
+IFrame. No site is going to care if they rack up double hits from a
+large percentage of their user base, right? As they helpfully append
+<code>fb_xd_fragment</code> as a query parameter, you can just make a special
+case short-circuit in your routing based on that. Right? Right?</p>
+
+<h2>A solution emerges</h2>
+
+<p>Remember how I linked to those oh-so-helpful JavaScript SDK docs that
+had nothing whatsoever to say about this problem? They are (shock of
+all shocks) incomplete. Littered all over the Internet, you'll find
+references to a mythical <strong>Cross Domain Communication Channel file</strong>
+that solves this
+problem. Stale versions of <a href="http://developers.facebook.com/search?q=Cross_Domain_Communication_Channel">Facebook's own documentation</a>
+and
+<a href="https://github.com/facebook/connect-js/wiki/custom-channel-url">connect-js Github page</a>
+hint at it, although the current versions of both are devoid of references.</p>
+
+<p>The channel file is a static chunk of HTML hosted on your domain that
+does nothing but load the Facebook Connect JavaScript. Through a
+now-undocumented configuration parameter, you can tell the Connect
+JavaScript on your site to load <em>that file</em> in the IFrame instead of
+loading a copy of your current page. Problem solved!</p>
+
+<p>Why wouldn't Facebook document this? Oh, wait – they did... sort
+of. It's listed as part of
+<a rel="nofollow" href="http://developers.facebook.com/docs/reference/oldjavascript/FB.Facebook.init">the old JavaScript API</a>.
+Oh, but wait. Apparently the API <em>has</em> changed a little, and
+<code>xdChannelUrl</code> should just be <code>channelUrl</code>. They're close enough,
+right? That's like, hardly worth mentioning. Or documenting.</p>
+
+<p>So now you do something like this:</p>
+
+<pre><code>FB.init({
+          apiKey: 'OMGWTFBBQ',
+          status: true,
+          cookie: true,
+          xfbml: true,
+          channelUrl: window.location.protocol + '//your-site.com/xd_receiver.html'
+        });
+</code></pre>
+
+<p>And in xd_receiver.html, you do this:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt; 
+&lt;html&gt;&lt;head&gt;&lt;title&gt;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;script src="//connect.facebook.net/en_US/all.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+
+<p>Voilà! Facebook can use this static, lightweight, stateless
+page to achieve their ends instead of loading the current page a
+second time. Set some way-in-the-future cache headers on that sucker
+and call it good.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Rails 2 Upgrade Turbulence: a Series</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-turbulence</id>
+    <updated>2010-10-21T07:39:56.7-08:00</updated>
+    <summary><![CDATA[
+Here are several posts on Rails 2 upgrade issues that I encountered at Urbanspoon: General Cleanup Disabling Sessions ActiveRecord Woes git-svn Workflow Warts Troubleshooting a Slow Production Deployment I've found it common for startups to get stuck on old versions of Rails because the incremental upgrade task is always lo...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Here are several posts on Rails 2 upgrade issues that I encountered at Urbanspoon:</p>
+
+<ul>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup">General Cleanup</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions">Disabling Sessions</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes">ActiveRecord Woes</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts">git-svn Workflow Warts</a></li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment">Troubleshooting a Slow Production Deployment</a></li>
+</ul>
+
+<p>I've found it common for startups to get stuck on old versions of Rails because the incremental upgrade task is always lower priority than feature work (rightfully so). As time progresses, the task becomes more and more daunting. I bit the bullet and upgraded our site.</p>
+
+<p>Considering that Rails 3 is out now, we're still a touch behind the times. That said, there are still interesting things one could learn from the process of taking a real site (that serves quite a bit of traffic) from Rails 1.1.6 to 2.3.10.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Troubleshooting a Slow Production Deployment</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment</id>
+    <updated>2010-10-21T06:55:09.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Staging and testing a big release is important, but there are some factors that can only be obsereved in the true production environment. Sure, I can replay the most interesting 80% of a yesterday's traffic against a test server without it failing – but I'm only ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Staging and testing a big release is important, but there are some factors that
+can only be obsereved in the true production environment. Sure, I can replay the
+most interesting 80% of a yesterday's traffic against a test server without it
+failing – but I'm only <em>one user</em> making <em>sequential</em> requests. This
+completely dodges the question of how the new code will work at scale.</p>
+
+<p>The <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/">ActiveRecord changes around association loading in Rails 2</a>
+made me particularly curious about the production behavior of Urbanspoon. We had
+recently added two identical servers to our production rotation, so I took over
+one and did a test deploy of the Rails 2 branch.</p>
+
+<p>Initial traffic (balanced to about 3% of our load) looked good – snappy
+response times and no exceptions. But when I bumped it up to take a full share,
+performance was substandard. The Rails 2 server was running at <em>nearly twice the load</em>
+of its counterpart, and was taking <em>on average twice as much time</em> to serve
+requests. Yech. We loaded up Rails 1, and performance improved... although
+this test server was still slower than the control. What a quandary.</p>
+
+<h2>Monitoring works.</h2>
+
+<p>Since we run munin, we have easy access to historical performance. My debugging
+tools/steps were:</p>
+
+<ol>
+<li>top - get a quick, side-by-side eyeball of CPU, load, iowait, memory usage.</li>
+<li>munin
+<ul><li>Rails times: total, views, db
+<ul><li>total time and db time in Rails 2 was twice that in Rails 1</li>
+<li>Raised the question of whether these are even comparable across
+different major Rails revisions.</li></ul></li>
+<li>Load/Memory graphs – same story as top.</li>
+<li>Interrupt graphs
+<ul><li>Wow – lots of "Rescheduling interrupts" on the slow server.</li></ul></li></ul></li>
+<li>cat /proc/cpuinfo, /proc/meminfo, /proc/interrupts, /proc/ioports (AHCI on
+one, but not the other?), ifconfig, etc.
+<ul><li>Are these machines actually the same? Lots of subtle differences.</li></ul></li>
+</ol>
+
+<p>These were all useful, but they didn't give me a definitive answer. The machines
+looked different, but the old code ran significantly faster than the new code.
+Yet all reports easily reached by Google lead me to believe Rails 2 might even
+give us a speed <em>boost</em>. So was it really slower, was there a hardware issue, or
+what?</p>
+
+<h2>Debugging works.</h2>
+
+<p>At this point, I switched into the :debug log-level to see if I could spot any
+subtle issues. Was ActiveRecord sending a flood of extra association loads that
+we should force into a join? Was memcache getting hit at all? Were our DB times
+slow due to bad network performance?</p>
+
+<p>Very quickly, I noticed something suspicious: our memcache keys looked like
+absolute urls. Ah, great. Looks like we were being bit yet again by the new
+<a href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/">Rails 2 named routes</a> – nameley,
+that *_url routes now produce an absoluter URL instead of a relative one. In
+addition to this, Rails 2 changed the <a href="http://github.com/rails/rails/blob/v2.3.10/actionpack/lib/action_controller/caching/fragments.rb#L33">fragment_cache_key method to include a
+prefix</a> – so no matter what, fragment caching in Rails 2
+would have totally new keys.</p>
+
+<p>So on our most popular pages, we were using a completely different keyspace.
+All of the Rails 1 servers were using an identical keyspace, and the one Rails 2
+was in its own. This memcache filled quickly, but the new server's keys got
+ejected at a <em>much</em> higher rate. Its cache misses were through the roof, and
+therefore so were its load and response times (although, isn't it nice when
+averaging a 120ms response time is "through the roof"?).</p>
+
+<p>Neat. But fixing the keys didn't bring performance up to par with the other
+server. We noticed two things:</p>
+
+<ul>
+<li>Those pesky "Rescheduling interrupts" were still there &amp;ndash at three
+orders of maginitude more per second from the slow server to the other.</li>
+<li><abbr title="Advanced Host Controller Interface">AHCI</abbr> was disabled
+on the slow server.</li>
+</ul>
+
+<p>Even after enabling AHCI and doing an OS reload, the "identical" servers were
+none too identical. So we took a leap of faith and  deployed Rails 2 to the
+other, faster one, and performance was as expected. We're still working with
+our hosting company to figure out what's wrong with the slow machine.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>git-svn Workflow Warts</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-git-svn-workflow-warts/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-git-svn-workflow-warts</id>
+    <updated>2010-10-21T06:23:23.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Now that I had confidence that the code was production-ready, it was time to merge changes back into trunk. We still have a main SVN repository, although most people use the git-svn bridge. This proved problematic in three ways which have nothing to do with Rails whats...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Now that I had confidence that the code was production-ready, it was
+time to merge changes back into trunk. We still have a main SVN
+repository, although most people use the git-svn bridge. This proved
+problematic in three ways which have <em>nothing to do with Rails</em>
+whatsoever, but could prove useful to know about.</p>
+
+<h2>git-svn rebase problems</h2>
+
+<p>I use a git-svn repository where the <code>master</code> branch tracks the trunk
+of SVN. I branched from <code>master</code> to create the <code>dev_rails2</code> topic
+branch. This follows the canonical example:</p>
+
+<pre><code>          A---B---C dev_rails2
+         /
+    D---E---F---G master
+</code></pre>
+
+<p>I also pushed <code>master</code> and <code>dev_rails2</code> to a remote Git repository. A
+few co-workers and I worked in the <code>dev_rails2</code> branch and checked in
+to the remote repository, and I pulled all changes back into my local
+branch.</p>
+
+<p>To prevent the gigantic merge that the Rails 2 upgrade would create, I
+pulled trunk into the topic branch weekly. This involved:</p>
+
+<ul>
+<li>git checkout master</li>
+<li>git svn rebase</li>
+<li>git checkout dev_rails2</li>
+<li>git merge master</li>
+<li>(resolve conflicts)</li>
+</ul>
+
+<p>If you do things this way, you have to use a more obscure git-svn
+command to commit your changes – dcommit won't work. Can you
+spot the reason from looking at my workflow? No? Well, don't feel
+too bad; I didn't anticipate the problem either.</p>
+
+<p>If you merge <code>master</code> into <code>dev_rails2</code> as I did, you will eventually
+want to merge <code>dev_rails2</code> back into master to commit. This can happen
+with no conflicts if you resolved everything in <code>master</code> –&gt;
+<code>dev_rails2</code> merges already.</p>
+
+<p>So I'd do this:
+ * git checkout master
+ * git svn rebase
+ * git merge dev_rails2 <em>(succeeded)</em></p>
+
+<p>But then in order for <code>git svn dcommit</code> to work, I'd need to do this: 
+ * git svn rebase <em>(failed spectacularly)</em>
+ * git svn dcommit <em>(doesn't work without the prior succeeding)</em></p>
+
+<p>The last step will rewind all of your merged changesets (which now
+include some of the existing commits in Subversion) and apply them
+to the current state of subversion. This generates conflicts because
+it's attempting to diff the already resolved state against Subversion,
+and the resolution often would not apply cleanly.</p>
+
+<p>The correct solution is:</p>
+
+<pre><code>git svn set-tree [first-hash]..[last-hash]
+</code></pre>
+
+<p>To <a href="http://www.kernel.org/pub/software/scm/git/docs/git-svn.html" rel="external nofollow"><abbr title="Quote the Effing Manual">QTFM</abbr></a>:</p>
+
+<pre><code>You should consider using dcommit instead of this command. Commit
+specified commit or tree objects to SVN. This relies on your imported
+fetch data being up-to-date. This makes absolutely no attempts to do
+patching when committing to SVN, it simply overwrites files with those
+specified in the tree or commit. All merging is assumed to have taken
+place independently of git svn functions.
+</code></pre>
+
+<p>Huh? <code>set-tree</code>? Yeah, I'd never heard of it either. And I fixed my problem
+before I learned about it. In order to save revision history, I decided to
+re-resolve all of the conflicts (sometimes badly, since there were too many
+commits to remember every bit of minutiae) and fix the bad commits later.
+This meant I'd have the following:</p>
+
+<ol>
+<li>Changes made in <code>master</code> (and therefore Subversion) that I wanted to keep.</li>
+<li>Changes made in <code>dev_rails2</code> that I wanted to keep, but that also contained
+random, badly-resolved conflicts.</li>
+<li>Changes to fix the bad resolutions.</li>
+</ol>
+
+<p>Because the <code>dev_rails2</code> branch was in a good (i.e. a correctly merged view
+of the final product that I wanted to commit) state, I managed to get #3 by
+making a separate clone of it and copying files into the checkout in which I
+had run (and resolved) <code>git svn rebase</code>. This allowed me to preserve ~130
+commit comments worth of Rails 2 upgrade knowledge. But man, I wish I had
+known about <code>set-tree</code> beforehand.</p>
+
+<h2>git-svn dcommit problems</h2>
+
+<p>After finally merging in <code>dev_rails2</code> and getting a clean <code>git svn rebase</code>, I
+was ready to commit. Not so fast – <code>git svn dcommit</code> failed rather
+quickly:</p>
+
+<pre><code>[hash] doesn't exist in the repository at /usr/lib/git-core/git-svn [...]
+Failed to read object [hash] at /usr/lib/git-core/git-svn line [...]
+</code></pre>
+
+<p>Who knows what <code>set-tree</code> would have done here. Two of my changes had made it
+into Subversion, but the process halted on the commit in which I had copied
+the new mysql<em>replication</em>adapter plugin into vendor/plugins. After Googling
+around, I discovered this <a href="http://de-co-de.blogspot.com/2009/02/git-svn-and-submodules.html">great post about submodules</a>
+causing this of failure.</p>
+
+<p>Although I didn't have a git submodule, the basic issue turns out to be the
+same. Something in my commit (I believe it was an empty directory) appeared
+differently in the subversion changeset. When git-svn attempted to map this
+back to the git objects it knew about, a mismatch occurred. The object existed
+in one repository but not the other, so the system (wisely) errored out.</p>
+
+<p>Unfortunately, fixing this was not as simple as deleting the bad directory
+in HEAD. git-svn has to commit your work sequentially, so I needed to rewrite
+history.</p>
+
+<pre><code>$ git tag broken [hash that failed to commit]
+$ git checkout broken
+$ # remove the directory, re-add with correct name, cross fingers
+$ git commit --amend
+$ git rebase --onto HEAD broken master
+</code></pre>
+
+<p>After rewriting the svn-incompatible changes, <code>git svn dcommit</code> worked! But <em>of course</em> there was one more issue.</p>
+
+<h2>.svn directories in the tree</h2>
+
+<p>I had to update quite a few plugins, and I did this by checking out the source
+code and copying it into place in vendor/plugins. This was a short-sighted way
+of doing things, but using git-svn puts one in the unenviable position of being
+able to use neither git submodules nor svn:externals. Unfortunately, git-svn is
+more than happy to let you check full copies of Subversion repositories into
+your own Subversion repository. Mind blowing, no?</p>
+
+<p>The affect of this is that when you <code>svn up</code>, Subversion fails to update because
+it can't actually add the .svn directories that are in the source tree –
+it'd overwrite the ones that it truly needs! Also unfortunate is that you can't
+delete them locally because <em>a)</em> they don't exist yet and <em>b)</em> even if they did,
+the svn client helpfully ignores any attempts to operate on files named .svn. So
+this is broken and will fail:</p>
+
+<pre><code>svn del -m 'Delete .svn checkin' path/to/bad/.svn
+</code></pre>
+
+<p>Instead, one must delete the checked-in .svn directory on the remote server:</p>
+
+<pre><code>svn del -m 'Delete .svn checkin' svn+ssh://svn-server/trunk/path/to/bad/.svn
+</code></pre>
+
+<p>Whew!</p>
+]]>
+</content>
+  </entry><entry>
+    <title>ActiveRecord Woes</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-activerecord-woes</id>
+    <updated>2010-10-21T06:02:13.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. ActiveRecord associations have changed. There are some gotchas, at least compared to the Rails 1.1.6 frame of mind. Join v. Queries Instead of forcing a join against the tables for every incuded association, ActiveRecord is now smart enough to split things into separat...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>ActiveRecord associations have changed. There are some gotchas, at least compared to the Rails 1.1.6 frame of mind.</p>
+
+<h2>Join v. Queries</h2>
+
+<p>Instead of forcing a join against the tables for every incuded association, ActiveRecord is now smart enough to split things into separate, on-index loads of each model. It then slaps the correct assocations back together. If separate loading is not possible, it can fall back on the join model.</p>
+
+<h3>Broken SQL</h3>
+
+<p>The nature of programmatically generating SQL is that, well, things break. Specifically, if you find with both <code>:include</code> and <code>:joins</code> statements, you'll be in for a rude awakening. Whether single or multiple, every query will include the specified <code>:joins</code>. If your application expected a single, joined query (as with Rails 1.x), and you now get multiple, this will break.</p>
+
+<p>You can also use <code>:include</code> and have <code>:conditions</code> or <code>:order</code> statements with unqualified column names. These also get applied to each of the queries, but since the columns don't exist in every table we're querying, things break. If you qualify the column names, ActiveRecord is smart enough to perform the join for you instead of executing separate queries.</p>
+
+<h2>Associations</h2>
+
+<p>As I hinted in code when writing about <a href="http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/">Bulk-loading associations with ActiveRecord</a>, you need to be careful when using normal Array operators on collection-like associations. You can easily add to an association without expecting an insert.</p>
+
+<p>E.g., <code>Restaurant.find(:first).cuisines &lt;&lt; Cuisine.find(:first)</code> now generates an insert statement that establishes that relation instead of simply pushing the Cuisine object into an array.</p>
+
+<p>To manipulate the collection directly without doing anything in the database, you must use <code>association.target</code>:</p>
+
+<pre><code>Restaurant.find(:first).cuisines.target &lt;&lt; Cuisine.find(:first)
+</code></pre>
+]]>
+</content>
+  </entry><entry>
+    <title>Disabling Sessions</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-disabling-sessions/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-disabling-sessions</id>
+    <updated>2010-10-21T05:45:55.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Urbanspoon uses sessions to store various bits of information in the database that users might want to see again. We have a neat hack that Adam wrote to turn off sessions for bots so that we don't need to touch that table unless necessary. Unfortunately, his trick depe...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Urbanspoon uses sessions to store various bits of information in the database that users might want to see again. We have a neat hack that Adam wrote to <a href="http://gurge.com/blog/2007/01/08/turn-off-rails-sessions-for-robots/">turn off sessions for bots</a> so that we don't need to touch that table unless necessary.</p>
+
+<p>Unfortunately, his trick depends on the Rails 1.x ability to toggle sessions progammatically. Rails 2 opted for lazy loading – if you don't access it, it never gets loaded. There is, in fact, no out-of-the-box way to disable the session progammatically at request time.</p>
+
+<p>The trick I used to make this work is simple: choose the session store for a given request in a <code>before_filter</code>. I made a simple session that dumps all its data into a Hash, but never persists anything.</p>
+
+<noscript>
+  <pre>
+    <code>
+# NoSession acts like a session, but doesn't get stored anywhere. Sneaky.
+class NoSession &lt; AbstractSession
+  class &lt;&lt; self
+    def find_session(session_id); end
+    def create_session(session_id, data={})
+      new(session_id, data)
+    end
+    def delete_all(condition=nil); end
+  end
+
+  def update_session(data); end
+  def destroy; end
+end    
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653039.js?file=no_session.rb"></script>
+
+<p>I then created a subclass of our session store (SqlSessionStore, in our case) that has a class-level toggle ("disabled") which it uses to choose the backing session class when it is called.</p>
+
+<noscript>
+  <pre>
+    <code>
+class OptionalSessionStore &lt; SqlSessionStore
+
+  cattr_accessor :enabled_session_class  
+  cattr_accessor :disabled
+
+  class &lt;&lt; self
+    def disabled=(v)
+      if self.disabled != v
+        @@disabled = v
+        self.toggle_session_class
+      end
+    end
+
+    def toggle_session_class
+      if self.disabled
+        SqlSessionStore.session_class = NoSession
+      else
+        SqlSessionStore.session_class = self.enabled_session_class
+      end
+    end  
+  end
+
+  def call(env)
+    # Make sure our disabled state is current
+    self.class.toggle_session_class
+    super(env)
+  end
+end
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653053.js?file=optional_session_store.rb"></script>
+
+<p>I now use a before filter to enable or disable sessions even for code paths that attempt to access them.</p>
+
+<noscript>
+  <pre>
+    <code>
+before_filter :toggle_session
+
+def toggle_session    
+  # Disable the session if we spy a bot (or it was disabled elsewhere), enable otherwise.
+  if @disable_session.nil?
+    @disable_session = UrbanspoonUtil.is_megatron?(request.user_agent)
+  end
+  OptionalSessionStore.disabled = @disable_session
+end
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653049.js?file=toggle_session.rb"></script>
+]]>
+</content>
+  </entry><entry>
+    <title>General Cleanup</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/rails2-upgrade-general-cleanup/" />
+    <id>tag:threebrothers.org,2010-10-21:/brendan/blog/rails2-upgrade-general-cleanup</id>
+    <updated>2010-10-21T05:31:37.0-08:00</updated>
+    <summary><![CDATA[
+This is part of a series on Rails 2 Upgrade Turbulence. Some generic cleanup tasks: @request/@params/etc are deprecated, drop the '@' everywhere. application.rb becomes application_controller.rb start_form_tag and end_form_tag are deprecated; use form_for instead. ActiveRecord associations have changed. Named routing has ch...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p><em>This is part of a series on <a href="http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence">Rails 2 Upgrade Turbulence</a>.</em></p>
+
+<p>Some generic cleanup tasks:</p>
+
+<ul>
+<li>@request/@params/etc are deprecated, drop the '@' everywhere.</li>
+<li>application.rb becomes application_controller.rb</li>
+<li>start_form_tag and end_form_tag are deprecated; use form_for instead.</li>
+<li><a href="http://threebrothers.org/brendan/blog/rails2-upgrade-activerecord-woes/">ActiveRecord associations have changed</a>.</li>
+<li>Named routing has changed. Previously, every route created a method of the form 'some_page_url', which generated a relative path to the related url. Now, both 'some_page_url' and 'some_page_path' are generated. The _url method now gives an absolute url, while _path is relative.</li>
+<li>Most gems/plugins need to be upgraded or replaced. Yay for more current versions!</li>
+</ul>
+
+<p>I found these <a href="http://www.slashdotdash.net/2007/12/03/rails-2-upgrade-notes/">Rails 2 Upgrade Notes</a> to be pretty helpful.</p>
+
+<p>Also, there's nothing like a little <code>grep</code>/<code>cut</code>/<code>sed</code> to make short work of replacing <em>en masse</em>:</p>
+
+<noscript>
+  <pre>
+    <code>
+ack @request . | cut -d ':' -f 1 | uniq | xargs sed -i 's/@request/request/g'
+    </code>
+  </pre>
+</noscript>
+
+<script src="http://gist.github.com/653085.js?file=replace.sh"></script>
+]]>
+</content>
+  </entry><entry>
+    <title>Bulk-loading associations with ActiveRecord</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/" />
+    <id>tag:threebrothers.org,2010-09-13:/brendan/blog/bulk-loading-associations-with-active-record</id>
+    <updated>2010-09-13T10:55:22.0-08:00</updated>
+    <summary><![CDATA[
+Here's a fairly common problem I've encountered. Say you have two classes; for example, a Restaurant and a Cuisine. They exist in a many-to-many relationship, and have associations defined like so: class Restaurant :delete_all has_many :cuisines, :through =&gt; :restaurant_cuisines end class Cuisine :delete_all has_many :resta...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Here's a fairly common problem I've encountered. Say you have two
+classes; for example, a Restaurant and a Cuisine. They exist in a
+many-to-many relationship, and have associations defined like so:</p>
+
+<noscript>
+  <pre>
+    <code>
+    class Restaurant &lt; ActiveRecord::Base
+      has_many :restaurant_cuisines, :dependent =&gt; :delete_all
+      has_many :cuisines, :through =&gt; :restaurant_cuisines
+    end
+
+    class Cuisine &lt; ActiveRecord::Base
+      has_many :restaurant_cuisines, :dependent =&gt; :delete_all
+      has_many :restaurants, :through =&gt; :restaurant_cuisines
+    end
+
+    class RestaurantCuisine &lt; ActiveRecord::Base
+      belongs_to :restaurant
+      belongs_to :cuisine  
+    end
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578503.js"></script>    
+
+<p>This is basically the model we use at Urbanspoon. </p>
+
+<p>Now, there are two interesting aspects to the data we have in this
+relationship. First, Urbanspoon know about approximately 40x more 
+Restaurants than Cuisines. Second, Cuisine popularity follows
+a Zipf distribution. That is, the vast majority of Cuisines are
+associated with very few Restaurants. However, the converse is not
+true: we enforce that there be ~3 cuisines associated with every
+Restaurant in the system.</p>
+
+<p><img alt="Restaurant counts by Cuisine" src="http://threebrothers.org/brendan/blog/bulk-loading-associations-with-active-record/zipf-cuisines.png" /></p>
+
+<p>So, it turns out that the top 1000 Restaurants in Seattle comprise
+about 70 distinct cuisines. That fits well with our graph from above,
+and provides a good premise for this issue. Let's say we load these
+1000 Restaurants and we'd like to display the Cuisines associated with
+all of them. What's the best way to do this?</p>
+
+<h2>Naïve Attempt</h2>
+
+<noscript>
+  <pre>
+    <code>
+    10.times do
+      r = Restaurant.find(:all, :conditions =&gt; ['id IN (?)', ids])
+      r.map(&amp;:cuisines).flatten.map(&amp;:id)
+    end
+
+    # benchmarked 10 times
+         user     system      total        real
+    10.170000   0.470000  10.640000 ( 11.809886)
+     9.630000   0.410000  10.040000 ( 11.076710)
+    11.220000   0.520000  11.740000 ( 12.819519)
+    11.140000   0.530000  11.670000 ( 12.702499)
+    10.040000   0.520000  10.560000 ( 11.654553)
+    10.680000   0.470000  11.150000 ( 12.250775)
+    10.050000   0.700000  10.750000 ( 11.763682)
+    11.020000   0.480000  11.500000 ( 12.893516)
+    10.410000   0.590000  11.000000 ( 12.181406)
+    11.460000   0.740000  12.200000 ( 13.326383)
+
+    # memory diff from baseline IRB for each run [1]
+    8712, 15000, 15092, 15204, 15260, 15324, 15360, 15392, 15424, 15428
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578505.js"></script>
+
+<p>This takes an average of ~12.25 seconds to complete <em>with a hot query
+cache</em>. True to intuition, naïve loading of associations
+is dog slow in this scenario. We're duplicating work left and right,
+both in database loading and in ActiveRecord instantiation. If one
+Cuisine is referenced by N Restaurants, we pull it from the database N
+times and create N objects with identical information.</p>
+
+<h2>Improved Attempt</h2>
+
+<noscript>
+  <pre>
+    <code>
+    10.times do
+      r = Restaurant.find(:all, :include =&gt; [:cuisines], :conditions =&gt; ['id IN (?)', ids])
+      r.map(&amp;:cuisines).flatten.map(&amp;:id)
+    end
+
+    # benchmarked 10 times
+        user     system      total        real
+    5.540000   0.010000   5.550000 (  5.553716)
+    5.560000   0.000000   5.560000 (  5.566566)
+    5.670000   0.010000   5.680000 (  5.687871)
+    5.670000   0.000000   5.670000 (  5.674870)
+    5.580000   0.000000   5.580000 (  5.581576)
+    5.670000   0.000000   5.670000 (  5.678692)
+    5.570000   0.000000   5.570000 (  5.578353)
+    5.630000   0.000000   5.630000 (  5.629657)
+    5.740000   0.000000   5.740000 (  5.745029)
+    5.560000   0.000000   5.560000 (  5.568952)
+
+    # memory diff from baseline IRB for each run [1]
+    8896, 14608, 14800, 14932, 15024, 15152, 15248, 15300, 15300, 15300
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578508.js"></script>
+
+<p>Great! We achieved an average speed of almost exactly twice as fast
+(~5.63 seconds) by using ActiveRecord's built-in association
+loading. But there are two problems with this approach. Firstly, it's
+not very flexible or composable. That is, you can't build a handful
+of specialized Restaurant-finding functions that are agnostic about
+the decision to load Cuisines or not. You can't cache a list of
+Restaurants and load the Cuisines later. Basically, if you want to be
+efficient, you have to do the Cuisine loading at query time.</p>
+
+<p>The second issue is <em>still</em> one of performance. Even though we only
+load 73 Cuisine rows from the database, ActiveRecord still allocates
+over 2000 unique Cuisine objects. See?</p>
+
+<noscript>
+  <pre>
+    <code>
+    r.map(&amp;:cuisines).flatten.map(&amp;:object_id).uniq.length
+     =&gt; 2001
+    r.map(&amp;:cuisines).flatten.map(&amp;:id).uniq.length
+     =&gt; 73
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578511.js"></script>
+
+<p>Oy. That means we're consuming roughly 27.4 times the memory and clock
+cycles required to instantiate and retain Cuisines. So, what's the
+<em>really</em> right way to do this?</p>
+
+<h2>Bulk Loading, For Real</h2>
+
+<p>The pattern I've used is pretty simple. You query the two associations
+separately, and then use an id-to-record map to squash them back
+together in code. I did this in a few places in the iLike codebase,
+and I found this example waiting for me at Urbanspoon. This final
+version combines and improves on my previous attempts, and I have a
+few comments to share about it later. But first, the code!</p>
+
+<noscript>
+  <pre>
+    <code>
+    def Restaurant.add_cuisines(restaurants)
+      return [] if restaurants.empty?
+
+      ids = []
+      id_map = {}
+      restaurants.each do |r|
+        id_map[r[:id]] = r
+        ids &lt;&lt; r[:id]
+        # make sure ActiveRecord won't try to load cuisines again
+        r.cuisines.loaded
+      end
+
+      # make sure we load each Cuisine once
+      cuisine_map = Hash.new {|h,id| h[id] = Cuisine.find(id)}
+
+      RestaurantCuisine.find(:all,
+          :conditions =&gt; ["restaurant_id in (?)", ids]).each do |row|
+        # use the association target so we don't do an insert
+        id_map[row[:restaurant_id]].cuisines.target &lt;&lt; cuisine_map[row[:cuisine_id]]
+      end
+
+      return restaurants
+    end
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578513.js"></script>  
+
+<p>OK, that seems reasonable enough. What are the times like?</p>
+
+<noscript>
+  <pre>
+    <code>
+    10.times do
+      r = Restaurant.find(:all, :conditions =&gt; ['id IN (?)', ids])
+      Restaurant.add_cuisines(r)
+      r.map(&amp;:cuisines).flatten.map(&amp;:id)
+    end
+
+    # benchmarked 10 times
+        user     system      total        real
+    3.070000   0.040000   3.110000 (  3.148139)
+    3.040000   0.030000   3.070000 (  3.133394)
+    3.060000   0.050000   3.110000 (  3.160772)
+    3.050000   0.040000   3.090000 (  3.178049)
+    3.100000   0.010000   3.110000 (  3.169859)
+    3.070000   0.030000   3.100000 (  3.174384)
+    3.120000   0.040000   3.160000 (  3.259299)
+    3.120000   0.030000   3.150000 (  3.238029)
+    3.100000   0.040000   3.140000 (  3.241258)
+    3.060000   0.030000   3.090000 (  3.135886)
+
+    # memory diff from baseline IRB for each run [1]
+    4388, 10112, 10180, 10252, 10316, 10364, 10408, 10496, 10540, 10472
+    </code>
+  </pre>
+</noscript>
+
+<script type="text/javascript" src="http://gist.github.com/578514.js"></script>  
+
+<p>Wow, an average of 3.18s! That's significantly faster than the
+association loading version. And it uses far less memory, too. In
+fact, that's the reason it's so much faster – you can shave off
+43.5% of the total time just by instantiating each database row only
+once. This is a total time reduction of 74% over the naïve
+method.</p>
+
+<p>Additionally, this function can be called as an afterthought. You
+can compose various functions and have them still perform well.
+You can load Restaurants from any cache or other non-DB resource
+and still fetch their associated Cuisines efficiently. Fun times.</p>
+
+<h3>Caveats</h3>
+
+<p>I mentioned that I had a few comments about this technique. Most of
+them pertain to changes in ActiveRecord from Rails 1.x to Rails
+2.x.</p>
+
+<ul>
+<li><p>See, the companies I've been working at have all been stuck on
+Rails 1.1.6 – deplorable, I know. So, previous versions had a
+line like this:</p>
+
+<p><code>id_map[row[:restaurant_id]].cuisines &lt;&lt; cuisine_map[row[:cuisine_id]] # note, *not* a call to .cuisines.target</code></p>
+
+<p>I'm upgrading Urbanspoon, and I discovered (thanks to unique key
+constraints in the database – don't ever let anyone tell you
+they're worthless) that modern versions of Rails will treat this
+as an <em>insert</em> statement. Yikes. Calling <code>.cuisines.target</code> lets you
+modify the array directly, rather than be intercepted by the
+associations codebase.</p>
+
+<p>My bungling first attempt at working around this was to use
+<code>instance_eval</code> to completely override the association during the
+ids-to-restaurants map building phase:</p>
+
+<p><code>r.instance_eval {</code>
+<code>@cuisines = []</code>
+<code>...</code>
+<code>}</code></p>
+
+<p>This is a bad idea, as it litters your codebase with instances of
+Restaurants whose associations may or may not behave correctly.</p></li>
+<li><p>The fact that each Restaurant now points to a single instance
+of the same cuisine could lead to unexpected things. That is, if
+Restaurants A and B both have the 'Chinese' cuisine, you can modify
+the Cuisines of A and see the change reflected in B without saving
+and reloading. This different than the normal associations behavior,
+but I think it's acceptable, and perhaps even preferable.</p></li>
+<li><p>Finally, I think this technique could be generalized easily and
+added to ActiveRecord. I haven't researched whether others have
+gone down this path before, so it's entirely possible that one
+can do this already with a hip plugin that I haven't seen.</p>
+
+<p>I also don't know if the cloned vs. referenced issue of the
+previous bullet point would be a problem with inclusion in
+ActiveRecord. It is the heart of the performance gain, howerever,
+and it is personally how I'd like associations in general to 
+behave.</p></li>
+</ul>
+
+<p><sup>[1]</sup> In kilobytes; based on <a href="http://laurelfan.com/2008/1/15/ruby-memory-usage">this post</a>.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Reinvent the Wheel</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/reinvent-the-wheel/" />
+    <id>tag:threebrothers.org,2010-08-14:/brendan/blog/reinvent-the-wheel</id>
+    <updated>2010-08-14T15:19:29.0-08:00</updated>
+    <summary><![CDATA[
+I spent a few days of last week pursuing a novel activity: building a bicycle wheel. I followed Sheldon Brown's excellent wheelbuiding guide, and I've been quite pleased with the results. Thus far the wheel has been smooth and true, and I feel rather enlightened by the whole experience. This marked a milestone of sorts in m...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>I spent a few days of last week pursuing a novel activity: building a bicycle wheel. I followed Sheldon Brown's <a href="http://www.sheldonbrown.com/wheelbuild.html">excellent wheelbuiding guide</a>, and I've been quite pleased with the results. Thus far the wheel has been smooth and true, and I feel rather enlightened by the whole experience.</p>
+
+<p>This marked a milestone of sorts in my journey as an amateur mechanic. It's one of those (seemingly) daunting tasks that (seemingly) impresses others once completed: "Wow, and you actually rode on that without experiencing some horrific and injurious crash? Cool!" But it also produces a fair amount of skepticism: "Why not just buy one?", "Wow, seems like a lot of unnecessary work..." and so on.</p>
+
+<div style="text-align:center;"><img alt="Lacing the wheel." src="http://threebrothers.org/brendan/images/reinvent-wheel.jpg" /><br /><em>Lacing the wheel.</em></div>
+
+<p>There were, quite naturally, a few jokes about me reinventing the wheel. And these set me to thinking.</p>
+
+<p>I've seen firsthand what reinventing the wheel means in the software world. I once spent a few weeks fixing bugs in a Lucene-based search system. I say "based" because most of Lucene's sensible, extensible default implementations had been ripped out and completely rewritten in some crazed attempt at optimization.</p>
+
+<p>From my latecomer's viewpoint, this seemed like a classic case of <a href="http://en.wikipedia.org/wiki/Not_Invented_Here"><abbr title="Not Invented Here">NIH</abbr> syndrome</a>. It cost our company quite a few man-hours to undo the unnecessary complexity – reverting to <em>simple</em> subclasses of most of Lucene's internals fixed most of our bugs, and it made the thing that much easier to test and maintain.</p>
+
+<h2>A Different Approach</h2>
+
+<p>Back to wheels.</p>
+
+<p>In the end, I saved money over buying a new wheel – even when considering the price of two new chain whips (a one-time tool purchase). I traded sleep for mechanical knowledge. In both regards, I feel that I came out ahead on the very first wheel; with a lifetime of cycling (and therefore broken wheels to replace) ahead of me, I'm certain that this was a wise move.</p>
+
+<div style="text-align:center;"><img title="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" alt="Credit: http://www.flickr.com/photos/chromatic_aberration/3828921733/" src="http://threebrothers.org/brendan/images/ancient-wheel.jpg" /><br /><em>Ancient wheel.</em></div>
+
+<p>But this brings us to an interesting juxtaposition. To your average, non-mechanic cyclist, I undertook an extraordinary amount of effort and personal risk to create something that is machine manufactured <em>en masse</em> and readily available at any bike shop. I reinvented the wheel, in both the literal and the clichéd sense.</p>
+
+<p>This is the standard response one has when looking at an unknown, black box system. But when I look at my bike I see, as it were, a semi-transparent box at a higher resolution. I <a href="http://threebrothers.org/brendan/blog/vitus-979-reborn/">built my Vitus 979 from scratch</a>, so each subsystem and component jumps out. I quickly jumped through these mental states:</p>
+
+<div class="codeBlock"><em>My rim is broken. My older frame and 8-speed Dura-Ace drivetrain limits my rear hub choices, so I'm not going to be able to buy a brand-new wheel replacement. It's also questionable whether I'll find any 8-speed Dura-Ace wheelsets, new or used. It'd be expensive to upgrade the whole drivetrain, and I have an awesome, <a href="http://www.sheldonbrown.com/k7.html#uniglide">rare Uniglide hub</a>. I should just learn how to build a wheel; that way, I can get a really nice rim, too, and come away from this with a better bike than before.</em></div>
+
+<h2>Not Understood Here</h2>
+
+<p>NIH is real. It's dangerous to think that you always need to create a new and novel implementation of readily available systems. No one creating the next consumer web startup should begin by implementing a database server from scratch. But, <strong>it's equally dangerous to be ignorant of how these systems work</strong>. This exactly is why programmers are often asked implement data structures like hash tables during interviews, but in practice almost always should use a native implementation thereof.</p>
+
+<p>The database example is rather salient: I worked for a company that started its metadata system with a vanilla MySQL backend, but later added spellchecking and autocorrection via a native <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> function. Rails provides another great example. It can be used like a black box, and you can build a functioning website without ever taking a look inside. But you'll always be at a disadvantage to the person who can quickly trace a behavior into some Rails internal and extend its functionality.</p>
+
+<div style="text-align:center;"><img title="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" alt="Credit: http://cozybeehive.blogspot.com/2010/03/jobst-brandt-part-v.html" src="http://threebrothers.org/brendan/images/forces-wheel.jpg" /><br /><em>Understanding the forces in play on a bicycle wheel.<br />From </em><a href="http://www.amazon.com/Bicycle-Wheel-3rd-Jobst-Brandt/dp/0960723668">The Bicycle Wheel</a><em> by Jobst Brandt.</em></div>
+
+<p>Don't put your black boxes on a pedestal as if they can never be opened – this behavior is just <a href="http://nathanmarz.com/blog/your-company-has-a-knowledge-debt-problem.html">another form of knowledge debt</a>. Don't forgo learning about and tinkering with a system just because it's established. In this regard, reinventing is good practice – in fact, I'd conjecture that is where most innovation originates.</p>
+
+<p>Paul Graham recently wrote that <em><a href="http://www.paulgraham.com/addiction.html">"if people don't think you're weird, you're living badly</a></em>". Abstraction is incredibly useful, but it's invaluable to <em>also</em> have a deep, systemic knowledge of the lower layer. People default to having only a shallow, cursory understanding of the things they depend on. But I see a definite advantage to being weirdly interested in the innards. And very often one must re-walk the paths of a device's invention to obtain this level of understanding.</p>
+
+<p>So, learn little by little about the systems you use daily. If you use open source software, you'll find this to be rather straightforward, and there will almost always be another enthusiastic person available to lend a hand. You'll find the accretions of knowledge to be invaluable; they'll color the way you approach problems and the solutions you recognize.</p>
+
+<p>Oh, and please don't look at me funny if I ever mention my latent desire to build a <a href="http://www.otherpower.com/steamengine.shtml">homebrewed steam engine and alternator</a>.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>This Week's Links</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/this-weeks-links-2010-06-18/" />
+    <id>tag:threebrothers.org,2010-06-18:/brendan/blog/this-weeks-links-2010-06-18</id>
+    <updated>2010-06-18T09:27:15.0-08:00</updated>
+    <summary><![CDATA[
+Math Moving Remy in Hardware: Pixar's Use of Harmonic Functions Cosines and correlation Software Sed One-Liners Explained You're Doing It Wrong Startups Getting a Divorce from a VC Your company has a knowledge debt problem ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<h3>Math</h3>
+
+<ul>
+<li><a href="http://www1.ams.org/samplings/feature-column/fcarc-harmonic">Moving Remy in Hardware: Pixar's Use of Harmonic Functions</a></li>
+<li><a href="http://www.johndcook.com/blog/2010/06/17/covariance-and-law-of-cosines/">Cosines and correlation</a></li>
+</ul>
+
+<h3>Software</h3>
+
+<ul>
+<li><a href="http://www.catonmat.net/series/sed-one-liners-explained">Sed One-Liners Explained</a></li>
+<li><a href="http://queue.acm.org/detail.cfm?id=1814327">You're Doing It Wrong</a></li>
+</ul>
+
+<h3>Startups</h3>
+
+<ul>
+<li><a href="http://justanentrepreneur.com/?p=32">Getting a Divorce from a VC</a></li>
+<li><a href="http://nathanmarz.com/blog/knowledge-debt/">Your company has a knowledge debt problem</a></li>
+</ul>
+]]>
+</content>
+  </entry><entry>
+    <title>Cleaning up with Some Shell Commands</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/cleaning-up-with-some-shell-commands/" />
+    <id>tag:threebrothers.org,2010-06-08:/brendan/blog/cleaning-up-with-some-shell-commands</id>
+    <updated>2010-06-08T11:25:13.0-08:00</updated>
+    <summary><![CDATA[
+Today, I encountered an interesting problem when syncing my music library between two different computers. Whenever I buy a CD (and yes, I still buy CDs on occasion — albeit ones that are used or heavily discounted), I rip it into FLAC. But sometimes, I'll have ripped an MP3 version of the same album on a different co...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Today, I encountered an interesting problem when syncing my music library
+between two different computers. Whenever I buy a CD (and yes, I still
+buy CDs on occasion — albeit ones that are used or heavily
+discounted), I rip it into <a href="http://flac.sourceforge.net/">FLAC</a>. But
+sometimes, I'll have ripped an MP3 version of the same album on a
+different computer. Merging the differing libraries fills my main
+music repository with FLAC and MP3 versions of the same songs, which
+is not exactly what I want. I'd much rather throw away the lower
+bitrate files when a lossless one exits.</p>
+
+<p>My solution is for the general form of "given a directory full of
+files matching pattern X, delete files matching pattern Y", although
+it will require parameter tweaking to be applied outside of the
+context of my music library.</p>
+
+<pre><code>find . -name '*.flac' | cut -d"/" -f 1-3 | uniq | while read line; do
+  echo rm -f "$line/"*.mp3
+done
+</code></pre>
+
+<p>I'll dissect how it works:</p>
+
+<ul>
+<li><b>find . -name '*.flac'</b>: Gets the path for all flac files under this root.</li>
+<li><b>cut -d"/" -f 1-3</b>: Removes the actual filename. My paths are of the form "./Artist/Album/Track.extension", so I cut out everything after the second "/".</li>
+<li><b>uniq</b>: Ensure that each album directory is only listed once.</li>
+<li><b>while read line; do [...] done</b>: Grabs each line of input and makes it available inside the loop as the <code>$line</code> variable.</li>
+</ul>
+
+<p>The inside of the loop performs a simple <code>rm</code> – actually, the
+posted line only <em>echoes</em> the command, which is much better for
+testing. To adapt this for other purposes, tweak the file matching
+lines and the <code>cut</code> line. Test first with <code>ls</code> or <code>echo</code>. Don't
+accidentally delete your data.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Amazon MP3 Downloader on 64-bit Ubuntu (Lucid Lynx)</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx/" />
+    <id>tag:threebrothers.org,2010-06-04:/brendan/blog/amazon-mp3-downloader-on-64-bit-ubuntu-lucid-lynx</id>
+    <updated>2010-06-04T12:55:37.0-08:00</updated>
+    <summary><![CDATA[
+I recently upgraded nearly all of my 32-bit Linux installations to the latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find that I couldn't install the Amazon MP3 downloader. For whatever reason, they've decided to only support a 32-bit installation. Fortunately, 64-bit users can still install and use 32-bi...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>I recently upgraded nearly all of my 32-bit Linux installations to the
+latest 64-bit Xubuntu "Lucid Lynx" release, and was chagrined to find
+that I couldn't install the Amazon MP3 downloader. For whatever
+reason, they've decided to only support a 32-bit installation.
+Fortunately, 64-bit users can still install and use 32-bit packages
+through a handy tool called <code>getlibs</code>.</p>
+
+<p>There's a thread about <a href="http://ubuntuforums.org/showthread.php?t=474790">using getlibs</a> on the
+Ubuntu forums that I found helpful, but (for the amazonmp3 package, at
+least) that tool alone is insufficient. I began by installing
+<code>getlibs</code> and forcing the installation of <code>amazonmp3</code>, which leaves it
+without any dependencies and quite inoperable. <code>getlibs</code> attempts to
+resolve these 32-bit dependencies and install them outsite of apt system.</p>
+
+<pre><code>wget http://frozenfox.freehostia.com/cappy/getlibs-all.deb
+sudo dpkg -i getlibs-all.deb
+wget http://amazonm-002.vo.llnwd.net/u/d1/clients/en_US/1.0.9/amazonmp3_1.0.9~ibex_i386.deb?httpHeader%5FContent-Disposition=attachment%3B%20filename%3Damazonmp3.deb&amp;amp;marketplace=1
+sudo dpkg -i --force-all amazonmp3.deb
+sudo getlibs /usr/bin/amazonmp3
+</code></pre>
+
+<p>At this point, you'll see a frustrating spew of "No match"
+notices for various libboost libraries. Through <code>aptitude search libboost</code>,
+I realized that Lucid had upgraded to version 1.40.0, but
+the Amazon was built for the 1.34.1 version that comes with
+Intrepid/Jaunty. <code>getlibs</code> works within the constraints of your
+current apt sources, so it couldn't resolve these dependencies.</p>
+
+<pre><code>No match for libboost_filesystem-gcc42-1_34_1.so.1.34.1
+No match for libboost_regex-gcc42-1_34_1.so.1.34.1
+No match for libboost_date_time-gcc42-1_34_1.so.1.34.1
+No match for libboost_signals-gcc42-1_34_1.so.1.34.1
+No match for libboost_iostreams-gcc42-1_34_1.so.1.34.1
+No match for libboost_thread-gcc42-mt-1_34_1.so.1.34.1
+</code></pre>
+
+<p>Fortunately, the repositories for previous distributions are still
+accessible and can be searched fairly easily. Installing these
+dependencies manually through getlibs will make them available to the
+amazonmp3 binary.</p>
+
+<pre><code>sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
+</code></pre>
+
+<p>Now <code>amazonmp3</code> works correctly, although don't be surprised if you
+encounter a few issues. For instance, it attempts to use load the
+64-bit libgvfsdbus.so library on startup, but doesn't seem to care
+when that loading fails. C'est la vie.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>The Birth of Ivo Clark Ribera</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/the-birth-of-ivo-clark-ribera/" />
+    <id>tag:threebrothers.org,2010-05-31:/brendan/blog/the-birth-of-ivo-clark-ribera</id>
+    <updated>2010-05-31T22:06:33.0-08:00</updated>
+    <summary><![CDATA[
+Roughly three weeks ago – on Wednesday, May 12th – Ivo was born. Jessica gave birth in a tub in the living room of our house, and it was amazing. Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Roughly three weeks ago – on Wednesday, May 12<sup>th</sup> – Ivo was born. <a href="http://jeskybera.blogspot.com/2010/05/birth-story.html">Jessica gave birth</a> in a tub in the living room of our house, and it was amazing.</p>
+
+<p>Our first labor (a natural birth in a hospital setting), while rewarding, was strenuous and exhausting. We had to consciously remind ourselves of the reasons we chose to birth without medication and seriously consider whether that would be the right route to repeat. We eventually decided to up the ante; not only would we birth naturally the second time, but we'd do it at home. I'm so glad we chose this, because the second birth presented an incredible contrast to the first one.</p>
+
+<p>Part of our consternation after the first birth was due to the near mythical birth stories that Jessica read beforehand. We experienced a hard, painful labor that was nothing like the joyous, ecstatic ones recounted by many natural childbirth books. Our expectations were high the first time, low the second, and a little misplaced during both.</p>
+
+<p>Three weeks ago we were nine days "overdue". Despite the fact that our midwife had been unsuccessful at breaking Jessica's water that morning and that the acupuncturist was ignoring our repeated phone calls, the semblance of early labor teased us into walking. And walk we did – all around Madison – waiting in vain for a call from the acupuncturist, all the while timing very noncommittal contractions. Yet, somehow I knew it would happen that day.</p>
+
+<p><img alt="Hugging" src="http://threebrothers.org/brendan/images/ivo-birth/01.jpg" /></p>
+
+<p>After lunch at <a href="http://www.urbanspoon.com/r/1/1130/restaurant/Madison-Park/Cactus-Madison-Park-Seattle">Cactus</a>, we headed home to walk some more. This is when the fun began – and I mean that quite literally. We had <em>fun</em> walking around, talking, and speculating about how events would progress. A package containing the digital camera I had purchase for Mothers' Day arrived – just in time! Jessica's contractions were increasing in frequency, but remained painless. Then a few of them started to feel perhaps the slightest bit painful. We updated our midwife, Cindie, and she told us to call for the tub. Jessica still wasn't convinced that she was <em>actually</em> in labor, and we dallied for another hour before actually placing the call.</p>
+
+<p><img alt="The labor tub" src="http://threebrothers.org/brendan/images/ivo-birth/02.jpg" /></p>
+
+<p>The contractions continued to accelerate slowly, but Jessica still found them to be completely tolerable. Our friend Brenna came over (she was present at Ezra's birth, too), and we all waited. Jessica and I sat on the couch, hugged during each contraction, watched <em>So I Married an Axe Murderer</em>, and got to enjoy each other's company. It was like a fun, carefree date. At some point the tub arrived, and we waited for it to fill. The contractions grew more serious, but Jessica still marveled at how easy they were to deal with. We laughed, snuggled, and expressed our complete mystery at how easy things were.</p>
+
+<p><img alt="That's a real 9cm contraction!" src="http://threebrothers.org/brendan/images/ivo-birth/03.jpg" /></p>
+
+<p>Cindie arrived and checked Jessica – she was 9 centimeters, and <strong>laughing</strong> about it. We were exuberant and flabbergasted – reaching this point last time had <em>not</em> been easy, but now it was (again, quite literally) a walk in the park. We hugged through a few more contractions, and then Jessica started feeling like she needed to push. This was crazy – last time, Jessica had <em>no</em> urge to push. We felt so incredibly blessed as each new stage came and passed perfectly. So Jessica climbed into the tub – by herself – and started laboring in the water.</p>
+
+<p><img alt="Pushing in the tub" src="http://threebrothers.org/brendan/images/ivo-birth/04.jpg" /></p>
+
+<p>I've always been really impressed with Jessica; being with her through birth completely outshines the other impressive things I've seen her do. The pushing phase of her first birth was the worst, most painful part – and it lasted a long time to boot. She was understandably worried about doing it again, but she went into it without hesitation. And the results were drastically different – she pushed for a mere 15 minutes before Ivo's amniotic sac started to crown. She started shouting, "Water bubble! Water bubble!" in an enthusiastic-and-perhaps-a-bit-delirious voice. Shortly after, she pushed Ivo out completely – with a ridiculous squeal of delight, "YAY!".</p>
+
+<p><img alt="Ivo is born!" src="http://threebrothers.org/brendan/images/ivo-birth/05.jpg" /></p>
+
+<p>Ivo came out with his bag of waters intact, and it floated around him in the tub like a diaphanous cape. He started breathing right away. We laughed and hugged and marveled over how splendidly the whole affair went – it really was an affirmative answer to our prayers. And it made me appreciate Jessica's ability to handle any situation. Her two births reminded me of this verse:</p>
+
+<blockquote>
+  <p><em>I know how to be brought low, and I know how to abound. In any and every circumstance, I have learned the secret of facing plenty and hunger, abundance and need. I can do all things through him who strengthens me.</em>
+  <br />Philippians 4:12-13</p>
+</blockquote>
+
+<p>What a trip! It was like the best date/vacation/present-opening we'd had in a long time. And if you told me that's how it was going to turn out a few months ago, I'd have looked at you a little funny. It was wonderful to go through this with Jessica and watch all of her bad, difficult birth experiences be redeemed and replaced with happy, fun ones. And it's wonderful to have another healthy, perfect little son.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Encoding iPad Video from Linux</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/encoding-ipad-video-from-linux/" />
+    <id>tag:threebrothers.org,2010-05-04:/brendan/blog/encoding-ipad-video-from-linux</id>
+    <updated>2010-05-04T22:59:55.0-08:00</updated>
+    <summary><![CDATA[
+Preamble I hesitate to publish these instructions because h.264 is patent-encumbered and dangerous, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion. The Goal I was given an iPad. We own several DVDs t...]]>
+</summary>
+    <content type="html"><![CDATA[
+<h2>Preamble</h2>
+
+<p>I hesitate to publish these instructions because <a href="http://www.osnews.com/story/23236/Why_Our_Civilization_s_Video_Art_and_Culture_is_Threatened_by_the_MPEG-LA">h.264 is patent-encumbered and dangerous</a>, and I don't want to contribute to its proliferation. But the steps here are general enough to be useful in many other situations, and interesting enough to merit discussion.</p>
+
+<h2>The Goal</h2>
+
+<p>I was given an iPad. We own several DVDs that my son Ezra loves to watch, and I would like to let him watch them on the iPad. I selected <em>WALL•E</em> and tried to use <code>dvd::rip</code> (via Ubuntu's vanilla <code>dvdrip</code> package), but it failed miserably. It 'read' 100 titles, each of which really turned out to be the movie with its chapters in the wrong order.</p>
+
+<h2>World Domination in Four Easy Steps</h2>
+
+<p>Because the point-and-click method had failed, I turned to the command line. I never should have left, really. Here's the solution I found after much digging and trial-and-error.</p>
+
+<ul>
+<li>Extract the VOBs</li>
+<li>Concatenate the VOBs</li>
+<li>Build a better ffmpeg</li>
+<li>Encode!</li>
+</ul>
+
+<h3>Extract the VOBs</h3>
+
+<p>The first step is to figure out exactly what we want to extract, and then to grab it. I used <code>dvdbackup</code> for this.</p>
+
+<pre><code># Show info about this disk
+brendan@ishmael:~/Videos$ dvdbackup -I | less
+# Output indicated that the main Title Set is 3
+brendan@ishmael:~/Videos$ dvdbackup -T 3
+brendan@ishmael:~/Videos$ tree -s WALL_E/
+WALL_E/
+`-- [       4096]  VIDEO_TS
+    |-- [     163840]  VTS_03_0.BUP
+    |-- [     163840]  VTS_03_0.IFO
+    |-- [  170770432]  VTS_03_0.VOB
+    |-- [ 1073739776]  VTS_03_1.VOB
+    |-- [ 1073739776]  VTS_03_2.VOB
+    |-- [ 1073739776]  VTS_03_3.VOB
+    |-- [ 1073739776]  VTS_03_4.VOB
+    |-- [ 1073739776]  VTS_03_5.VOB
+    `-- [  111591424]  VTS_03_6.VOB
+</code></pre>
+
+<h3>Concatenate the VOBs</h3>
+
+<p>These files are pretty boring, but they can be concatenated since they're basically just MPEG streams. My initial approach was to cat them together and pipe the result to ffmpeg, which took up no additional disk space and had the virtue of lazily deferring IO while the encoder churned.</p>
+
+<pre><code>cat *.VOB | ffmpeg -y -i - [...]
+</code></pre>
+
+<p>As nice as this plan was, I couldn't get it to work. My audio stream would disappear, and I couldn't figure out how to tell ffmpeg that it existed. The end result was beautiful video with no sound.</p>
+
+<p>Instead, I piped them to one big file and operated on that. I also omitted the 0 file, since it turned out to be the DVD menu animations.</p>
+
+<pre><code>rm VTS_03_0.VOB
+for x in *.VOB; do cat $x &gt;&gt; walle.vob; done
+</code></pre>
+
+<h3>Build a better ffmpeg</h3>
+
+<p>Because my goal was to use this on my iPad, I had rather nonstandard requirements: h.264 video and AAC audio with an MPEG-4 container. As I mentioned before, these formats are far from ideal – use OGG/Theora when you can. Presumably because they are non-free, the default Ubuntu ffmpeg package doesn't include these encoders. You'll need to replace it.</p>
+
+<p>Follow this <a href="http://ubuntuforums.org/showpost.php?p=8345112&amp;postcount=636">helpful tutorial to build ffmpeg</a> and various encoders from source. I enabled all of the options.</p>
+
+<h3>Encode!</h3>
+
+<p>The <a href="http://www.apple.com/ipad/specs/">iPad specifications</a> indicate that it can do h.264 video up to 720p at 30fps with AAC sound at 160Kbps, 48kHz. To achieve this, I did a 2-pass encoding based on an <a href="http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/">encoding guide</a> and a list of <a href="http://rodrigopolo.com/ffmpeg/cheats.html">ffmpeg cheats</a>. I also did a lot of trial and error encoding, and my most pertinent piece of advice is this: test on a small VOB first. Fail quickly.</p>
+
+<p><code class="codeBlock">
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 1 -vcodec libx264 -vpre fastfirstpass -threads 0 -an -f mp4 /dev/null
+  <br /><br />
+  ffmpeg -y -i walle.vob -r 30000/1001 -b 2M -bt 4M -pass 2 -vcodec libx264 -vpre hq -threads 0 -map 0.0 -map 0.2 -async 1 -acodec libfaac -ac 2 -ab 160k -ar 48000 walle.mp4
+</code></p>
+
+<p>Outside of the typical ffmpeg files/encoders/rates, there are a few interesting settings:</p>
+
+<ul>
+<li><strong>-r 30000/1001</strong>: set the frame rate to ~30fps</li>
+<li><strong>-pass &lt;N&gt;</strong>: indicate which pass we're doing</li>
+<li><strong>-vpre &lt;value&gt;</strong>: indicate which libx264 preset file to apply</li>
+<li><strong>-threads 0</strong>: let the encoder choose how many threads to use based on your hardware. Set this to utilize multicore/proc.</li>
+<li><strong>-an</strong>: disable audio, since the first pass only looks at video</li>
+<li><strong>-f mp4 /dev/null</strong>: set type to mp4 and output to /dev/null, since the first pass stores its statistics in secondary files and the actual video output should be thrown away.</li>
+<li><strong>-map 0.0 -map 0.2</strong>: switch to the English audio stream, which was located in the 0.2 stream instead of the normal 0.1. To figure out which was which, I did variations of <code>ffmpeg -y -i walle.vob -vn -acodec libfaac -ac 2 -ab 160k -ar 48000 -map 0.2:0.1 walle.aac</code> (extracting just audio) until I found the right stream.</li>
+<li><strong>-async 1</strong>: make the audio and video streams line up. Not necessary for all rips, but was in this case.</li>
+</ul>
+
+<p>This produces a fairly high quality DVD rip that should be iPad compatible. Unfortunately, you'll need to leave the wonderful world of Linux to actually put the file on your iPad. Don't you just feel dirty doing this? I know I do. In lieu of that, you could host it on a local webserver. I can stream this bitrate over WiFi via nginx perfectly well.</p>
+
+<h2>Closing Thoughts</h2>
+
+<p>The file I produced is currently not iPhone compatible. From what I can tell, the iPhone can only handle <a href="http://www.ilounge.com/index.php/articles/comments/the-complete-guide-to-ipod-video-formats-and-display-resolutions/">640x480 video at 1.5mbps</a>. You could do one of three things: tune the ffmpeg parameters to produce a video that'll work on both, produce one separate file for each device, or do what I did and eschew the the low resolution option.</p>
+
+<p>I'd like to figure out how to do this encoding on the fly. <code>hdparm</code> says my DVD transfer speeds clock in around 2-3MB/sec, which should stay ahead of the CPU during encoding. It would be wonderful if the only additional disk space taken up by this process were for intermediate first-pass statistics and the final encoded video. As things happened, I copied the files once from CD and again to concatenate them. That's less than ideal.</p>
+
+<p>I'd also like to showcase an open codec like OGG/Theora, since I strongly believe in that cause. Doing that now can be an exercise for the reader, and it shouldn't be too hard; it's just a matter of finding the correct ffmpeg parameters.</p>
+
+<p><strong>Updated</strong>: I changed some audio-specific parameters because the sound wasn't lining up with the video.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Removing the Cast</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/removing-the-cast/" />
+    <id>tag:threebrothers.org,2010-04-23:/brendan/blog/removing-the-cast</id>
+    <updated>2010-04-23T22:20:08.0-08:00</updated>
+    <summary><![CDATA[
+Three months ago, I broke my right hand while biking to work. I made a questionable decision involving slippery metal grating on the University Bridge, and found myself doing a not-so-graceful, 20 MPH handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand. My arm was in a cast for a...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Three months ago, I broke my right hand while biking to work. I made a questionable decision involving <a href="http://www.historylink.org/index.cfm?DisplayPage=output.cfm&amp;file_id=3139">slippery metal grating on the University Bridge</a>, and found myself doing a not-so-graceful, 20 <abbr title="Miles-per-hour">MPH</abbr> handstand in the way of traffic. I was incredibly fortunate to have only sustained a broken hand.</p>
+
+<p>My arm was in a cast for approximately five weeks. The nature of this situation was, as you can imagine, <em>really</em> obnoxious. The aftermath of cast-wearing proved equally obnoxious: with nothing to do, muscles atrophy; joints and tendons stiffen. I found myself training to make a fist or to be strong enough to chop carrots. It was five more weeks before my wrist and hand were strong enough for me to ride to work.</p>
+
+<div class="rightImage">
+  <img alt="Me with a cast" src="http://threebrothers.org/brendan/images/broken-hand-sketch.png" />
+</div>
+
+<p>In these weeks of recovery, I realized just how much <em>immobilization</em> had contributed to my weakened state. Small, anonymous actions are constantly reinforcing our ability to move. Small, frustrating exercises littered the path back to full recovery. As I rode the bus home yet again (while practicing flexion exercises that made me look insane), this struck me: Your work environment can be a cast, or it can be a bicycle.</p>
+
+<p>Part of what I love about small companies is that they make the bicycle the norm. There's little tolerance for inactivity or wasted motion – you must be habitually productive, or you fall off. Biking to work doesn't only get you there; it makes you stronger and fitter, too. The startups that I've worked with have all had cultures that reinforce, stretch, and strengthen their employees.</p>
+
+<p>Autonomy, creativity, and low-friction communication. My goal is to always work in an environment like this. And I never want to <a href="http://www.wetherobots.com/2008/06/16/meeting-time/">feel like this</a> again.</p>
+
+<p>Challenge yourself – learn a new <a href="http://clojure.org">language</a>, a new <a href="http://lucene.apache.org/mahout/taste.html">technology</a>, or a new <a href="http://projecteuler.net/index.php?section=problems&amp;id=66">mathematical concept</a>. Think about <a href="http://www.paulgraham.com/organic.html">seeing the problems around you</a>. Get on the bicycle and ride. As for me, I'm excited to now be doing this <a href="http://www.urbanspoon.com/about">at Urbanspoon</a>.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Android Impressions</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/android-impressions/" />
+    <id>tag:threebrothers.org,2010-04-13:/brendan/blog/android-impressions</id>
+    <updated>2010-04-13T00:30:36.0-08:00</updated>
+    <summary><![CDATA[
+ Fitter, happier, more pastries. Thanks to my latest aquatic shenanigans, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone. Product quality Hardware Negative: Only 4.5GB of space by default (512MB flash + 4GB SD) Ge...]]>
+</summary>
+    <content type="html"><![CDATA[
+<div class="rightImage">
+  <img alt="Credit: http://www.flickr.com/photos/niallkennedy/4118685804/" title="Credit: http://www.flickr.com/photos/niallkennedy/4118685804/" src="http://threebrothers.org/brendan/images/android-baked-goods.jpg" />
+  <br />
+  <em>Fitter, happier, more pastries.</em>
+</div>
+
+<p>Thanks to my <a href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/">latest aquatic shenanigans</a>, I spent a week playing with a Nexus One. Here are my impressions. If I make any comparisons that lack context, assume they are drawn in relation to the iPhone.</p>
+
+<h2>Product quality</h2>
+
+<h3>Hardware</h3>
+
+<p>Negative:</p>
+
+<ul>
+<li>Only 4.5GB of space by default (512MB flash + 4GB SD)</li>
+<li>Generally poorer battery performance than the iPhone</li>
+<li>Five buttons – <abbr title="Keep it simple, stupid!">KISS</abbr></li>
+</ul>
+
+<p>Positive:</p>
+
+<ul>
+<li>Removable battery (I can't stress enough what a boon this is)</li>
+<li>Swappable micro SD card</li>
+<li>Screen is larger and higher resolution</li>
+<li>5 megapixel camera with flash (compare to the iPhone's flashless 3 megapixel)</li>
+<li>1GHz processor with 512MB RAM (600MHz/256MB for a 3GS)</li>
+</ul>
+
+<p>The Nexus One has a substantial, polished feel. It's not exactly <em>sexy</em> in the ways the iPhone is, but it certainly doesn't feel like a cheap imitation. The specifications are pretty substantial, too. Given the superior hardware, it's understandable that battery life is inferior. Who knows about either phone's long-term battery performance. If the lithium-ion gods frown on you after a few months, you'll be forking over $79 with Apple and only $25 with Google.</p>
+
+<h3>Software</h3>
+
+<p>Negative:</p>
+
+<ul>
+<li>Inferior and slightly confusing UI</li>
+<li>Inferior app selection</li>
+<li>Browser feels clunky compared to Safari</li>
+</ul>
+
+<p>Positive:</p>
+
+<ul>
+<li>Android OS is open source</li>
+<li>Android Market is growing</li>
+<li>Background apps</li>
+<li>Apps are cloud-oriented; no more syncing through slow, clunky iTunes</li>
+</ul>
+
+<div class="rightImage">
+  <img alt="Credit: http://www.flickr.com/photos/naka7a/4356824760/" title="Credit: http://www.flickr.com/photos/naka7a/4356824760/" src="http://threebrothers.org/brendan/images/nexus-one-buttons.jpg" />
+  <br />
+  <em>Look at those wee, beady buttons.</em>
+</div>
+
+<p>I found the UI to be the biggest barrier for me. I disliked the Nexus One's <a href="http://www.youtube.com/watch?v=TPMS6tGOACo">pentavirate</a> of buttons before I had even turned it on. 'Back' and 'Search' are given permanent hardware real estate despite their limited applicability – many (if not most) apps have no use for them. 'Home' is present, but given a middle position with no tactile means of locating it – it's hard to switch apps in the dark.</p>
+
+<p>And then there's the 'Menu' button – this is where the biggest problems lie. I'm an engineer, but I have a <a href="http://ischool.uw.edu/informatics/prospective/at_uw.aspx">degree in Informatics</a> – I have enough interface design and usability knowledge to cause trouble. Here's what I see in the 'Menu' button: the iPhone makes good use of <em>affordances</em>; Android does not. What do I mean?</p>
+
+<blockquote>
+  <p><a name="rn1"></a><em>An <strong>affordance</strong> is an aspect of an object that makes it obvious how the object is to be used. […] Affordances must be visible to aid interpretation.</em><sup><a href="#fn1">1</a></sup></p>
+</blockquote>
+
+<p>The 'Menu' button doesn't make its functions obvious. If you press it, a menu comes up; if you hold it down, the on-screen keyboard appears. Both functions could be loosely associated with the button's graphic, but one would never guess them by simply looking at the button. This is minor, though; one can figure this functionality out quickly, and once it's known, that's that. What is bad is the precedent that this button sets for applications.</p>
+
+<p>The Android developer guide prefaces its section on <a href="http://developer.android.com/guide/practices/ui_guidelines/menu_design.html">Menu Design Guidelines</a> with this assertion:</p>
+
+<blockquote>
+  <p><em>A menu holds a set of commands (user actions) that are normally hidden, and are accessible by a button, key, or gesture.</em></p>
+</blockquote>
+
+<p>By convention, <strong>every Android interface has broken affordances</strong>. Apps are asked to obscure large portions of functionality in a hidden menu. Contrast this with Apple's in-depth <a href="http://developer.apple.com/iphone/library/documentation/UserExperience/Conceptual/MobileHIG/PrinciplesAndCharacteristics/PrinciplesAndCharacteristics.html#//apple_ref/doc/uid/TP40006556-CH7-SW1">iPhone Human Interface Guidelines</a>:</p>
+
+<blockquote>
+  <p><em>Presenting choices to the user […] allows them to concentrate on accomplishing tasks with your application, instead of remembering how to operate it.</em></p>
+</blockquote>
+
+<p>People tout simplicity as being the aspect of Apple's design that makes it superior. What they're trying to articulate is that the consistent application of good affordances allows users to approach every interface with knowledge about how to use it. The UI is not only simple – it's <em>understood</em>. Apple's defaults are a shared set of <em>visible</em> controls – (almost) everything that can be done is displayed using a common language. Android causes apps to fragment the user's knowledge — you have to individually <em>discover</em> and then <em>remember</em> exactly what can be done by every app because much of the functionality is invisible.</p>
+
+<h2>For consumers and developers</h2>
+
+<div class="rightImage">
+  <img alt="Babbage Analytical Engine" src="http://threebrothers.org/brendan/images/babbage-engine.jpg" />
+  <br />
+  <em>The Apple Analytical Engine<br />only accepts papyrus punch cards.</em>
+</div>
+
+<p>I've spent a bit of time talking about what I perceive to be the biggest weakness in the Android platform. This section is <em>much</em> friendlier towards Android.</p>
+
+<p>Android is a platform for hackers. It's open source, and can be hacked using any <abbr title="Java Virtual Machine">JVM</abbr> language on any development platform. The iPhone requires you to purchase an expensive Apple computer, use only the <a href="http://daringfireball.net/2010/04/iphone_agreement_bans_flash_compiler">approved tools/languages</a> , and pay $99/year to be part of the developer program. Android phones also come unlocked – that is, you can use them with any network.</p>
+
+<p>I've heard it suggested that Apple's closed platform will lead to better quality and a tighter control on the market. These sound like great things <em>for Apple</em>. As consumers, we don't necessarily want Apple to have control, and we don't want to be hogtied to AT&amp;T – we want competition to force continued innovation.</p>
+
+<p>There are copious blog posts discussing the negative ramifications of Apple's closed platform. If you've read none of them, <em><a href="http://diveintomark.org/archives/2010/01/29/tinkerers-sunset">Tinkerer's Sunset</a></em> and the <a href="http://al3x.net/2010/01/28/ipad.html">post of Alex Payne's</a> that inspired it (or at the very least inspired the title) are good start. I don't have much to add here. Limiting developers' tools or languages stifles innovation. The inverted version is what attracts me to Android: granting freedom to developers promotes innovation.</p>
+
+<h2>Conclusion</h2>
+
+<p>The Nexus One hardware and the openness of the Android platform outweigh any UI advantage held by the iPhone. As this assertion comes from a guy who spends upwards of 8 hours a day inside emacs or a Linux terminal, it should be taken with a few grains of salt. When my contract with AT&amp;T is up, however, I'll be looking to the Android market for my next phone. And I'd love to get ahold of an Android tablet.</p>
+
+<hr />
+
+<p><sup>1</sup> <span class="fn">Mary Beth Rosson and John M. Carroll, <em><a href="http://books.google.com/books?id=RRC9IODz4VsC&amp;pg=PA124">Usability Engineering</a></em> (Morgan Kaufmann, 2002), 124. <a href="#rn1" name="fn1">↵</a></span></p>
+]]>
+</content>
+  </entry><entry>
+    <title>iPhone Toilet Debacle Redux: The Backlight</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/iphone-toilet-debacle-redux-backlight/" />
+    <id>tag:threebrothers.org,2010-03-29:/brendan/blog/iphone-toilet-debacle-redux-backlight</id>
+    <updated>2010-03-29T13:43:21.0-08:00</updated>
+    <summary><![CDATA[
+Last Tuesday marked the 485th day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet. No...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Last Tuesday marked the 485<sup>th</sup> day since I dropped my first-generation iPhone in the toilet. I commemorated the occasion by setting my 3G in a precarious position on the edge of the bathroom sink, and then watching in horror from the shower as my almost-2-year-old came in and rammed it with a truck. Right into the toilet.</p>
+
+<div class="rightImage"><img title="Credit: http://www.flickr.com/photos/harvardavenue/79221382/" alt="" src="http://threebrothers.org/brendan/images/cat-toilet.jpg" /><br /><em>No!!!! My Phone!!!!</em></div>
+
+<p>You've probably experienced the sinking feeling that accompanies circumstances such as this one. My wife fished the phone out and I immediately shut it down, dried it off, and stuck it into a glass full of rice. What a crappy situation – pun indended. I began figuring out how I would justify buying a <em>third</em> ridiculously expensive phone-computer given my complete inability to protect said device.</p>
+
+<p>Over the next few days, I discovered that the phone was still largely functional. The backlight was completely dead, but I could receive calls, connect to WiFi, and (most importantly) the touchscreen still worked. Adjusting brightness settings did nothing for the backlight. My tests were brief, and I placed the phone back in its rice cocoon afterwards with hopes that more moisture would be absorbed.</p>
+
+<h2>Fixing the backlight</h2>
+
+<p>Fortunately, Phil hadn't yet <a href="http://thebogles.com/blog/2010/04/joining-google/">left for Google</a>, and he found some interesting claims about a method to fix a backlight that had died a watery death. The steps were:</p>
+
+<ol>
+<li>Backup the phone</li>
+<li>Perform a factory restore</li>
+<li>Adjust the brightness settings</li>
+</ol>
+
+<p>I was skeptical, but after 5 days of no progress I thought it was worth a shot. Because I don't really ever leave Linux, I hadn't yet updated to the 3.1.3 OS release. I did this upgrade in lieu of the 'factory restore' step, and (after completing step 3) was delighted to find my backlight fully functional! Major kudos to Phil for locating this information.</p>
+
+<p>It's interesting to engage in wild speculation about the hardware/software details that could lead to this. Perhaps some hardware state was corrupted by a short, and the resulting value had no valid meaning for the backlight. Normal brightness adjustment operated on the value, but didn't change enough of it to make it meaningful again (perhaps bit operations on an int that was saved as much larger than it's theoretical max – only operating on the lower order bits). Part of the upgrade/restore procedure writes sane defaults into these locations, restoring functionality. Who knows.</p>
+
+<h3>Coda</h3>
+
+<p>In the intervening days between my phone's death and revival, I got to play with a Nexus One from work. I'll write a post comparing the two soon. And I'm <em>really</em> glad that I don't have to shell out for a new phone... yet.</p>
+]]>
+</content>
+  </entry><entry>
+    <title>Memory and Ruby :symbols</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/memory-and-ruby-symbols/" />
+    <id>tag:threebrothers.org,2010-03-01:/brendan/blog/memory-and-ruby-symbols</id>
+    <updated>2010-03-01T21:32:32.0-08:00</updated>
+    <summary><![CDATA[
+Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be rewritten in many different ways. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the Symbol. First, compare these two lines: (1) ...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>Ruby provides a really flexible and sugary syntax. A lot can be expressed in one little snippet, and the same functionality can often be <a rel="nofollow external" href="http://refactormycode.com/codes/2-ruby-simple-loop">rewritten in many different ways</a>. In this post, I'd like to focus on some potentially dangerous properties of one particular piece of Ruby: the <a rel="nofollow external" href="http://ruby-doc.org/core/classes/Symbol.html">Symbol</a>.</p>
+
+<p>First, compare these two lines:</p>
+
+<pre><code>(1) {:foo  =&gt; 'bar', :qux  =&gt; 'quux'}
+(2) {'foo' =&gt; 'bar', 'qux' =&gt; 'quux'}
+</code></pre>
+
+<p>I'd say that Ruby developers default to (1) – at least, most Ruby code that I've worked with tends to favor that variant. This seems to be in part a matter of aesthetic taste, and a subtle way to differentiate between a map's keys and values. Sending a hash of symbolized keys to a method has become a fairly common way of implementing complex options – it's <a rel="nofollow external" href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M002263">prevalent in Rails</a>. Rails uses this construct so often that it adds <a rel="nofollow external" href="http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/Hash/Keys.html#M001190">extensions to the native <code>Hash</code></a> object to facilitate turning their <code>String</code> keys into <code>Symbols</code> and <em>vice versa</em>.</p>
+
+<h2>Symbols to the rescue!</h2>
+
+<p>There are some really common situations where (1) is the best option. A variation of <a rel="external" href="http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols">the canonical example</a> follows: Say you're creating thousands of hashes to represent a common JSON object – a temperature reading. They all have the same key structure, but the data differ.</p>
+
+<pre><code>sea = {'lat' =&gt; 47.53, 'lon' =&gt; 122.30, 'temp' =&gt; 15.0}
+sf  = {'lat' =&gt; 37.79, 'lon' =&gt; 122.41, 'temp' =&gt; 25.0}
+
+puts sea.keys[0] == sf.keys[0] # true
+puts sea.keys[0].object_id     # 86288110
+puts sf.keys[0].object_id      # 86345290
+</code></pre>
+
+<p>So it's 15°C in Seattle and 25°C in San Francisco. Typical. What's more interesting is that although your keys are equal, they are two different <code>String</code> objects. With 1,000,000 such hashes, you're carrying around 3,000,000 strings that take up a lot more space than the <code>Float</code> entries.</p>
+
+<p>Symbols solve this issue. At the C level of Ruby, each symbol maps to an unsigned integer – the <a rel="nofollow external" href="http://en.wikipedia.org/wiki/Symbol_table">symbol table</a> has one entry per symbol, and the entries exist as long as the process lives.</p>
+
+<h2>Wait, why is that still lying around?</h2>
+
+<p>Symbols are tiny and combine identity with equality, but <strong>they're never garbage collected</strong>. That's how the symbol table implementation works. So, replacing 3,000,000 Strings with 3 Symbols is a great improvement. But in a long-running process that does a lot of GC and uses random, unique keys, symbols can hurt.</p>
+
+<p>To illustrate the problem, I grepped through the iLike codebase for unique symbols. I stored them as Strings only, read the current memory usage, and then converted them all to Symbols using <code>to_sym</code>. The isolated increase in memory usage was ~<strong>1.2MB</strong> – and this test can't even find symbols created programmatically!</p>
+
+<p>Now, that figure represents &lt;1% of the memory used by a typical process of ours. But that consumption adds to Ruby's large low water mark for memory. If our application created symbols for arbitrary user input, we could easily choke a box into swapdeath. Incidentally, this is one reason why <code>HashWithIndifferentAccess</code> stores its keys internally as Strings – each Rails request creates a HWIA with all of the query parameters and GCs it later. Automatically converting query parameter names to symbols would create a vector for an easy <acronym title="Denial of Service">DOS</acronym> attack.</p>
+
+<h2>Guidelines</h2>
+
+<p>So, how should Symbols be used?</p>
+
+<ul>
+<li>Common values that are used often/repeatedly for <em>identity</em> (i.e. our temperature hash keys) should be Symbols. They're all about identity.</li>
+<li>Unique, high cardinality values or values that will be discarded should not be Symbols. They need to be garbage collected.</li>
+</ul>
+]]>
+</content>
+  </entry><entry>
+    <title>Disabling Flash in Chrome, and Other Tricks</title>
+    <link type="text/html" rel="alternate" href="http://threebrothers.org/brendan/blog/disabling-flash-in-chrome/" />
+    <id>tag:threebrothers.org,2010-02-25:/brendan/blog/disabling-flash-in-chrome</id>
+    <updated>2010-02-25T20:48:12.0-08:00</updated>
+    <summary><![CDATA[
+I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture: google-chrome --disable-plugins Previously I had resorted to moving libflashplayer.so or removing read access from it, but this is a much more controlled method. The are a ton of other Chrome switches that I on...]]>
+</summary>
+    <content type="html"><![CDATA[
+<p>I just learned that there is a handy switch one can pass while launching Chrome to bypass the plugin architecture:</p>
+
+<pre><code>google-chrome --disable-plugins
+</code></pre>
+
+<p>Previously I had resorted to moving <code>libflashplayer.so</code> or removing read access from it, but this is a much more controlled method.</p>
+
+<p>The are a ton of <a href="http://www.google.com/codesearch/p?hl=en#h0RrPvyPu-c/chrome/common/chrome_switches.cc">other Chrome switches</a> that I only found by browsing the source – good thing it's available. Among them is <code>allow-file-access-from-files</code>, which would have come in handy yesterday.</p>
+]]>
+</content>
+  </entry>
+
+</feed>

@@ -1,6 +1,7 @@
 http://threebrothers.org/brendan/
 http://threebrothers.org/brendan/about/
 http://threebrothers.org/brendan/software/
+http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/
 http://threebrothers.org/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe/
 http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/
 http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/

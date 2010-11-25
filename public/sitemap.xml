@@ -15,6 +15,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+<url><loc>http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/facebook-connect-ie-fb_xd_fragment-iframe/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-turbulence/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
 <url><loc>http://threebrothers.org/brendan/blog/rails2-upgrade-troubleshooting-a-slow-production-deployment/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
