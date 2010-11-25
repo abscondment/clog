@@ -5,7 +5,7 @@
   <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
   <link href="http://threebrothers.org/brendan/" />
   <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
-  <updated>2010-11-25T00:33:39-08:00</updated>
+  <updated>2010-11-25T07:54:16-08:00</updated>
   <author>
     <name>Brendan Ribera</name>
     <email>brendan.ribera+blogatom@gmail.com</email>
@@ -16,7 +16,7 @@
     <id>tag:threebrothers.org,2010-11-24:/brendan/blog/stirlings-approximation-formula-clojure</id>
     <updated>2010-11-24T24:12:38.0-08:00</updated>
     <summary><![CDATA[
-In my copious free time (hah!), I've been working through Probability Theory: A Concise Course by Y.A. Rozanov. The first chapter contains a great factorial approximation that anyone doing computer-based statistics or combinatorics ought to know: This is Stirling's Approximation. As n grows, this function gets closer and cl...]]>
+In my copious free time (hah!), I've been working through Probability Theory: A Concise Course by Y.A. Rozanov. The first chapter contains a great factorial approximation that anyone doing computer-based statistics or combinatorics ought to know: This is Stirling's Approximation. As n grows, the relative error of this funct...]]>
 </summary>
     <content type="html"><![CDATA[
 <p>In my copious free time (hah!), I've been working through <a href="http://store.doverpublications.com/0486635449.html">Probability Theory: A Concise Course</a> by Y.A. Rozanov.
@@ -25,8 +25,10 @@ computer-based statistics or combinatorics ought to know:</p>
 
 <p><img alt="n! ∼ √(2πn) * (n/e)^n" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/stirlings-approximation.png" /></p>
 
-<p>This is <strong>Stirling's Approximation</strong>. As <em>n</em> grows, this function gets
-closer and closer to the actual value of <em>n!</em>. More formally, the <strong>∼</strong> operator means that when A(n) ∼ B(n),</p>
+<p>This is <strong>Stirling's Approximation</strong>. As <em>n</em> grows, the relative error of this
+function compared to <em>n!</em> gets smaller and smaller. More formally, the
+<strong>∼</strong> symbol expresses asypmtotic equivalence, meaning that when A(n)
+∼ B(n),</p>
 
 <p><img alt="lim n-&gt;&amp;infinity; A(n)/B(n) = 1" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/sim.png" /></p>
 
@@ -108,9 +110,9 @@ and needed to change the way we compute first expression. I don't think anyone
 is actually going to seriously try doing factorials that large, but if you are,
 you can make use of this <a href="http://www.merriampark.com/bigsqrt.htm">free BigSquareRoot class that uses BigDecimals</a>.</p>
 
-<p>For my purposes, only the division and multiplication in the second expression
-need to be converted. Java has a handy BigDecimal class that fits the
-arbitrary-precision bill:</p>
+<p>For my purposes, only the exponentiation, division, and multiplication in the
+second expression need to be converted. Java has a handy BigDecimal class that
+fits the arbitrary-precision bill:</p>
 
 <script src="https://gist.github.com/715046.js?file=stirling-big.clj"></script>
 
@@ -135,8 +137,9 @@ the numerical error standpoint:</p>
 <p><img alt="That's better" src="http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/chart-good.png" /></p>
 
 <p>You can see that as <em>n</em> gets larger, the ratio of the functions asymptotically
-approaches 1. Stirling's approximation gets more and more accurate with larger
-<em>n</em>, which is exactly what we want.</p>
+approaches 1. The relative error of Stirling's approximation shrinks with larger
+<em>n</em>, which is great for most applications. The absolute error grows, but the
+rate at which it grows is smaller than the rate at which the actual value grows.</p>
 
 <p>And the performance is great, too! Check out the differences:</p>
 
@@ -150,6 +153,8 @@ to perform in quadratic time relative to <em>n</em>, while Stirling's formula ha
 very low constant cost.</p>
 
 <p>So remember Stirling's formula if you find yourself computing large factorials.</p>
+
+<p><em>Updated 2010-11-25 07:48 to clarify <strong>relative error</strong> versus <strong>actual value</strong>. Thanks to David Karapetyan for pointing out the discrepency.</em></p>
 ]]>
 </content>
   </entry><entry>

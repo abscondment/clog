@@ -4,8 +4,10 @@ computer-based statistics or combinatorics ought to know:
 
 ![n! &#x223C; &#x221A;(2&pi;n) * (n/e)^n](http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/stirlings-approximation.png)
 
-This is **Stirling's Approximation**. As *n* grows, this function gets
-closer and closer to the actual value of *n!*. More formally, the **&#x223C;** operator means that when A(n) &#x223C; B(n),
+This is **Stirling's Approximation**. As *n* grows, the relative error of this
+function compared to *n!* gets smaller and smaller. More formally, the
+**&#x223C;** symbol expresses asypmtotic equivalence, meaning that when A(n)
+&#x223C; B(n),
 
 ![lim n->&infinity; A(n)/B(n) = 1](http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/sim.png)
 
@@ -85,9 +87,9 @@ and needed to change the way we compute first expression. I don't think anyone
 is actually going to seriously try doing factorials that large, but if you are,
 you can make use of this [free BigSquareRoot class that uses BigDecimals](http://www.merriampark.com/bigsqrt.htm).
 
-For my purposes, only the division and multiplication in the second expression
-need to be converted. Java has a handy BigDecimal class that fits the
-arbitrary-precision bill:
+For my purposes, only the exponentiation, division, and multiplication in the
+second expression need to be converted. Java has a handy BigDecimal class that
+fits the arbitrary-precision bill:
 
 <script src="https://gist.github.com/715046.js?file=stirling-big.clj"></script>
 <noscript>
@@ -111,8 +113,9 @@ the numerical error standpoint:
 ![That's better](http://threebrothers.org/brendan/blog/stirlings-approximation-formula-clojure/chart-good.png)
 
 You can see that as *n* gets larger, the ratio of the functions asymptotically
-approaches 1. Stirling's approximation gets more and more accurate with larger
-*n*, which is exactly what we want.
+approaches 1. The relative error of Stirling's approximation shrinks with larger
+*n*, which is great for most applications. The absolute error grows, but the
+rate at which it grows is smaller than the rate at which the actual value grows.
 
 And the performance is great, too! Check out the differences:
 
@@ -126,3 +129,5 @@ to perform in quadratic time relative to *n*, while Stirling's formula has a
 very low constant cost.
 
 So remember Stirling's formula if you find yourself computing large factorials.
+
+*Updated 2010-11-25 07:48 to clarify **relative error** versus **actual value**. Thanks to David Karapetyan for pointing out the discrepency.*
