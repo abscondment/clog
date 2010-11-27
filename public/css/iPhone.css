@@ -1,12 +1,19 @@
-body { font-size:2.7em; }
+body { font-size:2.7em; margin:0; }
+
+.banner { font-size:0.8em; clear:both; margin-bottom:1em; }
+.banner h1,
+.banner h2,
+.banner p
+{ text-align:left;line-height:1em; margin:0.5em 0 0 0; }
 
 .lbar { float:none; min-height:0; }
 .lbar, .content, .header { width:100%; margin:0; padding:0; }
 
-ul.menu { margin-left:2%; }
+ul.menu { width:100%;margin-left:1%; }
 ul.menu li { float:left;margin:0 1% 0.5em 0;width:32%; }
 ul.menu li a {margin:0; font-size:0.8em;}
 .header { margin:0 0 1em 0; font-size:1em; clear:both; }
-.envelope { padding:0.5em; }
+.envelope { padding:0.5em; width:auto; }
+.footer { margin-bottom:1.5em; }
 
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6, .content ol, .content ul { text-align:left; }
