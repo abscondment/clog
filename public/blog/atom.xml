@@ -5,7 +5,7 @@
   <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
   <link href="http://threebrothers.org/brendan/" />
   <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
-  <updated>2010-11-25T07:54:16-08:00</updated>
+  <updated>2010-11-26T23:51:09-08:00</updated>
   <author>
     <name>Brendan Ribera</name>
     <email>brendan.ribera+blogatom@gmail.com</email>
@@ -16,10 +16,10 @@
     <id>tag:threebrothers.org,2010-11-24:/brendan/blog/stirlings-approximation-formula-clojure</id>
     <updated>2010-11-24T24:12:38.0-08:00</updated>
     <summary><![CDATA[
-In my copious free time (hah!), I've been working through Probability Theory: A Concise Course by Y.A. Rozanov. The first chapter contains a great factorial approximation that anyone doing computer-based statistics or combinatorics ought to know: This is Stirling's Approximation. As n grows, the relative error of this funct...]]>
+In my free time, I've been working through Probability Theory: A Concise Course by Y.A. Rozanov. The first chapter contains a great factorial approximation that anyone doing computer-based statistics or combinatorics ought to know: This is Stirling's Approximation. As n grows, the relative error of this function compared to...]]>
 </summary>
     <content type="html"><![CDATA[
-<p>In my copious free time (hah!), I've been working through <a href="http://store.doverpublications.com/0486635449.html">Probability Theory: A Concise Course</a> by Y.A. Rozanov.
+<p>In my free time, I've been working through <a href="http://store.doverpublications.com/0486635449.html">Probability Theory: A Concise Course</a> by Y.A. Rozanov.
 The first chapter contains a great factorial approximation that anyone doing
 computer-based statistics or combinatorics ought to know:</p>
 
@@ -236,6 +236,9 @@ of. It's listed as part of
 Oh, but wait. Apparently the API <em>has</em> changed a little, and
 <code>xdChannelUrl</code> should just be <code>channelUrl</code>. They're close enough,
 right? That's like, hardly worth mentioning. Or documenting.</p>
+
+<p><em>Update 2010-11-26 09:05: It appears this</em> is
+<em>documented, or at least it is now. Peperone23 points out <a href="http://developers.facebook.com/docs/reference/javascript/FB.init">the FB.init documentation</a>.</em></p>
 
 <p>So now you do something like this:</p>
 
@@ -1182,19 +1185,21 @@ accessible and can be searched fairly easily. Installing these
 dependencies manually through getlibs will make them available to the
 amazonmp3 binary.</p>
 
-<pre><code>sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
-sudo getlibs -w http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
+<pre><code>sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
+sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
 </code></pre>
 
 <p>Now <code>amazonmp3</code> works correctly, although don't be surprised if you
 encounter a few issues. For instance, it attempts to use load the
 64-bit libgvfsdbus.so library on startup, but doesn't seem to care
 when that loading fails. C'est la vie.</p>
+
+<p><em>Updated 2010-11-26 09:05 to fix links to the .deb files. Thanks to Stefan for this info.</em></p>
 ]]>
 </content>
   </entry><entry>

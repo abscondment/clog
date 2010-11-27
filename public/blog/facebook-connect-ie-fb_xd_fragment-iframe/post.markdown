@@ -69,6 +69,9 @@ Oh, but wait. Apparently the API *has* changed a little, and
 `xdChannelUrl` should just be `channelUrl`. They're close enough,
 right? That's like, hardly worth mentioning. Or documenting.
 
+*Update 2010-11-26 09:05: It appears this* is
+*documented, or at least it is now. Peperone23 points out [the FB.init documentation](http://developers.facebook.com/docs/reference/javascript/FB.init).*
+
 So now you do something like this:
 
     FB.init({

@@ -37,15 +37,17 @@ accessible and can be searched fairly easily. Installing these
 dependencies manually through getlibs will make them available to the
 amazonmp3 binary.
 
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://mirrors.kernel.org/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
-    sudo getlibs -w http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-filesystem1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-regex1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-date-time1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-signals1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-iostreams1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/b/boost/libboost-thread1.34.1_1.34.1-11ubuntu1_i386.deb
+    sudo getlibs -w http://old-releases.ubuntu.com/ubuntu/pool/main/i/icu/libicu38_3.8.1-2ubuntu0.2_i386.deb
 
 Now `amazonmp3` works correctly, although don't be surprised if you
 encounter a few issues. For instance, it attempts to use load the
 64-bit libgvfsdbus.so library on startup, but doesn't seem to care
 when that loading fails. C'est la vie.
+
+*Updated 2010-11-26 09:05 to fix links to the .deb files. Thanks to Stefan for this info.*

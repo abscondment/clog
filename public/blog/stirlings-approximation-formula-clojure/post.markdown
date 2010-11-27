@@ -1,4 +1,4 @@
-In my copious free time (hah!), I've been working through [Probability Theory: A Concise Course](http://store.doverpublications.com/0486635449.html) by Y.A. Rozanov.
+In my free time, I've been working through [Probability Theory: A Concise Course](http://store.doverpublications.com/0486635449.html) by Y.A. Rozanov.
 The first chapter contains a great factorial approximation that anyone doing
 computer-based statistics or combinatorics ought to know:
 
