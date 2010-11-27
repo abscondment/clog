@@ -8,17 +8,15 @@
       <div class="lbar">
         <div id='menu'></div>
       </div>
-      <div class="header"></div>
+      <div class="banner"><h1 class="title"></h1></div>
       <div class="content">
         <div>
-          Recent posts:
+          <h1>Recent posts <a href="http://feeds.feedburner.com/threebrothers/brendan"><img alt="Feed" src="/brendan/images/feed.png" /></a></h1>
           
           <div class="years">
             <div class="year"><b></b></div>
             <ul class="posts"><li class="post"><a></a></li></ul>
           </div>
-
-          <a href="http://feeds.feedburner.com/threebrothers/brendan"><img alt="Feed" src="/brendan/images/feed.png" /></a>
         </div>
       </div>
       <div class="footer"></div>

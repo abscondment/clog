@@ -6,8 +6,9 @@
       <div class="lbar">
         <div id='menu'></div>
       </div>
-      <div class="header"></div>
+      <div class="banner"><h1 class="title"></h1></div>
       <div class="content">
+        <h1><a></a></h1>
         <br/>
         <div id="disqus_thread"></div>
         <noscript><p><a href="http://disqus.com/forums/tbdo-brendan/?url=ref">View the discussion thread.</a></p></noscript>

@@ -6,12 +6,11 @@
 (defn- load-snippet [path] (html-snippet (get-resource path slurp)))
 
 ;; snippets that we'll reuse.
+(def banner-upsell (load-snippet "banner-upsell.snippet"))
 (def head (load-snippet "head.snippet"))
 (def menu (load-snippet "menu.snippet"))
 (def footer (load-snippet "footer.snippet"))
 
-(def header [{:tag :a :attrs {:href "/brendan/"} :content "Brendan"}
-             (html-snippet " &raquo; " (*config* :title))])
 (def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
 
 (defn- group-by-year [posts]
@@ -26,8 +25,8 @@
 (defn- years-and-posts [posts]
   (let [posts (group-by-year posts)]
     (clone-for [[year selected] posts]
-                      [:div.year :b] (content year)
-                      [:ul.posts :li.post] (list-posts selected))))
+               [:div.year :b] (content year)
+               [:ul.posts :li.post] (list-posts selected))))
 
 
 
@@ -35,22 +34,23 @@
   [:head] (append head)
   [:div.footer] (content footer)
   [:#menu] (content menu)
-  [:div.header] (content header)
+  [:div.banner :h1.title] (content (html-snippet (*config* :title)))
+  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :sub-title))}
+                                  {:tag :p :content banner-upsell}])
   [:div.content :div :div.years] (years-and-posts posts)
   [:.currentYear] (content current-year))
-
-
 
 (deftemplate blog-post "post.template" [post prev-post next-post]
   [:head] (append head)
   [:head :title] (content (html-snippet (str (post :title) " - Brendan Ribera")))
   [:div.footer] (content footer)
   [:#menu] (content menu)
-  [:div.header] (content [(first header)
-                                 (html-snippet (str " &raquo; " (post :title)))])
-  [:div.content] (prepend
-                         {:tag :h1  :content (html-snippet (post :title))}
-                         (html-snippet @(post :body)))
+  [:div.banner :h1.title] (content (html-snippet (*config* :title)))
+  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :sub-title))}
+                                  {:tag :p :content banner-upsell}])
+  [:div.content :h1 :a] (do-> (set-attr :href (url-for-post post))
+                              (content (html-snippet (post :title))))
+  [:div.content :h1] (after (html-snippet @(post :body)))
   [:#previousPost] (if prev-post
                      (content
                       (html-snippet "&laquo;&nbsp;")
@@ -66,15 +66,15 @@
 (deftemplate atom-xml "atom.template" [posts]
   [:feed :> :title] (content (*config* :title))
   [:feed :> :updated] (content (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss-08:00")
-                                               (java.util.Date.)))
+                                        (java.util.Date.)))
   [:feed :> :entry] (clone-for
                      [{:keys [title url body created_at]} posts]
                      [:title] (content title)
                      [:link] (set-attr :href (full-url (url-for-post url))
-                                              :rel "alternate"
-                                              :type "text/html")
+                                       :rel "alternate"
+                                       :type "text/html")
                      [:id] (content "tag:" (*config* :domain) ","
-                                           (apply str (take 10 created_at)) ":/brendan/blog/" url)
+                                    (apply str (take 10 created_at)) ":/brendan/blog/" url)
                      [:updated] (content
                                  (apply str (take 10 created_at)) "T" (apply str (drop 11 created_at)) "-08:00")
                      [:summary] (html-content
@@ -107,6 +107,6 @@
 
 (defn sitemap-txt [posts]
   (apply str
-   (concat
-    (map #(str (full-url %) "\n") (*config* :static-paths))
-    (map #(str (full-url (url-for-post %)) "\n") posts))))
+         (concat
+          (map #(str (full-url %) "\n") (*config* :static-paths))
+          (map #(str (full-url (url-for-post %)) "\n") posts))))

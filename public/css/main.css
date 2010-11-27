@@ -2,15 +2,11 @@ body {
   font-family:Arial, sans-serif;
   font-size:0.9em;
   line-height:1.2em;
-  margin:0.5em;
+  margin:1em 0;
   padding:0;
-  border:0.5em solid #006000;
   background-color:#fff;
   color:#222;
-  top:0.5em;
-  bottom:0.5em;
-  left:0.5em;
-  right:0.5em;
+  text-align:center;
 }
 
 .header, h1, h2, h3, h4, h5, h6 {
@@ -30,38 +26,32 @@ a:hover {color:#000;}
 abbr, acronym { border-bottom:1px dotted #333; cursor: help; }
 
 .envelope {
-  margin:0;
-  padding:1.5em 2em;
+  margin:0 auto;
+  width:54em;
+  padding:2em 2em 1em 2em;
   border:0.5em solid #00a000;
-  top:0em;
-  bottom:0em;
-  left:0em;
-  right:0em;
   min-height:25em;
+  text-align:left;
 }
 
-.header {
-  margin:0 0 0.5em 11.85em;
-  padding:0 0 0.5em 0;
-  font-size:1.2em;
-  border-bottom:1px solid #999;
-}
+.banner { margin:0; text-align:right; line-height:2.5em; }
 
-.header h1 {
-  margin: 0.5em 0;
-}
-
-.header a {
+.banner h1,
+.banner h2,
+.banner p { padding:0; font-family:Georgia,serif; }
+.banner h1 { margin:0 0 0.6em 0; font-size:2em; }
+.banner h2 { margin:0 0 0.8em 0; font-size:1.6em; }
+.banner p { line-height:2.2em; font-size:1.2em; margin:0; }
+.banner a {
   text-decoration:none;
 }
 
-ul.menu {padding:0;margin:0;}
+ul.menu {padding:0;margin:0;width: 10em;}
 ul.menu li {list-style-type:none;margin:0;padding;0;}
 ul.menu li a {
   display:block;
   padding:0.6em 0;
-  margin:0 1em 1em 0;
-
+  margin:0 0 1em 0;
   background-color:#00a000;
   color:#fff;
   font-family:georgia,serif;
@@ -86,15 +76,18 @@ ul.menu li a:hover {
 
 .lbar {
   float:left;
-  width:13em;
-  min-height:25em;
+  margin-right:1em;
 }
 
 .content {
-  margin:0 1em 0 14em;
-  width:42em;
+  clear:both;
+  margin:2em 0 0 0;
+  padding-top:0.5em;
   line-height:1.6em;
+  border-top:1px solid #999;
 }
+.content h1 a { text-decoration:none; }
+.content p { margin:1.5em 0; }
 .wide { width:auto; }
 
 .content .rightImage {float:right;text-align:center;margin: 0 0 1em 1em;}
@@ -115,6 +108,8 @@ div.years {margin-top:10px;}
   text-align:center;
   font-size:0.8em;
   color:#aaa;
+  line-height:15px;
+  height:15px;
 }
 .footer a {color:#aaa;}
 .footer img {vertical-align:middle;}
