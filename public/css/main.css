@@ -98,7 +98,7 @@ ul.posts li.post { margin-bottom:5px; }
 
 div.years {margin-top:10px;}
 
-.codeBlock, pre { padding:2em 3em;line-height:2em;border-style:solid;border-width:1px 0;border-color:#ddd;background-color:#efefef; word-wrap:break-word; }
+.codeBlock, pre { padding:1em;line-height:1.5em;border-style:solid;border-width:1px 0;border-color:#ddd;background-color:#efefef; word-wrap:break-word; }
 .codeBlock {display:block;}
 
 .footer {
