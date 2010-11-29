@@ -20,7 +20,7 @@
   (clone-for [{:keys [title url created_at]} posts]
              [:a] (do-> (content title)
                         (set-attr :href (url-for-post url))
-                        (after (str " - " created_at)))))
+                        (after [{:tag :div :content created_at}]))))
 
 (defn- years-and-posts [posts]
   (let [posts (group-by-year posts)]
