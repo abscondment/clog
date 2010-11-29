@@ -28,25 +28,26 @@
                [:div.year :b] (content year)
                [:ul.posts :li.post] (list-posts selected))))
 
-
+;;; Templates
 
 (deftemplate index "index.template" [posts]
   [:head] (append head)
+  [:head :title] (content (str (:title *config*) " - " (:author *config*)))
   [:div.footer] (content footer)
   [:#menu] (content menu)
   [:div.banner :h1.title] (content (html-snippet (*config* :title)))
-  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :sub-title))}
+  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
                                   {:tag :p :content banner-upsell}])
   [:div.content :div :div.years] (years-and-posts posts)
   [:.currentYear] (content current-year))
 
 (deftemplate blog-post "post.template" [post prev-post next-post]
   [:head] (append head)
-  [:head :title] (content (html-snippet (str (post :title) " - Brendan Ribera")))
+  [:head :title] (content (html-snippet (post :title)))
   [:div.footer] (content footer)
   [:#menu] (content menu)
   [:div.banner :h1.title] (content (html-snippet (*config* :title)))
-  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :sub-title))}
+  [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
                                   {:tag :p :content banner-upsell}])
   [:div.content :h1 :a] (do-> (set-attr :href (url-for-post post))
                               (content (html-snippet (post :title))))
@@ -65,6 +66,7 @@
 
 (deftemplate atom-xml "atom.template" [posts]
   [:feed :> :title] (content (*config* :title))
+  [:feed :> :subtitle] (content (*config* :subtitle))
   [:feed :> :updated] (content (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss-08:00")
                                         (java.util.Date.)))
   [:feed :> :entry] (clone-for

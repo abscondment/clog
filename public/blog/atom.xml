@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Wine, Water, and Blood</title>
-  <subtitle>Three Planes of Thought Which to Sail</subtitle>
+  <title>Quod erat faciendum</title>
+  <subtitle>A technical blog by Brendan Ribera</subtitle>
   <link rel="self" href="http://threebrothers.org/brendan/blog/atom.xml" />
   <link href="http://threebrothers.org/brendan/" />
   <id>tag:threebrothers.org,2010-01-07:/brendan/blog</id>
-  <updated>2010-11-26T23:56:14-08:00</updated>
+  <updated>2010-11-28T21:50:46-08:00</updated>
   <author>
     <name>Brendan Ribera</name>
     <email>brendan.ribera+blogatom@gmail.com</email>
