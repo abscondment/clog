@@ -3,7 +3,7 @@ classes/*
 lib/*
 public/index.html
 public/blog/*.xml
-public/blog/sitemap.*
+public/sitemap.*
 public/blog/*/*.html
 public/blog/*/*.md5sum
 
