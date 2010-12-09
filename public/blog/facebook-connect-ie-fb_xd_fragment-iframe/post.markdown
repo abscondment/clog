@@ -79,7 +79,7 @@ So now you do something like this:
               status: true,
               cookie: true,
               xfbml: true,
-              channelUrl: window.location.protocol + '//your-site.com/xd_receiver.html'
+              channelUrl: window.location.protocol + '//example.com/xd_receiver.html'
             });
         
 And in xd_receiver.html, you do this:
