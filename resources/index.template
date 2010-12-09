@@ -11,7 +11,7 @@
       <div class="banner"><h1 class="title"></h1></div>
       <div class="content">
         <div>
-          <h1>Recent posts <a href="http://feeds.feedburner.com/threebrothers/brendan"><img alt="Feed" src="/brendan/images/feed.png" /></a></h1>
+          <h1>Recent posts <a href="http://feeds.threebrothers.org/threebrothers/brendan"><img alt="Feed" src="/brendan/images/feed.png" /></a></h1>
           
           <div class="years">
             <div class="year"><b></b></div>
