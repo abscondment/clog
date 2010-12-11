@@ -1,0 +1,18 @@
+#-*- mode: org -*-
+#+startup: overview
+#+startup: hidestars
+#+TODO: TODO | INPROGRESS | DONE
+
+Clog TODOs
+
+* For 1.0
+** TODO Separate /public from this repository
+** TODO Config file
+*** TODO Sane default file
+*** TODO Command line overrides
+*** TODO Command line alternate file
+** TODO Enforce valid dates
+** TODO Restructure post YAML
+*** TODO YAML file per post in directory
+*** TODO Add 'published' flag
+** TODO Make feed paths absolute
