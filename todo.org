@@ -6,13 +6,14 @@
 Clog TODOs
 
 * For 1.0
-** TODO Separate /public from this repository
-** TODO Config file
+** DONE Separate /public from this repository
+** INPROGRESS Config file
 *** TODO Sane default file
 *** TODO Command line overrides
 *** TODO Command line alternate file
-** TODO Enforce valid dates
-** TODO Restructure post YAML
-*** TODO YAML file per post in directory
-*** TODO Add 'published' flag
-** TODO Make feed paths absolute
+** DONE Enforce valid dates
+** DONE Restructure post YAML
+*** DONE YAML file per post in directory
+*** DONE Add 'published' flag
+** TODO Make only feed paths absolute
+** TODO Tests? :(
