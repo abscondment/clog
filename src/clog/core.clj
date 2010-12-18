@@ -2,21 +2,20 @@
   (:use [clojure.contrib.io :only [file]]
         [clog config helpers]
         [clog.db :as db]
-        [clog.views :as views])
-  (:gen-class))
+        [clog.views :as views]))
 
 (defn- update [next post prev]
   (if (or (:updated post)
           (:updated prev)
           (:updated next))
     (let [url (post :url)
-          dir (java.io.File. (str "./public/blog/" url))]
+          dir (java.io.File. (str (:path *config*) "/public/blog/" url))]
       (do
         (if (not (.exists dir)) (.mkdir dir))
-        (spit (file "public" "blog" url "index.html")
+        (spit (file (:path *config*) "public" "blog" url "index.html")
               (apply str (views/blog-post post prev next)))
-        (spit (file "public" "blog" url "post.markdown.md5sum")
-              (post :md5))))))
+        (spit (file (:path *config*) "public" "blog" url "post.markdown.md5sum")
+              (:md5 post))))))
 
 (defn- update-posts [to-update]
   (let [count (count (filter :updated to-update))
@@ -34,19 +33,18 @@
     (update-posts posts)
     (do
       (println "Generating index.")
-      (spit (file "public" "index.html")
+      (spit (file (:path *config*) "public" "index.html")
             (apply str (views/index posts)))
       
       (println "Generating atom.")
-      (spit (file "public" "blog" "atom.xml")
+      (spit (file (:path *config*) "public" "blog" "atom.xml")
             (add-xml
              (wrap-atom-cdata
               (apply str (views/atom-xml (take 20 posts))))))
 
       (println "Generating sitemaps.")
-      (spit (file "public" "sitemap.xml")
+      (spit (file (:path *config*) "public" "sitemap.xml")
             (add-xml (apply str (views/sitemap-xml posts))))
-      (spit (file "public" "sitemap.txt") (sitemap-txt posts))
-
+      (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts))
       (shutdown-agents))))
 
