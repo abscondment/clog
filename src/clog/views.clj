@@ -14,13 +14,13 @@
 (def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
 
 (defn- group-by-year [posts]
-  (group-by #(apply str (take 4 (% :created_at))) posts))
+  (group-by #(format-date (% :created_at) "yyyy") posts))
 
 (defn- list-posts [posts]
   (clone-for [{:keys [title url created_at]} posts]
              [:a] (do-> (content title)
                         (set-attr :href (url-for-post url))
-                        (after [{:tag :div :content created_at}]))))
+                        (after [{:tag :div :content (format-date created_at "MMMM d 'at' h:mm a")}]))))
 
 (defn- years-and-posts [posts]
   (let [posts (group-by-year posts)]
@@ -67,18 +67,21 @@
 (deftemplate atom-xml "atom.template" [posts]
   [:feed :> :title] (content (*config* :title))
   [:feed :> :subtitle] (content (*config* :subtitle))
-  [:feed :> :updated] (content (.format (java.text.SimpleDateFormat. "yyyy-MM-dd'T'HH:mm:ss-08:00")
-                                        (java.util.Date.)))
+  [:feed :> :updated] (content (date-to-rfc3339 (new java.util.Date)))
   [:feed :> :entry] (clone-for
                      [{:keys [title url body created_at]} posts]
                      [:title] (content title)
                      [:link] (set-attr :href (full-url (url-for-post url))
                                        :rel "alternate"
                                        :type "text/html")
-                     [:id] (content "tag:" (*config* :domain) ","
-                                    (apply str (take 10 created_at)) ":/brendan/blog/" url)
+                     [:id] (content "tag:"
+                                    (*config* :domain)
+                                    ","
+                                    (format-date created_at "yyyy-MM-dd")
+                                    ":/brendan/blog/"
+                                    url)
                      [:updated] (content
-                                 (apply str (take 10 created_at)) "T" (apply str (drop 11 created_at)) "-08:00")
+                                 (date-to-rfc3339 created_at))
                      [:summary] (html-content
                                  (apply str
                                         (take 325

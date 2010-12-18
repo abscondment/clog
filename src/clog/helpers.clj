@@ -1,6 +1,20 @@
 (ns clog.helpers
   (:use [clojure.contrib.str-utils :only [re-gsub]]
-        [clog config]))
+        [clog config])
+  (:import (java.text SimpleDateFormat)))
+
+(defn format-date [date format]
+  "Apply a formatting string to a Date."
+  (.format (new SimpleDateFormat format) date))
+
+(defn date-to-rfc3339
+  "Convert a Date to its RFC3339 output."
+  [date]
+  (let [almost (format-date date "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        pos (- (count almost) 2)]
+    (str (apply str (take  pos almost))
+         ":"
+         (apply str (drop pos almost)))))
 
 (defn full-url [relative-url]
   (str "http://" (*config* :domain) relative-url))
