@@ -3,13 +3,8 @@
         [clojure.contrib.str-utils :only [re-gsub]]
         [clog config helpers]))
 
+(defn- rp [file] (str (*config* :path) "/templates/" file))
 (defn- load-snippet [path] (html-snippet (get-resource path slurp)))
-
-;; snippets that we'll reuse.
-(def banner-upsell (load-snippet "banner-upsell.snippet"))
-(def head (load-snippet "head.snippet"))
-(def menu (load-snippet "menu.snippet"))
-(def footer (load-snippet "footer.snippet"))
 
 (def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
 
@@ -28,9 +23,19 @@
                [:div.year :b] (content year)
                [:ul.posts :li.post] (list-posts selected))))
 
+;;
+;; TODO: define these snippets/templates dynamically at runtime
+;;
+
+ ;; snippets that we'll reuse.
+(def banner-upsell (load-snippet (rp "banner-upsell.snippet")))
+(def head (load-snippet (rp "head.snippet")))
+(def menu (load-snippet (rp "menu.snippet")))
+(def footer (load-snippet (rp "footer.snippet")))
+
 ;;; Templates
 
-(deftemplate index "index.template" [posts]
+(deftemplate index (rp "index.template") [posts]
   [:head] (append head)
   [:head :title] (content (str (:title *config*) " - " (:author *config*)))
   [:div.footer] (content footer)
@@ -41,7 +46,7 @@
   [:div.content :div :div.years] (years-and-posts posts)
   [:.currentYear] (content current-year))
 
-(deftemplate blog-post "post.template" [post prev-post next-post]
+(deftemplate blog-post (rp "post.template") [post prev-post next-post]
   [:head] (append head)
   [:head :title] (content (html-snippet (post :title)))
   [:div.footer] (content footer)
@@ -64,7 +69,7 @@
 
 
 
-(deftemplate atom-xml "atom.template" [posts]
+(deftemplate atom-xml (rp "atom.template") [posts]
   [:feed :> :title] (content (*config* :title))
   [:feed :> :subtitle] (content (*config* :subtitle))
   [:feed :> :updated] (content (date-to-rfc3339 (new java.util.Date)))
@@ -96,7 +101,7 @@
 
 
 
-(deftemplate sitemap-xml "sitemap.template" [posts]
+(deftemplate sitemap-xml (rp "sitemap.template") [posts]
   [:urlset :> last-child] (after
                            (interleave
                             (repeat "\n")
