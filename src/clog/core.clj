@@ -28,23 +28,25 @@
                (partition 3 1 (concat '(nil) to-update '(nil))))))
       (println "No posts require updating."))))
 
-(defn -main [& args]
-  (let [posts (db/all-posts)]
-    (update-posts posts)
-    (do
-      (println "Generating index.")
-      (spit (file (:path *config*) "public" "index.html")
-            (apply str (views/index posts)))
-      
-      (println "Generating atom.")
-      (spit (file (:path *config*) "public" "blog" "atom.xml")
-            (add-xml
-             (wrap-atom-cdata
-              (apply str (views/atom-xml (take 20 posts))))))
+(defn -main
+  ([] (apply -main *command-line-args*))
+  ([& args]
+     (do-read-config (first args))
+     (let [posts (db/all-posts)]
+       (update-posts posts)
+       (do
+         (println "Generating index.")
+         (spit (file (:path *config*) "public" "index.html")
+               (apply str (views/index posts)))
+         
+         (println "Generating atom.")
+         (spit (file (:path *config*) "public" "blog" "atom.xml")
+               (add-xml
+                (wrap-atom-cdata
+                 (apply str (views/atom-xml (take 20 posts))))))
 
-      (println "Generating sitemaps.")
-      (spit (file (:path *config*) "public" "sitemap.xml")
-            (add-xml (apply str (views/sitemap-xml posts))))
-      (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts))
-      (shutdown-agents))))
-
+         (println "Generating sitemaps.")
+         (spit (file (:path *config*) "public" "sitemap.xml")
+               (add-xml (apply str (views/sitemap-xml posts))))
+         (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts))
+         (shutdown-agents)))))
