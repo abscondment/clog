@@ -16,6 +16,14 @@
          ":"
          (apply str (drop pos almost)))))
 
+(def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
+
+(defn group-by-year [posts]
+  (group-by #(format-date (% :created_at) "yyyy") posts))
+
+(defn group-by-month [posts]
+  (group-by #(format-date (% :created_at) "yyyy-MM") posts))
+
 (defn full-url [relative-url]
   (str "http://" (*config* :domain) relative-url))
 

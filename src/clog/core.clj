@@ -28,8 +28,47 @@
                (partition 3 1 (concat '(nil) to-update '(nil))))))
       (println "No posts require updating."))))
 
+(defn- do-make-index [{current :current
+                    prev :prev
+                    next :next
+                    posts :posts}]
+  (let [index-url #(if (not (or (nil? %) (empty? %)))
+                     (apply str
+                            (butlast
+                             (interleave
+                              (cons (:path *config*) %)
+                              (repeat java.io.File/separator)))))
+        dir (java.io.File. (index-url current))]
+    (do (if (not (.exists dir)) (.mkdir dir))
+        (spit
+         (file (index-url current) "index.html")
+         (apply str (views/index posts (index-url prev) (index-url next)))))))
+
+(defn- update-indexes [posts]
+  (println (sort (keys (group-by-month posts))))
+(comment  (loop [index-hashes
+          (let [pages (vec (partition 20 posts))
+                last-page (count pages)
+                page-numbers (range last-page)
+                page-urls (vec
+                           (map #(filter identity (list "public" (if (> % 0) %)))
+                                page-numbers))]    
+            (for [i page-numbers]
+              (merge {:current (nth page-urls i)
+                      :posts (nth pages i)}
+                     (if (> i 0) {:next (nth page-urls (dec i))})
+                     (if (< i (dec last-page))
+                       {:prev (nth page-urls (inc i))}))))]
+     (if (not (empty? index-hashes))
+       (do
+         (do-make-index (first index-hashes))
+         (recur (rest index-hashes)))))))
+
+
 (defn -main
-  ([] (apply -main *command-line-args*))
+  ([] (if (empty? *command-line-args*)
+        (println "TODO: usage")
+        (apply -main *command-line-args*)))
   ([& args]
      (do
        ;; read config
@@ -37,12 +76,15 @@
        ;; make some templates
        (views/build-templates)
        ;; process posts
-       (let [posts (db/all-posts)]
-         (update-posts posts)
+       (let [posts (db/all-posts)
+             by-month (group-by-month posts)
+             month-urls (map #(str "public/" %)
+                             (reverse (sort (keys by-month))))]
          (do
+           (update-posts posts)
            (println "Generating index.")
            (spit (file (:path *config*) "public" "index.html")
-                 (apply str (views/index posts)))
+                 (apply str (views/index posts month-urls)))
            
            (println "Generating atom.")
            (spit (file (:path *config*) "public" "blog" "atom.xml")

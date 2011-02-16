@@ -8,11 +8,6 @@
 (defn- expand-path [name] (file (str (*config* :path) "/templates/" name)))
 (defn- load-snippet [path] (html-snippet (get-resource path slurp)))
 
-(def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
-
-(defn- group-by-year [posts]
-  (group-by #(format-date (% :created_at) "yyyy") posts))
-
 (defn- list-posts [posts]
   (clone-for [{:keys [title url created_at]} posts]
              [:a] (do-> (content title)
@@ -44,7 +39,7 @@
   (def footer (load-snippet (expand-path "footer.snippet")))
 
   ;; Templates
-  (deftemplate index (expand-path "index.template") [posts]
+  (deftemplate index (expand-path "index.template") [posts year-urls]
     [:head] (append head)
     [:head :title] (content (str (:title *config*) " - " (:author *config*)))
     [:div.footer] (content footer)
