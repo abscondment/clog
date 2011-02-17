@@ -55,3 +55,11 @@
   {:tag :a
    :attrs {:href (url-for-post post)}
    :content (post :title)})
+
+(defn list-to-url [coll]
+  (if (not (or (nil? coll) (empty? coll)))
+    (apply str
+           (butlast
+            (interleave
+             coll
+             (repeat java.io.File/separator))))))

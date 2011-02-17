@@ -39,7 +39,7 @@
   (def footer (load-snippet (expand-path "footer.snippet")))
 
   ;; Templates
-  (deftemplate index (expand-path "index.template") [posts year-urls]
+  (deftemplate index (expand-path "index.template") [posts prev-url next-url]
     [:head] (append head)
     [:head :title] (content (str (:title *config*) " - " (:author *config*)))
     [:div.footer] (content footer)
@@ -48,6 +48,20 @@
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
                                     {:tag :p :content banner-upsell}])
     [:div.content :div :div.years] (years-and-posts posts)
+    [:#previousPage] (if prev-url
+                       (content
+                        (html-snippet "&laquo;&nbsp;")
+                        {:tag :a
+                         ;; TODO: into config
+                         :attrs {:href (str "/brendan/" prev-url "/")}
+                         :content "Older"}))
+    [:#nextPage] (if next-url
+                   (content
+                    {:tag :a
+                     ;; TODO: into config
+                     :attrs {:href (str "/brendan/" next-url "/")}
+                     :content "Newer"}
+                    (html-snippet "&nbsp;&raquo;")))
     [:.currentYear] (content current-year))
 
   (deftemplate blog-post (expand-path "post.template") [post prev-post next-post]

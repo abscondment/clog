@@ -32,38 +32,34 @@
                     prev :prev
                     next :next
                     posts :posts}]
-  (let [index-url #(if (not (or (nil? %) (empty? %)))
-                     (apply str
-                            (butlast
-                             (interleave
-                              (cons (:path *config*) %)
-                              (repeat java.io.File/separator)))))
+  (let [index-url #(list-to-url (cons (:path *config*) (cons "public" %)))
         dir (java.io.File. (index-url current))]
     (do (if (not (.exists dir)) (.mkdir dir))
         (spit
          (file (index-url current) "index.html")
-         (apply str (views/index posts (index-url prev) (index-url next)))))))
+         (apply str (views/index posts (list-to-url prev) (list-to-url next)))))))
 
 (defn- update-indexes [posts]
-  (println (sort (keys (group-by-month posts))))
-(comment  (loop [index-hashes
-          (let [pages (vec (partition 20 posts))
-                last-page (count pages)
-                page-numbers (range last-page)
-                page-urls (vec
-                           (map #(filter identity (list "public" (if (> % 0) %)))
-                                page-numbers))]    
-            (for [i page-numbers]
-              (merge {:current (nth page-urls i)
-                      :posts (nth pages i)}
-                     (if (> i 0) {:next (nth page-urls (dec i))})
-                     (if (< i (dec last-page))
-                       {:prev (nth page-urls (inc i))}))))]
-     (if (not (empty? index-hashes))
-       (do
-         (do-make-index (first index-hashes))
-         (recur (rest index-hashes)))))))
-
+  (loop [index-hashes
+         (let [pages (vec (partition 5 posts))
+               last-page (count pages)
+               page-numbers (range last-page)
+               page-urls (vec
+                          (map #(filter
+                                 identity
+                                 (if (> % 0)
+                                   (list "page" %)))
+                               page-numbers))]    
+           (for [i page-numbers]
+             (merge {:current (nth page-urls i)
+                     :posts (nth pages i)}
+                    (if (> i 0) {:next (nth page-urls (dec i))})
+                    (if (< i (dec last-page))
+                      {:prev (nth page-urls (inc i))}))))]
+    (if (not (empty? index-hashes))
+      (do
+        (do-make-index (first index-hashes))
+        (recur (rest index-hashes))))))
 
 (defn -main
   ([] (if (empty? *command-line-args*)
@@ -83,8 +79,7 @@
          (do
            (update-posts posts)
            (println "Generating index.")
-           (spit (file (:path *config*) "public" "index.html")
-                 (apply str (views/index posts month-urls)))
+           (update-indexes posts)
            
            (println "Generating atom.")
            (spit (file (:path *config*) "public" "blog" "atom.xml")
