@@ -78,8 +78,13 @@
                              (reverse (sort (keys by-month))))]
          (do
            (update-posts posts)
-           (println "Generating index.")
+           
+           (println "Generating indexes.")
            (update-indexes posts)
+           (let [all (file (:path *config*)  "public" "blog" "page" "all")]
+             (do (if (not (.exists all)) (.mkdir all))
+                 (spit (file (.getCanonicalPath all) "index.html")
+                       (apply str (views/list-all-posts posts)))))
            
            (println "Generating atom.")
            (spit (file (:path *config*) "public" "blog" "atom.xml")

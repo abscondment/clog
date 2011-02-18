@@ -23,6 +23,19 @@
                         {:tag :div
                          :content (html-snippet (summarize @body) "...")}]))))
 
+(defn- years-and-posts [posts]
+  (let [posts (group-by-year posts)]
+    (clone-for [[year selected] posts]
+               [:div.year :b] (content year)
+               [:ul.posts :li.post :a]
+               (clone-for
+                [{:keys [title url created_at]} selected]
+                (do-> (content title)
+                      (set-attr :href (url-for-post url))
+                      (after [{:tag :div
+                               :attrs {:class "date"}
+                               :content (format-date created_at "MMMM d 'at' h:mm a")}]))))))
+
 (defn sitemap-txt [posts]
   (apply str
          (concat
@@ -82,6 +95,19 @@
                   (apply str (html-snippet "&nbsp;&raquo;"))]}))
     
     [:.currentYear] (content current-year))
+
+  
+  (deftemplate list-all-posts (expand-path "list.template") [posts]
+    [:head] (append head)
+    [:head :title] (content (str (:title *config*) " - " (:author *config*)))
+    [:div.footer] (content footer)
+    [:#menu] (content menu)
+    [:div.banner :h1.title] (content (html-snippet (*config* :title)))
+    [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
+                                    {:tag :p :content banner-upsell}])
+    [:div.content :div :div.years] (years-and-posts posts)
+    [:.currentYear] (content current-year))
+  
 
   (deftemplate blog-post (expand-path "post.template") [post prev-post next-post]
     [:head] (append head)
