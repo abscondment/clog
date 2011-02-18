@@ -68,7 +68,12 @@
   ([& args]
      (do
        ;; read config
-       (do-read-config (first args))
+       (try
+         (do-read-config (first args))
+         (catch java.io.FileNotFoundException e
+           (do (println "TODO: error message")
+               (System/exit 1))))
+       
        ;; make some templates
        (views/build-templates)
        ;; process posts
