@@ -2,7 +2,9 @@
   (:use
    [clojure.contrib.io :only [file]]
    [clojure.contrib.str-utils :only [re-gsub]]
-   [net.cgrand.enlive-html :only [append after clone-for content deftemplate do-> get-resource html-content html-snippet last-child prepend set-attr]]
+   [net.cgrand.enlive-html :only [append after at clone-for content deftemplate
+                                  do-> get-resource html-content html-snippet
+                                  last-child prepend set-attr]]
    [clog config helpers]))
 
 (defn- expand-path [name] (file (str (*config* :path) "/templates/" name)))
@@ -24,8 +26,8 @@
 (defn sitemap-txt [posts]
   (apply str
          (concat
-          (map #(str (full-url %) "\n") (*config* :static-paths))
-          (map #(str (full-url (url-for-post %)) "\n") posts))))
+          (map #(str (make-full-url %) "\n") (*config* :static-paths))
+          (map #(str (make-full-url (url-for-post %)) "\n") posts))))
 
 ;;
 ;; Snippets & Templates that are defined at runtime.
@@ -92,7 +94,7 @@
     [:feed :> :entry] (clone-for
                        [{:keys [title url body created_at]} posts]
                        [:title] (content title)
-                       [:link] (set-attr :href (full-url (url-for-post url))
+                       [:link] (set-attr :href (make-full-url (url-for-post url))
                                          :rel "alternate"
                                          :type "text/html")
                        [:id] (content "tag:"
@@ -110,9 +112,16 @@
                                    "...")
                        [:content] (do->
                                    (set-attr :type "html")
-                                   (html-content @body))))
+                                   (html-content @body)))
+    ;; update relative paths - links and images
+    [:a] (at (fn [node]
+               (update-in node [:attrs :href]
+                          #(if (full-url? %) % (make-full-url %)))))
+    [:img] (at (fn [node]
+                 (update-in node [:attrs :src]
+                            #(if (full-url? %) % (make-full-url %))))))
 
-
+  
 
   (deftemplate sitemap-xml (expand-path "sitemap.template") [posts]
     [:urlset :> last-child] (after
@@ -121,7 +130,8 @@
                               (map (fn [{:keys [url]}]
                                      {:tag :url
                                       :content
-                                      [{:tag :loc :content (full-url (url-for-post url))}
+                                      [{:tag :loc :content (make-full-url (url-for-post url))}
                                        {:tag :changefreq :content "monthly"}
                                        {:tag :priority :content "1.0"}]})
                                    posts)))))
+

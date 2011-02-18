@@ -8,12 +8,12 @@ Clog TODOs
 * For 1.0
 ** DONE Separate /public from this repository
 ** INPROGRESS Config file
-*** TODO Sane default file
+*** INPROGRESS Sane default file
 *** TODO Command line overrides
 *** TODO Command line alternate file
 ** DONE Enforce valid dates
 ** DONE Restructure post YAML
 *** DONE YAML file per post in directory
 *** DONE Add 'published' flag
-** TODO Make only feed paths absolute
+** DONE Make only feed paths absolute
 ** TODO Tests? :(

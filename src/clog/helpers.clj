@@ -1,5 +1,6 @@
 (ns clog.helpers
-  (:use [clojure.contrib.str-utils :only [re-gsub]]
+  (:use [clojure.contrib.io :only [file]]
+        [clojure.contrib.str-utils :only [re-gsub]]
         [clog config])
   (:import (java.text SimpleDateFormat)))
 
@@ -24,8 +25,23 @@
 (defn group-by-month [posts]
   (group-by #(format-date (% :created_at) "yyyy-MM") posts))
 
-(defn full-url [relative-url]
-  (str "http://" (*config* :domain) relative-url))
+(defn full-url? [href]
+  (not (nil? (re-find #"^[^:\s]*:?//" href))))
+
+(defn make-full-url [href]
+  (let [leading-slash  (= (str (first href)) "/")
+        trailing-slash (= (str (last href)) "/" java.io.File/separator)]
+    (if (full-url? href)
+      href
+      (str "http"
+           (if (:https *config*) "s")
+           "://"
+           (:domain *config*)
+           (if leading-slash
+             href
+             (-> (file (:root-url *config*) "blog" "_" href)
+                 (.getCanonicalPath)))
+           (if (and (false? leading-slash) trailing-slash) "/")))))
 
 (defmulti url-for-post (fn [p] (type p)))
 (defmethod url-for-post String
