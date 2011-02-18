@@ -7,3 +7,4 @@ public/sitemap.*
 public/blog/*/*.html
 public/blog/*/*.md5sum
 
+.lein-deps-sum
