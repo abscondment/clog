@@ -52,14 +52,12 @@
                        (content
                         (html-snippet "&laquo;&nbsp;")
                         {:tag :a
-                         ;; TODO: into config
-                         :attrs {:href (str "/brendan/" prev-url)}
+                         :attrs {:href (str (:root-url *config*) prev-url)}
                          :content "Older"}))
     [:#nextPage] (if next-url
                    (content
                     {:tag :a
-                     ;; TODO: into config
-                     :attrs {:href (str "/brendan/" next-url)}
+                     :attrs {:href (str (:root-url *config*) next-url)}
                      :content "Newer"}
                     (html-snippet "&nbsp;&raquo;")))
     [:.currentYear] (content current-year))
@@ -101,8 +99,9 @@
                                       (*config* :domain)
                                       ","
                                       (format-date created_at "yyyy-MM-dd")
-                                      ;; TODO: config
-                                      ":/brendan/blog/"
+                                      ":"
+                                      (:root-url *config*)
+                                      "blog/"
                                       url)
                        [:updated] (content
                                    (date-to-rfc3339 created_at))

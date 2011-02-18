@@ -41,7 +41,7 @@
 
 (defn- update-indexes [posts]
   (loop [index-hashes
-         (let [pages (vec (partition 7 posts))
+         (let [pages (vec (partition (:page-size *config*) posts))
                last-page (count pages)
                page-numbers (range last-page)
                page-urls (vec

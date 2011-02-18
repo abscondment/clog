@@ -30,8 +30,7 @@
 (defmulti url-for-post (fn [p] (type p)))
 (defmethod url-for-post String
   [p]
-  ;; TODO: /brendan/blog/ to config
-  (str "/brendan/blog/" p "/"))
+  (str (:root-url *config*) "blog/" p "/"))
 (defmethod url-for-post clojure.lang.IPersistentMap
   [p] (url-for-post (p :url)))
 
