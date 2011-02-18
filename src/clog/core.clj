@@ -29,9 +29,9 @@
       (println "No posts require updating."))))
 
 (defn- do-make-index [{current :current
-                    prev :prev
-                    next :next
-                    posts :posts}]
+                       prev :prev
+                       next :next
+                       posts :posts}]
   (let [index-url #(list-to-url (cons (:path *config*) (cons "public" %)))
         dir (java.io.File. (index-url current))]
     (do (if (not (.exists dir)) (.mkdir dir))
@@ -41,14 +41,14 @@
 
 (defn- update-indexes [posts]
   (loop [index-hashes
-         (let [pages (vec (partition 5 posts))
+         (let [pages (vec (partition 7 posts))
                last-page (count pages)
                page-numbers (range last-page)
                page-urls (vec
                           (map #(filter
                                  identity
                                  (if (> % 0)
-                                   (list "page" %)))
+                                   (list "blog" "page" %)))
                                page-numbers))]    
            (for [i page-numbers]
              (merge {:current (nth page-urls i)

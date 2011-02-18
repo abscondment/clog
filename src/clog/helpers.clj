@@ -57,9 +57,16 @@
    :content (post :title)})
 
 (defn list-to-url [coll]
-  (if (not (or (nil? coll) (empty? coll)))
+  (if (not (nil? coll))
     (apply str
-           (butlast
-            (interleave
-             coll
-             (repeat java.io.File/separator))))))
+           (interleave
+            (filter identity coll)
+            (repeat java.io.File/separator)))))
+
+(defn summarize [body]
+  (apply str
+   (take 325
+    (re-gsub
+     #"[\s]+" " "
+     (re-gsub
+      #"(</?[^>]*>)" "" body)))))

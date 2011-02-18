@@ -9,17 +9,17 @@
 (defn- load-snippet [path] (html-snippet (get-resource path slurp)))
 
 (defn- list-posts [posts]
-  (clone-for [{:keys [title url created_at]} posts]
-             [:a] (do-> (content title)
-                        (set-attr :href (url-for-post url))
-                        (after [{:tag :div :content (format-date created_at "MMMM d 'at' h:mm a")}]))))
-
-(defn- years-and-posts [posts]
-  (let [posts (group-by-year posts)]
-    (clone-for [[year selected] posts]
-               [:div.year :b] (content year)
-               [:ul.posts :li.post] (list-posts selected))))
-
+  (clone-for [{:keys [title body url created_at]} posts]
+             [:li.post] (do->
+                         (content [{:tag :h1
+                                    :content [{:tag :a
+                                               :content title
+                                               :attrs {:href (url-for-post url)}}]}
+                                   {:tag :div
+                                    :attrs {:class "date"}
+                                    :content (format-date created_at "MMMM d, yyyy 'at' h:mm a")}
+                                   {:tag :dig
+                                    :content (html-snippet (summarize @body) "...")}]))))
 
 (defn sitemap-txt [posts]
   (apply str
@@ -47,19 +47,19 @@
     [:div.banner :h1.title] (content (html-snippet (*config* :title)))
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
                                     {:tag :p :content banner-upsell}])
-    [:div.content :div :div.years] (years-and-posts posts)
+    [:div.content :div :ul.posts] (list-posts posts)
     [:#previousPage] (if prev-url
                        (content
                         (html-snippet "&laquo;&nbsp;")
                         {:tag :a
                          ;; TODO: into config
-                         :attrs {:href (str "/brendan/" prev-url "/")}
+                         :attrs {:href (str "/brendan/" prev-url)}
                          :content "Older"}))
     [:#nextPage] (if next-url
                    (content
                     {:tag :a
                      ;; TODO: into config
-                     :attrs {:href (str "/brendan/" next-url "/")}
+                     :attrs {:href (str "/brendan/" next-url)}
                      :content "Newer"}
                     (html-snippet "&nbsp;&raquo;")))
     [:.currentYear] (content current-year))
@@ -107,12 +107,7 @@
                        [:updated] (content
                                    (date-to-rfc3339 created_at))
                        [:summary] (html-content
-                                   (apply str
-                                          (take 325
-                                                (re-gsub
-                                                 #"[\s]+" " "
-                                                 (re-gsub
-                                                  #"(</?[^>]*>)" "" @body))))
+                                   (summarize @body)
                                    "...")
                        [:content] (do->
                                    (set-attr :type "html")
