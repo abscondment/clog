@@ -25,6 +25,9 @@
 (defn group-by-month [posts]
   (group-by #(format-date (% :created_at) "yyyy-MM") posts))
 
+(defn make-url [& path]
+  (apply str (cons (:root-url *config*) path)))
+
 (defn full-url? [href]
   (not (nil? (re-find #"^[^:\s]*:?//" href))))
 
@@ -46,7 +49,7 @@
 (defmulti url-for-post (fn [p] (type p)))
 (defmethod url-for-post String
   [p]
-  (str (:root-url *config*) "blog/" p "/"))
+  (make-url "blog/" p "/"))
 (defmethod url-for-post clojure.lang.IPersistentMap
   [p] (url-for-post (p :url)))
 

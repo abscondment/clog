@@ -2,9 +2,9 @@
   (:use
    [clojure.contrib.io :only [file]]
    [clojure.contrib.str-utils :only [re-gsub]]
-   [net.cgrand.enlive-html :only [append after at clone-for content deftemplate
-                                  do-> get-resource html-content html-snippet
-                                  last-child prepend set-attr]]
+   [net.cgrand.enlive-html :only [append after at before clone-for content
+                                  deftemplate do-> get-resource html-content
+                                  html-snippet last-child prepend set-attr]]
    [clog config helpers]))
 
 (defn- expand-path [name] (file (str (*config* :path) "/templates/" name)))
@@ -12,16 +12,16 @@
 
 (defn- list-posts [posts]
   (clone-for [{:keys [title body url created_at]} posts]
-             [:li.post] (do->
-                         (content [{:tag :h1
-                                    :content [{:tag :a
-                                               :content title
-                                               :attrs {:href (url-for-post url)}}]}
-                                   {:tag :div
-                                    :attrs {:class "date"}
-                                    :content (format-date created_at "MMMM d, yyyy 'at' h:mm a")}
-                                   {:tag :dig
-                                    :content (html-snippet (summarize @body) "...")}]))))
+             (do->
+              (content [{:tag :h1
+                         :content [{:tag :a
+                                    :content title
+                                    :attrs {:href (url-for-post url)}}]}
+                        {:tag :div
+                         :attrs {:class "date"}
+                         :content (format-date created_at "MMMM d, yyyy 'at' h:mm a")}
+                        {:tag :div
+                         :content (html-snippet (summarize @body) "...")}]))))
 
 (defn sitemap-txt [posts]
   (apply str
@@ -34,13 +34,20 @@
 ;;
 
 (defn build-templates []
+  ;;
   ;; snippets that we'll reuse.
+  ;;
+  
   (def banner-upsell (load-snippet (expand-path "banner-upsell.snippet")))
   (def head (load-snippet (expand-path "head.snippet")))
   (def menu (load-snippet (expand-path "menu.snippet")))
   (def footer (load-snippet (expand-path "footer.snippet")))
 
+  
+  ;;
   ;; Templates
+  ;;
+  
   (deftemplate index (expand-path "index.template") [posts prev-url next-url]
     [:head] (append head)
     [:head :title] (content (str (:title *config*) " - " (:author *config*)))
@@ -49,19 +56,31 @@
     [:div.banner :h1.title] (content (html-snippet (*config* :title)))
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
                                     {:tag :p :content banner-upsell}])
-    [:div.content :div :ul.posts] (list-posts posts)
-    [:#previousPage] (if prev-url
-                       (content
-                        (html-snippet "&laquo;&nbsp;")
-                        {:tag :a
-                         :attrs {:href (str (:root-url *config*) prev-url)}
-                         :content "Older"}))
-    [:#nextPage] (if next-url
-                   (content
-                    {:tag :a
-                     :attrs {:href (str (:root-url *config*) next-url)}
-                     :content "Newer"}
-                    (html-snippet "&nbsp;&raquo;")))
+    [:div.content :div :ul.posts :li.post] (list-posts posts)
+    
+    [:div.nextLinks :div.left]
+    (content
+     (if prev-url
+       {:tag :h3
+        :content [(apply str (html-snippet "&laquo;&nbsp;"))
+                  {:tag :a
+                   :attrs {:href (make-url prev-url)}
+                   :content "Older"}]}))
+    
+    [:div.nextLinks :div.middle :h3]
+    (prepend {:tag :a
+             :content "View all posts"
+             :attrs {:href (make-url "blog/page/all/")}})
+    
+    [:div.nextLinks :div.right]
+    (if next-url
+      (content
+       {:tag :h3
+        :content [{:tag :a
+                   :attrs {:href (make-url next-url)}
+                   :content "Newer"}
+                  (apply str (html-snippet "&nbsp;&raquo;"))]}))
+    
     [:.currentYear] (content current-year))
 
   (deftemplate blog-post (expand-path "post.template") [post prev-post next-post]
