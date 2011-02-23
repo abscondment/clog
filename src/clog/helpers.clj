@@ -8,14 +8,18 @@
   "Apply a formatting string to a Date."
   (.format (new SimpleDateFormat format) date))
 
+(defn date-adjust-timezone
+  "Fix the timezone portion of Java's date formatting output. 0800 becomes 08:00."
+  [date]
+  (let [pos (- (count date) 2)]
+    (str (apply str (take  pos date))
+         ":"
+         (apply str (drop pos date)))))
+
 (defn date-to-rfc3339
   "Convert a Date to its RFC3339 output."
   [date]
-  (let [almost (format-date date "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        pos (- (count almost) 2)]
-    (str (apply str (take  pos almost))
-         ":"
-         (apply str (drop pos almost)))))
+  (date-adjust-timezone (format-date date "yyyy-MM-dd'T'HH:mm:ss.SSSZ")))
 
 (def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
 

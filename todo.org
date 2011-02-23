@@ -6,15 +6,15 @@
 Clog TODOs
 
 * For 1.0
-** TODO command-line clog script tasks
+** INPROGRESS command-line clog script tasks
 *** TODO install/upgrade jar
 *** TODO create empty blog
-*** TODO create new post
+*** INPROGRESS create new post
 ** DONE Separate /public from this repository
 ** INPROGRESS Config file
 *** INPROGRESS Sane default file
 *** TODO Command line overrides
-*** TODO Command line alternate file
+*** DONE Command line alternate file
 ** DONE Enforce valid dates
 ** DONE Restructure post YAML
 *** DONE YAML file per post in directory
