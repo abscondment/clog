@@ -22,7 +22,7 @@
       
       ;; Get this party started
       (do
-        (.mkdir dir)
+        (.mkdirs dir)
         (spit (file dir "post.markdown") "## Edit me\n")
         (spit (file dir "post.yaml")
               (str "---
