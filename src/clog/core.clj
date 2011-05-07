@@ -5,9 +5,6 @@
    [clog.generate :as generate]
    [clog.update :as update]))
 
-
-
-
 (defn -main
   ([] (if (empty? *command-line-args*)
         (do (apply -main ["-h"])

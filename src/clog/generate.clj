@@ -10,7 +10,7 @@
                            (partial re-gsub #"[\\-]+$", "")
                            (partial re-gsub #"[\\-]+", "-")
                            (partial re-gsub #"[ \n\t]+" "-")
-                           (partial re-gsub #"[^a-zA-Z]+" " ")
+                           (partial re-gsub #"[^a-zA-Z0-9]+" " ")
                            (partial re-gsub (java.util.regex.Pattern/compile
                                              (str "[" java.io.File/separator "]+")) " ")
                            lower-case) title)
