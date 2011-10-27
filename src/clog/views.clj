@@ -119,7 +119,10 @@
                                     {:tag :p :content banner-upsell}])
     [:div.content :h1 :a] (do-> (set-attr :href (url-for-post post))
                                 (content (html-snippet (post :title))))
-    [:div.content :h1] (after (html-snippet @(post :body)))
+    [:div.content :h1] (after [{:tag :div
+                                :attrs {:class "date"}
+                                :content (format-date (post :created_at) "MMMM d, yyyy 'at' h:mm a")}
+                               (html-snippet @(post :body))])
     [:#previousPost] (if prev-post
                        (content
                         (html-snippet "&laquo;&nbsp;")
