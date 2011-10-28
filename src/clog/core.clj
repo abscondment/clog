@@ -1,6 +1,6 @@
 (ns clog.core
   (:use
-   [clojure.contrib.command-line :only [with-command-line]]
+   [clojure.tools.cli :only [cli]]
    [clog config]
    [clog.generate :as generate]
    [clog.update :as update]))

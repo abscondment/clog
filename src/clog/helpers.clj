@@ -1,6 +1,5 @@
 (ns clog.helpers
-  (:use [clojure.contrib.io :only [file]]
-        [clojure.contrib.str-utils :only [re-gsub]]
+  (:use [clojure.java.io :only [file]]
         [clog config])
   (:import (java.text SimpleDateFormat)))
 
@@ -59,8 +58,8 @@
 
 (defn add-xmlns [text]
   (->> text
-       (re-gsub #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
-       (re-gsub #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
+       (replace #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
+       (replace #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
 
 (defn add-xml [text]
   (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -68,10 +67,10 @@
 
 (defn wrap-atom-cdata [text]
   (->> text
-       (re-gsub #"<summary>" "<summary><![CDATA[\n")
-       (re-gsub #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
-       (re-gsub #"</summary>" "]]>\n</summary>")
-       (re-gsub #"</content>" "]]>\n</content>")))
+       (replace #"<summary>" "<summary><![CDATA[\n")
+       (replace #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
+       (replace #"</summary>" "]]>\n</summary>")
+       (replace #"</content>" "]]>\n</content>")))
 
 (defn link-to-post [post]
   {:tag :a
@@ -88,7 +87,5 @@
 (defn summarize [body]
   (apply str
    (take 325
-    (re-gsub
-     #"[\s]+" " "
-     (re-gsub
-      #"(</?[^>]*>)" "" body)))))
+    (replace #"[\s]+" " "
+             (replace #"(</?[^>]*>)" "" body)))))

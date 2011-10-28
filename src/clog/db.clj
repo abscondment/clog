@@ -1,5 +1,5 @@
 (ns clog.db
-  (:use [clojure.contrib.io :only [file]]
+  (:use [clojure.java.io :only [file]]
         [org.satta.glob :only [glob]]
         [clj-yaml.core :only [parse-string]]
         [clog config])

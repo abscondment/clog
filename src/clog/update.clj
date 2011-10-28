@@ -1,6 +1,6 @@
 (ns clog.update
   (:use
-   [clojure.contrib.io :only [file]]
+   [clojure.java.io :only [file]]
    [clog config helpers]
    [clog.db :as db]
    [clog.views :as views]))

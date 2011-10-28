@@ -1,7 +1,7 @@
 (ns clog.views
   (:use
    [clojure.contrib.io :only [file]]
-   [clojure.contrib.str-utils :only [re-gsub]]
+   [clojure.string :only [replace]]
    [net.cgrand.enlive-html :only [append after at before clone-for content
                                   deftemplate do-> get-resource html-content
                                   html-snippet last-child prepend set-attr]]

@@ -1,17 +1,16 @@
 (ns clog.generate
   (:use
-   [clojure.contrib.io :only [file]]
-   [clojure.contrib.string :only [chomp lower-case]]
-   [clojure.contrib.str-utils :only [re-gsub]]
+   [clojure.java.io :only [file]]
+   [clojure.string :only [lower-case replace]]
    [clog config helpers]))
 
 (defn post [title]
   (let [pretty-url-title ((comp
-                           (partial re-gsub #"[\\-]+$", "")
-                           (partial re-gsub #"[\\-]+", "-")
-                           (partial re-gsub #"[ \n\t]+" "-")
-                           (partial re-gsub #"[^a-zA-Z0-9]+" " ")
-                           (partial re-gsub (java.util.regex.Pattern/compile
+                           (partial replace #"[\\-]+$", "")
+                           (partial replace #"[\\-]+", "-")
+                           (partial replace #"[ \n\t]+" "-")
+                           (partial replace #"[^a-zA-Z0-9]+" " ")
+                           (partial replace (java.util.regex.Pattern/compile
                                              (str "[" java.io.File/separator "]+")) " ")
                            lower-case) title)
         dir (file (:path *config*) "public" "blog" pretty-url-title)]
