@@ -1,18 +1,18 @@
 (ns clog.generate
+  (:require [clojure.string])
   (:use
    [clojure.java.io :only [file]]
-   [clojure.string :only [lower-case replace]]
    [clog config helpers]))
 
 (defn post [title]
   (let [pretty-url-title ((comp
-                           (partial replace #"[\\-]+$", "")
-                           (partial replace #"[\\-]+", "-")
-                           (partial replace #"[ \n\t]+" "-")
-                           (partial replace #"[^a-zA-Z0-9]+" " ")
-                           (partial replace (java.util.regex.Pattern/compile
+                           (partial clojure.string/replace #"[\\-]+$", "")
+                           (partial clojure.string/replace #"[\\-]+", "-")
+                           (partial clojure.string/replace #"[ \n\t]+" "-")
+                           (partial clojure.string/replace #"[^a-zA-Z0-9]+" " ")
+                           (partial clojure.string/replace (java.util.regex.Pattern/compile
                                              (str "[" java.io.File/separator "]+")) " ")
-                           lower-case) title)
+                           clojure.string/lower-case) title)
         dir (file (:path *config*) "public" "blog" pretty-url-title)]
     (if (.exists dir)
       ;; Directory already exists. Bail.
