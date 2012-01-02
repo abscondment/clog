@@ -33,7 +33,8 @@
       (let [[command & extras] remaining]
         (case command
           "new" (generate/post
-                 (apply str (interleave extras (repeat " "))))             
+                 (apply str (butlast (interleave extras (repeat " ")))))
+                               
           ;; default to update
           (update/site)))
          
