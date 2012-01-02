@@ -9,11 +9,12 @@
   ;; parse command-line options
   
   (let [[options remaining help]
-        (cli (if (empty? *command-line-args*)
-               ["-h"]
-               *command-line-args*)
-             ["-h" "--help" "Show help" :default false :flag true]
-             ["-c" "--config" "Optional config file" :default "."])]
+        (cli
+         (if (empty? *command-line-args*)
+           ["-h"]
+           *command-line-args*)
+         ["-h" "--help" "Show this help message" :flag true]
+         ["-c" "--config" "Optional path to a config file" :default "."])]
 
     (when (:help options)
       ;; print help and quit
