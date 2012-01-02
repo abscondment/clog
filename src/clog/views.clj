@@ -1,5 +1,4 @@
 (ns clog.views
-  (:require [clojure.string])
   (:use
    [clojure.java.io :only [file]]
    [net.cgrand.enlive-html :only [append after at before clone-for content

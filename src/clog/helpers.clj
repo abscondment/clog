@@ -1,4 +1,5 @@
 (ns clog.helpers
+  (:require [clojure.string])
   (:use [clojure.java.io :only [file]]
         [clog config])
   (:import (java.text SimpleDateFormat)))
@@ -58,8 +59,8 @@
 
 (defn add-xmlns [text]
   (->> text
-       (replace #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
-       (replace #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
+       (clojure.string/replace #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
+       (clojure.string/replace #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
 
 (defn add-xml [text]
   (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -67,10 +68,10 @@
 
 (defn wrap-atom-cdata [text]
   (->> text
-       (replace #"<summary>" "<summary><![CDATA[\n")
-       (replace #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
-       (replace #"</summary>" "]]>\n</summary>")
-       (replace #"</content>" "]]>\n</content>")))
+       (clojure.string/replace #"<summary>" "<summary><![CDATA[\n")
+       (clojure.string/replace #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
+       (clojure.string/replace #"</summary>" "]]>\n</summary>")
+       (clojure.string/replace #"</content>" "]]>\n</content>")))
 
 (defn link-to-post [post]
   {:tag :a
@@ -87,5 +88,5 @@
 (defn summarize [body]
   (apply str
    (take 325
-    (replace #"[\s]+" " "
-             (replace #"(</?[^>]*>)" "" body)))))
+    (clojure.string/replace #"[\s]+" " "
+             (clojure.string/replace #"(</?[^>]*>)" "" body)))))
