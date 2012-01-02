@@ -4,31 +4,38 @@
    [clojure.java.io :only [file]]
    [clog config helpers]))
 
-(defn post [title]
-  (let [pretty-url-title ((comp
-                           (partial clojure.string/replace #"[\\-]+$", "")
-                           (partial clojure.string/replace #"[\\-]+", "-")
-                           (partial clojure.string/replace #"[ \n\t]+" "-")
-                           (partial clojure.string/replace #"[^a-zA-Z0-9]+" " ")
-                           (partial clojure.string/replace (java.util.regex.Pattern/compile
-                                             (str "[" java.io.File/separator "]+")) " ")
-                           clojure.string/lower-case) title)
-        dir (file (:path *config*) "public" "blog" pretty-url-title)]
-    (if (.exists dir)
-      ;; Directory already exists. Bail.
-      (do (println "A post appears to exist at" (str "/" pretty-url-title) "already!")
-          (System/exit 1))
-      
-      ;; Get this party started
-      (do
-        (.mkdirs dir)
-        (spit (file dir "post.markdown") "## Edit me\n")
-        (spit (file dir "post.yaml")
-              (str "---
+(defn- pretty-url [title]
+  (-> title
+      (clojure.string/lower-case)
+      (clojure.string/replace (java.util.regex.Pattern/compile
+                               (str "[" java.io.File/separator "]+")) " ")
+      (clojure.string/replace #"[^a-zA-Z0-9]+" " ")
+      (clojure.string/replace #"[ \n\t]+" "-")
+      (clojure.string/replace #"[\\-]+", "-")
+      (clojure.string/replace #"[\\-]+$", "")))
+
+(defn- do-generate-dir [dir title]
+  (do
+    (.mkdirs dir)
+    (spit (file dir "post.markdown") "## Edit me\n")
+    (spit (file dir "post.yaml")
+          (str "---
 title: \"" title "\"
 created_at: " (date-adjust-timezone
                (format-date
                 (java.util.Date.)
                 "yyyy-MM-dd HH:mm:ss.SSSZ")) "
 published: false
-"))))))
+"))))
+
+(defn post [title]
+  (let [url (pretty-url title)
+        dir (file (:path *config*) "public" "blog"
+                  url)]
+    (if (.exists dir)
+      ;; Directory already exists. Bail.
+      (do (println "A post appears to exist at" (str "/" url) "already!")
+          (System/exit 1))
+      
+      ;; Get this party started
+      (do-generate-dir dir title))))

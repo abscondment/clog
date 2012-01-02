@@ -58,20 +58,20 @@
   [p] (url-for-post (p :url)))
 
 (defn add-xmlns [text]
-  (->> text
-       (clojure.string/replace #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
-       (clojure.string/replace #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
+  (-> text
+      (clojure.string/replace #"<feed>" "<feed xmlns=\"http://www.w3.org/2005/Atom\">")
+      (clojure.string/replace #"<urlset>" "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")))
 
 (defn add-xml [text]
   (str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
        (add-xmlns text)))
 
 (defn wrap-atom-cdata [text]
-  (->> text
-       (clojure.string/replace #"<summary>" "<summary><![CDATA[\n")
-       (clojure.string/replace #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
-       (clojure.string/replace #"</summary>" "]]>\n</summary>")
-       (clojure.string/replace #"</content>" "]]>\n</content>")))
+  (-> text
+      (clojure.string/replace #"<summary>" "<summary><![CDATA[\n")
+      (clojure.string/replace #"<content type=\"html\">" "<content type=\"html\"><![CDATA[\n")
+      (clojure.string/replace #"</summary>" "]]>\n</summary>")
+      (clojure.string/replace #"</content>" "]]>\n</content>")))
 
 (defn link-to-post [post]
   {:tag :a
@@ -86,7 +86,9 @@
             (repeat java.io.File/separator)))))
 
 (defn summarize [body]
-  (apply str
-   (take 325
-    (clojure.string/replace #"[\s]+" " "
-             (clojure.string/replace #"(</?[^>]*>)" "" body)))))
+  (clojure.string/trim
+   (apply str
+    (take 325
+     (-> body
+         (clojure.string/replace #"(</?[^>]*>)" " ")
+         (clojure.string/replace  #"[\s]+" " "))))))
