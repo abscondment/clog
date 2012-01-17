@@ -14,7 +14,7 @@
       (clojure.string/replace #"[\\-]+", "-")
       (clojure.string/replace #"[\\-]+$", "")))
 
-(defn- do-generate-dir [dir title]
+(defn- do-generate-post-dir [dir title]
   (do
     (.mkdirs dir)
     (spit (file dir "post.markdown") "## Edit me\n")
@@ -38,4 +38,4 @@ published: false
           (System/exit 1))
       
       ;; Get this party started
-      (do-generate-dir dir title))))
+      (do-generate-post-dir dir title))))
