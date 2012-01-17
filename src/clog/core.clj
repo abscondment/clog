@@ -20,18 +20,14 @@
 
     (do
       ;; read config file
-      (try
-        (do-read-config (:config options))
-        (catch java.io.FileNotFoundException e
-          (do (println "TODO: error message")
-              (println help)
-              (System/exit 1))))
+      (do-read-config (:config options))
          
       ;; run command
-      (let [[command & extras] remaining]
+      (let [[command & extras] remaining
+            extras-string (apply str (butlast (interleave extras (repeat " "))))]
         (case command
-          "new" (generate/post
-                 (apply str (butlast (interleave extras (repeat " ")))))
+          "create" (generate/create-blog (or extras-string "."))
+          "post" (generate/post extras-string)
                                
           ;; default to update
           (update/site)))
