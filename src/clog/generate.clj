@@ -28,9 +28,10 @@ created_at: " (date-adjust-timezone
 published: false
 "))))
 
+
 (defn create-blog [path]
-  (println "testing:" path)
-)
+  (println "testing:" path))
+
 
 (defn post [title]
   (let [url (pretty-url title)
