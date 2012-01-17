@@ -22,6 +22,8 @@
   ([path]
      (alter-var-root
       #'*config*
-      (fn [_]
-        (load-file
-         (.getAbsolutePath (java-io/file path "config.clj")))))))
+      (fn [old-config]
+        (try
+          (load-file
+           (.getAbsolutePath (java-io/file path "config.clj")))
+          (catch RuntimeException e old-config))))))
