@@ -26,11 +26,11 @@
       (let [[command & extras] remaining
             extras-string (apply str (butlast (interleave extras (repeat " "))))]
         (case command
-          "create" (generate/create-blog (or extras-string "."))
+          "create-blog" (generate/create-blog (or extras-string "."))
           "post" (generate/post extras-string)
                                
           ;; default to update
-          (update/site)))
+          nil (update/site)))
          
       ;; shut down threadpool from pmap et al.
       (shutdown-agents))))
