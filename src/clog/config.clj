@@ -10,6 +10,6 @@
       #'*config*
       (fn [old-config]
         (try
-          (load-file
-           (.getAbsolutePath (java-io/file path "config.clj")))
+          (let [path (.getAbsolutePath (java-io/file path))]
+            (merge {:path path} (load-file (str path "config.clj"))))
           (catch RuntimeException e old-config))))))
