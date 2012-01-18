@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div class="envelope">
+      <div class="lbar">
+        <div id='menu'></div>
+      </div>
+      <div class="banner"><h1 class="title"></h1></div>
+      <div class="content">
+        <div>
+          <h1>Recent posts</h1>
+          <div class="years">
+            <div class="year"><b></b></div>
+            <ul class="posts"><li class="post"><a></a></li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
+</html>

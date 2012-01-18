@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div class="envelope">
+      <div class="lbar">
+        <div id='menu'></div>
+      </div>
+      <div class="banner"><h1 class="title"></h1></div>
+      <div class="content post">
+        <h1><a></a></h1>
+        <div style="clear:both;margin:2em 0 1em 0;">
+          <div style="float:left;" id="previousPost"></div>
+          <div style="float:right;" id="nextPost"></div>
+          <br style="clear:both;"/>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </body>
+</html>
+

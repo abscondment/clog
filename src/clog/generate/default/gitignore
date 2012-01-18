@@ -1,0 +1,6 @@
+public/index.html
+public/*.xml
+public/sitemap.*
+public/*/*/*.html
+public/*/*/*.md5sum
+public/page/*
