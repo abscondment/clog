@@ -30,11 +30,14 @@
                        prev :prev
                        next :next
                        posts :posts}]
-  (let [prev (if prev (concat [(:root-path *config*) "page"] prev))
-        next (if next (concat [(:root-path *config*) "page"] next))
-        index-path #(list-to-url (concat [(:path *config*) "public" "page"] %))
+  (let [prev (if prev (concat [(:root-path *config*) "page"] [prev]))
+        next (if next (concat [(:root-path *config*) "page"] [next]))
+        index-path #(list-to-url
+                     (if (= 1 %)
+                       [(:path *config*) "public"]
+                       [(:path *config*) "public" "page" %]))
         dir (file (index-path current))]
-    (do (if (not (.exists dir)) (.mkdir dir))
+    (do (if (not (.exists dir)) (.mkdirs dir))
         (spit
          (file (index-path current) "index.html")
          (apply str (views/index posts (list-to-url prev) (list-to-url next)))))))
@@ -46,15 +49,13 @@
                                      []
                                      posts))
                last-page (count pages)
-               page-numbers (range last-page)
-               page-urls (vec (map #(filter identity (if (> % 0) [%]))
-                                   page-numbers))]    
+               page-numbers (range last-page)]
            (for [i page-numbers]
-             (merge {:current (nth page-urls i)
+             (merge {:current (inc i)
                      :posts (nth pages i)}
-                    (if (> i 0) {:next (nth page-urls (dec i))})
+                    (if (> i 0) {:next i})
                     (if (< i (dec last-page))
-                      {:prev (nth page-urls (inc i))}))))]
+                      {:prev (inc (inc i))}))))]
     (if (not (empty? index-hashes))
       (do
         (do-make-index (first index-hashes))
@@ -85,7 +86,9 @@
       (spit (file (:path *config*) "public" "atom.xml")
             (add-xml
              (wrap-atom-cdata
-              (apply str (views/atom-xml (take 20 posts) (:created_at (last posts)))))))
+              (apply str (views/atom-xml
+                          (take 20 posts)
+                          (:created_at (last posts)))))))
         
 
       (comment
