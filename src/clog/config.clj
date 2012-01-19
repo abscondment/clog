@@ -20,6 +20,6 @@
           (let [config-file (java-io/file path "config.clj")
                 new-config (load-file (str config-file))]
             (merge new-config
-                   {:path (.getAbsolutePath (.getParentFile config-file))
+                   {:path (.getCanonicalPath (.getParentFile config-file))
                     :root-path (massage-root-path (:root-path new-config))}))
           (catch RuntimeException e old-config))))))
