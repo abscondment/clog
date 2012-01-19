@@ -11,15 +11,15 @@
 
 (defn do-read-config
   "Read config.clj, and swap it in to *config*."
-  ([] (do-read-config (System/getenv "PWD")))
+  ([] (do-read-config (or (System/getProperty "user.dir") (System/getenv "PWD"))))
   ([path]
      (alter-var-root
       #'*config*
       (fn [old-config]
         (try
-          (let [path (.getAbsolutePath (java-io/file path))
-                new-config (load-file (str path "/config.clj"))]
+          (let [config-file (java-io/file path "config.clj")
+                new-config (load-file (str config-file))]
             (merge new-config
-                   {:path path
+                   {:path (.getAbsolutePath (.getParentFile config-file))
                     :root-path (massage-root-path (:root-path new-config))}))
           (catch RuntimeException e old-config))))))

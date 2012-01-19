@@ -11,7 +11,7 @@
   (let [[options remaining help]
         (cli *command-line-args*
              ["-h" "--help" "Show this help message" :flag true]
-             ["-c" "--config" "Optional path to a config file" :default "."])]
+             ["-c" "--config" "Optional path to a config file" :default nil])]
 
     (when (or (:help options) (empty? remaining))
       ;; print help and quit
@@ -20,7 +20,10 @@
 
     (do
       ;; read config file
-      (do-read-config (:config options))
+      (do-read-config
+       (or  (:config options)
+            (System/getProperty "user.dir")
+            (System/getenv "PWD")))
          
       ;; run command
       (let [[command & extras] remaining
