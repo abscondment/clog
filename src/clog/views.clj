@@ -19,8 +19,10 @@
                         {:tag :div
                          :attrs {:class "date"}
                          :content (format-date created_at "MMMM d, yyyy 'at' h:mm a")}
-                        {:tag :div
-                         :content (html-snippet (summarize @body) "...")}]))))
+                        (if (:list-full *config*)
+                          (html-snippet @body)
+                          {:tag :div
+                           :content (html-snippet (summarize @body) "...")})]))))
 
 (defn- years-and-posts [posts]
   (let [posts (group-by-year posts)]
