@@ -22,5 +22,4 @@
             (merge new-config
                    {:path path
                     :root-path (massage-root-path (:root-path new-config))}))
-          (catch RuntimeException e (do (println e)
-                                      old-config)))))))
+          (catch RuntimeException e old-config))))))
