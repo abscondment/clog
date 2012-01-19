@@ -50,3 +50,11 @@
                       :md5 new-md5
                       :updated (not= (existing-md5-for post) new-md5)}))))
         (filter :published posts-yaml)))))))
+
+(defn do-clean-md5sums
+  "Delete all md5sums."
+  []
+  (count
+   (doall
+    (for [md5sum (glob (str (file (:path *config*) "public" "*" "*" "*" "*.md5sum")))]
+      (.delete md5sum)))))

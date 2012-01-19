@@ -1,9 +1,10 @@
 (ns clog.update
   (:use
    [clojure.java.io :only [file]]
-   [clog config helpers]
+   [org.satta.glob :only [glob]]
    [clog.db :as db]
-   [clog.views :as views]))
+   [clog.views :as views]
+   [clog config helpers]))
 
 (defn- update [next post prev]
   (if (or (:updated post)
@@ -96,3 +97,36 @@
         (spit (file (:path *config*) "public" "sitemap.xml")
               (add-xml (apply str (views/sitemap-xml posts))))
         (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts))))))
+
+(defn- clean-html
+  "Delete generated HTML."
+  []
+  (count
+   (doall
+    (for [md5sum (glob (str (file (:path *config*) "public" "*" "*" "*" "index.html")))]
+      (.delete md5sum)))))
+
+(defn- simple-pluralize
+  "Naive pluralize."
+  [count word]
+  (str count " "
+       (if (= count 1) word
+           (str word
+                (if (= \s (last word)) "es" "s")))))
+
+(defn clean
+  "Delete all transient files."
+  []
+  (if (nil? *config*)
+    
+    (do
+      ;; Don't delete without a real path. Scary!
+      (println "No config file - aborting.")
+      (System/exit 1))
+    
+    (do
+      ;; Go ahead.
+      (println "Cleaning...")
+      (println " " (simple-pluralize (clean-html) "html file"))
+      (println " " (simple-pluralize (db/do-clean-md5sums) "md5sum")))))
+
