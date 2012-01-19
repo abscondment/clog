@@ -10,7 +10,6 @@
   
   (let [[options remaining help]
         (cli *command-line-args*
-             ["update" "Generate any HTML that is out of date."]
              ["-h" "--help" "Show this help message" :flag true]
              ["-c" "--config" "Optional path to a config file" :default "."])]
 
