@@ -80,10 +80,9 @@
                    :content "Older"}]}))
     
     [:div.nextLinks :div.middle :h3]
-(do println "FUG"
- (prepend {:tag :a
-           :content "View all posts!"
-           :attrs {:href (make-url "/" (:root-path *config*) "/page/all/")}}))
+    (prepend {:tag :a
+              :content "View all posts!"
+              :attrs {:href (make-url "/" (:root-path *config*) "/page/all/")}})
     
     [:div.nextLinks :div.right]
     (if next-url
