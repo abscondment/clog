@@ -20,20 +20,21 @@
      (catch NoSuchAlgorithmException e
        (throw (new RuntimeException e))))))
 
-(defn existing-md5-for [url]
+(defn existing-md5-for [post]
   (try
-    (slurp (str (file (:path *config*) "public" "blog" url "post.markdown.md5sum")))
+    (slurp (str (file (:path post) "post.markdown.md5sum")))
     (catch FileNotFoundException e "")))
 
 (defn all-posts []
   (let [markdown-processor (new com.petebevin.markdown.MarkdownProcessor)
         posts-yaml (map #(let [yaml-str (slurp %)]
                            (assoc (parse-string yaml-str)
+                             :path (.getParent %)
                              :yaml-md5 (md5-sum yaml-str)
                              :url (-> % .getParent file .getName)))
                         (glob
                          (str (file (:path *config*)
-                                    "public" "blog" "*" "*.yaml"))))]
+                                    "public" "*" "*" "*" "*.yaml"))))]
     (reverse
      (sort-by :created_at
       (filter not-empty
@@ -41,15 +42,11 @@
         (fn [post]
           (let [body (slurp
                       (str
-                       (file (:path *config*)
-                             "public" "blog"
-                             (post :url)
-                             "post.markdown")))
+                       (file (:path post) "post.markdown")))
                 new-md5 (str (:yaml-md5 post) (md5-sum body))]
             (if (not (empty? body))
               (merge post
                      {:body (delay (.. markdown-processor (markdown body)))
                       :md5 new-md5
-                      :updated (not= (existing-md5-for (:url post))
-                                     new-md5)}))))
+                      :updated (not= (existing-md5-for post) new-md5)}))))
         (filter :published posts-yaml)))))))

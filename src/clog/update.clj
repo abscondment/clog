@@ -9,14 +9,11 @@
   (if (or (:updated post)
           (:updated prev)
           (:updated next))
-    (let [url (post :url)
-          dir (file (:path *config*) "public" "blog" url)]
-      (do
-        (if (not (.exists dir)) (.mkdir dir))
-        (spit (file (:path *config*) "public" "blog" url "index.html")
-              (apply str (views/blog-post post prev next)))
-        (spit (file (:path *config*) "public" "blog" url "post.markdown.md5sum")
-              (:md5 post))))))
+    (do
+      (spit (file (:path post) "index.html")
+            (apply str (views/blog-post post prev next)))
+      (spit (file (:path post) "post.markdown.md5sum")
+            (:md5 post)))))
 
 (defn- update-posts [to-update]
   (let [count (count (filter :updated to-update))
@@ -33,7 +30,7 @@
                        prev :prev
                        next :next
                        posts :posts}]
-  (let [index-url #(list-to-url (cons (:path *config*) (cons "public" %)))
+  (let [index-url #(list-to-url (concat [(:path *config*) "public"] %))
         dir (file (index-url current))]
     (do (if (not (.exists dir)) (.mkdir dir))
         (spit
@@ -52,7 +49,7 @@
                           (map #(filter
                                  identity
                                  (if (> % 0)
-                                   (list "blog" "page" %)))
+                                   (list "page" %)))
                                page-numbers))]    
            (for [i page-numbers]
              (merge {:current (nth page-urls i)
@@ -80,18 +77,21 @@
         
       (println "Generating indexes.")
       (update-indexes posts)
-      (let [all (file (:path *config*)  "public" "blog" "page" "all")]
-        (do (if (not (.exists all)) (.mkdir all))
+      
+      (let [all (file (:path *config*) "public" "page" "all")]
+        (do (if (not (.exists all)) (.mkdirs all))
             (spit (file (.getCanonicalPath all) "index.html")
                   (apply str (views/list-all-posts posts)))))
-      
+
       (println "Generating atom.")
-      (spit (file (:path *config*) "public" "blog" "atom.xml")
+      (spit (file (:path *config*) "public" "atom.xml")
             (add-xml
              (wrap-atom-cdata
-              (apply str (views/atom-xml (take 20 posts))))))
+              (apply str (views/atom-xml (take 20 posts) (:created_at (last posts)))))))
+        
 
-      (println "Generating sitemaps.")
-      (spit (file (:path *config*) "public" "sitemap.xml")
-            (add-xml (apply str (views/sitemap-xml posts))))
-      (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts)))))
+      (comment
+        (println "Generating sitemaps.")
+        (spit (file (:path *config*) "public" "sitemap.xml")
+              (add-xml (apply str (views/sitemap-xml posts))))
+        (spit (file (:path *config*) "public" "sitemap.txt") (sitemap-txt posts))))))

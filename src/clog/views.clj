@@ -10,12 +10,12 @@
 (defn- load-snippet [path] (html-snippet (get-resource path slurp)))
 
 (defn- list-posts [posts]
-  (clone-for [{:keys [title body url created_at]} posts]
+  (clone-for [{:keys [title body created_at] :as post} posts]
              (do->
               (content [{:tag :h1
                          :content [{:tag :a
                                     :content title
-                                    :attrs {:href (url-for-post url)}}]}
+                                    :attrs {:href (url-for-post post)}}]}
                         {:tag :div
                          :attrs {:class "date"}
                          :content (format-date created_at "MMMM d, yyyy 'at' h:mm a")}
@@ -28,9 +28,9 @@
                [:div.year :b] (content year)
                [:ul.posts :li.post :a]
                (clone-for
-                [{:keys [title url created_at]} selected]
+                [{:keys [title created_at] :as post} selected]
                 (do-> (content title)
-                      (set-attr :href (url-for-post url))
+                      (set-attr :href (url-for-post post))
                       (after [{:tag :div
                                :attrs {:class "date"}
                                :content (format-date created_at "MMMM d 'at' h:mm a")}]))))))
@@ -50,7 +50,7 @@
   ;; snippets that we'll reuse.
   ;;
   
-  (def banner-upsell (load-snippet (expand-path "banner-upsell.snippet")))
+  (def banner (load-snippet (expand-path "banner.snippet")))
   (def head (load-snippet (expand-path "head.snippet")))
   (def menu (load-snippet (expand-path "menu.snippet")))
   (def footer (load-snippet (expand-path "footer.snippet")))
@@ -67,7 +67,7 @@
     [:#menu] (content menu)
     [:div.banner :h1.title] (content (html-snippet (*config* :title)))
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
-                                    {:tag :p :content banner-upsell}])
+                                    {:tag :p :content banner}])
     [:div.content :div :ul.posts :li.post] (list-posts posts)
     
     [:div.nextLinks :div.left]
@@ -103,7 +103,7 @@
     [:#menu] (content menu)
     [:div.banner :h1.title] (content (html-snippet (*config* :title)))
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
-                                    {:tag :p :content banner-upsell}])
+                                    {:tag :p :content banner}])
     [:div.content :div :div.years] (years-and-posts posts)
     [:.currentYear] (content current-year))
   
@@ -115,7 +115,7 @@
     [:#menu] (content menu)
     [:div.banner :h1.title] (content (html-snippet (*config* :title)))
     [:div.banner :h1.title] (after [{:tag :h2 :content (html-snippet (*config* :subtitle))}
-                                    {:tag :p :content banner-upsell}])
+                                    {:tag :p :content banner}])
     [:div.content :h1 :a] (do-> (set-attr :href (url-for-post post))
                                 (content (html-snippet (post :title))))
     [:div.content :h1] (after [{:tag :div
@@ -134,14 +134,27 @@
 
 
 
-  (deftemplate atom-xml (expand-path "atom.template") [posts]
+  (deftemplate atom-xml (expand-path "atom.template") [posts start-year]
     [:feed :> :title] (content (*config* :title))
     [:feed :> :subtitle] (content (*config* :subtitle))
+    [:feed :> :subtitle] (after [{:tag :link
+                                  :attrs {:rel "self"
+                                          :href (make-full-url (str "/" (*config* :root-path) "/atom.xml"))}}
+                                 {:tag :link
+                                  :attrs {:href (make-full-url (str "/" (*config* :root-path)))}}])
+    [:feed :> :id] (content "tag:"
+                            (*config* :domain)
+                             ","
+                             (format-date start-year "yyyy-MM-dd")
+                             ":/"
+                             (*config* :root-path))
     [:feed :> :updated] (content (date-to-rfc3339 (new java.util.Date)))
+    [:feed :> :author] (append {:tag :name :content (:author *config*)})
+    (if (:email *config*) [:feed :> :author]) (append {:tag :email :content (:email *config*)})
     [:feed :> :entry] (clone-for
-                       [{:keys [title url body created_at]} posts]
+                       [{:keys [title url body created_at] :as post} posts]
                        [:title] (content title)
-                       [:link] (set-attr :href (make-full-url (url-for-post url))
+                       [:link] (set-attr :href (make-full-url (url-for-post post))
                                          :rel "alternate"
                                          :type "text/html")
                        [:id] (content "tag:"
@@ -149,9 +162,7 @@
                                       ","
                                       (format-date created_at "yyyy-MM-dd")
                                       ":"
-                                      (:root-url *config*)
-                                      "blog/"
-                                      url)
+                                      (url-for-post post))
                        [:updated] (content
                                    (date-to-rfc3339 created_at))
                        [:summary] (html-content
@@ -169,15 +180,14 @@
                             #(if (full-url? %) % (make-full-url %))))))
 
   
-
   (deftemplate sitemap-xml (expand-path "sitemap.template") [posts]
     [:urlset :> last-child] (after
                              (interleave
                               (repeat "\n")
-                              (map (fn [{:keys [url]}]
+                              (map (fn [post]
                                      {:tag :url
                                       :content
-                                      [{:tag :loc :content (make-full-url (url-for-post url))}
+                                      [{:tag :loc :content (make-full-url (url-for-post post))}
                                        {:tag :changefreq :content "monthly"}
                                        {:tag :priority :content "1.0"}]})
                                    posts)))))

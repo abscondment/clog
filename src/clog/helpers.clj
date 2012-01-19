@@ -22,6 +22,11 @@
   (date-adjust-timezone (format-date date "yyyy-MM-dd'T'HH:mm:ss.SSSZ")))
 
 (def current-year (str (.get (java.util.Calendar/getInstance) java.util.Calendar/YEAR)))
+(def current-month (apply str
+                    (take-last 2
+                     (cons \0
+                      (str (inc (.get (java.util.Calendar/getInstance)
+                                      java.util.Calendar/MONTH)))))))
 
 (defn group-by-year [posts]
   (group-by #(format-date (% :created_at) "yyyy") posts))
@@ -30,7 +35,7 @@
   (group-by #(format-date (% :created_at) "yyyy-MM") posts))
 
 (defn make-url [& path]
-  (apply str (cons (:root-url *config*) path)))
+  (apply str path))
 
 (defn full-url? [href]
   (not (nil? (re-find #"^[^:\s]*:?//" href))))
@@ -46,16 +51,15 @@
            (:domain *config*)
            (if leading-slash
              href
-             (-> (file (:root-url *config*) "blog" "_" href)
+             (-> (file :root-path *config* "blog" "_" href)
                  (.getCanonicalPath)))
            (if (and (false? leading-slash) trailing-slash) "/")))))
 
 (defmulti url-for-post (fn [p] (type p)))
 (defmethod url-for-post String
-  [p]
-  (make-url "blog/" p "/"))
+  [p] (make-url "/" p "/"))
 (defmethod url-for-post clojure.lang.IPersistentMap
-  [p] (url-for-post (p :url)))
+  [p] (url-for-post (str (:root-path *config*) (format-date (p :created_at) "/yyyy/MM/") (p :url))))
 
 (defn add-xmlns [text]
   (-> text
