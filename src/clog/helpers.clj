@@ -85,9 +85,10 @@
 (defn list-to-url [coll]
   (if (not (nil? coll))
     (apply str
-           (interleave
-            (filter identity coll)
-            (repeat java.io.File/separator)))))
+           (cons java.io.File/separator
+                 (interleave
+                  (filter identity coll)
+                  (repeat java.io.File/separator))))))
 
 (defn summarize [body]
   (clojure.string/trim

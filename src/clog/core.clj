@@ -10,10 +10,11 @@
   
   (let [[options remaining help]
         (cli *command-line-args*
+             ["update" "Generate any HTML that is out of date."]
              ["-h" "--help" "Show this help message" :flag true]
              ["-c" "--config" "Optional path to a config file" :default "."])]
 
-    (when (:help options)
+    (when (or (:help options) (empty? remaining))
       ;; print help and quit
       (println help)
       (System/exit 0))
@@ -27,10 +28,8 @@
             extras-string (apply str (butlast (interleave extras (repeat " "))))]
         (case command
           "create-blog" (generate/create-blog (or extras-string "."))
-          "post" (generate/post extras-string)
-                               
-          ;; default to update
-          nil (update/site)))
+          "new" (generate/post extras-string)
+          "update" (update/site)))
          
       ;; shut down threadpool from pmap et al.
       (shutdown-agents))))

@@ -30,11 +30,13 @@
                        prev :prev
                        next :next
                        posts :posts}]
-  (let [index-url #(list-to-url (concat [(:path *config*) "public"] %))
-        dir (file (index-url current))]
+  (let [prev (if prev (concat [(:root-path *config*) "page"] prev))
+        next (if next (concat [(:root-path *config*) "page"] next))
+        index-path #(list-to-url (concat [(:path *config*) "public" "page"] %))
+        dir (file (index-path current))]
     (do (if (not (.exists dir)) (.mkdir dir))
         (spit
-         (file (index-url current) "index.html")
+         (file (index-path current) "index.html")
          (apply str (views/index posts (list-to-url prev) (list-to-url next)))))))
 
 (defn- update-indexes [posts]
@@ -45,12 +47,8 @@
                                      posts))
                last-page (count pages)
                page-numbers (range last-page)
-               page-urls (vec
-                          (map #(filter
-                                 identity
-                                 (if (> % 0)
-                                   (list "page" %)))
-                               page-numbers))]    
+               page-urls (vec (map #(filter identity (if (> % 0) [%]))
+                                   page-numbers))]    
            (for [i page-numbers]
              (merge {:current (nth page-urls i)
                      :posts (nth pages i)}
