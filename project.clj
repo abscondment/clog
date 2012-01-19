@@ -1,4 +1,4 @@
-(defproject clog "0.6-SNAPSHOT"
+(defproject clog "0.7-SNAPSHOT"
   :repositories {"scala-tools" "http://scala-tools.org/repo-releases/"}
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.clojure/tools.cli "0.2.0"]

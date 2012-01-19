@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export CLOG_VERSION="0.6-SNAPSHOT"
+export CLOG_VERSION="0.7-SNAPSHOT"
 
 JAVA_CMD=${JAVA_CMD:-"java"}
 
