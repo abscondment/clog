@@ -5,12 +5,12 @@ export CLOG_VERSION="0.7-SNAPSHOT"
 JAVA_CMD=${JAVA_CMD:-"java"}
 
 CLOG_JAR_NAME="clog-$CLOG_VERSION-standalone.jar"
-# TODO: "install" task to actually place the jar here ala Leiningen.
-CLOG_JAR="$HOME/.clog/$CLOG_JAR_NAME"
+CLOG_JAR="$PWD/$CLOG_JAR_NAME"
 NULL_DEVICE=/dev/null
 
 if [ ! -r "$CLOG_JAR" ]; then
-    CLOG_JAR="$PWD/$CLOG_JAR_NAME"
+    # TODO: "install" task to actually place the jar here ala Leiningen.
+    CLOG_JAR="$HOME/.clog/$CLOG_JAR_NAME"
     if [ ! -r "$CLOG_JAR" ]; then
         echo "Missing $CLOG_JAR_NAME - exiting."
         exit 1
