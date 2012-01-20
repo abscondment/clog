@@ -4,17 +4,46 @@ export CLOG_VERSION="0.7-SNAPSHOT"
 
 JAVA_CMD=${JAVA_CMD:-"java"}
 
+HTTP_CLIENT="wget --no-check-certificate -O"
+if type -p curl >/dev/null 2>&1; then
+    if [ "$https_proxy" != "" ]; then
+        CURL_PROXY="-x $https_proxy"
+    fi
+    HTTP_CLIENT="curl $CURL_PROXY --insecure -f -L -o"
+fi
+
+CLOG_HOME="$HOME/.clog"
 CLOG_JAR_NAME="clog-$CLOG_VERSION-standalone.jar"
 CLOG_JAR="$PWD/$CLOG_JAR_NAME"
 NULL_DEVICE=/dev/null
 
 if [ ! -r "$CLOG_JAR" ]; then
-    # TODO: "install" task to actually place the jar here ala Leiningen.
-    CLOG_JAR="$HOME/.clog/$CLOG_JAR_NAME"
-    if [ ! -r "$CLOG_JAR" ]; then
-        echo "Missing $CLOG_JAR_NAME - exiting."
-        exit 1
+    CLOG_JAR="$CLOG_HOME/$CLOG_JAR_NAME"
+fi
+
+if [ "$1" = "install" ]; then
+    if [ -r "$CLOG_JAR" ]; then
+      echo "The Clog jar already exists at $CLOG_JAR."
+      echo "If you wish to re-download, delete it and rerun \"$0 install\"."
+      exit 1
     fi
+    echo "Downloading Clog now..."
+    CLOG_DIR=`dirname "$CLOG_JAR"`
+    mkdir -p "$CLOG_DIR"
+    CLOG_URL="https://github.com/downloads/abscondment/clog/$CLOG_JAR_NAME"
+    $HTTP_CLIENT "$CLOG_JAR" "$CLOG_URL"
+    if [ $? != 0 ]; then
+        echo "Failed to download $CLOG_URL"
+        rm $CLOG_JAR 2> /dev/null
+        exit 1
+    else
+        exit 0
+    fi
+fi
+
+if [ ! -r "$CLOG_JAR" ]; then
+    echo "Missing $CLOG_JAR_NAME. Please run \"$0 install\" to install it."
+    exit 1
 fi
 
 exec $JAVA_CMD -Xbootclasspath/a:"$CLOG_JAR" -client $JAVA_OPTS \
